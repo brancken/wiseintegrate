@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#08080f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="WiseIntegrate" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="description" content="A complete, phased guide for integrating AI across every ministry department — without replacing the pastor, the Holy Spirit, or the people." />
+  <title>Church AI Integration — WiseIntegrate</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/images/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+  <style>
+    .church-hero { padding: 8rem 5vw 5rem; position: relative; }
+    .church-hero .hero-glow { position:absolute; width:600px; height:600px; border-radius:50%; background:radial-gradient(circle,rgba(37,99,235,0.15) 0%,transparent 70%); pointer-events:none; top:-5%; right:5%; filter:blur(50px); }
+    .church-inner { max-width: var(--section-max); margin: 0 auto; position: relative; z-index: 1; }
+    .church-title { font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 700; color: var(--text-primary); line-height: 1.1; margin-bottom: 1.25rem; }
+    .church-title em { font-style: normal; color: var(--blue-3); }
+    .church-subtitle { font-size: 1.1rem; color: var(--text-secondary); max-width: 640px; line-height: 1.75; margin-bottom: 2rem; }
+    .church-body { padding: 0 5vw 6rem; }
+    .church-body-inner { max-width: var(--section-max); margin: 0 auto; }
+    .phase-block { margin-bottom: 4rem; padding: 2.5rem; background: var(--bg-card); border: 0.5px solid var(--border); border-radius: var(--radius-lg); }
+    .phase-block:hover { border-color: var(--border-hover); }
+    .phase-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-3); margin-bottom: 0.5rem; }
+    .phase-title { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.6rem; line-height: 1.2; }
+    .phase-subtitle { font-size: 0.95rem; color: var(--blue-4); font-style: italic; margin-bottom: 1.25rem; }
+    .phase-intro { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 1.5rem; }
+    .phase-steps { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
+    .phase-step { display: flex; gap: 1rem; align-items: flex-start; }
+    .phase-step-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-3); flex-shrink: 0; min-width: 100px; padding-top: 0.1rem; }
+    .phase-step-content { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; }
+    .phase-step-content ul { padding-left: 1.2rem; list-style: disc; margin-top: 0.4rem; display: flex; flex-direction: column; gap: 0.3rem; }
+    .section-divider { width: 100%; height: 0.5px; background: var(--border); margin: 3rem 0; }
+    .ministry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+    .ministry-card { background: rgba(37,99,235,0.04); border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: 1.5rem; }
+    .ministry-card h4 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+    .ministry-card h4 i { color: var(--blue-3); font-size: 1.1rem; }
+    .ministry-card ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+    .ministry-card ul li { font-size: 0.85rem; color: var(--text-secondary); padding-left: 1rem; position: relative; line-height: 1.4; }
+    .ministry-card ul li::before { content: ""; position: absolute; left: 0; top: 0.5rem; width: 5px; height: 5px; border-radius: 50%; background: var(--blue-3); opacity: 0.6; }
+    .callout-box { background: linear-gradient(135deg, rgba(29,78,216,0.12), rgba(37,99,235,0.06)); border: 0.5px solid rgba(96,165,250,0.3); border-radius: var(--radius-lg); padding: 2rem; margin: 2rem 0; }
+    .callout-box p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.75; }
+    .callout-box strong { color: var(--text-primary); }
+    .boundary-box { background: rgba(239,68,68,0.04); border: 0.5px solid rgba(239,68,68,0.2); border-radius: var(--radius-lg); padding: 2rem; margin: 2rem 0; }
+    .boundary-box h3 { font-family: var(--font-display); font-size: 1.1rem; color: var(--text-primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .boundary-box h3 i { color: #f87171; }
+    .boundary-box ul { display: flex; flex-direction: column; gap: 0.6rem; }
+    .boundary-box ul li { font-size: 0.9rem; color: var(--text-secondary); padding-left: 1.2rem; position: relative; line-height: 1.5; }
+    .boundary-box ul li::before { content: ""; position: absolute; left: 0; top: 0.55rem; width: 6px; height: 6px; border-radius: 50%; background: #f87171; opacity: 0.7; }
+    .role-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+    .role-table th { background: rgba(37,99,235,0.1); color: var(--blue-4); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.75rem 1rem; text-align: left; border-bottom: 0.5px solid var(--border); }
+    .role-table td { padding: 1rem; font-size: 0.875rem; color: var(--text-secondary); border-bottom: 0.5px solid rgba(37,99,235,0.08); vertical-align: top; line-height: 1.6; }
+    .role-table tr:last-child td { border-bottom: none; }
+    .role-table td:first-child { color: var(--text-primary); font-weight: 600; white-space: nowrap; }
+    .questions-block { display: flex; flex-direction: column; gap: 2rem; }
+    .questions-section h4 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--blue-4); margin-bottom: 0.75rem; }
+    .questions-section ul { display: flex; flex-direction: column; gap: 0.6rem; }
+    .questions-section ul li { font-size: 0.9rem; color: var(--text-secondary); padding-left: 1.2rem; position: relative; line-height: 1.55; font-style: italic; }
+    .questions-section ul li::before { content: "Q"; position: absolute; left: 0; top: 0; font-size: 0.7rem; font-weight: 700; color: var(--blue-3); }
+    .pilot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+    @media (max-width: 768px) { .pilot-grid { grid-template-columns: 1fr; } .ministry-grid { grid-template-columns: 1fr; } }
+    .pilot-card { background: var(--bg-card); border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: 1.5rem; }
+    .pilot-card h4 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem; }
+    .pilot-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+    .stat-highlight { font-size: 2rem; font-weight: 800; font-family: var(--font-display); color: var(--blue-3); display: block; margin-bottom: 0.25rem; }
+    .toc { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 3rem; padding: 1.75rem; background: var(--bg-card); border: 0.5px solid var(--border); border-radius: var(--radius-lg); }
+    .toc h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem; }
+    .toc a { font-size: 0.9rem; color: var(--blue-4); text-decoration: none; padding: 0.2rem 0; display: flex; align-items: center; gap: 0.5rem; }
+    .toc a:hover { color: var(--blue-3); }
+    .toc a::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-3); opacity: 0.5; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+  <div id="cursor-orb" aria-hidden="true"></div>
+  <div id="cursor-moon" aria-hidden="true"></div>
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="WiseIntegrate home">
+        <img src="/images/logo.png" alt="WiseIntegrate" class="nav-logo-img" />
+      </a>
+      <div class="nav-links" role="list">
+        <a href="/#services" role="listitem">Services</a>
+        <a href="/#process" role="listitem">Process</a>
+        <a href="/church" role="listitem" aria-current="page">Church</a>
+        <a href="/#business" role="listitem">Business</a>
+        <a href="/#contact" role="listitem">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button id="nav-pwa-btn" class="btn-pwa-nav" aria-label="Add to home screen">
+          <i class="ti ti-device-mobile" aria-hidden="true"></i>
+          <span>Add to phone</span>
+        </button>
+        <a href="/assessment" class="btn-primary btn-sm">Request Assessment</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+          <i class="ti ti-menu-2"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <a href="/#services" class="mobile-link">Services</a>
+      <a href="/#process" class="mobile-link">Process</a>
+      <a href="/church" class="mobile-link">Church</a>
+      <a href="/#business" class="mobile-link">Business</a>
+      <a href="/#contact" class="mobile-link">Contact</a>
+      <a href="/assessment" class="btn-primary" style="margin-top:1rem;text-align:center;">Request Assessment</a>
+    </div>
+  </div>
+  <main>
+    <!-- Hero -->
+    <section class="church-hero" aria-labelledby="church-heading">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="church-inner animate-fade-up">
+        <div class="eyebrow" style="--delay:0.1s">
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          Church AI Integration
+        </div>
+        <h1 id="church-heading" class="church-title" style="margin-top:0.75rem;">
+          From first conversation<br>to full <em>implementation.</em>
+        </h1>
+        <p class="church-subtitle">
+          A complete, phased guide for helping a local church integrate artificial intelligence across every ministry department — without replacing the pastor, the Holy Spirit, or the people.
+        </p>
+        <p style="font-size:0.9rem;color:var(--text-muted);max-width:600px;line-height:1.65;">
+          Every recommendation in this framework is grounded in the conviction that AI is a tool, not a peer — something to be stewarded, not surrendered to. Human presence must grow as a result of AI adoption, never shrink.
+        </p>
+      </div>
+    </section>
+
+    <!-- Body -->
+    <section class="church-body">
+      <div class="church-body-inner">
+
+        <!-- Table of Contents -->
+        <nav class="toc" aria-label="Page contents">
+          <h3><i class="ti ti-list" style="color:var(--blue-3);margin-right:0.5rem;"></i>Framework Overview</h3>
+          <a href="#phase0">Phase 0 — Entry &amp; Trust Building</a>
+          <a href="#phase1">Phase 1 — Church Readiness Assessment</a>
+          <a href="#phase2">Phase 2 — Complete Ministry Inventory</a>
+          <a href="#phase3">Phase 3 — Policy, Governance &amp; Boundaries</a>
+          <a href="#phase4">Phase 4 — Pilot Implementation</a>
+          <a href="#phase5">Phase 5 — Training &amp; Staff Rollout</a>
+          <a href="#phase6">Phase 6 — Full Rollout, Measure &amp; Review</a>
+          <a href="#governance">Roles &amp; Governance</a>
+          <a href="#boundaries">Permanent Boundaries</a>
+          <a href="#questions">Discussion Questions for Leadership</a>
+        </nav>
+
+        <!-- Phase 0 -->
+        <div class="phase-block animate-fade-up" id="phase0">
+          <div class="phase-label">Phase 0</div>
+          <h2 class="phase-title">Entry &amp; Trust Building</h2>
+          <p class="phase-subtitle">You were invited by a board member or administrator. Pastoral buy-in is not yet secured.</p>
+          <p class="phase-intro">Your entry point is through a board member or administrator — not the senior pastor. This means your first priority is not to present AI tools. It is to earn the right to the right room.</p>
+          <div class="phase-steps">
+            <div class="phase-step">
+              <div class="phase-step-label">Step 0.1</div>
+              <div class="phase-step-content">
+                <strong style="color:var(--text-primary);">First call with the contact who invited you</strong>
+                <ul>
+                  <li>Ask what prompted the call and what problem they are trying to solve</li>
+                  <li>Understand their level of AI knowledge and their concerns</li>
+                  <li>Find out who else is involved and who will ultimately decide</li>
+                  <li>Do not present any AI recommendations in this conversation</li>
+                </ul>
+              </div>
+            </div>
+            <div class="phase-step">
+              <div class="phase-step-label">Step 0.2</div>
+              <div class="phase-step-content">
+                <strong style="color:var(--text-primary);">Identify the real decision-maker</strong>
+                <ul>
+                  <li>In most churches, significant operational change requires the senior pastor's endorsement</li>
+                  <li>Confirm whether the pastor is aware of this conversation and supports it</li>
+                  <li>If the pastor is not yet involved, make securing that introduction your next step</li>
+                </ul>
+              </div>
+            </div>
+            <div class="phase-step">
+              <div class="phase-step-label">Step 0.3</div>
+              <div class="phase-step-content">
+                <strong style="color:var(--text-primary);">Request a meeting with the senior pastor before proceeding</strong>
+                <ul>
+                  <li>Frame the request as wanting to ensure the initiative is aligned with his vision</li>
+                  <li>This is not just courtesy — it is essential. Without pastoral buy-in, implementation will stall</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="callout-box">
+            <p><strong>Pastoral conversation agenda:</strong> Open with mission and theology, not tools. Ask: "Where are your people spending time on things that keep them from people?" and "If you had an extra 10 hours a week in your team, what would you do with them?" These questions frame AI inside the ministry, not the other way around.</p>
+          </div>
+        </div>
+
+        <!-- Phase 1 -->
+        <div class="phase-block animate-fade-up" id="phase1">
+          <div class="phase-label">Phase 1</div>
+          <h2 class="phase-title">Church Readiness Assessment</h2>
+          <p class="phase-subtitle">Before any tool is recommended, understand the church's current state in every department.</p>
+          <p class="phase-intro">The readiness assessment is a structured conversation — not a technical audit. It maps the church across five dimensions and produces a written AI Readiness Report. Do not skip this phase.</p>
+          <div class="ministry-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+            <div class="ministry-card">
+              <h4><i class="ti ti-eye"></i> Awareness</h4>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">Does leadership know what AI is? Fear or curiosity?</p>
+            </div>
+            <div class="ministry-card">
+              <h4><i class="ti ti-refresh"></i> Readiness</h4>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">Is the culture open to change? Who will resist, and why?</p>
+            </div>
+            <div class="ministry-card">
+              <h4><i class="ti ti-tool"></i> Tools in Use</h4>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">What software do they already have? ChMS? Accounting?</p>
+            </div>
+            <div class="ministry-card">
+              <h4><i class="ti ti-file-text"></i> Policy Gap</h4>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">Any AI guidelines in place? Data privacy policies?</p>
+            </div>
+            <div class="ministry-card">
+              <h4><i class="ti ti-users"></i> Capability</h4>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">Tech skill level of staff and volunteers. Digital maturity?</p>
+            </div>
+          </div>
+          <div class="callout-box" style="margin-top:1.5rem;">
+            <p><strong>Output:</strong> A written AI Readiness Report — scores each dimension 1 to 5. This report forms the basis for your phased implementation plan and gives leadership something concrete to review and approve.</p>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="phase-block animate-fade-up" id="phase2">
+          <div class="phase-label">Phase 2</div>
+          <h2 class="phase-title">Complete Ministry Inventory</h2>
+          <p class="phase-subtitle">Map every ministry area. Identify pain points, time drains, and AI opportunity in each one.</p>
+          <div class="callout-box">
+            <p>The average church administrator spends <strong>23 hours per week</strong> on tasks that AI can assist with or automate — email management, scheduling, drafting communications, and database updates. That is more than half a full-time position consumed by work that does not require pastoral judgment. The ministry inventory makes that visible and actionable.</p>
+          </div>
+
+          <h3 style="font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--blue-4);margin:2rem 0 1rem;">Section A — Operational &amp; Administrative Core</h3>
+          <div class="ministry-grid">
+            <div class="ministry-card"><h4><i class="ti ti-building"></i> Administration</h4><ul><li>Email drafting and editing</li><li>Meeting notes and action items</li><li>Scheduling coordination</li><li>Policy and procedure drafts</li><li>Staff communication templates</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-currency-dollar"></i> Finance</h4><ul><li>Giving report summarisation</li><li>Budget narrative drafts</li><li>Donor tracking communications</li><li>Grant proposal first drafts</li><li>Financial FAQ responses</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-id-badge"></i> HR &amp; Staff</h4><ul><li>Job description drafts</li><li>Onboarding documentation</li><li>Performance review templates</li><li>Staff communication drafts</li><li>Volunteer recognition messages</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-building-warehouse"></i> Facilities</h4><ul><li>Maintenance schedules</li><li>Room booking systems</li><li>Vendor communications</li><li>Safety checklist templates</li><li>Cleaning rosters</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-heart-handshake"></i> Volunteer Management</h4><ul><li>Scheduling and role matching</li><li>Automated reminders</li><li>Recruitment copy drafts</li><li>Volunteer recognition</li><li>Onboarding guides</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-speakerphone"></i> Communications</h4><ul><li>Newsletter and bulletin drafts</li><li>SMS and email sequences</li><li>Website FAQ management</li><li>Visitor inquiry chatbot</li><li>Announcement copy</li></ul></div>
+          </div>
+
+          <h3 style="font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--blue-4);margin:2rem 0 1rem;">Section B — Sunday &amp; Weekly Services</h3>
+          <div class="ministry-grid">
+            <div class="ministry-card"><h4><i class="ti ti-music"></i> Worship &amp; Music</h4><ul><li>Service order planning</li><li>Setlist management tools</li><li>Chord transposition (OnSong)</li><li>Lyric sheet organisation</li><li>Planning Center integration</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-video"></i> Media &amp; Production</h4><ul><li>Slide generation and design</li><li>Live stream descriptions</li><li>Video captioning and clips</li><li>Sermon clip creation</li><li>Social media reels from sermon</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-book"></i> Sermon Support (admin only)</h4><ul><li>Background research only</li><li>Historical context summarising</li><li>Scholarly source compilation</li><li>NOT interpretation or authorship</li><li>Pastor retains full authority</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-arrows-right-down"></i> Sermon Notes Output Pipeline</h4><ul><li>Convert notes to blog posts</li><li>Generate devotional emails</li><li>Create small group guides</li><li>Produce social media content</li><li>Build discussion questions</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-door-enter"></i> Guest Services</h4><ul><li>First-time visitor email sequences</li><li>Follow-up automation</li><li>Welcome letter templates</li><li>FAQ chatbot on church website</li><li>Event information responses</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-language"></i> Translation &amp; Accessibility</h4><ul><li>Real-time sermon translation</li><li>Live captions for services</li><li>Materials in multiple languages</li><li>Hearing-impaired access tools</li><li>Multilingual congregation support</li></ul></div>
+          </div>
+
+          <h3 style="font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--blue-4);margin:2rem 0 1rem;">Section C — Discipleship &amp; Pastoral Care</h3>
+          <div class="ministry-grid">
+            <div class="ministry-card"><h4><i class="ti ti-users-group"></i> Small Groups</h4><ul><li>Discussion guide outlines</li><li>Leader guide templates</li><li>Group scheduling and comms</li><li>Session summary notes</li><li>Resource recommendation lists</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-stethoscope"></i> Pastoral Care Admin</h4><ul><li>Visit and appointment scheduling</li><li>Care notes organisation</li><li>Referral resource lists</li><li>Follow-up task reminders</li><li>Bereavement letter templates</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-hands"></i> Prayer Ministry Admin</h4><ul><li>Organise and categorise requests</li><li>Prayer guide drafts</li><li>Team coordination emails</li><li>Prayer update newsletters</li><li>Intercessory schedule management</li></ul></div>
+          </div>
+
+          <h3 style="font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--blue-4);margin:2rem 0 1rem;">Sections D–H — Full Ministry Coverage</h3>
+          <div class="ministry-grid">
+            <div class="ministry-card"><h4><i class="ti ti-baby-carriage"></i> Children's Ministry</h4><ul><li>Age-appropriate lesson outlines</li><li>Craft and activity ideas</li><li>Parent communication emails</li><li>Attendance tracking systems</li><li>Child safety policy docs</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-run"></i> Youth Ministry</h4><ul><li>Event planning documents</li><li>Camp and retreat logistics</li><li>AI literacy training for teens</li><li>Imago Dei worldview resources</li><li>Parent conversations on AI</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-world"></i> Outreach &amp; Missions</h4><ul><li>Outreach planning documents</li><li>Missionary newsletters</li><li>Food bank inventory coordination</li><li>Donor appeal letters</li><li>Impact reports for funders</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-social"></i> Social Media &amp; Growth</h4><ul><li>Content calendars</li><li>Caption and post drafts</li><li>Image generation (Canva AI)</li><li>SEO copy and page content</li><li>Google My Business updates</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-building-church"></i> Special Ministries</h4><ul><li>Building campaign documents</li><li>Vision and case documents</li><li>Men's and Women's Ministry events</li><li>Seniors Ministry scheduling</li><li>Grief resource lists</li></ul></div>
+            <div class="ministry-card"><h4><i class="ti ti-school"></i> Theology &amp; Education</h4><ul><li>Study material research</li><li>Course administration</li><li>Library cataloguing</li><li>Class communication</li><li>Curriculum planning support</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="phase-block animate-fade-up" id="phase3">
+          <div class="phase-label">Phase 3</div>
+          <h2 class="phase-title">Policy, Governance &amp; Boundaries</h2>
+          <p class="phase-subtitle">Before any tools are deployed, the church must establish a written AI Acceptable Use Policy.</p>
+          <div class="callout-box">
+            <p>82% of nonprofits now use AI, but fewer than 10% have formal policies governing its use. This gap is where harm happens. <strong>Your consultancy closes that gap before implementation begins.</strong></p>
+          </div>
+          <div class="boundary-box">
+            <h3><i class="ti ti-shield-lock"></i> Non-Negotiable Boundaries — Built Into Every Church AI Policy</h3>
+            <ul>
+              <li>AI will never preach, teach, or communicate spiritual authority. Sermon preparation and public teaching of Scripture are exclusively human responsibilities.</li>
+              <li>AI will never provide pastoral counselling or spiritual guidance. All pastoral care, crisis support, and personal ministry remain exclusively human.</li>
+              <li>AI will never interpret or apply Scripture as a spiritual authority. AI may assist with research — not with interpretation.</li>
+              <li>No congregation member's personal information (PII), financial data, pastoral notes, or children's data may be entered into any AI tool.</li>
+              <li>Every AI-generated output must be reviewed by a qualified human before it is used, published, or distributed. No exceptions.</li>
+            </ul>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem;">
+            <div class="ministry-card">
+              <h4><i class="ti ti-file-description"></i> What the policy must cover</h4>
+              <ul><li>Theological preamble (imago Dei foundation)</li><li>Six governing principles</li><li>Absolute limits — what AI cannot do</li><li>Permitted and prohibited use lists</li><li>The verification requirement</li><li>Data protection and privacy rules</li><li>Transparency and disclosure obligations</li><li>Governance, accountability, and review cycle</li></ul>
+            </div>
+            <div class="ministry-card">
+              <h4><i class="ti ti-signature"></i> Who must sign it</h4>
+              <ul><li>Senior Pastor</li><li>Board Chair / Elder</li><li>AI Oversight Officer (designated)</li><li>Church Administrator</li><li>All ministry department leaders (acknowledgement)</li><li>Annual re-acknowledgement by all staff</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="phase-block animate-fade-up" id="phase4">
+          <div class="phase-label">Phase 4</div>
+          <h2 class="phase-title">Pilot Implementation — Start Small</h2>
+          <p class="phase-subtitle">Choose 2–3 highest-impact, lowest-risk wins. Build confidence before expanding.</p>
+          <p class="phase-intro">The biggest mistake churches make is deploying AI across all departments simultaneously before staff understand how to use it responsibly. Start with three pilots. Prove the value. Then expand.</p>
+          <div class="pilot-grid">
+            <div class="pilot-card">
+              <h4>Quick Win 1</h4>
+              <p style="color:var(--blue-4);font-size:0.85rem;font-weight:600;margin-bottom:0.5rem;">Email &amp; bulletin drafting</p>
+              <p>Admin uses AI to draft all routine communications. Human reviews before sending. Saves 3–5 hours per week immediately.</p>
+            </div>
+            <div class="pilot-card">
+              <h4>Quick Win 2</h4>
+              <p style="color:var(--blue-4);font-size:0.85rem;font-weight:600;margin-bottom:0.5rem;">Volunteer scheduling &amp; reminders</p>
+              <p>AI assists with scheduling, matching, and automated reminders. Saves 3–5 hours per week and reduces no-shows.</p>
+            </div>
+            <div class="pilot-card">
+              <h4>Quick Win 3</h4>
+              <p style="color:var(--blue-4);font-size:0.85rem;font-weight:600;margin-bottom:0.5rem;">Meeting notes &amp; action items</p>
+              <p>Record or transcribe meetings. AI summarises action items. Saves 1–2 hours per week and improves follow-through.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 5 -->
+        <div class="phase-block animate-fade-up" id="phase5">
+          <div class="phase-label">Phase 5</div>
+          <h2 class="phase-title">Training &amp; Staff Rollout</h2>
+          <p class="phase-subtitle">Equip every ministry leader with skills, not just tools. AI literacy is a requirement, not optional.</p>
+          <p class="phase-intro">You cannot hand people tools and walk away. Training happens in three layers: leadership, staff, and ongoing. The theological framework must be taught alongside the practical skills, not instead of them.</p>
+          <div class="ministry-grid" style="grid-template-columns:repeat(3,1fr);">
+            <div class="ministry-card">
+              <h4><i class="ti ti-crown"></i> Leadership Session (half-day)</h4>
+              <ul><li>Theology of AI — imago Dei, stewardship, wisdom</li><li>The six governing principles</li><li>Policy review and sign-off</li><li>Boundaries and non-negotiables</li><li>Accountability structure agreement</li></ul>
+            </div>
+            <div class="ministry-card">
+              <h4><i class="ti ti-school"></i> Staff Workshop (full day)</h4>
+              <ul><li>What AI is and is not</li><li>Prompt engineering fundamentals</li><li>Data safety rules and what never goes in</li><li>Hands-on exercises per department</li><li>Verification protocols and hallucination awareness</li></ul>
+            </div>
+            <div class="ministry-card">
+              <h4><i class="ti ti-refresh"></i> Ongoing Support (quarterly)</h4>
+              <ul><li>New tool assessments and approvals</li><li>Policy review and updates</li><li>Staff Q&amp;A and emerging issues</li><li>Ministry-specific use case development</li><li>Annual AI Readiness re-assessment</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 6 -->
+        <div class="phase-block animate-fade-up" id="phase6">
+          <div class="phase-label">Phase 6</div>
+          <h2 class="phase-title">Full Rollout, Measure &amp; Review</h2>
+          <p class="phase-subtitle">Expand to all ministry departments. Track time saved, not just tool adoption.</p>
+          <p class="phase-intro">Expand rollout systematically — one ministry department at a time. The measurement question that matters most is not how many tools are in use. It is whether pastoral presence is growing or shrinking as a result.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem;">
+            <div class="ministry-card">
+              <h4><i class="ti ti-chart-bar"></i> Measure this</h4>
+              <ul><li>Hours reclaimed per week per department</li><li>Staff AI confidence scores (survey quarterly)</li><li>Policy compliance — zero data breaches</li><li>Content output time saved (admin tasks)</li></ul>
+            </div>
+            <div class="ministry-card">
+              <h4><i class="ti ti-question-mark"></i> Ask this quarterly</h4>
+              <ul><li>Is AI serving people or replacing them?</li><li>Is pastoral presence growing or shrinking?</li><li>Are congregation relationships deepening?</li><li>Are staff freed for more ministry, not less?</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Governance -->
+        <div class="phase-block animate-fade-up" id="governance">
+          <div class="phase-label">Roles &amp; Governance</div>
+          <h2 class="phase-title">Who is Responsible for What</h2>
+          <table class="role-table">
+            <thead><tr><th>Role</th><th>Responsibility</th></tr></thead>
+            <tbody>
+              <tr><td>Senior Pastor</td><td>Theological guardian of this framework. Reviews AI impact on pastoral culture quarterly. Approves expansion to new departments.</td></tr>
+              <tr><td>AI Oversight Officer</td><td>Manages approved tools list. Reviews new tool requests. Receives policy breach reports. Leads annual policy review. Trains department leaders.</td></tr>
+              <tr><td>Ministry Department Leaders</td><td>Champion AI use within their teams. Ensure all volunteers are briefed. Report concerns and results to the AI Oversight Officer.</td></tr>
+              <tr><td>Church Administrator</td><td>Coordinates implementation logistics. Manages vendor relationships for approved tools. Tracks time savings and reports to leadership.</td></tr>
+              <tr><td>All Staff &amp; Volunteers</td><td>Use only approved tools. Never enter protected data. Review all AI output before use. Report concerns immediately.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Permanent Boundaries -->
+        <div class="phase-block animate-fade-up" id="boundaries">
+          <div class="phase-label">Non-Negotiable</div>
+          <h2 class="phase-title">Permanent Boundaries — These Never Change</h2>
+          <p class="phase-intro">Regardless of how capable AI becomes, regardless of how much time it could save, regardless of any external pressure — these boundaries hold. They are not policies that can be updated. They are convictions rooted in Scripture and the theology of human dignity.</p>
+          <div class="boundary-box">
+            <h3><i class="ti ti-shield-lock"></i> These Apply at Every Stage, in Every Department, Without Exception</h3>
+            <ul>
+              <li>AI will never preach, teach Scripture, or exercise pastoral authority of any kind.</li>
+              <li>AI will never provide pastoral counselling, spiritual direction, or crisis care.</li>
+              <li>AI will never interpret Scripture for a congregation or create theological doctrine.</li>
+              <li>AI will never be presented as a spiritual companion, guide, or entity to congregation members.</li>
+              <li>No congregation member's personal information will ever be entered into an AI tool.</li>
+              <li>Every single AI output must be reviewed by a trained human before it is used.</li>
+              <li>Pastoral presence must grow as a result of AI — if it shrinks, implementation has failed.</li>
+              <li>The gospel has not changed. Trust it. Steward the tools. Serve the people.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Discussion Questions -->
+        <div class="phase-block animate-fade-up" id="questions">
+          <div class="phase-label">Leadership Resource</div>
+          <h2 class="phase-title">Discussion Questions for Leadership Teams</h2>
+          <p class="phase-intro">Use these questions in your first meeting with a church's leadership team, during a board retreat, or as part of staff training.</p>
+          <div class="questions-block">
+            <div class="questions-section">
+              <h4>Theological Foundations</h4>
+              <ul>
+                <li>How does the doctrine of imago Dei shape the way your team thinks about what AI can and cannot do in ministry?</li>
+                <li>What is the difference between knowledge and wisdom, and why does that distinction matter for how your church engages AI?</li>
+                <li>Where do you see technology being treated like an idol in the broader culture — and where might that temptation exist in your own ministry?</li>
+              </ul>
+            </div>
+            <div class="questions-section">
+              <h4>Pastoral Practice</h4>
+              <ul>
+                <li>Where is the administrative burden currently preventing your team from doing the relational work only humans can do?</li>
+                <li>What protocols does your church currently have for verifying any content before it is used in teaching, preaching, or pastoral guidance?</li>
+                <li>How are your young people being formed by AI and algorithmic content, and what is the church doing in response?</li>
+              </ul>
+            </div>
+            <div class="questions-section">
+              <h4>Mission &amp; Future</h4>
+              <ul>
+                <li>Pastor's role shifts in an AI age from information gatekeeper to wisdom guide. What does that transition require of your leadership team personally?</li>
+                <li>What would it look like for your church to model a wisdom-rich community as a counter-cultural witness in an AI-saturated culture?</li>
+                <li>If AI frees up 15 hours of staff time per week, what would you invest that time in?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="callout-box animate-fade-up" style="text-align:center;padding:3rem 2rem;">
+          <h2 style="font-family:var(--font-display);font-size:1.75rem;font-weight:700;color:var(--text-primary);margin-bottom:0.75rem;">Ready to begin?</h2>
+          <p style="max-width:520px;margin:0 auto 1.75rem;font-size:1rem;">Start with a Church AI Readiness Assessment. We'll map where your church is today and build a phased plan together.</p>
+          <a href="/assessment" class="btn-primary btn-lg">Request Your Assessment</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="footer-logo" aria-label="WiseIntegrate home">
+            <img src="/images/logo.png" alt="WiseIntegrate" class="nav-logo-img" />
+          </a>
+          <p class="footer-tagline">AI should serve your mission. Not replace it.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-col">
+            <h4 class="footer-col-title">Services</h4>
+            <a href="/#services">AI Training</a>
+            <a href="/#services">Strategy Roadmap</a>
+            <a href="/#services">Church Integration</a>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-col-title">Company</h4>
+            <a href="/#process">How it works</a>
+            <a href="/assessment">Assessment</a>
+            <a href="/church">Church AI</a>
+            <a href="/#contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-col-title">Legal</h4>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Use</a>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 WiseIntegrate. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="mailto:hello@wiseintegrate.com">hello@wiseintegrate.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/cursor.js" defer></script>
+  <script src="/js/nav.js" defer></script>
+  <script src="/js/pwa.js" defer></script>
+  <script src="/js/animations.js" defer></script>
+</body>
+</html>
