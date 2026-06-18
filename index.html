@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#08080f" />
+  <meta name="description" content="WiseIntegrate helps churches and businesses integrate AI wisely — with clear strategy, firm boundaries, and a plan built around your people." />
+  <meta property="og:title" content="WiseIntegrate — AI Integration Consultancy" />
+  <meta property="og:description" content="AI should serve your mission. Not replace it." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://wiseintegrate.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>WiseIntegrate — AI Integration Consultancy</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/images/icon-192.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+</head>
+<body>
+
+  <!-- Cursor effects -->
+  <div id="cursor-orb" aria-hidden="true"></div>
+  <div id="cursor-moon" aria-hidden="true"></div>
+
+  <!-- PWA Install Banner -->
+  <div id="pwa-banner" class="pwa-banner" role="banner" style="display:none;">
+    <div class="pwa-banner-text">
+      <i class="ti ti-device-mobile" aria-hidden="true"></i>
+      Install WiseIntegrate on your phone or desktop — works like an app, no app store needed.
+    </div>
+    <button id="pwa-install-btn" class="btn-pwa-install">+ Add to Home Screen</button>
+    <button id="pwa-dismiss" class="pwa-dismiss" aria-label="Dismiss"><i class="ti ti-x"></i></button>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="WiseIntegrate home">
+        Wise<span>Integrate</span>
+      </a>
+      <div class="nav-links" role="list">
+        <a href="#services" role="listitem">Services</a>
+        <a href="#process" role="listitem">Process</a>
+        <a href="#church" role="listitem">Church</a>
+        <a href="#business" role="listitem">Business</a>
+        <a href="#contact" role="listitem">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button id="nav-pwa-btn" class="btn-pwa-nav" aria-label="Add to home screen">
+          <i class="ti ti-device-mobile" aria-hidden="true"></i>
+          <span>Add to phone</span>
+        </button>
+        <a href="/assessment" class="btn-primary btn-sm">Request Assessment</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+          <i class="ti ti-menu-2"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <a href="#services" class="mobile-link">Services</a>
+      <a href="#process" class="mobile-link">Process</a>
+      <a href="#church" class="mobile-link">Church</a>
+      <a href="#business" class="mobile-link">Business</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+      <a href="/assessment" class="btn-primary" style="margin-top:1rem;text-align:center;">Request Assessment</a>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-3" aria-hidden="true"></div>
+
+      <div class="hero-inner">
+        <div class="eyebrow animate-fade-up" style="--delay:0.1s">
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          AI Integration Consultancy
+        </div>
+        <h1 id="hero-heading" class="hero-headline animate-fade-up" style="--delay:0.3s">
+          AI should serve<br>your <em>mission.</em><br>Not replace it.
+        </h1>
+        <p class="hero-subhead animate-fade-up" style="--delay:0.55s">
+          We help churches and businesses integrate artificial intelligence wisely — with clear strategy, firm boundaries, and a plan built around your people.
+        </p>
+        <div class="hero-ctas animate-fade-up" style="--delay:0.75s">
+          <a href="/assessment" class="btn-primary btn-lg">Request Your Assessment</a>
+          <a href="#process" class="btn-ghost btn-lg">How it works</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ticker -->
+    <div class="ticker-band" aria-hidden="true">
+      <div class="ticker-track">
+        <div class="ticker-set">
+          <span class="ticker-item">AI Integration <span class="ticker-sep">✦</span></span>
+          <span class="ticker-item">Church & Ministry <span class="ticker-sep">✦</span></span>
+          <span class="ticker-item">Business Strategy <span class="ticker-sep">✦</span></span>
+          <span class="ticker-item">Governance & Policy <span class="ticker-sep">✦</span></span>
+          <span class="ticker-item">Staff Training <span class="ticker-sep">✦</span></span>
+          <span class="ticker-item">Readiness Assessment <span class="ticker-sep">✦</span></span>
+          <span class="ticker-item">Wise Implementation <span class="ticker-sep">✦</span></span>
+          <span class="ticker-item">Human-First Design <span class="ticker-sep">✦</span></span>
+        </div>
+        <div class="ticker-set" aria-hidden="true">
+          <span class="ticker-item">AI Integration <span class="ticker-sep">✦</span></span>
+          <span class="ticker-item">Church & Ministry <span class="ticker-sep">✦</span></span>
+          <span class="ticker-item">Business Strategy <span class="ticker-sep">✦</span></span>
+          <span class="ticker-item">Governance & Policy <span class="ticker-sep">✦</span></span>
+          <span class="ticker-item">Staff Training <span class="ticker-sep">✦</span></span>
+          <span class="ticker-item">Readiness Assessment <span class="ticker-sep">✦</span></span>
+          <span class="ticker-item">Wise Implementation <span class="ticker-sep">✦</span></span>
+          <span class="ticker-item">Human-First Design <span class="ticker-sep">✦</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Foundation Section -->
+    <section class="section" id="services" aria-labelledby="foundation-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="label">Our foundation</div>
+          <h2 id="foundation-heading" class="section-title">
+            Built on wisdom.<br>Not just <em>efficiency.</em>
+          </h2>
+          <p class="section-body">
+            Most AI consultancies lead with tools. We lead with questions. What is your mission? Who are your people? What does faithfulness look like for your organisation in the age of AI? The tools come second.
+          </p>
+        </div>
+
+        <div class="card-grid" role="list">
+          <div class="card" role="listitem">
+            <div class="card-icon" aria-hidden="true"><i class="ti ti-eye"></i></div>
+            <h3 class="card-title">Discernment first</h3>
+            <p class="card-text">Every recommendation starts with your specific context, culture, and calling — not a generic deployment checklist.</p>
+          </div>
+          <div class="card" role="listitem">
+            <div class="card-icon" aria-hidden="true"><i class="ti ti-shield-check"></i></div>
+            <h3 class="card-title">Clear boundaries</h3>
+            <p class="card-text">AI handles administration. Humans handle relationships, leadership, and mission. Those lines never move.</p>
+          </div>
+          <div class="card" role="listitem">
+            <div class="card-icon" aria-hidden="true"><i class="ti ti-chart-line"></i></div>
+            <h3 class="card-title">Measurable margin</h3>
+            <p class="card-text">Success is time reclaimed for the work only humans can do — and the relationships that result from it.</p>
+          </div>
+          <div class="card" role="listitem">
+            <div class="card-icon" aria-hidden="true"><i class="ti ti-lock"></i></div>
+            <h3 class="card-title">Governed & accountable</h3>
+            <p class="card-text">Every implementation comes with a policy framework, oversight structure, and a review cycle built in.</p>
+          </div>
+        </div>
+
+        <div class="quote-block">
+          <blockquote>
+            <p class="quote-text">"AI is already doing formation work inside your organisation. The only question is whether you are guiding it."</p>
+            <cite class="quote-source">WiseIntegrate — Integration Framework</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sectors -->
+    <section class="section section-alt" id="church" aria-labelledby="sectors-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="label">Who we serve</div>
+          <h2 id="sectors-heading" class="section-title">
+            Two sectors.<br>One <em>approach.</em>
+          </h2>
+          <p class="section-body">
+            Whether you lead a church or a company, the challenge is the same — integrating AI in a way that serves your people, protects your values, and advances your purpose.
+          </p>
+        </div>
+
+        <div class="sectors-grid" id="business">
+          <div class="sector-card">
+            <span class="sector-tag">Church & Ministry</span>
+            <h3 class="sector-title">For churches ready to engage AI wisely</h3>
+            <p class="sector-text">From senior pastor buy-in through to full departmental rollout — with a theological framework your leadership can stand on.</p>
+            <ul class="sector-list">
+              <li>AI Readiness Assessment</li>
+              <li>Governance & policy framework</li>
+              <li>Department-by-department implementation</li>
+              <li>Staff & volunteer training</li>
+              <li>Ongoing review and accountability</li>
+            </ul>
+            <a href="/church" class="link-arrow">Church integration pathway <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+          </div>
+          <div class="sector-card">
+            <span class="sector-tag">Business & Organisation</span>
+            <h3 class="sector-title">For leaders who want AI that actually works</h3>
+            <p class="sector-text">Practical integration that fits how your team works — with governance structures that protect your people and your data.</p>
+            <ul class="sector-list">
+              <li>Organisational AI readiness audit</li>
+              <li>Workflow mapping & automation strategy</li>
+              <li>Policy and ethics framework</li>
+              <li>Team training and onboarding</li>
+              <li>Quarterly review and optimisation</li>
+            </ul>
+            <a href="/business" class="link-arrow">Business integration pathway <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section class="section" id="process" aria-labelledby="process-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="label">The process</div>
+          <h2 id="process-heading" class="section-title">
+            From first conversation<br>to full <em>integration.</em>
+          </h2>
+        </div>
+
+        <div class="steps" role="list">
+          <div class="step" role="listitem">
+            <div class="step-num" aria-hidden="true">01</div>
+            <div class="step-content">
+              <h3 class="step-title">You request your assessment</h3>
+              <p class="step-text">We send you a private link. Complete it by typed form or voice conversation. Takes 12 to 15 minutes.</p>
+            </div>
+          </div>
+          <div class="step" role="listitem">
+            <div class="step-num" aria-hidden="true">02</div>
+            <div class="step-content">
+              <h3 class="step-title">We analyse your responses</h3>
+              <p class="step-text">Your answers are assessed across five dimensions. You receive a brief snapshot. We receive a full priority report.</p>
+            </div>
+          </div>
+          <div class="step" role="listitem">
+            <div class="step-num" aria-hidden="true">03</div>
+            <div class="step-content">
+              <h3 class="step-title">We meet to map the path</h3>
+              <p class="step-text">A focused conversation where we walk through the assessment and build your phased integration plan.</p>
+            </div>
+          </div>
+          <div class="step" role="listitem">
+            <div class="step-num" aria-hidden="true">04</div>
+            <div class="step-content">
+              <h3 class="step-title">We implement — wisely</h3>
+              <p class="step-text">Starting with the highest-impact, lowest-risk wins. Building confidence and capacity as we expand to every department.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Assessment CTA -->
+    <section class="section section-alt assessment-section" id="contact" aria-labelledby="assessment-heading">
+      <div class="section-inner">
+        <div class="assessment-grid">
+          <div class="assessment-copy">
+            <div class="label">Start here</div>
+            <h2 id="assessment-heading" class="section-title">
+              Senior Leader<br><em>Assessment</em>
+            </h2>
+            <p class="section-body">
+              Before any tool is recommended, we need to understand where you are. The assessment gives us everything we need to begin — and gives you a clear picture of where you stand.
+            </p>
+            <ul class="check-list">
+              <li>Complete by typed form or voice conversation</li>
+              <li>AI-analysed and prioritised automatically</li>
+              <li>You receive a snapshot. We receive the full report.</li>
+              <li>No obligation. No sales pitch. Just clarity.</li>
+              <li>Works perfectly on phone, tablet, or desktop</li>
+            </ul>
+          </div>
+          <div class="assessment-card">
+            <div class="assessment-card-header">
+              <h3 class="assessment-card-title">AI Readiness Assessment</h3>
+              <p class="assessment-card-sub">Senior Leader · Church or Business · 12–15 min</p>
+            </div>
+            <form id="assessment-form" action="/assessment" method="GET" novalidate>
+              <div class="form-group">
+                <label for="name" class="sr-only">Your name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name" required />
+              </div>
+              <div class="form-group">
+                <label for="org" class="sr-only">Your organisation</label>
+                <input type="text" id="org" name="org" placeholder="Your organisation" autocomplete="organization" required />
+              </div>
+              <div class="form-group">
+                <label for="email" class="sr-only">Your email address</label>
+                <input type="email" id="email" name="email" placeholder="Your email address" autocomplete="email" required />
+              </div>
+              <div class="voice-option" role="button" tabindex="0" id="voice-toggle" aria-pressed="false">
+                <div class="voice-dot" aria-hidden="true"></div>
+                <span class="voice-label">I'd prefer to answer by voice conversation</span>
+                <input type="hidden" name="mode" id="mode-input" value="form" />
+              </div>
+              <button type="submit" class="btn-primary btn-full">Begin assessment →</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">Wise<span>Integrate</span></div>
+        <p class="footer-tagline">AI should serve your mission. Not replace it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <div class="footer-col">
+          <h4 class="footer-col-title">Services</h4>
+          <a href="/church">Church Integration</a>
+          <a href="/business">Business Integration</a>
+          <a href="/assessment">Readiness Assessment</a>
+          <a href="/training">Staff Training</a>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Company</h4>
+          <a href="/about">About</a>
+          <a href="/process">Our Process</a>
+          <a href="/contact">Contact</a>
+          <a href="/blog">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Use</a>
+          <a href="/cookies">Cookie Policy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 WiseIntegrate. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="mailto:hello@wiseintegrate.com">hello@wiseintegrate.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/cursor.js" defer></script>
+  <script src="/js/nav.js" defer></script>
+  <script src="/js/pwa.js" defer></script>
+  <script src="/js/animations.js" defer></script>
+  <script src="/js/form.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+/* animations.css — WiseIntegrate */
+
+/* =====================
+   KEYFRAMES
+   ===================== */
+@keyframes breathe {
+  0%, 100% { transform: translate(-50%, -55%) scale(1); opacity: 1; }
+  50%       { transform: translate(-50%, -55%) scale(1.09); opacity: 0.85; }
+}
+
+@keyframes breathe-free {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.1); opacity: 0.8; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.28; }
+}
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* =====================
+   ANIMATE ON LOAD (hero)
+   ===================== */
+.animate-fade-up {
+  opacity: 0;
+  animation: fade-up 0.9s ease forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+/* =====================
+   SCROLL REVEAL
+   ===================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+  transition-delay: var(--reveal-delay, 0s);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+  transition-delay: var(--reveal-delay, 0s);
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger children */
+.stagger > *:nth-child(1) { --reveal-delay: 0s; }
+.stagger > *:nth-child(2) { --reveal-delay: 0.1s; }
+.stagger > *:nth-child(3) { --reveal-delay: 0.2s; }
+.stagger > *:nth-child(4) { --reveal-delay: 0.3s; }
+.stagger > *:nth-child(5) { --reveal-delay: 0.4s; }
+.stagger > *:nth-child(6) { --reveal-delay: 0.5s; }
+
+/* =====================
+   HOVER MICRO-INTERACTIONS
+   ===================== */
+.hover-lift {
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+}
+
+/* Nav active states */
+.nav-links a.active {
+  color: var(--purple-4);
+}
+
+/* =====================
+   REDUCED MOTION
+   ===================== */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .reveal,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .hero-glow,
+  .eyebrow-dot,
+  .voice-dot {
+    animation: none !important;
+  }
+
+  .ticker-set {
+    animation: none !important;
+  }
+}
