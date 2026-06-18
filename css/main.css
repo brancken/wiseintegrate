@@ -1073,7 +1073,7 @@ body {
 @media (max-width: 580px) {
   .offer-grid { grid-template-columns: 1fr; }
   .offer-card { padding: 1.5rem 1.25rem; }
-  .nav-logo-img { height: 30px; max-width: 150px; }
+  .nav-logo-img { height: 33px; max-width: 150px; }
 }
 /* ── END OFFER CARDS ──────────────────────────────────── */
 
