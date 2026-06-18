@@ -152,7 +152,7 @@ body {
 .nav-logo span { color: var(--blue-3); }
 
 .nav-logo-img {
-  height: 42px;
+  height: 46px;
   width: auto;
   max-width: 220px;
   object-fit: contain;
