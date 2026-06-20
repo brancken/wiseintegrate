@@ -41,9 +41,13 @@
       "continue": true
     },
     {
-      "src": "/assessment",
-      "dest": "/assessment.html"
-    },
+  "src": "/assessment",
+  "dest": "/assessment-intro.html"
+},
+{
+  "src": "/assessment/start",
+  "dest": "/assessment.html"
+},
     {
       "src": "/dashboard",
       "dest": "/dashboard.html"
