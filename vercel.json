@@ -41,9 +41,9 @@
       "continue": true
     },
     {
-      "src": "/assessment",
-      "dest": "/assessment/index.html"
-    },
+  "src": "/assessment",
+  "dest": "/assessment.html"
+},
     {
       "src": "/church",
       "dest": "/church/index.html"
