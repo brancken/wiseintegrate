@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="WiseIntegrate">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#08080f">
+<meta name="description" content="AI Readiness Assessment — WiseIntegrate">
+<title>AI Readiness Assessment — WiseIntegrate</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ── Reset & base ─────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #08080f;
+    --bg2:       #0a0a16;
+    --bg3:       rgba(37,99,235,0.06);
+    --border:    rgba(37,99,235,0.15);
+    --border2:   rgba(37,99,235,0.28);
+    --accent:    #1d4ed8;
+    --accent2:   #60a5fa;
+    --gold:      #1d4ed8;
+    --gold2:     #60a5fa;
+    --text:      #eff6ff;
+    --text2:     rgba(239,246,255,0.55);
+    --text3:     rgba(239,246,255,0.30);
+    --good:      #1d4ed8;
+    --good-bg:   rgba(29,78,216,0.15);
+    --error:     #c04040;
+    --error-bg:  #2a0d0d;
+    --radius:    10px;
+    --radius-sm: 6px;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-disp: 'Playfair Display', Georgia, serif;
+    --max-w:     720px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Nav ──────────────────────────────────────────────────── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(8,8,15,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo img { height: 32px; display: block; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--accent); color: #fff;
+    padding: 8px 18px; border-radius: 50px;
+    font-size: 13px; font-weight: 600;
+    text-decoration: none; white-space: nowrap;
+    transition: background .2s;
+  }
+  .nav-cta:hover { background: var(--accent2); }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+  }
+
+  /* ── Hero ─────────────────────────────────────────────────── */
+  .hero {
+    text-align: center;
+    padding: 72px 24px 56px;
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--gold);
+    border: 1px solid var(--gold); border-radius: 50px;
+    padding: 4px 14px; margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: var(--font-disp);
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 700; line-height: 1.15;
+    margin-bottom: 18px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent2); }
+  .hero p {
+    font-size: 16px; color: var(--text2);
+    max-width: 520px; margin: 0 auto 36px;
+    line-height: 1.7;
+  }
+
+  /* Progress bar */
+  .progress-wrap {
+    max-width: var(--max-w);
+    margin: 0 auto 12px;
+    padding: 0 24px;
+  }
+  .progress-label {
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--text3);
+    margin-bottom: 6px;
+  }
+  .progress-track {
+    height: 4px; background: var(--border2);
+    border-radius: 2px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: var(--accent);
+    border-radius: 2px;
+    width: 0%;
+    transition: width .4s ease;
+  }
+
+  /* ── Form shell ───────────────────────────────────────────── */
+  .form-wrap {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ── Steps ────────────────────────────────────────────────── */
+  .step { display: none; }
+  .step.active { display: block; animation: fadeUp .35s ease; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Section header ───────────────────────────────────────── */
+  .section-hd {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    margin-bottom: 28px;
+  }
+  .section-hd .tag {
+    font-size: 10px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--accent2);
+    margin-bottom: 6px;
+  }
+  .section-hd h2 {
+    font-family: var(--font-disp);
+    font-size: 22px; font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .section-hd p { font-size: 14px; color: var(--text2); line-height: 1.6; }
+
+  /* ── Dimension header ─────────────────────────────────────── */
+  .dim-hd {
+    display: flex; align-items: center; gap: 12px;
+    margin: 32px 0 18px;
+  }
+  .dim-badge {
+    background: var(--accent);
+    color: #fff; font-size: 11px; font-weight: 700;
+    padding: 3px 10px; border-radius: 50px;
+    white-space: nowrap;
+  }
+  .dim-title { font-size: 16px; font-weight: 600; }
+
+  /* ── Field groups ─────────────────────────────────────────── */
+  .field-group { margin-bottom: 20px; }
+  .field-group label {
+    display: block; font-size: 13px; font-weight: 600;
+    color: var(--text2); margin-bottom: 7px;
+  }
+  .field-group label span { color: var(--error); margin-left: 3px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+    width: 100%; background: var(--bg3);
+    border: 1px solid var(--border2);
+    color: var(--text); border-radius: var(--radius-sm);
+    padding: 12px 15px; font-size: 15px;
+    font-family: var(--font-body);
+    outline: none; transition: border-color .2s;
+    -webkit-appearance: none;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(29,78,216,.12);
+  }
+  textarea { min-height: 90px; resize: vertical; }
+  select { cursor: pointer; color: var(--text); }
+  select option { background: #0a0a16; color: #eff6ff; }
+
+  /* Checkbox grid for org type */
+  .check-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 500px) { .check-grid { grid-template-columns: 1fr; } }
+
+  .check-opt {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg3); border: 1px solid var(--border2);
+    border-radius: var(--radius-sm); padding: 12px 14px;
+    cursor: pointer; transition: border-color .2s, background .2s;
+    font-size: 14px;
+  }
+  .check-opt:hover { border-color: var(--accent); }
+  .check-opt input[type="radio"],
+  .check-opt input[type="checkbox"] {
+    width: 16px; height: 16px; flex-shrink: 0;
+    accent-color: var(--accent);
+  }
+  .check-opt.selected {
+    border-color: var(--accent);
+    background: rgba(29,78,216,.08);
+  }
+
+  /* Size selector */
+  .size-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
+  }
+  @media (max-width: 540px) { .size-grid { grid-template-columns: 1fr 1fr; } }
+
+  /* ── Question card ────────────────────────────────────────── */
+  .q-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 14px;
+    transition: border-color .2s;
+  }
+  .q-card:has(.opt-btn.selected) { border-color: var(--border2); }
+
+  .q-meta {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 10px;
+  }
+  .q-num {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    color: var(--accent2); font-size: 11px; font-weight: 700;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .q-dim { font-size: 11px; color: var(--text3); }
+
+  .q-text { font-size: 15px; font-weight: 500; line-height: 1.5; margin-bottom: 14px; }
+
+  .opt-list { display: flex; flex-direction: column; gap: 8px; }
+  .opt-btn {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 10px 14px;
+    cursor: pointer; font-size: 14px; color: var(--text2);
+    text-align: left; transition: border-color .15s, background .15s, color .15s;
+    line-height: 1.45;
+  }
+  .opt-btn:hover { border-color: var(--border2); color: var(--text); }
+  .opt-btn.selected {
+    border-color: var(--accent);
+    background: rgba(29,78,216,.1);
+    color: var(--text);
+  }
+  .opt-score {
+    min-width: 22px; height: 22px;
+    border-radius: 50%; background: var(--border2);
+    color: var(--text3); font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+    transition: background .15s, color .15s;
+  }
+  .opt-btn.selected .opt-score {
+    background: var(--accent); color: #fff;
+  }
+
+  /* ── Callout box ──────────────────────────────────────────── */
+  .callout {
+    background: var(--bg3);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 16px 18px; margin: 24px 0;
+    font-size: 13px; color: var(--text2); line-height: 1.6;
+  }
+  .callout strong { color: var(--gold); }
+
+  /* ── Navigation buttons ───────────────────────────────────── */
+  .btn-row {
+    display: flex; gap: 12px; align-items: center;
+    margin-top: 36px; justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 28px; border-radius: 50px;
+    font-size: 15px; font-weight: 600; cursor: pointer;
+    border: none; outline: none;
+    transition: opacity .2s, transform .15s;
+    font-family: var(--font-body);
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary { background: linear-gradient(135deg, #1d4ed8, #1e3a8a); color: #fff; box-shadow: 0 0 16px rgba(37,99,235,0.30); }
+  .btn-primary:hover { box-shadow: 0 0 28px rgba(37,99,235,0.45); transform: translateY(-1px); opacity: 1; }
+  .btn-secondary {
+    background: transparent; color: var(--text2);
+    border: 1px solid var(--border2);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--text); }
+  .btn-submit { background: linear-gradient(135deg, #1d4ed8, #1e3a8a); color: #fff; box-shadow: 0 0 16px rgba(37,99,235,0.30); }
+  .btn-submit:hover { box-shadow: 0 0 28px rgba(37,99,235,0.45); transform: translateY(-1px); }
+  .btn:disabled { opacity: .4; cursor: not-allowed; }
+
+  /* ── Thank you screen ─────────────────────────────────────── */
+  #step-thanks {
+    text-align: center;
+    padding: 60px 24px;
+  }
+  .thanks-icon {
+    width: 72px; height: 72px;
+    background: var(--good-bg); border: 2px solid var(--good);
+    border-radius: 50%; margin: 0 auto 28px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+  }
+  #step-thanks h2 {
+    font-family: var(--font-disp);
+    font-size: 30px; margin-bottom: 14px;
+  }
+  #step-thanks p { color: var(--text2); max-width: 440px; margin: 0 auto 12px; font-size: 15px; line-height: 1.7; }
+  .teaser-box {
+    background: var(--bg3); border: 1px solid var(--border2);
+    border-radius: var(--radius); padding: 28px;
+    margin: 32px auto; max-width: 480px; text-align: left;
+  }
+  .teaser-box .label { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text3); margin-bottom: 8px; }
+  .stage-pill {
+    display: inline-block;
+    background: rgba(29,78,216,.15);
+    border: 1px solid var(--accent);
+    color: var(--accent2); font-weight: 700; font-size: 14px;
+    padding: 4px 14px; border-radius: 50px; margin-bottom: 14px;
+  }
+  .teaser-box p { font-size: 14px; color: var(--text2); line-height: 1.65; }
+
+  /* ── Error message ────────────────────────────────────────── */
+  .error-msg {
+    background: var(--error-bg); border: 1px solid var(--error);
+    border-radius: var(--radius-sm); padding: 12px 16px;
+    color: #f08080; font-size: 14px; margin-top: 16px;
+    display: none;
+  }
+  .error-msg.show { display: block; }
+
+  /* ── Footer ───────────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 24px;
+    text-align: center; font-size: 13px; color: var(--text3);
+  }
+  footer a { color: var(--text3); text-decoration: none; }
+  footer a:hover { color: var(--text2); }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a href="https://wiseintegrate.com" class="nav-logo">
+    <img src="https://www.wiseintegrate.com/images/logo.png" alt="WiseIntegrate" onerror="this.style.display='none'; this.parentElement.textContent='WiseIntegrate'">
+  </a>
+  <div class="nav-links">
+    <a href="https://wiseintegrate.com/#services">Services</a>
+    <a href="https://wiseintegrate.com/#process">Process</a>
+    <a href="https://wiseintegrate.com/church">Church</a>
+    <a href="https://wiseintegrate.com/#contact">Contact</a>
+  </div>
+  <a href="https://wiseintegrate.com" class="nav-cta">← Back to site</a>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <span class="hero-eyebrow">AI Readiness Assessment</span>
+  <h1>How ready are you <em>really</em> for AI?</h1>
+  <p>A structured diagnostic across 8 dimensions. Takes 15–20 minutes. You receive a snapshot — we receive the full priority report.</p>
+</div>
+
+<!-- Progress -->
+<div class="progress-wrap">
+  <div class="progress-label">
+    <span id="prog-label">Section A — Your Organisation</span>
+    <span id="prog-pct">0%</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+</div>
+
+<!-- Form wrapper -->
+<div class="form-wrap">
+
+  <!-- ══════════════════════════════════════════════════════════
+       STEP 0 — Profile
+  ══════════════════════════════════════════════════════════ -->
+  <div class="step active" id="step-0">
+    <div class="section-hd">
+      <div class="tag">Section A</div>
+      <h2>Your Organisation</h2>
+      <p>This takes about 3 minutes. Everything you share is confidential and used only to prepare your personalised report.</p>
+    </div>
+
+    <div class="field-group">
+      <label>Full name <span>*</span></label>
+      <input type="text" id="f-name" placeholder="Your name" required>
+    </div>
+    <div class="field-group">
+      <label>Your role / title <span>*</span></label>
+      <input type="text" id="f-role" placeholder="e.g. Senior Pastor, CEO, Operations Manager">
+    </div>
+    <div class="field-group">
+      <label>Organisation name <span>*</span></label>
+      <input type="text" id="f-org" placeholder="Church, business, or ministry name">
+    </div>
+    <div class="field-group">
+      <label>Email address <span>*</span></label>
+      <input type="email" id="f-email" placeholder="you@example.com">
+    </div>
+    <div class="field-group">
+      <label>Phone (optional)</label>
+      <input type="tel" id="f-phone" placeholder="+1 555 000 0000">
+    </div>
+    <div class="field-group">
+      <label>City / Country</label>
+      <input type="text" id="f-location" placeholder="e.g. Auckland, New Zealand">
+    </div>
+
+    <div class="field-group">
+      <label>Organisation type <span>*</span></label>
+      <div class="check-grid" id="org-type-grid">
+        <label class="check-opt"><input type="radio" name="org-type" value="church"> Church / Ministry</label>
+        <label class="check-opt"><input type="radio" name="org-type" value="business"> Business</label>
+        <label class="check-opt"><input type="radio" name="org-type" value="nonprofit"> Nonprofit / NGO</label>
+        <label class="check-opt"><input type="radio" name="org-type" value="education"> Educational Institution</label>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>Organisation size</label>
+      <select id="f-size">
+        <option value="">Select size…</option>
+        <optgroup label="Church / Ministry">
+          <option value="church-under-100">Under 100 members</option>
+          <option value="church-100-299">100 – 299 members</option>
+          <option value="church-300-999">300 – 999 members</option>
+          <option value="church-1000-4999">1,000 – 4,999 members</option>
+          <option value="church-5000+">5,000+ members</option>
+        </optgroup>
+        <optgroup label="Business">
+          <option value="biz-under-10">Under 10 employees</option>
+          <option value="biz-10-49">10 – 49 employees</option>
+          <option value="biz-50-199">50 – 199 employees</option>
+          <option value="biz-200-999">200 – 999 employees</option>
+          <option value="biz-1000+">1,000+ employees</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label>Number of paid staff</label>
+      <input type="text" id="f-staff" placeholder="e.g. 12">
+    </div>
+
+    <div class="field-group">
+      <label>What prompted this assessment?</label>
+      <textarea id="f-prompt" placeholder="A sentence or two is fine — what challenge or opportunity brought you here?"></textarea>
+    </div>
+
+    <div class="field-group">
+      <label>Current AI usage</label>
+      <div class="check-grid" id="ai-usage-grid">
+        <label class="check-opt"><input type="radio" name="ai-use" value="none"> Just starting to explore</label>
+        <label class="check-opt"><input type="radio" name="ai-use" value="informal"> A few people use AI informally</label>
+        <label class="check-opt"><input type="radio" name="ai-use" value="some"> Some departments use AI</label>
+        <label class="check-opt"><input type="radio" name="ai-use" value="active"> Active AI programme in place</label>
+      </div>
+    </div>
+
+    <div class="error-msg" id="err-0">Please fill in your name, role, organisation, and email before continuing.</div>
+    <div class="btn-row">
+      <div></div>
+      <button class="btn btn-primary" onclick="goNext(0)">Continue — Start Assessment →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       STEP 1 — Leadership & Strategy (Q1–6)
+  ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-1">
+    <div class="section-hd">
+      <div class="tag">Section B — The Assessment</div>
+      <h2>Scored Questions</h2>
+      <p>For each question, choose the answer that honestly describes your organisation today — not where you plan to be.</p>
+    </div>
+
+    <div class="callout"><strong>Scoring guide:</strong> 1 = Not in place &nbsp;·&nbsp; 2 = Early stages &nbsp;·&nbsp; 3 = Mostly in place &nbsp;·&nbsp; 4 = Fully established</div>
+
+    <div class="dim-hd"><span class="dim-badge">D1</span><span class="dim-title">Leadership &amp; Strategy</span></div>
+
+    <!-- Q1 -->
+    <div class="q-card" id="qc-1">
+      <div class="q-meta"><span class="q-num">Q1</span><span class="q-dim">Leadership &amp; Strategy</span></div>
+      <div class="q-text">Our senior leadership has a clear, documented position on how and why we will use AI.</div>
+      <div class="opt-list" data-q="1">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>We have not discussed this formally</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Discussed informally — nothing written</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>A basic position exists and has been shared</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Written policy, communicated and endorsed by leadership</button>
+      </div>
+    </div>
+
+    <div class="q-card" id="qc-2">
+      <div class="q-meta"><span class="q-num">Q2</span><span class="q-dim">Leadership &amp; Strategy</span></div>
+      <div class="q-text">AI adoption decisions are driven by our mission and values — not vendor pressure or what others are doing.</div>
+      <div class="opt-list" data-q="2">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>We are mostly following trends</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some mission thinking — mostly reactive</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Mission usually drives decisions</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Every AI decision maps to mission first</button>
+      </div>
+    </div>
+
+    <div class="q-card" id="qc-3">
+      <div class="q-meta"><span class="q-num">Q3</span><span class="q-dim">Leadership &amp; Strategy</span></div>
+      <div class="q-text">Our board / elders / senior team have received at least basic AI literacy training in the last 12 months.</div>
+      <div class="opt-list" data-q="3">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No training has occurred</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>One or two leaders have self-learned</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>A training session has been run</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Formal training completed and documented</button>
+      </div>
+    </div>
+
+    <div class="q-card" id="qc-4">
+      <div class="q-meta"><span class="q-num">Q4</span><span class="q-dim">Leadership &amp; Strategy</span></div>
+      <div class="q-text">We have a designated person responsible for AI oversight (does not need to be a specialist).</div>
+      <div class="opt-list" data-q="4">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No one is responsible</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Someone informally keeps an eye on it</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>A role exists but is not formalised</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Formal AI Oversight role with clear accountability</button>
+      </div>
+    </div>
+
+    <div class="q-card" id="qc-5">
+      <div class="q-meta"><span class="q-num">Q5</span><span class="q-dim">Leadership &amp; Strategy</span></div>
+      <div class="q-text">We have discussed and agreed on what AI must never do in our context (non-negotiable boundaries).</div>
+      <div class="opt-list" data-q="5">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>We have not had this conversation</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Informal discussion — nothing agreed</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Boundaries discussed and noted</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Written boundaries, signed off by leadership</button>
+      </div>
+    </div>
+
+    <div class="q-card" id="qc-6">
+      <div class="q-meta"><span class="q-num">Q6</span><span class="q-dim">Leadership &amp; Strategy</span></div>
+      <div class="q-text">Our AI strategy (or approach) is reviewed and updated at least annually.</div>
+      <div class="opt-list" data-q="6">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>We have no AI strategy to review</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>We check in occasionally, informally</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Annual review happens most years</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Formal annual review with documented updates</button>
+      </div>
+    </div>
+
+    <div class="error-msg" id="err-1">Please answer all questions in this section before continuing.</div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goPrev(1)">← Back</button>
+      <button class="btn btn-primary" onclick="goNext(1)">Data &amp; Systems →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       STEP 2 — Data & Systems (Q7–12)
+  ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-2">
+    <div class="dim-hd"><span class="dim-badge">D2</span><span class="dim-title">Data &amp; Systems</span></div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q7</span><span class="q-dim">Data &amp; Systems</span></div>
+      <div class="q-text">We have a single, reliable system of record for key information (members / customers, finances, communications).</div>
+      <div class="opt-list" data-q="7">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Data is spread across spreadsheets and inboxes</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>A system exists but is not consistently used</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Main system in use, with some workarounds</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>One system, consistently maintained and trusted</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q8</span><span class="q-dim">Data &amp; Systems</span></div>
+      <div class="q-text">Our key data is clean — consistent formats, no major duplicates, fields regularly updated.</div>
+      <div class="opt-list" data-q="8">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Data quality is poor and known to be</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some clean data, many inconsistencies</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Mostly clean with occasional issues</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>High data quality with governance in place</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q9</span><span class="q-dim">Data &amp; Systems</span></div>
+      <div class="q-text">Our systems (ChMS, CRM, accounting, comms) share data or connect in useful ways.</div>
+      <div class="opt-list" data-q="9">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Systems are completely siloed</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some manual data transfers between systems</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Some integration, with some manual gaps</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Systems integrated and data flows well</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q10</span><span class="q-dim">Data &amp; Systems</span></div>
+      <div class="q-text">We know which data we hold, where it lives, and who is responsible for it.</div>
+      <div class="opt-list" data-q="10">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No one could answer these questions</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some informal understanding exists</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Most data is mapped and owned</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Full data inventory with assigned ownership</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q11</span><span class="q-dim">Data &amp; Systems</span></div>
+      <div class="q-text">We regularly back up our data and have verified that the backup actually works.</div>
+      <div class="opt-list" data-q="11">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Not sure if backups exist</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Backups run but never tested</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Backups run and tested occasionally</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Regular tested backups with documented process</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q12</span><span class="q-dim">Data &amp; Systems</span></div>
+      <div class="q-text">We have a process for maintaining data quality over time — not just cleaning it once.</div>
+      <div class="opt-list" data-q="12">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No process exists</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Occasional manual clean-ups only</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Semi-regular review process</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Systematic ongoing maintenance with accountability</button>
+      </div>
+    </div>
+
+    <div class="error-msg" id="err-2">Please answer all questions before continuing.</div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goPrev(2)">← Back</button>
+      <button class="btn btn-primary" onclick="goNext(2)">AI Literacy →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       STEP 3 — AI Literacy (Q13–18)
+  ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-3">
+    <div class="dim-hd"><span class="dim-badge">D3</span><span class="dim-title">AI Literacy &amp; Staff Readiness</span></div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q13</span><span class="q-dim">AI Literacy</span></div>
+      <div class="q-text">Staff who use AI tools understand what hallucination is and know what to do when they encounter it.</div>
+      <div class="opt-list" data-q="13">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Most staff have not heard the term</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>A few individuals know and apply caution</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Most staff know and apply caution</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>All staff trained with protocols in place</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q14</span><span class="q-dim">AI Literacy</span></div>
+      <div class="q-text">Staff understand that AI outputs must always be reviewed by a human before use — and this actually happens.</div>
+      <div class="opt-list" data-q="14">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>This is not common practice</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some people review — others do not</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Most staff review most outputs</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Policy enforced — no AI output goes unreviewed</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q15</span><span class="q-dim">AI Literacy</span></div>
+      <div class="q-text">Our team has received formal AI literacy training in the past 12 months (not just self-teaching).</div>
+      <div class="opt-list" data-q="15">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No formal training has taken place</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>One or two attended something external</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Team-wide session run at least once</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Regular training, documented and updated</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q16</span><span class="q-dim">AI Literacy</span></div>
+      <div class="q-text">Staff know which types of data must never be entered into an AI tool (PII, pastoral notes, financial records, children's data).</div>
+      <div class="opt-list" data-q="16">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No one has been told this</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some awareness — not formally communicated</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Communicated — not consistently followed</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Written in policy, trained, and enforced</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q17</span><span class="q-dim">AI Literacy</span></div>
+      <div class="q-text">We know which AI tools staff are currently using — including informal or personal use.</div>
+      <div class="opt-list" data-q="17">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>We have no visibility of this</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>We assume some usage but do not know</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>We have a rough picture</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>All AI tool use is logged and approved</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q18</span><span class="q-dim">AI Literacy</span></div>
+      <div class="q-text">Young people in our ministry / organisation have received specific guidance on responsible AI use.</div>
+      <div class="opt-list" data-q="18">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No guidance has been given</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>General digital safety conversations only</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Some specific AI guidance given</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Structured programme in place</button>
+      </div>
+    </div>
+
+    <div class="error-msg" id="err-3">Please answer all questions before continuing.</div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goPrev(3)">← Back</button>
+      <button class="btn btn-primary" onclick="goNext(3)">Governance →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       STEP 4 — Governance & Policy (Q19–24)
+  ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-4">
+    <div class="dim-hd"><span class="dim-badge">D4</span><span class="dim-title">Governance &amp; Policy</span></div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q19</span><span class="q-dim">Governance</span></div>
+      <div class="q-text">We have a written AI Acceptable Use Policy.</div>
+      <div class="opt-list" data-q="19">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No policy exists</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Draft in progress but not finalised</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Policy exists but not widely known</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Policy written, signed, communicated, and reviewed</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q20</span><span class="q-dim">Governance</span></div>
+      <div class="q-text">Our policy includes a clear list of what AI cannot do in our context (non-negotiable limits).</div>
+      <div class="opt-list" data-q="20">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No policy exists</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Policy exists but does not cover this</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Limits mentioned but not detailed</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Clear written boundaries with rationale</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q21</span><span class="q-dim">Governance</span></div>
+      <div class="q-text">All staff who use AI tools have acknowledged the policy in writing.</div>
+      <div class="opt-list" data-q="21">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No policy to acknowledge</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Policy exists but not signed</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Most but not all staff have signed</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>All staff signed, records kept</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q22</span><span class="q-dim">Governance</span></div>
+      <div class="q-text">We have a process for evaluating and approving new AI tools before staff use them.</div>
+      <div class="opt-list" data-q="22">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Anyone can use anything they find</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Informal conversation sometimes happens</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Most tools discussed before adoption</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Formal approval process before any new tool</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q23</span><span class="q-dim">Governance</span></div>
+      <div class="q-text">We have a clear process for what happens when something goes wrong with an AI output.</div>
+      <div class="opt-list" data-q="23">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No incident process exists</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>We would work it out when it happened</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Informal protocol understood</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Written incident process, tested</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q24</span><span class="q-dim">Governance</span></div>
+      <div class="q-text">Our AI policy is reviewed at least annually and updated when tools or risks change.</div>
+      <div class="opt-list" data-q="24">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No policy to review</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Review has not happened</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Ad hoc review when something prompts it</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Annual review scheduled and documented</button>
+      </div>
+    </div>
+
+    <div class="error-msg" id="err-4">Please answer all questions before continuing.</div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goPrev(4)">← Back</button>
+      <button class="btn btn-primary" onclick="goNext(4)">Current AI Use →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       STEP 5 — Current AI Usage (Q25–30)
+  ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-5">
+    <div class="dim-hd"><span class="dim-badge">D5</span><span class="dim-title">Current AI Usage</span></div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q25</span><span class="q-dim">Current Use</span></div>
+      <div class="q-text">AI tools we use are delivering measurable time savings or quality improvements — not just novelty.</div>
+      <div class="opt-list" data-q="25">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>We are not yet measuring this</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some anecdotal benefit noticed</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Clear time savings in specific areas</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Measured impact tracked and reported regularly</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q26</span><span class="q-dim">Current Use</span></div>
+      <div class="q-text">The time saved by AI is being reinvested into people-facing work — not just absorbed by other tasks.</div>
+      <div class="opt-list" data-q="26">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>We have not thought about this</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Saves time but impact is unclear</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Some reinvestment into ministry / mission work</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Deliberate policy to redirect saved time to people</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q27</span><span class="q-dim">Current Use</span></div>
+      <div class="q-text">We have clear, agreed uses for AI in each department or ministry area.</div>
+      <div class="opt-list" data-q="27">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No agreed uses — ad hoc only</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some departments have informal norms</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Most areas have some clarity</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Written approved use list per department</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q28</span><span class="q-dim">Current Use</span></div>
+      <div class="q-text">All AI-generated content is reviewed by a qualified human before it is published or distributed.</div>
+      <div class="opt-list" data-q="28">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Content sometimes goes out unreviewed</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Usually reviewed but no formal rule</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Reviewed as a standard expectation</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Policy enforced — no AI content goes unreviewed</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q29</span><span class="q-dim">Current Use</span></div>
+      <div class="q-text">We have avoided using AI for any function requiring pastoral authority, spiritual guidance, or counselling.</div>
+      <div class="opt-list" data-q="29">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Not sure — no clear rule exists</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Mostly avoided but no formal rule</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Clear expectation in place</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Written policy enforced, never crossed</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q30</span><span class="q-dim">Current Use</span></div>
+      <div class="q-text">Staff who use AI for research or teaching verify all AI-generated references against original sources.</div>
+      <div class="opt-list" data-q="30">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>This does not happen consistently</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some do, some do not</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Expectation communicated — mostly followed</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Policy enforced — verification is mandatory</button>
+      </div>
+    </div>
+
+    <div class="error-msg" id="err-5">Please answer all questions before continuing.</div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goPrev(5)">← Back</button>
+      <button class="btn btn-primary" onclick="goNext(5)">Department Readiness →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       STEP 6 — Department Readiness (Q31–36)
+  ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-6">
+    <div class="dim-hd"><span class="dim-badge">D6</span><span class="dim-title">Department / Ministry Readiness</span></div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q31</span><span class="q-dim">Departments</span></div>
+      <div class="q-text">Administration &amp; communications — AI is being used appropriately to reduce admin burden and free staff for people-focused work.</div>
+      <div class="opt-list" data-q="31">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Not using AI here</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some informal use</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>AI integrated with oversight</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Systematic, governed, measured use</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q32</span><span class="q-dim">Departments</span></div>
+      <div class="q-text">Work involving young people — appropriate AI literacy and safeguarding are in place in children's / youth / junior staff areas.</div>
+      <div class="opt-list" data-q="32">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Nothing specific in place</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>General guidance only</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Some specific guidance given</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Full programme with trained leaders</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q33</span><span class="q-dim">Departments</span></div>
+      <div class="q-text">Outreach / marketing / communications — AI is helping reach more people without replacing authentic human connection.</div>
+      <div class="opt-list" data-q="33">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Not using AI here</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some use, no clear strategy</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>AI assists reach — humans follow up</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Measured impact with consistent human follow-up</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q34</span><span class="q-dim">Departments</span></div>
+      <div class="q-text">Pastoral care / HR / people functions — AI assists admin but never replaces human presence or counselling.</div>
+      <div class="opt-list" data-q="34">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No boundaries in place</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Informal awareness only</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Boundaries communicated clearly</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Written policy, trained staff, enforced</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q35</span><span class="q-dim">Departments</span></div>
+      <div class="q-text">Finance / giving / accounting — data governance and security practices are in place around any AI used in financial processes.</div>
+      <div class="opt-list" data-q="35">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>AI not used / no safeguards considered</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some thought given — nothing formal</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Security considerations in place</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Full governance around financial AI use</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q36</span><span class="q-dim">Departments</span></div>
+      <div class="q-text">Education / discipleship / staff development — AI assists content and research but human relationship remains the core of formation.</div>
+      <div class="opt-list" data-q="36">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Not using AI here</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some use — boundaries unclear</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Human relationship remains primary</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Policy clear — AI enhances but never substitutes</button>
+      </div>
+    </div>
+
+    <div class="error-msg" id="err-6">Please answer all questions before continuing.</div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goPrev(6)">← Back</button>
+      <button class="btn btn-primary" onclick="goNext(6)">Security &amp; Privacy →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       STEP 7 — Security & Privacy (Q37–42)
+  ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-7">
+    <div class="dim-hd"><span class="dim-badge">D7</span><span class="dim-title">Security &amp; Privacy</span></div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q37</span><span class="q-dim">Security</span></div>
+      <div class="q-text">Staff know which types of data are classified as sensitive and must never be entered into any AI system.</div>
+      <div class="opt-list" data-q="37">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No classification or training exists</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some informal awareness</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Communicated but not formally trained</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Documented classification, trained, and enforced</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q38</span><span class="q-dim">Security</span></div>
+      <div class="q-text">We have reviewed the privacy policies of AI tools we use and know how they handle data we input.</div>
+      <div class="opt-list" data-q="38">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>We have not reviewed any policies</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Checked for one or two tools</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Reviewed most tools we use</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Full review for all approved tools, documented</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q39</span><span class="q-dim">Security</span></div>
+      <div class="q-text">Pastoral notes, counselling records, medical information, and children's data are protected from AI systems by policy and practice.</div>
+      <div class="opt-list" data-q="39">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No protections in place</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Informally avoided</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Policy in place — mostly followed</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Written policy, enforced, and audited</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q40</span><span class="q-dim">Security</span></div>
+      <div class="q-text">We have a basic cybersecurity posture — updated passwords, multi-factor authentication, staff awareness of phishing.</div>
+      <div class="opt-list" data-q="40">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Basic hygiene largely absent</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some practices — inconsistently applied</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Most practices in place</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Documented security baseline, trained, maintained</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q41</span><span class="q-dim">Security</span></div>
+      <div class="q-text">We comply with relevant data privacy legislation in our jurisdiction (GDPR, Privacy Act, CCPA, or equivalent).</div>
+      <div class="opt-list" data-q="41">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Not aware of our obligations</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some awareness — no formal compliance work</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Broadly compliant — informal</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Fully reviewed and documented compliance</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q42</span><span class="q-dim">Security</span></div>
+      <div class="q-text">If a data breach occurred through an AI tool, we know what steps to take and who to notify.</div>
+      <div class="opt-list" data-q="42">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No incident plan exists</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>We would work it out when it happened</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Informal protocol understood</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Written incident response plan, tested</button>
+      </div>
+    </div>
+
+    <div class="error-msg" id="err-7">Please answer all questions before continuing.</div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goPrev(7)">← Back</button>
+      <button class="btn btn-primary" onclick="goNext(7)">Budget &amp; Resources →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       STEP 8 — Budget & Resources (Q43–45) + Submit
+  ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-8">
+    <div class="dim-hd"><span class="dim-badge">D8</span><span class="dim-title">Budget &amp; Resources</span></div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q43</span><span class="q-dim">Budget</span></div>
+      <div class="q-text">We have a dedicated budget for AI tools and training — not just hoping it fits within existing software budgets.</div>
+      <div class="opt-list" data-q="43">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>No budget allocated</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Using spare budget informally</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Budget allocated — not yet formalised</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Formal budget line, reviewed annually</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q44</span><span class="q-dim">Budget</span></div>
+      <div class="q-text">We allocate budget for change management and staff training alongside any new AI tool — not just the tool cost itself.</div>
+      <div class="opt-list" data-q="44">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Training costs are not considered</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Occasional ad hoc training funded</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Training budget usually accompanies tools</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Policy: training allocation is mandatory</button>
+      </div>
+    </div>
+
+    <div class="q-card"><div class="q-meta"><span class="q-num">Q45</span><span class="q-dim">Budget</span></div>
+      <div class="q-text">Leadership is willing to invest in fixing data and systems foundations before adding new AI tools, even if that feels slow.</div>
+      <div class="opt-list" data-q="45">
+        <button class="opt-btn" data-val="1"><span class="opt-score">1</span>Leadership wants tools — not foundations</button>
+        <button class="opt-btn" data-val="2"><span class="opt-score">2</span>Some openness to foundations work</button>
+        <button class="opt-btn" data-val="3"><span class="opt-score">3</span>Generally willing to do foundations first</button>
+        <button class="opt-btn" data-val="4"><span class="opt-score">4</span>Committed to a foundations-first approach</button>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:32px;">
+      <strong>Almost done.</strong> When you submit, you will see a brief snapshot of your maturity stage. Your consultant will review your full results and contact you within 2 business days with a detailed report and recommended next steps.
+    </div>
+
+    <div class="error-msg" id="err-8">Please answer all three questions before submitting.</div>
+    <div class="error-msg" id="err-submit">Something went wrong saving your responses. Please try again or email hello@wiseintegrate.com</div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goPrev(8)">← Back</button>
+      <button class="btn btn-submit" id="submit-btn" onclick="submitAssessment()">Submit Assessment →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       STEP 9 — Thank you / Teaser
+  ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-thanks">
+    <div class="thanks-icon">✓</div>
+    <h2>Assessment submitted.</h2>
+    <p>Thank you for taking the time to complete this. Here is a brief snapshot of where your organisation sits right now.</p>
+    <p style="color: var(--text3); font-size: 13px;">Your consultant will review your full results and be in touch within 2 business days with a detailed report and recommended next steps.</p>
+
+    <div class="teaser-box">
+      <div class="label">Your AI Maturity Stage</div>
+      <div class="stage-pill" id="teaser-stage">Calculating…</div>
+      <p id="teaser-msg">Your results are being processed.</p>
+    </div>
+
+    <a href="https://wiseintegrate.com" class="btn btn-secondary" style="margin: 0 auto; display: inline-flex;">← Back to WiseIntegrate</a>
+  </div>
+
+</div><!-- /form-wrap -->
+
+<footer>
+  <p>© 2026 WiseIntegrate. All rights reserved. &nbsp;·&nbsp;
+  <a href="https://wiseintegrate.com/privacy">Privacy</a> &nbsp;·&nbsp;
+  <a href="https://wiseintegrate.com/terms">Terms</a> &nbsp;·&nbsp;
+  <a href="mailto:hello@wiseintegrate.com">hello@wiseintegrate.com</a></p>
+</footer>
+
+<script>
+// ── Config — replace with your actual values ───────────────────
+const SUPABASE_URL  = 'https://ppgecvmyuyuntwnqwcru.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBwZ2Vjdm15dXl1bnR3bnF3Y3J1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4MzY4MzYsImV4cCI6MjA5NzQxMjgzNn0.sVdfTUM6NvqI7ZrjfdO7JbEit9e3izKhXNZ0-zBmHIs';
+const TABLE_NAME    = 'ai_assessments';
+const EDGE_FN_URL   = 'https://ppgecvmyuyuntwnqwcru.supabase.co/functions/v1/generate-report';
+
+// ── State ──────────────────────────────────────────────────────
+const answers = {};  // { q1: 3, q2: 1, … }
+const TOTAL_STEPS = 9; // 0 = profile, 1-8 = dimensions, thanks = final
+
+// Questions per step
+const STEP_QS = {
+  1: [1,2,3,4,5,6],
+  2: [7,8,9,10,11,12],
+  3: [13,14,15,16,17,18],
+  4: [19,20,21,22,23,24],
+  5: [25,26,27,28,29,30],
+  6: [31,32,33,34,35,36],
+  7: [37,38,39,40,41,42],
+  8: [43,44,45]
+};
+
+const STEP_LABELS = [
+  'Section A — Your Organisation',
+  'D1 — Leadership & Strategy',
+  'D2 — Data & Systems',
+  'D3 — AI Literacy & Staff Readiness',
+  'D4 — Governance & Policy',
+  'D5 — Current AI Usage',
+  'D6 — Department Readiness',
+  'D7 — Security & Privacy',
+  'D8 — Budget & Resources'
+];
+
+// ── Option button interactions ─────────────────────────────────
+document.querySelectorAll('.opt-list').forEach(list => {
+  const qNum = list.dataset.q;
+  list.querySelectorAll('.opt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      list.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      answers[`q${qNum}`] = parseInt(btn.dataset.val);
+    });
+  });
+});
+
+// Radio/checkbox styling
+document.querySelectorAll('.check-opt input').forEach(inp => {
+  inp.addEventListener('change', () => {
+    const grid = inp.closest('.check-grid');
+    if (!grid) return;
+    grid.querySelectorAll('.check-opt').forEach(o => o.classList.remove('selected'));
+    inp.closest('.check-opt').classList.add('selected');
+  });
+});
+
+// ── Navigation ─────────────────────────────────────────────────
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  const target = n === 'thanks'
+    ? document.getElementById('step-thanks')
+    : document.getElementById(`step-${n}`);
+  if (target) { target.classList.add('active'); window.scrollTo({top:0, behavior:'smooth'}); }
+  updateProgress(n);
+}
+
+function updateProgress(step) {
+  if (step === 'thanks') step = 9;
+  const pct = Math.round((step / 9) * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-label').textContent =
+    STEP_LABELS[step] || (step === 9 ? 'Complete' : '');
+}
+
+function goNext(currentStep) {
+  // Validate
+  if (currentStep === 0) {
+    const name  = document.getElementById('f-name').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const org   = document.getElementById('f-org').value.trim();
+    const role  = document.getElementById('f-role').value.trim();
+    if (!name || !email || !org || !role) {
+      document.getElementById('err-0').classList.add('show'); return;
+    }
+    document.getElementById('err-0').classList.remove('show');
+  } else {
+    const qs = STEP_QS[currentStep];
+    if (qs) {
+      const missing = qs.some(q => !answers[`q${q}`]);
+      if (missing) {
+        document.getElementById(`err-${currentStep}`).classList.add('show'); return;
+      }
+      document.getElementById(`err-${currentStep}`).classList.remove('show');
+    }
+  }
+  showStep(currentStep + 1);
+}
+
+function goPrev(currentStep) {
+  showStep(currentStep - 1);
+}
+
+// ── Score calculation ──────────────────────────────────────────
+function calcScores() {
+  const dims = {
+    d1: [1,2,3,4,5,6],
+    d2: [7,8,9,10,11,12],
+    d3: [13,14,15,16,17,18],
+    d4: [19,20,21,22,23,24],
+    d5: [25,26,27,28,29,30],
+    d6: [31,32,33,34,35,36],
+    d7: [37,38,39,40,41,42],
+    d8: [43,44,45]
+  };
+  const scores = {};
+  let total = 0;
+  for (const [dim, qs] of Object.entries(dims)) {
+    scores[dim] = qs.reduce((sum, q) => sum + (answers[`q${q}`] || 0), 0);
+    total += scores[dim];
+  }
+  return { scores, total };
+}
+
+function getStage(total) {
+  if (total <= 72)  return { stage: 1, label: 'Stage 1 — Digital Foundation',       color: '#c04040' };
+  if (total <= 108) return { stage: 2, label: 'Stage 2 — Experimentation & Literacy', color: '#b87a20' };
+  if (total <= 135) return { stage: 3, label: 'Stage 3 — Integration',               color: '#1d4ed8' };
+  if (total <= 162) return { stage: 4, label: 'Stage 4 — Optimisation',              color: '#2a7a4a' };
+  return              { stage: 5, label: 'Stage 5 — Transformation',                color: '#c9963a' };
+}
+
+function getTeaserMsg(stage) {
+  const msgs = {
+    1: "Your organisation is building its digital foundation. Before adding AI tools, the priority is getting core systems, data quality, and basic governance in place. Your consultant will walk you through a practical starting roadmap.",
+    2: "You have foundations in place and are beginning to explore AI. The next step is a written policy, scoped pilots, and team-wide AI literacy training. Your consultant will identify the 2-3 highest-impact, lowest-risk starting points.",
+    3: "AI is starting to embed in your workflows. You are at the critical inflection point where organisations that move carefully and measure what matters consistently outperform peers. Your consultant will help you expand systematically.",
+    4: "AI is producing measurable value in your organisation. The focus now is strategic refinement — better use cases, stronger measurement, and deliberate reinvestment of saved time into people-facing work. Your consultant will help you optimise.",
+    5: "Your organisation is operating at the leading edge of AI maturity. The task is sustained excellence — keeping governance rigorous, ensuring human presence grows alongside AI capability, and staying ahead of emerging risks."
+  };
+  return msgs[stage] || "";
+}
+
+// ── Submit ─────────────────────────────────────────────────────
+async function submitAssessment() {
+  // Validate last section
+  const qs = STEP_QS[8];
+  const missing = qs.some(q => !answers[`q${q}`]);
+  if (missing) { document.getElementById('err-8').classList.add('show'); return; }
+  document.getElementById('err-8').classList.remove('show');
+
+  const submitBtn = document.getElementById('submit-btn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting…';
+
+  const { scores, total } = calcScores();
+  const stageInfo = getStage(total);
+
+  // Build payload
+  const payload = {
+    submitted_at:  new Date().toISOString(),
+    name:          document.getElementById('f-name').value.trim(),
+    role:          document.getElementById('f-role').value.trim(),
+    organisation:  document.getElementById('f-org').value.trim(),
+    email:         document.getElementById('f-email').value.trim(),
+    phone:         document.getElementById('f-phone').value.trim(),
+    location:      document.getElementById('f-location').value.trim(),
+    org_type:      document.querySelector('input[name="org-type"]:checked')?.value || '',
+    org_size:      document.getElementById('f-size').value,
+    staff_count:   document.getElementById('f-staff').value.trim(),
+    ai_usage:      document.querySelector('input[name="ai-use"]:checked')?.value || '',
+    prompt_reason: document.getElementById('f-prompt').value.trim(),
+    d1_leadership: scores.d1,
+    d2_data:       scores.d2,
+    d3_literacy:   scores.d3,
+    d4_governance: scores.d4,
+    d5_usage:      scores.d5,
+    d6_departments:scores.d6,
+    d7_security:   scores.d7,
+    d8_budget:     scores.d8,
+    total_score:   total,
+    maturity_stage:stageInfo.stage,
+    ...Object.fromEntries(Object.entries(answers).map(([k,v]) => [k, v]))
+  };
+
+  try {
+    // Step 1 — Save to Supabase
+    submitBtn.textContent = 'Saving responses…';
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE_NAME}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON,
+        'Authorization': `Bearer ${SUPABASE_ANON}`,
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const [saved] = await res.json();
+    const rowId = saved?.id;
+
+    // Step 2 — Generate AI report via Edge Function
+    submitBtn.textContent = 'Generating your report…';
+    let report = null;
+    try {
+      const fnRes = await fetch(EDGE_FN_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON,
+          'Authorization': `Bearer ${SUPABASE_ANON}`
+        },
+        body: JSON.stringify(payload)
+      });
+      if (fnRes.ok) {
+        const fnData = await fnRes.json();
+        report = fnData.report || null;
+      }
+    } catch(e) { console.error('Report gen error:', e); }
+
+    // Step 3 — Save report back to Supabase
+    if (rowId && report) {
+      await fetch(`${SUPABASE_URL}/rest/v1/${TABLE_NAME}?id=eq.${rowId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON,
+          'Authorization': `Bearer ${SUPABASE_ANON}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ ai_report: report })
+      });
+    }
+
+    // Step 4 — Show teaser
+    showStep('thanks');
+    document.getElementById('teaser-stage').textContent = stageInfo.label;
+    document.getElementById('teaser-stage').style.borderColor = stageInfo.color;
+    document.getElementById('teaser-stage').style.color = stageInfo.color;
+    document.getElementById('teaser-msg').textContent = getTeaserMsg(stageInfo.stage);
+
+  } catch (err) {
+    console.error('Submission error:', err);
+    document.getElementById('err-submit').classList.add('show');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Submit Assessment →';
+  }
+}
+
+
+</script>
+</body>
+</html>
