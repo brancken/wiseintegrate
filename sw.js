@@ -1,8 +1,8 @@
 // sw.js — WiseIntegrate Service Worker
 // Cache-first for assets, network-first for HTML pages
 
-const CACHE_NAME   = 'wiseintegrate-v1';
-const STATIC_CACHE = 'wiseintegrate-static-v1';
+const CACHE_NAME   = 'wiseintegrate-v2';
+const STATIC_CACHE = 'wiseintegrate-static-v2';
 
 // Files to pre-cache on install
 const PRECACHE_URLS = [
