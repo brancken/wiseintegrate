@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08080f">
+<title>Consultant Dashboard — WiseIntegrate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:      #08080f;
+    --bg2:     #0f0f1a;
+    --bg3:     #151525;
+    --border:  #1e1e35;
+    --border2: #2a2a48;
+    --accent:  #7c6cdc;
+    --accent2: #9d8ef0;
+    --gold:    #c9963a;
+    --text:    #e8e8f0;
+    --text2:   #9999bb;
+    --text3:   #5a5a7a;
+    --good:    #2a7a4a;
+    --good-bg: #0d2a1a;
+    --error:   #c04040;
+    --radius:  10px;
+    --s1c: #c04040; --s2c: #b87a20; --s3c: #7c6cdc; --s4c: #2a7a4a; --s5c: #c9963a;
+  }
+  html, body { min-height: 100vh; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; }
+
+  /* ── Login screen ── */
+  #login-screen {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .login-box {
+    background: var(--bg2); border: 1px solid var(--border2);
+    border-radius: var(--radius); padding: 40px; width: 100%; max-width: 380px;
+    text-align: center;
+  }
+  .login-box h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .login-box p { color: var(--text2); font-size: 13px; margin-bottom: 28px; }
+  .login-box input {
+    width: 100%; background: var(--bg3); border: 1px solid var(--border2);
+    color: var(--text); border-radius: 7px; padding: 11px 14px;
+    font-size: 15px; font-family: inherit; outline: none; margin-bottom: 12px;
+    transition: border-color .2s;
+  }
+  .login-box input:focus { border-color: var(--accent); }
+  .login-box button {
+    width: 100%; background: var(--accent); color: #fff;
+    border: none; border-radius: 50px; padding: 12px;
+    font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit;
+    transition: opacity .2s;
+  }
+  .login-box button:hover { opacity: .85; }
+  .login-error { color: #f08080; font-size: 13px; margin-top: 10px; display: none; }
+
+  /* ── App shell ── */
+  #app { display: none; }
+
+  nav {
+    background: rgba(8,8,15,.95); border-bottom: 1px solid var(--border);
+    padding: 0 24px; height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-brand { font-weight: 700; font-size: 15px; }
+  .nav-brand span { color: var(--accent2); }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-right a { color: var(--text2); text-decoration: none; font-size: 13px; }
+  .nav-right a:hover { color: var(--text); }
+  .logout-btn {
+    background: transparent; border: 1px solid var(--border2);
+    color: var(--text2); padding: 6px 14px; border-radius: 50px;
+    font-size: 13px; cursor: pointer; font-family: inherit;
+    transition: border-color .2s, color .2s;
+  }
+  .logout-btn:hover { border-color: var(--accent); color: var(--text); }
+
+  .main { padding: 28px 24px; max-width: 1400px; margin: 0 auto; }
+
+  /* ── Stats row ── */
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .stat-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px;
+  }
+  .stat-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text3); margin-bottom: 8px; }
+  .stat-card .value { font-size: 28px; font-weight: 700; }
+  .stat-card .sub { font-size: 12px; color: var(--text2); margin-top: 4px; }
+
+  /* ── Filters ── */
+  .filters {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px 20px;
+    display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+    margin-bottom: 20px;
+  }
+  .filters input, .filters select {
+    background: var(--bg3); border: 1px solid var(--border2);
+    color: var(--text); border-radius: 7px; padding: 8px 12px;
+    font-size: 13px; font-family: inherit; outline: none;
+    transition: border-color .2s; -webkit-appearance: none;
+  }
+  .filters input { width: 220px; }
+  .filters input:focus, .filters select:focus { border-color: var(--accent); }
+  .filters label { font-size: 12px; color: var(--text3); }
+  .filter-group { display: flex; flex-direction: column; gap: 4px; }
+  .btn-sm {
+    background: var(--accent); color: #fff; border: none;
+    border-radius: 50px; padding: 8px 18px; font-size: 13px;
+    font-weight: 600; cursor: pointer; font-family: inherit;
+    transition: opacity .2s; white-space: nowrap;
+  }
+  .btn-sm:hover { opacity: .85; }
+  .btn-sm.secondary {
+    background: transparent; border: 1px solid var(--border2); color: var(--text2);
+  }
+  .btn-sm.secondary:hover { border-color: var(--accent); color: var(--text); opacity: 1; }
+
+  /* ── Table ── */
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; }
+  thead { background: var(--bg3); }
+  th {
+    padding: 12px 14px; text-align: left; font-size: 11px;
+    font-weight: 600; text-transform: uppercase; letter-spacing: .07em;
+    color: var(--text3); white-space: nowrap; cursor: pointer;
+    border-bottom: 1px solid var(--border2);
+    user-select: none;
+  }
+  th:hover { color: var(--text2); }
+  td {
+    padding: 12px 14px; font-size: 13px; color: var(--text);
+    border-bottom: 1px solid var(--border); white-space: nowrap;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg2); }
+  .clickable { cursor: pointer; }
+
+  /* ── Stage pill ── */
+  .stage-pill {
+    display: inline-block; padding: 3px 10px; border-radius: 50px;
+    font-size: 11px; font-weight: 700; border: 1px solid;
+  }
+  .s1 { color: var(--s1c); border-color: var(--s1c); background: rgba(192,64,64,.08); }
+  .s2 { color: var(--s2c); border-color: var(--s2c); background: rgba(184,122,32,.08); }
+  .s3 { color: var(--s3c); border-color: var(--s3c); background: rgba(124,108,220,.08); }
+  .s4 { color: var(--s4c); border-color: var(--s4c); background: rgba(42,122,74,.08); }
+  .s5 { color: var(--s5c); border-color: var(--s5c); background: rgba(201,150,58,.08); }
+
+  /* ── Dim score bars ── */
+  .dim-bar { display: flex; align-items: center; gap: 6px; }
+  .bar-track { height: 6px; width: 60px; background: var(--border2); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--accent); border-radius: 3px; }
+
+  /* ── Detail modal ── */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,.7);
+    z-index: 200; display: none; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--bg2); border: 1px solid var(--border2);
+    border-radius: var(--radius); width: 100%; max-width: 780px;
+    max-height: 90vh; overflow-y: auto;
+    padding: 32px;
+  }
+  .modal-hd {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .modal-hd h2 { font-size: 20px; font-weight: 700; }
+  .modal-hd p { color: var(--text2); font-size: 13px; margin-top: 4px; }
+  .close-btn {
+    background: transparent; border: 1px solid var(--border2);
+    color: var(--text2); width: 32px; height: 32px; border-radius: 50%;
+    font-size: 18px; cursor: pointer; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; font-family: inherit;
+    transition: border-color .2s;
+  }
+  .close-btn:hover { border-color: var(--accent); color: var(--text); }
+
+  .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  @media (max-width: 540px) { .modal-grid { grid-template-columns: 1fr; } }
+  .info-item { background: var(--bg3); border-radius: 7px; padding: 12px 14px; }
+  .info-item .lbl { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--text3); margin-bottom: 4px; }
+  .info-item .val { font-size: 14px; font-weight: 500; }
+
+  .dim-section { margin-bottom: 20px; }
+  .dim-section h3 { font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .06em; }
+  .dim-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+  .dim-item {
+    background: var(--bg3); border-radius: 7px; padding: 12px 14px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .dim-item .name { font-size: 12px; color: var(--text2); }
+  .dim-item .score { font-size: 14px; font-weight: 700; }
+
+  .notes-section { margin-top: 20px; }
+  .notes-section h3 { font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .06em; }
+  .notes-area {
+    width: 100%; background: var(--bg3); border: 1px solid var(--border2);
+    color: var(--text); border-radius: 7px; padding: 12px 14px;
+    font-size: 14px; font-family: inherit; min-height: 100px;
+    resize: vertical; outline: none; transition: border-color .2s;
+  }
+  .notes-area:focus { border-color: var(--accent); }
+  .save-notes-btn {
+    margin-top: 10px; background: var(--gold); color: var(--bg);
+    border: none; border-radius: 50px; padding: 10px 22px;
+    font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit;
+    transition: opacity .2s;
+  }
+  .save-notes-btn:hover { opacity: .85; }
+
+  /* ── Empty / loading ── */
+  .empty { text-align: center; padding: 60px 20px; color: var(--text3); font-size: 15px; }
+  .loading { text-align: center; padding: 60px 20px; color: var(--text3); }
+  .spinner {
+    width: 32px; height: 32px; border: 3px solid var(--border2);
+    border-top-color: var(--accent); border-radius: 50%;
+    animation: spin .7s linear infinite; margin: 0 auto 14px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Pagination ── */
+  .pagination {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0; flex-wrap: wrap; gap: 10px;
+  }
+  .pagination span { font-size: 13px; color: var(--text2); }
+  .page-btns { display: flex; gap: 8px; }
+
+  /* ── Export ── */
+  .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+  .top-bar h1 { font-size: 20px; font-weight: 700; }
+
+  @media (max-width: 600px) {
+    .filters { flex-direction: column; align-items: stretch; }
+    .filters input { width: 100%; }
+    .modal { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>WiseIntegrate</h1>
+    <p>Consultant Dashboard — restricted access</p>
+    <input type="password" id="pwd-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')login()">
+    <button onclick="login()">Sign In</button>
+    <div class="login-error" id="login-error">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- ── APP ── -->
+<div id="app">
+  <nav>
+    <div class="nav-brand">WiseIntegrate <span>Dashboard</span></div>
+    <div class="nav-right">
+      <a href="https://wiseintegrate.com" target="_blank">← Main site</a>
+      <button class="logout-btn" onclick="logout()">Sign out</button>
+    </div>
+  </nav>
+
+  <div class="main">
+    <!-- Stats -->
+    <div class="stats-row" id="stats-row">
+      <div class="stat-card"><div class="label">Total Submissions</div><div class="value" id="stat-total">—</div></div>
+      <div class="stat-card"><div class="label">This Week</div><div class="value" id="stat-week">—</div></div>
+      <div class="stat-card"><div class="label">Avg Score</div><div class="value" id="stat-avg">—</div><div class="sub">out of 180</div></div>
+      <div class="stat-card"><div class="label">Most Common Stage</div><div class="value" id="stat-stage">—</div></div>
+      <div class="stat-card"><div class="label">Churches</div><div class="value" id="stat-church">—</div></div>
+      <div class="stat-card"><div class="label">Businesses</div><div class="value" id="stat-biz">—</div></div>
+    </div>
+
+    <!-- Top bar -->
+    <div class="top-bar">
+      <h1>Submissions</h1>
+      <div style="display:flex;gap:10px;">
+        <button class="btn-sm secondary" onclick="exportCSV()">Export CSV</button>
+        <button class="btn-sm" onclick="loadData()">↺ Refresh</button>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <div class="filter-group">
+        <label>Search</label>
+        <input type="text" id="f-search" placeholder="Name, org, email…" oninput="applyFilters()">
+      </div>
+      <div class="filter-group">
+        <label>Stage</label>
+        <select id="f-stage" onchange="applyFilters()">
+          <option value="">All stages</option>
+          <option value="1">Stage 1 — Foundation</option>
+          <option value="2">Stage 2 — Experimentation</option>
+          <option value="3">Stage 3 — Integration</option>
+          <option value="4">Stage 4 — Optimisation</option>
+          <option value="5">Stage 5 — Transformation</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Org Type</label>
+        <select id="f-type" onchange="applyFilters()">
+          <option value="">All types</option>
+          <option value="church">Church / Ministry</option>
+          <option value="business">Business</option>
+          <option value="nonprofit">Nonprofit</option>
+          <option value="education">Education</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Sort by</label>
+        <select id="f-sort" onchange="applyFilters()">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+          <option value="score-high">Score — high to low</option>
+          <option value="score-low">Score — low to high</option>
+        </select>
+      </div>
+      <button class="btn-sm secondary" onclick="clearFilters()">Clear</button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <div class="loading" id="loading"><div class="spinner"></div>Loading submissions…</div>
+      <table id="main-table" style="display:none;">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Organisation</th>
+            <th>Type</th>
+            <th>Size</th>
+            <th>Stage</th>
+            <th>Score</th>
+            <th>D1</th><th>D2</th><th>D3</th><th>D4</th>
+            <th>D5</th><th>D6</th><th>D7</th><th>D8</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+      <div class="empty" id="empty-msg" style="display:none;">No submissions match your filters.</div>
+    </div>
+
+    <div class="pagination">
+      <span id="page-info"></span>
+      <div class="page-btns">
+        <button class="btn-sm secondary" id="prev-btn" onclick="changePage(-1)">← Prev</button>
+        <button class="btn-sm secondary" id="next-btn" onclick="changePage(1)">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── DETAIL MODAL ── -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-content">
+    <div class="modal-hd">
+      <div>
+        <h2 id="m-name">—</h2>
+        <p id="m-sub">—</p>
+      </div>
+      <button class="close-btn" onclick="closeModalDirect()">×</button>
+    </div>
+
+    <div class="modal-grid">
+      <div class="info-item"><div class="lbl">Email</div><div class="val" id="m-email">—</div></div>
+      <div class="info-item"><div class="lbl">Phone</div><div class="val" id="m-phone">—</div></div>
+      <div class="info-item"><div class="lbl">Organisation</div><div class="val" id="m-org">—</div></div>
+      <div class="info-item"><div class="lbl">Type</div><div class="val" id="m-type">—</div></div>
+      <div class="info-item"><div class="lbl">Size</div><div class="val" id="m-size">—</div></div>
+      <div class="info-item"><div class="lbl">Staff Count</div><div class="val" id="m-staff">—</div></div>
+      <div class="info-item"><div class="lbl">Location</div><div class="val" id="m-location">—</div></div>
+      <div class="info-item"><div class="lbl">Current AI Usage</div><div class="val" id="m-ai-use">—</div></div>
+      <div class="info-item" style="grid-column:1/-1"><div class="lbl">What prompted this assessment?</div><div class="val" id="m-prompt">—</div></div>
+    </div>
+
+    <div class="dim-section">
+      <h3>Dimension Scores</h3>
+      <div class="dim-grid">
+        <div class="dim-item"><span class="name">D1 Leadership & Strategy</span><span class="score" id="m-d1">—</span></div>
+        <div class="dim-item"><span class="name">D2 Data & Systems</span><span class="score" id="m-d2">—</span></div>
+        <div class="dim-item"><span class="name">D3 AI Literacy</span><span class="score" id="m-d3">—</span></div>
+        <div class="dim-item"><span class="name">D4 Governance & Policy</span><span class="score" id="m-d4">—</span></div>
+        <div class="dim-item"><span class="name">D5 Current AI Usage</span><span class="score" id="m-d5">—</span></div>
+        <div class="dim-item"><span class="name">D6 Dept Readiness</span><span class="score" id="m-d6">—</span></div>
+        <div class="dim-item"><span class="name">D7 Security & Privacy</span><span class="score" id="m-d7">—</span></div>
+        <div class="dim-item"><span class="name">D8 Budget & Resources</span><span class="score" id="m-d8">—</span></div>
+      </div>
+      <div style="margin-top:14px; background:var(--bg3); border-radius:7px; padding:14px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-weight:600;">Total Score</span>
+        <span style="font-size:20px; font-weight:700;" id="m-total">—</span>
+      </div>
+    </div>
+
+    <div class="notes-section">
+      <h3>Consultant Notes</h3>
+      <textarea class="notes-area" id="m-notes" placeholder="Add your analysis, priority gaps, and recommended next steps here…"></textarea>
+      <button class="save-notes-btn" onclick="saveNotes()">Save Notes</button>
+      <span id="notes-saved" style="margin-left:12px; font-size:13px; color:var(--good); display:none;">✓ Saved</span>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Config ────────────────────────────────────────────────────
+const SUPABASE_URL  = 'https://ppgecvmyuyuntwnqwcru.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBwZ2Vjdm15dXl1bnR3bnF3Y3J1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4MzY4MzYsImV4cCI6MjA5NzQxMjgzNn0.sVdfTUM6NvqI7ZrjfdO7JbEit9e3izKhXNZ0-zBmHIs';
+const TABLE        = 'ai_assessments';
+
+// ── CHANGE THIS PASSWORD ──────────────────────────────────────
+const DASHBOARD_PASSWORD = 'LoveJesus777#';
+
+// ── State ────────────────────────────────────────────────────
+let allData = [];
+let filtered = [];
+let currentPage = 1;
+const PAGE_SIZE = 20;
+let currentRow = null;
+
+// ── Auth ─────────────────────────────────────────────────────
+function login() {
+  const pwd = document.getElementById('pwd-input').value;
+  if (pwd === DASHBOARD_PASSWORD) {
+    sessionStorage.setItem('wi_auth', '1');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadData();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+function logout() {
+  sessionStorage.removeItem('wi_auth');
+  location.reload();
+}
+if (sessionStorage.getItem('wi_auth') === '1') {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+}
+
+// ── Load data ─────────────────────────────────────────────────
+async function loadData() {
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('main-table').style.display = 'none';
+  document.getElementById('empty-msg').style.display = 'none';
+
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/${TABLE}?select=*&order=submitted_at.desc&limit=1000`,
+      { headers: { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}` } }
+    );
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    allData = await res.json();
+    updateStats();
+    applyFilters();
+  } catch (err) {
+    document.getElementById('loading').innerHTML = `<p style="color:#f08080">Error loading data: ${err.message}</p>`;
+  }
+}
+
+// ── Stats ────────────────────────────────────────────────────
+function updateStats() {
+  const total = allData.length;
+  const now = new Date();
+  const weekAgo = new Date(now - 7 * 24 * 60 * 60 * 1000);
+  const thisWeek = allData.filter(r => new Date(r.submitted_at) > weekAgo).length;
+  const avgScore = total ? Math.round(allData.reduce((s, r) => s + (r.total_score || 0), 0) / total) : 0;
+  const stages = [1,2,3,4,5].map(s => allData.filter(r => r.maturity_stage === s).length);
+  const topStage = stages.indexOf(Math.max(...stages)) + 1;
+  const churches = allData.filter(r => r.org_type === 'church').length;
+  const bizzes = allData.filter(r => r.org_type === 'business').length;
+
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-week').textContent = thisWeek;
+  document.getElementById('stat-avg').textContent = avgScore || '—';
+  document.getElementById('stat-stage').textContent = total ? `Stage ${topStage}` : '—';
+  document.getElementById('stat-church').textContent = churches;
+  document.getElementById('stat-biz').textContent = bizzes;
+}
+
+// ── Filters ───────────────────────────────────────────────────
+function applyFilters() {
+  const search = document.getElementById('f-search').value.toLowerCase();
+  const stage  = document.getElementById('f-stage').value;
+  const type   = document.getElementById('f-type').value;
+  const sort   = document.getElementById('f-sort').value;
+
+  filtered = allData.filter(r => {
+    const matchSearch = !search ||
+      (r.name || '').toLowerCase().includes(search) ||
+      (r.organisation || '').toLowerCase().includes(search) ||
+      (r.email || '').toLowerCase().includes(search) ||
+      (r.role || '').toLowerCase().includes(search);
+    const matchStage = !stage || String(r.maturity_stage) === stage;
+    const matchType  = !type  || r.org_type === type;
+    return matchSearch && matchStage && matchType;
+  });
+
+  filtered.sort((a, b) => {
+    if (sort === 'newest') return new Date(b.submitted_at) - new Date(a.submitted_at);
+    if (sort === 'oldest') return new Date(a.submitted_at) - new Date(b.submitted_at);
+    if (sort === 'score-high') return (b.total_score || 0) - (a.total_score || 0);
+    if (sort === 'score-low') return (a.total_score || 0) - (b.total_score || 0);
+    return 0;
+  });
+
+  currentPage = 1;
+  renderTable();
+}
+
+function clearFilters() {
+  document.getElementById('f-search').value = '';
+  document.getElementById('f-stage').value = '';
+  document.getElementById('f-type').value = '';
+  document.getElementById('f-sort').value = 'newest';
+  applyFilters();
+}
+
+// ── Render table ──────────────────────────────────────────────
+function renderTable() {
+  document.getElementById('loading').style.display = 'none';
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = '';
+
+  if (!filtered.length) {
+    document.getElementById('main-table').style.display = 'none';
+    document.getElementById('empty-msg').style.display = 'block';
+    document.getElementById('page-info').textContent = '';
+    document.getElementById('prev-btn').disabled = true;
+    document.getElementById('next-btn').disabled = true;
+    return;
+  }
+
+  document.getElementById('main-table').style.display = 'table';
+  document.getElementById('empty-msg').style.display = 'none';
+
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const end = Math.min(start + PAGE_SIZE, filtered.length);
+  const page = filtered.slice(start, end);
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+
+  document.getElementById('page-info').textContent = `Showing ${start + 1}–${end} of ${filtered.length}`;
+  document.getElementById('prev-btn').disabled = currentPage === 1;
+  document.getElementById('next-btn').disabled = currentPage === totalPages;
+
+  page.forEach(row => {
+    const tr = document.createElement('tr');
+    tr.className = 'clickable';
+    tr.onclick = () => openModal(row);
+    const date = row.submitted_at ? new Date(row.submitted_at).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' }) : '—';
+    const stage = row.maturity_stage || '—';
+    const stageLabel = ['','Foundation','Experiment','Integration','Optimise','Transform'][stage] || stage;
+    tr.innerHTML = `
+      <td>${date}</td>
+      <td><strong>${esc(row.name || '—')}</strong></td>
+      <td>${esc(row.role || '—')}</td>
+      <td>${esc(row.organisation || '—')}</td>
+      <td>${esc(row.org_type || '—')}</td>
+      <td style="font-size:12px; color:var(--text2)">${esc((row.org_size || '').replace('church-','').replace('biz-',''))}</td>
+      <td><span class="stage-pill s${stage}">${stageLabel}</span></td>
+      <td><strong>${row.total_score || '—'}</strong>/180</td>
+      <td>${dimBar(row.d1_leadership, 24)}</td>
+      <td>${dimBar(row.d2_data, 24)}</td>
+      <td>${dimBar(row.d3_literacy, 24)}</td>
+      <td>${dimBar(row.d4_governance, 24)}</td>
+      <td>${dimBar(row.d5_usage, 24)}</td>
+      <td>${dimBar(row.d6_departments, 24)}</td>
+      <td>${dimBar(row.d7_security, 24)}</td>
+      <td>${dimBar(row.d8_budget, 12)}</td>
+      <td><button class="btn-sm" onclick="event.stopPropagation();openModal(${JSON.stringify(row).replace(/"/g,'&quot;')})">View</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function dimBar(val, max) {
+  const pct = val ? Math.round((val / max) * 100) : 0;
+  return `<div class="dim-bar"><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><span style="font-size:11px;color:var(--text2)">${val || 0}</span></div>`;
+}
+
+function changePage(dir) {
+  currentPage += dir;
+  renderTable();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Modal ─────────────────────────────────────────────────────
+function openModal(row) {
+  currentRow = row;
+  const date = row.submitted_at ? new Date(row.submitted_at).toLocaleString('en-GB') : '—';
+  const stage = row.maturity_stage;
+  const stageNames = ['','Digital Foundation','Experimentation & Literacy','Integration','Optimisation','Transformation'];
+
+  document.getElementById('m-name').textContent = row.name || '—';
+  document.getElementById('m-sub').textContent = `${date} · Stage ${stage} — ${stageNames[stage] || ''} · Score ${row.total_score || 0}/180`;
+  document.getElementById('m-email').textContent = row.email || '—';
+  document.getElementById('m-phone').textContent = row.phone || '—';
+  document.getElementById('m-org').textContent = row.organisation || '—';
+  document.getElementById('m-type').textContent = row.org_type || '—';
+  document.getElementById('m-size').textContent = (row.org_size || '—').replace('church-','').replace('biz-','');
+  document.getElementById('m-staff').textContent = row.staff_count || '—';
+  document.getElementById('m-location').textContent = row.location || '—';
+  document.getElementById('m-ai-use').textContent = row.ai_usage || '—';
+  document.getElementById('m-prompt').textContent = row.prompt_reason || '—';
+  document.getElementById('m-d1').textContent = `${row.d1_leadership || 0}/24`;
+  document.getElementById('m-d2').textContent = `${row.d2_data || 0}/24`;
+  document.getElementById('m-d3').textContent = `${row.d3_literacy || 0}/24`;
+  document.getElementById('m-d4').textContent = `${row.d4_governance || 0}/24`;
+  document.getElementById('m-d5').textContent = `${row.d5_usage || 0}/24`;
+  document.getElementById('m-d6').textContent = `${row.d6_departments || 0}/24`;
+  document.getElementById('m-d7').textContent = `${row.d7_security || 0}/24`;
+  document.getElementById('m-d8').textContent = `${row.d8_budget || 0}/12`;
+  document.getElementById('m-total').textContent = `${row.total_score || 0}/180`;
+  document.getElementById('m-notes').value = row.consultant_notes || '';
+  document.getElementById('notes-saved').style.display = 'none';
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── Save notes ────────────────────────────────────────────────
+async function saveNotes() {
+  if (!currentRow) return;
+  const notes = document.getElementById('m-notes').value;
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/${TABLE}?id=eq.${currentRow.id}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON,
+          'Authorization': `Bearer ${SUPABASE_ANON}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ consultant_notes: notes })
+      }
+    );
+    if (res.ok) {
+      currentRow.consultant_notes = notes;
+      const idx = allData.findIndex(r => r.id === currentRow.id);
+      if (idx > -1) allData[idx].consultant_notes = notes;
+      document.getElementById('notes-saved').style.display = 'inline';
+      setTimeout(() => document.getElementById('notes-saved').style.display = 'none', 3000);
+    }
+  } catch (err) { console.error('Save error:', err); }
+}
+
+// ── Export CSV ────────────────────────────────────────────────
+function exportCSV() {
+  const cols = ['submitted_at','name','role','organisation','email','phone','location','org_type','org_size','staff_count','ai_usage','maturity_stage','total_score','d1_leadership','d2_data','d3_literacy','d4_governance','d5_usage','d6_departments','d7_security','d8_budget','consultant_notes'];
+  const header = cols.join(',');
+  const rows = filtered.map(r => cols.map(c => `"${(r[c] || '').toString().replace(/"/g,'""')}"`).join(','));
+  const csv = [header, ...rows].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url;
+  a.download = `wiseintegrate-assessments-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click(); URL.revokeObjectURL(url);
+}
+
+// ── Util ──────────────────────────────────────────────────────
+function esc(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+</script>
+</body>
+</html>
