@@ -557,10 +557,12 @@ footer { background: #030308; border-top: 0.5px solid var(--border); padding: 60
 <script>
 // Cursor glow
 const glow = document.getElementById('cursor-glow');
-document.addEventListener('mousemove', e => {
-  glow.style.left = e.clientX + 'px';
-  glow.style.top = e.clientY + 'px';
-});
+if (glow) {
+  document.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+  });
+}
 
 // PWA
 let deferredPrompt;
