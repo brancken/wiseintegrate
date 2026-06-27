@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Get in touch with WiseIntegrate. We help churches, businesses and non-profits integrate AI wisely.">
+<meta name="theme-color" content="#08080f">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="WiseIntegrate">
+<meta property="og:title" content="Contact — WiseIntegrate">
+<meta property="og:description" content="Get in touch with WiseIntegrate.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wiseintegrate.com/contact">
+<title>Contact — WiseIntegrate</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/images/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:      #08080f;
+  --bg2:     #0a0a16;
+  --bg3:     rgba(29,78,216,0.06);
+  --accent:  #1d4ed8;
+  --accent2: #60a5fa;
+  --border:  rgba(37,99,235,0.15);
+  --border2: rgba(37,99,235,0.28);
+  --text:    #eff6ff;
+  --text2:   rgba(239,246,255,0.6);
+  --text3:   rgba(239,246,255,0.35);
+  --radius:  12px;
+  --radius-sm: 8px;
+  --font-head: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --glow-sm: 0 0 16px rgba(37,99,235,0.30);
+  --glow-md: 0 0 28px rgba(37,99,235,0.45);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  background-image: radial-gradient(ellipse 100% 50% at 50% 0%, rgba(29,78,216,0.25) 0%, transparent 60%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* CURSOR */
+body { cursor: none !important; }
+a, [role="button"] { cursor: none !important; }
+.mouse-ambient {
+  position: fixed; top: 0; left: 0;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(29,78,216,0.22) 0%, rgba(29,78,216,0.09) 40%, transparent 70%);
+  pointer-events: none; z-index: 0;
+  transform: translate(-50%, -50%);
+  will-change: left, top; transition: left 0.08s linear, top 0.08s linear;
+}
+.cursor-glow {
+  position: fixed; top: 0; left: 0;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(180,210,255,0.85) 40%, rgba(96,165,250,0.4) 70%, transparent 100%);
+  box-shadow: 0 0 8px 3px rgba(96,165,250,0.7), 0 0 18px 5px rgba(29,78,216,0.35);
+  pointer-events: none; z-index: 99999;
+  transform: translate(-50%, -50%);
+  will-change: left, top; transition: width 0.12s ease, height 0.12s ease;
+}
+.cursor-glow.hovering {
+  width: 22px; height: 22px;
+  box-shadow: 0 0 12px 4px rgba(96,165,250,0.8), 0 0 28px 8px rgba(29,78,216,0.4);
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(8,8,15,0.92); backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--border);
+  padding: 0 24px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+.nav-logo img { height: 42px; width: auto; }
+.nav-links { display: flex; align-items: center; gap: 24px; list-style: none; flex-shrink: 0; }
+.nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+  color: #fff !important; padding: 9px 20px;
+  border-radius: 50px; font-size: 14px; font-weight: 600;
+  text-decoration: none; transition: box-shadow .2s;
+}
+.nav-cta:hover { box-shadow: var(--glow-sm); }
+.nav-menu-btn { display: none; background: none; border: none; color: var(--text); cursor: pointer; font-size: 22px; }
+.mobile-nav {
+  display: none; position: fixed; top: 60px; left: 0; right: 0;
+  background: rgba(8,8,15,0.98); border-bottom: 0.5px solid var(--border);
+  padding: 20px 24px; z-index: 99; flex-direction: column; gap: 16px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a { color: var(--text2); text-decoration: none; font-size: 15px; font-weight: 500; padding: 8px 0; border-bottom: 0.5px solid var(--border); }
+
+/* HERO */
+.hero {
+  min-height: 44vh; display: flex; align-items: center; justify-content: center;
+  padding: 60px 24px; margin-top: 60px; position: relative; overflow: hidden; text-align: center;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 90% 70% at 50% 30%, rgba(29,78,216,0.45) 0%, rgba(29,78,216,0.15) 45%, transparent 75%);
+  pointer-events: none;
+}
+.hero-content { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+.sec-label {
+  font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent2); display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px;
+}
+.sec-label::before { content: ''; width: 20px; height: 1px; background: var(--accent2); display: inline-block; }
+h1 {
+  font-family: var(--font-head);
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800; line-height: 1.1; letter-spacing: -.02em;
+  margin-bottom: 18px; color: #fff;
+}
+h1 em { font-style: italic; color: var(--accent2); }
+.hero-sub { font-size: 17px; color: var(--text2); line-height: 1.65; max-width: 520px; margin: 0 auto; }
+
+/* CONTACT SECTION */
+#contact { padding: 64px 24px; background: var(--bg2); }
+.container { max-width: 1000px; margin: 0 auto; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+
+/* CONTACT INFO */
+.contact-info { display: flex; flex-direction: column; gap: 20px; }
+.contact-card {
+  background: var(--bg3); border: 0.5px solid var(--border); border-left: 3px solid var(--accent);
+  border-radius: var(--radius); padding: 24px;
+  transition: border-color .2s, transform .2s;
+}
+.contact-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.contact-card-icon {
+  width: 40px; height: 40px;
+  background: rgba(29,78,216,0.12); border: 0.5px solid rgba(37,99,235,0.25);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+}
+.contact-card-icon svg { width: 20px; height: 20px; stroke: var(--accent2); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.contact-card h3 { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.contact-card p { font-size: 14px; color: var(--text2); line-height: 1.6; }
+.contact-card a { color: var(--accent2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+.contact-card a:hover { color: var(--text); }
+
+/* FORM */
+.contact-form-wrap {
+  background: var(--bg3); border: 0.5px solid var(--border);
+  border-radius: var(--radius); padding: 36px;
+}
+.contact-form-wrap h2 {
+  font-family: var(--font-head); font-size: 22px; font-weight: 800;
+  color: #fff; margin-bottom: 8px; text-align: left;
+}
+.contact-form-wrap p { font-size: 14px; color: var(--text2); margin-bottom: 28px; line-height: 1.6; }
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 7px; letter-spacing: .03em; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; background: rgba(8,8,15,0.6);
+  border: 0.5px solid var(--border2); border-radius: var(--radius-sm);
+  padding: 12px 16px; color: var(--text); font-family: var(--font-body);
+  font-size: 15px; line-height: 1.5; outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  -webkit-appearance: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--accent2);
+  box-shadow: 0 0 0 3px rgba(96,165,250,0.12);
+}
+.form-group textarea { resize: vertical; min-height: 130px; }
+.form-group select option { background: #0a0a16; color: var(--text); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.btn-submit {
+  width: 100%; background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+  color: #fff; border: none; border-radius: 50px;
+  padding: 14px 32px; font-size: 15px; font-weight: 600;
+  font-family: var(--font-body); cursor: pointer;
+  transition: box-shadow .2s, transform .2s; margin-top: 8px;
+}
+.btn-submit:hover { box-shadow: var(--glow-md); transform: translateY(-1px); }
+.btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.form-note { font-size: 12px; color: var(--text3); text-align: center; margin-top: 12px; }
+.form-error {
+  display: none; background: rgba(192,64,64,0.1); border: 0.5px solid #c04040;
+  border-radius: var(--radius-sm); padding: 12px 16px;
+  color: #f08080; font-size: 14px; margin-top: 12px;
+}
+.form-error.show { display: block; }
+.form-success {
+  display: none; text-align: center; padding: 32px 24px;
+  background: rgba(29,78,216,0.08); border: 0.5px solid rgba(37,99,235,0.3);
+  border-radius: var(--radius);
+}
+.form-success h3 { font-family: var(--font-head); font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+.form-success p { font-size: 15px; color: var(--text2); line-height: 1.6; }
+
+/* FOOTER */
+footer { background: #030308; border-top: 0.5px solid var(--border); padding: 60px 24px 32px; }
+.footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+.footer-brand img { height: 32px; margin-bottom: 16px; }
+.footer-brand p { font-size: 14px; color: var(--text3); line-height: 1.6; }
+.footer-col h4 { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
+.footer-col a { display: block; color: var(--text2); text-decoration: none; font-size: 14px; margin-bottom: 10px; transition: color .2s; }
+.footer-col a:hover { color: var(--text); }
+.footer-bottom { max-width: 1100px; margin: 0 auto; border-top: 0.5px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-bottom p { font-size: 13px; color: var(--text3); }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { font-size: 13px; color: var(--text3); text-decoration: none; transition: color .2s; }
+.footer-bottom-links a:hover { color: var(--text2); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-menu-btn { display: block; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  h1 { font-size: 30px; }
+}
+</style>
+</head>
+<body>
+
+<div class="mouse-ambient" id="mouse-ambient"></div>
+<div class="cursor-glow" id="cursor-glow"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png" alt="WiseIntegrate" onerror="this.style.display='none';this.nextSibling.style.display='block'" />
+    <span style="display:none;font-family:'Manrope',sans-serif;font-weight:800;font-size:18px;color:#fff">Wise<span style="color:#60a5fa">Integrate</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#process">Process</a></li>
+    <li><a href="/church">Church</a></li>
+    <li><a href="/business">Business</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/assessment" class="nav-cta">Start Assessment</a></li>
+  </ul>
+  <button class="nav-menu-btn">&#9776;</button>
+</nav>
+<div class="mobile-nav">
+  <a href="/">Home</a>
+  <a href="/#services">Services</a>
+  <a href="/#process">Process</a>
+  <a href="/church">Church</a>
+  <a href="/business">Business</a>
+  <a href="/contact">Contact</a>
+  <a href="/assessment" style="color:var(--accent2);font-weight:700">Start Your Free Assessment</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="sec-label">Get In Touch</div>
+    <h1>Let us talk about<br>your <em>organisation</em></h1>
+    <p class="hero-sub">Whether you are a business, non-profit, or a church, every conversation starts with your mission, not our tools.</p>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- LEFT — INFO CARDS -->
+      <div class="contact-info">
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3>Location</h3>
+          <p>Providing AI consulting and implementation services globally through virtual collaboration. We are based in Auckland, New Zealand.</p>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h3>Email us</h3>
+          <p>For general enquiries, consultancy questions, or to start a conversation.</p>
+          <a href="mailto:hello@wiseintegrate.com">hello@wiseintegrate.com</a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3>Church enquiries</h3>
+          <p>Working with a church or ministry? We understand the theological and pastoral context your team needs.</p>
+          <a href="/church">View Church Integration &#8594;</a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3>Business enquiries</h3>
+          <p>Ready to implement AI that actually delivers results? Start with a free readiness assessment.</p>
+          <a href="/assessment">Start Your Free Assessment &#8594;</a>
+        </div>
+      </div>
+
+      <!-- RIGHT — FORM -->
+      <div class="contact-form-wrap">
+        <h2>Send us a message</h2>
+        <p>We will get back to you soon.</p>
+        <div id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first-name">First name</label>
+              <input type="text" id="first-name" placeholder="Your first name">
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last name</label>
+              <input type="text" id="last-name" placeholder="Your last name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" placeholder="you@organisation.com">
+          </div>
+          <div class="form-group">
+            <label for="organisation">Organisation name</label>
+            <input type="text" id="organisation" placeholder="Your church, business, or non-profit">
+          </div>
+          <div class="form-group">
+            <label for="type">Organisation type</label>
+            <select id="type">
+              <option value="" disabled selected>Select one</option>
+              <option value="Church or Ministry">Church or Ministry</option>
+              <option value="Business">Business</option>
+              <option value="Non-profit Organisation">Non-profit Organisation</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">How can we help?</label>
+            <textarea id="message" placeholder="Tell us a little about your organisation and what you are hoping to achieve with AI."></textarea>
+          </div>
+          <div class="form-error" id="form-error">Please fill in your name, email, and message before sending.</div>
+          <button class="btn-submit" id="submit-btn" onclick="handleSubmit()">Send Message &#8594;</button>
+          <p class="form-note">We will never share your information. No spam, ever.</p>
+        </div>
+        <div class="form-success" id="form-success">
+          <h3>Message received.</h3>
+          <p>Thank you for reaching out. We will be in touch soon.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="/images/logo.png" alt="WiseIntegrate" onerror="this.style.display='none'">
+      <p>AI should serve your mission. Not replace it.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="/church">Church Integration</a>
+      <a href="/business">Business Integration</a>
+      <a href="/assessment">Readiness Assessment</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about">About</a>
+      <a href="/#process">Our Process</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Use</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&#169; 2026 WiseIntegrate. All rights reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="mailto:hello@wiseintegrate.com">hello@wiseintegrate.com</a>
+    </div>
+  </div>
+</footer>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+// Initialise EmailJS
+emailjs.init('DL-E8dje2rOO6v-Ad');
+
+// Cursor
+const _glow = document.getElementById('cursor-glow');
+const _ambient = document.getElementById('mouse-ambient');
+if (_glow && !('ontouchstart' in window) && window.matchMedia('(pointer: fine)').matches) {
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  document.addEventListener('mousemove', function(e) {
+    mx = e.clientX; my = e.clientY;
+    _glow.style.left = mx + 'px'; _glow.style.top = my + 'px';
+    if (_ambient) { _ambient.style.left = mx + 'px'; _ambient.style.top = my + 'px'; }
+  });
+  document.querySelectorAll('a, button, [role="button"]').forEach(el => {
+    el.addEventListener('mouseenter', () => _glow.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => _glow.classList.remove('hovering'));
+  });
+  _glow.style.left = mx + 'px'; _glow.style.top = my + 'px';
+  if (_ambient) { _ambient.style.left = mx + 'px'; _ambient.style.top = my + 'px'; }
+} else if (_glow) {
+  _glow.style.display = 'none';
+  if (_ambient) _ambient.style.display = 'none';
+}
+
+// Mobile nav
+document.querySelector('.nav-menu-btn').addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.toggle('open');
+});
+document.querySelectorAll('.mobile-nav a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.mobile-nav').classList.remove('open');
+  });
+});
+
+// Form submit
+async function handleSubmit() {
+  const firstName  = document.getElementById('first-name').value.trim();
+  const lastName   = document.getElementById('last-name').value.trim();
+  const email      = document.getElementById('email').value.trim();
+  const org        = document.getElementById('organisation').value.trim();
+  const orgType    = document.getElementById('type').value;
+  const message    = document.getElementById('message').value.trim();
+  const errorEl    = document.getElementById('form-error');
+  const submitBtn  = document.getElementById('submit-btn');
+
+  // Validate
+  if (!firstName || !email || !message) {
+    errorEl.classList.add('show');
+    return;
+  }
+  errorEl.classList.remove('show');
+
+  // Disable button and show sending state
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending…';
+
+  const templateParams = {
+    first_name:   firstName,
+    last_name:    lastName,
+    email:        email,
+    organisation: org || 'Not provided',
+    org_type:     orgType || 'Not specified',
+    message:      message
+  };
+
+  try {
+    await emailjs.send('service_hg0ttpe', 'template_6x1opry', templateParams);
+    document.getElementById('contact-form').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  } catch (error) {
+    console.error('EmailJS error:', error);
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Message →';
+    errorEl.textContent = 'Something went wrong. Please try again or email hello@wiseintegrate.com directly.';
+    errorEl.classList.add('show');
+  }
+}
+</script>
+</body>
+</html>
