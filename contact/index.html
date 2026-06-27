@@ -488,6 +488,8 @@ async function handleSubmit() {
     errorEl.textContent = 'Something went wrong. Please try again or click the email link on this page to contact us directly.';
     errorEl.classList.add('show');
   }
+}
+
 // Email obfuscation — assembles address client-side so bots can't scrape it
 function revealEmail(el) {
   const u = 'hello';
@@ -496,7 +498,6 @@ function revealEmail(el) {
   el.href = 'mailto:' + email;
   el.textContent = email;
   el.onclick = null;
-}
 }
 </script>
 </body>
