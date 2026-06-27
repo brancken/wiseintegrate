@@ -303,7 +303,7 @@ footer { background: #030308; border-top: 0.5px solid var(--border); padding: 60
           </div>
           <h3>Email us</h3>
           <p>For general enquiries, consultancy questions, or to start a conversation.</p>
-          <a href="mailto:hello@wiseintegrate.com">hello@wiseintegrate.com</a>
+          <a href="#" id="obf-email" onclick="revealEmail(this); return false;">Click to reveal email</a>
         </div>
         <div class="contact-card">
           <div class="contact-card-icon">
@@ -404,7 +404,7 @@ footer { background: #030308; border-top: 0.5px solid var(--border); padding: 60
     <div class="footer-bottom-links">
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
-      <a href="mailto:hello@wiseintegrate.com">hello@wiseintegrate.com</a>
+      <a href="#" id="obf-email-footer" onclick="revealEmail(this); return false;">hello@wiseintegrate.com</a>
     </div>
   </div>
 </footer>
@@ -485,9 +485,18 @@ async function handleSubmit() {
     console.error('EmailJS error:', error);
     submitBtn.disabled = false;
     submitBtn.textContent = 'Send Message →';
-    errorEl.textContent = 'Something went wrong. Please try again or email hello@wiseintegrate.com directly.';
+    errorEl.textContent = 'Something went wrong. Please try again or click the email link on this page to contact us directly.';
     errorEl.classList.add('show');
   }
+// Email obfuscation — assembles address client-side so bots can't scrape it
+function revealEmail(el) {
+  const u = 'hello';
+  const d = 'wiseintegrate.com';
+  const email = u + '@' + d;
+  el.href = 'mailto:' + email;
+  el.textContent = email;
+  el.onclick = null;
+}
 }
 </script>
 </body>
