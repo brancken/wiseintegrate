@@ -1,0 +1,80 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg-glow" cx="75%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#08080f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orb-grad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#08080f"/>
+  <rect width="1200" height="630" fill="url(#bg-glow)"/>
+
+  <!-- Right side: decorative hub-and-spoke -->
+  <circle cx="910" cy="315" r="300" fill="url(#orb-grad)"/>
+  <circle cx="910" cy="315" r="90"  fill="none" stroke="#1d4ed8" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="910" cy="315" r="155" fill="none" stroke="#1d4ed8" stroke-width="1"   opacity="0.25" stroke-dasharray="7 7"/>
+  <circle cx="910" cy="315" r="215" fill="none" stroke="#1d4ed8" stroke-width="0.75" opacity="0.15" stroke-dasharray="4 10"/>
+
+  <!-- Spoke lines -->
+  <line x1="910" y1="225" x2="910" y2="160" stroke="#60a5fa" stroke-width="1.2" opacity="0.35"/>
+  <line x1="1000" y1="268" x2="1055" y2="235" stroke="#60a5fa" stroke-width="1.2" opacity="0.35"/>
+  <line x1="1000" y1="362" x2="1055" y2="395" stroke="#60a5fa" stroke-width="1.2" opacity="0.35"/>
+  <line x1="910"  y1="405" x2="910"  y2="470" stroke="#60a5fa" stroke-width="1.2" opacity="0.35"/>
+  <line x1="820"  y1="362" x2="765"  y2="395" stroke="#60a5fa" stroke-width="1.2" opacity="0.35"/>
+  <line x1="820"  y1="268" x2="765"  y2="235" stroke="#60a5fa" stroke-width="1.2" opacity="0.35"/>
+
+  <!-- Spoke nodes -->
+  <circle cx="910"  cy="150" r="9" fill="#60a5fa" opacity="0.7"/>
+  <circle cx="1063" cy="229" r="9" fill="#60a5fa" opacity="0.7"/>
+  <circle cx="1063" cy="401" r="9" fill="#60a5fa" opacity="0.7"/>
+  <circle cx="910"  cy="480" r="9" fill="#60a5fa" opacity="0.7"/>
+  <circle cx="757"  cy="401" r="9" fill="#60a5fa" opacity="0.7"/>
+  <circle cx="757"  cy="229" r="9" fill="#60a5fa" opacity="0.7"/>
+
+  <!-- Hub centre dot -->
+  <circle cx="910" cy="315" r="14" fill="#1d4ed8" opacity="0.9"/>
+  <circle cx="910" cy="315" r="6"  fill="#60a5fa"/>
+
+  <!-- Divider -->
+  <line x1="620" y1="70" x2="620" y2="560" stroke="#1d4ed8" stroke-width="0.75" opacity="0.3"/>
+
+  <!-- Left accent bar -->
+  <rect x="96" y="195" width="5" height="70" fill="#60a5fa" rx="2.5"/>
+
+  <!-- WiseIntegrate wordmark -->
+  <text x="116" y="256"
+        font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif"
+        font-weight="800" font-size="68" letter-spacing="-2.5"
+        fill="#eff6ff">WiseIntegrate</text>
+
+  <!-- Tagline line 1 -->
+  <text x="116" y="316"
+        font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif"
+        font-weight="400" font-size="30"
+        fill="rgba(239,246,255,0.65)">AI should serve your mission.</text>
+
+  <!-- Tagline line 2 -->
+  <text x="116" y="358"
+        font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif"
+        font-weight="300" font-size="26"
+        fill="rgba(239,246,255,0.35)">Not replace it.</text>
+
+  <!-- Pill badge -->
+  <rect x="116" y="430" width="244" height="44" rx="8"
+        fill="rgba(29,78,216,0.18)" stroke="rgba(96,165,250,0.35)" stroke-width="1"/>
+  <text x="238" y="458"
+        font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif"
+        font-weight="700" font-size="14" letter-spacing="2"
+        fill="#60a5fa" text-anchor="middle">AI INTEGRATION CONSULTANCY</text>
+
+  <!-- Domain -->
+  <text x="116" y="536"
+        font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif"
+        font-weight="500" font-size="17" letter-spacing="0.5"
+        fill="rgba(239,246,255,0.3)">wiseintegrate.com</text>
+</svg>
