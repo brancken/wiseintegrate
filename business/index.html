@@ -85,15 +85,41 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 .mobile-nav a { color: var(--text2); text-decoration: none; font-size: 15px; font-weight: 500; padding: 8px 0; border-bottom: 0.5px solid var(--border); }
 
 /* HERO */
-.hero { min-height: 88vh; display: flex; align-items: center; justify-content: center; margin-top: 60px; padding: 80px 24px 60px; position: relative; overflow: hidden; background: transparent; text-align: center; }
+.hero { min-height: 88vh; display: flex; align-items: center; justify-content: center; margin-top: 60px; padding: 80px 24px 60px; position: relative; overflow: hidden; background: transparent; }
 .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 90% 70% at 50% 30%, rgba(29,78,216,0.45) 0%, rgba(29,78,216,0.15) 45%, transparent 75%); pointer-events: none; }
-.hero-content { max-width: 700px; position: relative; z-index: 1; margin: 0 auto; }
+.hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; position: relative; z-index: 1; }
+.hero-content { text-align: left; }
+.hero-visual { display: flex; align-items: center; justify-content: center; }
+.hero-visual svg { width: 100%; max-width: 480px; height: auto; }
 .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent2); border: 0.5px solid rgba(96,165,250,0.3); border-radius: 999px; padding: 6px 16px; margin-bottom: 24px; }
 .hero h1 { font-family: var(--font-head); font-size: clamp(30px,5vw,52px); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; margin-bottom: 20px; color: #fff; }
 .hero h1 em { font-style: italic; color: var(--accent2); }
-.hero-sub { font-size: 17px; color: var(--text2); line-height: 1.65; max-width: 580px; margin-bottom: 32px; }
+.hero-sub { font-size: 17px; color: var(--text2); line-height: 1.65; max-width: 480px; margin-bottom: 32px; }
 .btn-primary { background: linear-gradient(135deg,#1d4ed8,#1e3a8a); color: #fff; padding: 14px 32px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; display: inline-block; transition: box-shadow .2s, transform .2s; }
 .btn-primary:hover { box-shadow: var(--glow-md); transform: translateY(-1px); }
+/* Business illustration animations */
+.biz-node-pulse   { animation: bizNP 3s ease-in-out infinite; }
+.biz-node-pulse-2 { animation: bizNP 3s ease-in-out infinite .6s; }
+.biz-node-pulse-3 { animation: bizNP 3s ease-in-out infinite 1.2s; }
+.biz-node-pulse-4 { animation: bizNP 3s ease-in-out infinite 1.8s; }
+.biz-node-pulse-5 { animation: bizNP 3s ease-in-out infinite 2.4s; }
+@keyframes bizNP { 0%,100%{opacity:.45} 50%{opacity:1} }
+.biz-line-flow   { stroke-dasharray:8 6; animation: bizLF 2s linear infinite; }
+.biz-line-flow-2 { stroke-dasharray:8 6; animation: bizLF 2s linear infinite .5s; }
+.biz-line-flow-3 { stroke-dasharray:8 6; animation: bizLF 2s linear infinite 1s; }
+.biz-line-flow-4 { stroke-dasharray:8 6; animation: bizLF 2s linear infinite 1.5s; }
+.biz-line-flow-5 { stroke-dasharray:8 6; animation: bizLF 2s linear infinite 2s; }
+@keyframes bizLF { 0%{stroke-dashoffset:14} 100%{stroke-dashoffset:0} }
+.biz-glow-core { animation: bizGC 4s ease-in-out infinite; }
+@keyframes bizGC { 0%,100%{opacity:.7} 50%{opacity:1} }
+.biz-data-flow   { animation: bizDF 3s ease-in-out infinite; }
+.biz-data-flow-2 { animation: bizDF 3s ease-in-out infinite 1s; }
+.biz-data-flow-3 { animation: bizDF 3s ease-in-out infinite 2s; }
+@keyframes bizDF { 0%,100%{transform:translateY(0);opacity:.55} 50%{transform:translateY(-8px);opacity:1} }
+.biz-chart-line { stroke-dasharray: 290; animation: bizDraw 4s ease-in-out infinite; }
+@keyframes bizDraw { 0%{stroke-dashoffset:290;opacity:.15} 65%{stroke-dashoffset:0;opacity:1} 90%,100%{stroke-dashoffset:0;opacity:1} }
+.biz-live-ping { transform-box:fill-box; transform-origin:center; animation: bizPing 2s ease-out infinite; }
+@keyframes bizPing { 0%{transform:scale(1);opacity:.65} 100%{transform:scale(4.5);opacity:0} }
 
 section { padding: 64px 24px; }
 .container { max-width: 1000px; margin: 0 auto; }
@@ -157,6 +183,9 @@ footer { background: #030308; border-top: 0.5px solid var(--border); padding: 48
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .nav-menu-btn { display: block; }
+  .hero-inner { grid-template-columns: 1fr; text-align: center; }
+  .hero-content { text-align: center; }
+  .hero-visual { display: none; }
   .cols3 { grid-template-columns: 1fr; }
   .why-cards { grid-template-columns: 1fr; }
   .process-steps { grid-template-columns: 1fr; }
@@ -198,11 +227,129 @@ footer { background: #030308; border-top: 0.5px solid var(--border); padding: 48
 <!-- HERO -->
 <div class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-content">
-    <span class="hero-tag">Business &amp; Organisation AI Integration</span>
-    <h1>AI that actually works for your business,<br>not just your <em>tech team.</em></h1>
-    <p class="hero-sub">We map your workflows, build your policy framework, train your team, and implement AI that delivers measurable results from day one.</p>
-    <a href="/assessment" class="btn-primary">Start Your Free Assessment &#8594;</a>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <span class="hero-tag">Business &amp; Organisation AI Integration</span>
+      <h1>AI that actually works for your business,<br>not just your <em>tech team.</em></h1>
+      <p class="hero-sub">We map your workflows, build your policy framework, train your team, and implement AI that delivers measurable results from day one.</p>
+      <a href="/assessment" class="btn-primary">Start Your Free Assessment &#8594;</a>
+    </div>
+    <div class="hero-visual">
+      <svg viewBox="0 0 500 440" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="bBgGlow" cx="40%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#08080f" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="bCoreGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#60a5fa"/>
+            <stop offset="100%" stop-color="#1d4ed8"/>
+          </radialGradient>
+          <linearGradient id="bAreaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.30"/>
+            <stop offset="100%" stop-color="#60a5fa" stop-opacity="0.02"/>
+          </linearGradient>
+          <filter id="bGlow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="bGlowStrong">
+            <feGaussianBlur stdDeviation="7" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="bCardGlow">
+            <feGaussianBlur stdDeviation="14" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <clipPath id="bChartClip">
+            <rect x="58" y="153" width="274" height="106"/>
+          </clipPath>
+        </defs>
+        <!-- Background glow -->
+        <ellipse cx="225" cy="215" rx="220" ry="195" fill="url(#bBgGlow)"/>
+        <!-- Card glow -->
+        <rect x="50" y="46" width="292" height="290" rx="14" fill="rgba(29,78,216,0.10)" filter="url(#bCardGlow)"/>
+        <!-- Dashboard card -->
+        <rect x="50" y="46" width="292" height="290" rx="14" fill="rgba(6,10,34,0.86)" stroke="rgba(96,165,250,0.26)" stroke-width="0.75"/>
+        <!-- Header separator -->
+        <line x1="50" y1="82" x2="342" y2="82" stroke="rgba(96,165,250,0.12)" stroke-width="0.5"/>
+        <!-- Window dots -->
+        <circle cx="70" cy="64" r="3.5" fill="rgba(96,165,250,0.55)"/>
+        <circle cx="82" cy="64" r="3.5" fill="rgba(96,165,250,0.28)"/>
+        <circle cx="94" cy="64" r="3.5" fill="rgba(96,165,250,0.15)"/>
+        <!-- Header label -->
+        <text x="112" y="68" font-family="Inter,sans-serif" font-size="9" fill="rgba(147,197,253,0.50)">AI Business Overview</text>
+        <!-- Stat cards row -->
+        <rect x="60" y="91" width="82" height="50" rx="6" fill="rgba(29,78,216,0.18)" stroke="rgba(96,165,250,0.16)" stroke-width="0.5"/>
+        <text x="101" y="114" text-anchor="middle" font-family="Manrope,sans-serif" font-size="16" font-weight="800" fill="#93c5fd">&#8593; 47%</text>
+        <text x="101" y="129" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="rgba(147,197,253,0.48)">ROI</text>
+        <rect x="151" y="91" width="82" height="50" rx="6" fill="rgba(29,78,216,0.18)" stroke="rgba(96,165,250,0.16)" stroke-width="0.5"/>
+        <text x="192" y="114" text-anchor="middle" font-family="Manrope,sans-serif" font-size="16" font-weight="800" fill="#93c5fd">12</text>
+        <text x="192" y="129" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="rgba(147,197,253,0.48)">Workflows</text>
+        <rect x="242" y="91" width="82" height="50" rx="6" fill="rgba(29,78,216,0.18)" stroke="rgba(96,165,250,0.16)" stroke-width="0.5"/>
+        <text x="283" y="114" text-anchor="middle" font-family="Manrope,sans-serif" font-size="16" font-weight="800" fill="#93c5fd">3.2&#215;</text>
+        <text x="283" y="129" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="rgba(147,197,253,0.48)">Output</text>
+        <!-- Chart section label -->
+        <text x="60" y="150" font-family="Inter,sans-serif" font-size="7" fill="rgba(147,197,253,0.32)">Performance trend</text>
+        <!-- Chart grid lines -->
+        <line x1="60" y1="163" x2="330" y2="163" stroke="rgba(96,165,250,0.06)" stroke-width="0.5"/>
+        <line x1="60" y1="184" x2="330" y2="184" stroke="rgba(96,165,250,0.06)" stroke-width="0.5"/>
+        <line x1="60" y1="205" x2="330" y2="205" stroke="rgba(96,165,250,0.06)" stroke-width="0.5"/>
+        <line x1="60" y1="226" x2="330" y2="226" stroke="rgba(96,165,250,0.06)" stroke-width="0.5"/>
+        <line x1="60" y1="247" x2="330" y2="247" stroke="rgba(96,165,250,0.06)" stroke-width="0.5"/>
+        <!-- Chart area + animated line (clipped) -->
+        <g clip-path="url(#bChartClip)">
+          <path d="M 60 249 L 85 243 L 112 239 L 140 231 L 167 221 L 194 210 L 220 199 L 247 187 L 274 174 L 301 162 L 326 158 L 332 158 L 332 258 L 60 258 Z" fill="url(#bAreaGrad)"/>
+          <path d="M 60 249 L 85 243 L 112 239 L 140 231 L 167 221 L 194 210 L 220 199 L 247 187 L 274 174 L 301 162 L 326 158" stroke="rgba(96,165,250,0.88)" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round" class="biz-chart-line"/>
+        </g>
+        <!-- Chart data dots -->
+        <circle cx="60"  cy="249" r="2.5" fill="#60a5fa" filter="url(#bGlow)" class="biz-node-pulse"/>
+        <circle cx="112" cy="239" r="2.5" fill="#60a5fa" filter="url(#bGlow)" class="biz-node-pulse-2"/>
+        <circle cx="167" cy="221" r="2.5" fill="#60a5fa" filter="url(#bGlow)" class="biz-node-pulse-3"/>
+        <circle cx="220" cy="199" r="2.5" fill="#60a5fa" filter="url(#bGlow)" class="biz-node-pulse-4"/>
+        <circle cx="274" cy="174" r="2.5" fill="#60a5fa" filter="url(#bGlow)" class="biz-node-pulse-5"/>
+        <circle cx="326" cy="158" r="2.5" fill="#93c5fd" filter="url(#bGlow)" class="biz-glow-core"/>
+        <!-- Live-end ping ring -->
+        <circle cx="326" cy="158" r="5" stroke="rgba(96,165,250,0.55)" stroke-width="0.75" fill="none" class="biz-live-ping"/>
+        <!-- Progress bars section -->
+        <line x1="60" y1="263" x2="330" y2="263" stroke="rgba(96,165,250,0.10)" stroke-width="0.5"/>
+        <text x="62" y="277" font-family="Inter,sans-serif" font-size="7" fill="rgba(147,197,253,0.42)">Admin</text>
+        <rect x="62" y="281" width="220" height="3.5" rx="1.75" fill="rgba(96,165,250,0.10)"/>
+        <rect x="62" y="281" width="150" height="3.5" rx="1.75" fill="rgba(96,165,250,0.52)"/>
+        <text x="287" y="285" font-family="Inter,sans-serif" font-size="6.5" fill="rgba(147,197,253,0.38)" text-anchor="end">68%</text>
+        <text x="62" y="297" font-family="Inter,sans-serif" font-size="7" fill="rgba(147,197,253,0.42)">Comms</text>
+        <rect x="62" y="301" width="220" height="3.5" rx="1.75" fill="rgba(96,165,250,0.10)"/>
+        <rect x="62" y="301" width="180" height="3.5" rx="1.75" fill="rgba(96,165,250,0.46)"/>
+        <text x="287" y="305" font-family="Inter,sans-serif" font-size="6.5" fill="rgba(147,197,253,0.38)" text-anchor="end">82%</text>
+        <text x="62" y="317" font-family="Inter,sans-serif" font-size="7" fill="rgba(147,197,253,0.42)">Strategy</text>
+        <rect x="62" y="321" width="220" height="3.5" rx="1.75" fill="rgba(96,165,250,0.10)"/>
+        <rect x="62" y="321" width="112" height="3.5" rx="1.75" fill="rgba(96,165,250,0.38)"/>
+        <text x="287" y="325" font-family="Inter,sans-serif" font-size="6.5" fill="rgba(147,197,253,0.38)" text-anchor="end">51%</text>
+        <!-- Connection lines card → AI orb (animated dashes) -->
+        <line x1="342" y1="116" x2="392" y2="174" stroke="rgba(96,165,250,0.20)" stroke-width="0.75" class="biz-line-flow-2"/>
+        <line x1="342" y1="205" x2="378" y2="205" stroke="rgba(96,165,250,0.20)" stroke-width="0.75" class="biz-line-flow-3"/>
+        <line x1="342" y1="294" x2="392" y2="238" stroke="rgba(96,165,250,0.20)" stroke-width="0.75" class="biz-line-flow-4"/>
+        <!-- Waypoint dots on connections -->
+        <circle cx="364" cy="143" r="2" fill="rgba(96,165,250,0.50)" filter="url(#bGlow)" class="biz-node-pulse-2"/>
+        <circle cx="360" cy="205" r="2" fill="rgba(96,165,250,0.50)" filter="url(#bGlow)" class="biz-node-pulse-3"/>
+        <circle cx="364" cy="268" r="2" fill="rgba(96,165,250,0.50)" filter="url(#bGlow)" class="biz-node-pulse-4"/>
+        <!-- AI orb -->
+        <circle cx="422" cy="205" r="46" stroke="rgba(37,99,235,0.12)" stroke-width="0.5"/>
+        <circle cx="422" cy="205" r="34" fill="rgba(29,78,216,0.12)"/>
+        <circle cx="422" cy="205" r="24" fill="rgba(29,78,216,0.22)"/>
+        <circle cx="422" cy="205" r="18" fill="url(#bCoreGrad)" filter="url(#bGlowStrong)" class="biz-glow-core"/>
+        <text x="422" y="210" font-family="Manrope,sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">AI</text>
+        <!-- Orbiting dots -->
+        <circle cx="422" cy="159" r="2" fill="rgba(96,165,250,0.55)" filter="url(#bGlow)" class="biz-node-pulse-3"/>
+        <circle cx="468" cy="205" r="2" fill="rgba(96,165,250,0.45)" filter="url(#bGlow)" class="biz-node-pulse-4"/>
+        <circle cx="422" cy="251" r="2" fill="rgba(96,165,250,0.55)" filter="url(#bGlow)" class="biz-node-pulse-5"/>
+        <!-- Floating result badges -->
+        <rect x="374" y="50" width="74" height="26" rx="6" fill="rgba(29,78,216,0.26)" stroke="rgba(96,165,250,0.30)" stroke-width="0.5" class="biz-node-pulse-5"/>
+        <text x="411" y="68" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" font-weight="600" fill="rgba(147,197,253,0.90)">Revenue &#8593;</text>
+        <rect x="374" y="354" width="74" height="26" rx="6" fill="rgba(29,78,216,0.26)" stroke="rgba(96,165,250,0.30)" stroke-width="0.5" class="biz-node-pulse"/>
+        <text x="411" y="372" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" font-weight="600" fill="rgba(147,197,253,0.90)">Teams &#8593;</text>
+      </svg>
+    </div>
   </div>
 </div>
 
