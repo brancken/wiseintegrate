@@ -88,13 +88,38 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 .hero { position: relative; min-height: 88vh; display: flex; align-items: center; justify-content: center; margin-top: 60px; overflow: hidden; }
 .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.3); }
 .hero-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse 90% 70% at 50% 30%, rgba(29,78,216,0.45) 0%, rgba(29,78,216,0.15) 45%, transparent 75%); }
-.hero-content { position: relative; z-index: 1; padding: 60px 24px; max-width: 780px; margin: 0 auto; text-align: center; }
+.hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding: 60px 24px; position: relative; z-index: 1; }
+.hero-content { text-align: left; }
+.hero-visual { display: flex; align-items: center; justify-content: center; }
+.hero-visual svg { width: 100%; max-width: 480px; height: auto; }
 .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent2); border: 0.5px solid rgba(96,165,250,0.3); border-radius: 999px; padding: 6px 16px; margin-bottom: 24px; }
-.hero h1 { font-family: var(--font-head); font-size: clamp(30px,5vw,52px); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; margin-bottom: 20px; color: #fff; text-align: center; }
+.hero h1 { font-family: var(--font-head); font-size: clamp(30px,5vw,52px); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; margin-bottom: 20px; color: #fff; }
 .hero h1 em { font-style: italic; color: var(--accent2); }
-.hero-sub { font-size: 17px; color: rgba(239,246,255,0.75); line-height: 1.65; max-width: 540px; margin: 0 auto 32px; text-align: center; }
+.hero-sub { font-size: 17px; color: rgba(239,246,255,0.75); line-height: 1.65; max-width: 500px; margin-bottom: 32px; }
 .btn-primary { background: linear-gradient(135deg,#1d4ed8,#1e3a8a); color: #fff; padding: 14px 32px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; display: inline-block; transition: box-shadow .2s, transform .2s; }
 .btn-primary:hover { box-shadow: var(--glow-md); transform: translateY(-1px); }
+/* Church illustration animations */
+.ch-node-pulse   { animation: chNP 3s ease-in-out infinite; }
+.ch-node-pulse-2 { animation: chNP 3s ease-in-out infinite .7s; }
+.ch-node-pulse-3 { animation: chNP 3s ease-in-out infinite 1.4s; }
+.ch-node-pulse-4 { animation: chNP 3s ease-in-out infinite 2.1s; }
+.ch-node-pulse-5 { animation: chNP 3s ease-in-out infinite 2.8s; }
+@keyframes chNP { 0%,100%{opacity:.45} 50%{opacity:1} }
+.ch-line-p   { stroke-dasharray:8 6; animation: chLF 2.5s linear infinite; }
+.ch-line-p-2 { stroke-dasharray:8 6; animation: chLF 2.5s linear infinite .6s; }
+.ch-line-p-3 { stroke-dasharray:8 6; animation: chLF 2.5s linear infinite 1.2s; }
+.ch-line-p-4 { stroke-dasharray:8 6; animation: chLF 2.5s linear infinite 1.8s; }
+.ch-line-s   { stroke-dasharray:6 8; animation: chLF 2s linear infinite; }
+.ch-line-s-2 { stroke-dasharray:6 8; animation: chLF 2s linear infinite .5s; }
+.ch-line-s-3 { stroke-dasharray:6 8; animation: chLF 2s linear infinite 1s; }
+.ch-line-s-4 { stroke-dasharray:6 8; animation: chLF 2s linear infinite 1.5s; }
+@keyframes chLF { 0%{stroke-dashoffset:14} 100%{stroke-dashoffset:0} }
+.ch-bridge { stroke-dasharray:10 5; animation: chBR 1.8s linear infinite; }
+@keyframes chBR { 0%{stroke-dashoffset:15} 100%{stroke-dashoffset:0} }
+.ch-pastor-glow { animation: chPG 4s ease-in-out infinite; }
+@keyframes chPG { 0%,100%{opacity:.78} 50%{opacity:1} }
+.ch-ai-glow { animation: chAG 3.5s ease-in-out infinite .5s; }
+@keyframes chAG { 0%,100%{opacity:.60} 50%{opacity:.92} }
 
 /* SECTIONS */
 section { padding: 64px 24px; }
@@ -161,6 +186,9 @@ footer { background: #030308; border-top: 0.5px solid var(--border); padding: 48
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .nav-menu-btn { display: block; }
+  .hero-inner { grid-template-columns: 1fr; text-align: center; padding: 40px 24px; }
+  .hero-content { text-align: center; }
+  .hero-visual { display: none; }
   .cols3 { grid-template-columns: 1fr; }
   .concerns-cards { grid-template-columns: 1fr; }
   .process-steps { grid-template-columns: 1fr; }
@@ -203,11 +231,117 @@ footer { background: #030308; border-top: 0.5px solid var(--border); padding: 48
 <!-- HERO -->
 <div class="hero">
   <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <span class="hero-tag">Church &amp; Ministry AI Integration</span>
-    <h1>AI will never replace your pastor.<br>It will free him up to be <em>one.</em></h1>
-    <p class="hero-sub">Built by a pastor, for pastors. With over 32 years of international ministry, missions, and church planting experience behind every recommendation.</p>
-    <a href="/assessment" class="btn-primary">Start Your Free Assessment &#8594;</a>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <span class="hero-tag">Church &amp; Ministry AI Integration</span>
+      <h1>AI will never replace your pastor.<br>It will free him up to be <em>one.</em></h1>
+      <p class="hero-sub">Built by a pastor, for pastors. With over 32 years of international ministry, missions, and church planting experience behind every recommendation.</p>
+      <a href="/assessment" class="btn-primary">Start Your Free Assessment &#8594;</a>
+    </div>
+    <div class="hero-visual">
+      <svg viewBox="0 0 500 440" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="chBgGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.20"/>
+            <stop offset="100%" stop-color="#08080f" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="chPastorGrad" cx="38%" cy="32%" r="68%">
+            <stop offset="0%" stop-color="#93c5fd"/>
+            <stop offset="100%" stop-color="#1d4ed8"/>
+          </radialGradient>
+          <radialGradient id="chAIGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#60a5fa"/>
+            <stop offset="100%" stop-color="#1e3a8a"/>
+          </radialGradient>
+          <radialGradient id="chNodeGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#93c5fd"/>
+            <stop offset="100%" stop-color="#1d4ed8"/>
+          </radialGradient>
+          <filter id="chGlow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="chGlowPastor">
+            <feGaussianBlur stdDeviation="9" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="chGlowAI">
+            <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- Background glow -->
+        <ellipse cx="250" cy="218" rx="220" ry="195" fill="url(#chBgGlow)"/>
+
+        <!-- ── PEOPLE SIDE (Pastor's relationships) ── -->
+        <!-- Faint static lines: people → pastor -->
+        <line x1="62" y1="102" x2="155" y2="215" stroke="rgba(96,165,250,0.14)" stroke-width="1"/>
+        <line x1="38" y1="215" x2="155" y2="215" stroke="rgba(96,165,250,0.14)" stroke-width="1"/>
+        <line x1="62" y1="328" x2="155" y2="215" stroke="rgba(96,165,250,0.14)" stroke-width="1"/>
+        <line x1="140" y1="395" x2="155" y2="215" stroke="rgba(96,165,250,0.14)" stroke-width="1"/>
+        <!-- Animated flow: people → pastor (inward) -->
+        <line x1="62" y1="102" x2="155" y2="215" stroke="rgba(96,165,250,0.58)" stroke-width="1.2" class="ch-line-p"/>
+        <line x1="38" y1="215" x2="155" y2="215" stroke="rgba(96,165,250,0.58)" stroke-width="1.2" class="ch-line-p-2"/>
+        <line x1="62" y1="328" x2="155" y2="215" stroke="rgba(96,165,250,0.58)" stroke-width="1.2" class="ch-line-p-3"/>
+        <line x1="140" y1="395" x2="155" y2="215" stroke="rgba(96,165,250,0.58)" stroke-width="1.2" class="ch-line-p-4"/>
+        <!-- People nodes -->
+        <circle cx="62"  cy="102" r="7" fill="url(#chNodeGrad)" filter="url(#chGlow)" class="ch-node-pulse"/>
+        <circle cx="38"  cy="215" r="7" fill="url(#chNodeGrad)" filter="url(#chGlow)" class="ch-node-pulse-2"/>
+        <circle cx="62"  cy="328" r="7" fill="url(#chNodeGrad)" filter="url(#chGlow)" class="ch-node-pulse-3"/>
+        <circle cx="140" cy="395" r="7" fill="url(#chNodeGrad)" filter="url(#chGlow)" class="ch-node-pulse-4"/>
+        <!-- People labels -->
+        <text x="62"  y="120" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.68)">Members</text>
+        <text x="38"  y="233" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.68)">Families</text>
+        <text x="62"  y="346" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.68)">Pastoral</text>
+        <text x="140" y="413" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.68)">Community</text>
+
+        <!-- ── PASTOR NODE (large, human, primary) ── -->
+        <circle cx="155" cy="215" r="28" fill="rgba(29,78,216,0.14)" filter="url(#chGlowPastor)" class="ch-pastor-glow"/>
+        <circle cx="155" cy="215" r="22" fill="url(#chPastorGrad)" filter="url(#chGlowPastor)" class="ch-pastor-glow"/>
+        <!-- Person silhouette: head + shoulders -->
+        <circle cx="155" cy="207" r="4" fill="rgba(255,255,255,0.88)"/>
+        <path d="M 146 223 Q 155 215 164 223" stroke="rgba(255,255,255,0.80)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Pastor label -->
+        <text x="155" y="252" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10" font-weight="700" fill="rgba(147,197,253,0.88)">Pastor</text>
+
+        <!-- ── BRIDGE: AI assists pastor (flows right→left) ── -->
+        <!-- Faint static background line -->
+        <line x1="177" y1="215" x2="331" y2="215" stroke="rgba(96,165,250,0.12)" stroke-width="1"/>
+        <!-- Bridge label above line -->
+        <text x="254" y="204" text-anchor="middle" font-family="Inter,sans-serif" font-size="7.5" letter-spacing="0.06em" fill="rgba(147,197,253,0.32)">assists pastor</text>
+        <!-- Animated dashes: flow from AI toward Pastor (right → left) -->
+        <line x1="332" y1="215" x2="186" y2="215" stroke="rgba(96,165,250,0.68)" stroke-width="1.5" class="ch-bridge"/>
+        <!-- Static arrowhead pointing left at Pastor -->
+        <path d="M 186 210 L 178 215 L 186 220 Z" fill="rgba(96,165,250,0.55)"/>
+
+        <!-- ── SYSTEMS SIDE (AI's domain) ── -->
+        <!-- Faint static lines: AI → systems -->
+        <line x1="345" y1="215" x2="438" y2="102" stroke="rgba(96,165,250,0.11)" stroke-width="1"/>
+        <line x1="345" y1="215" x2="462" y2="215" stroke="rgba(96,165,250,0.11)" stroke-width="1"/>
+        <line x1="345" y1="215" x2="438" y2="328" stroke="rgba(96,165,250,0.11)" stroke-width="1"/>
+        <line x1="345" y1="215" x2="360" y2="395" stroke="rgba(96,165,250,0.11)" stroke-width="1"/>
+        <!-- Animated flow: AI → systems (outward) -->
+        <line x1="345" y1="215" x2="438" y2="102" stroke="rgba(96,165,250,0.42)" stroke-width="1.0" class="ch-line-s"/>
+        <line x1="345" y1="215" x2="462" y2="215" stroke="rgba(96,165,250,0.42)" stroke-width="1.0" class="ch-line-s-2"/>
+        <line x1="345" y1="215" x2="438" y2="328" stroke="rgba(96,165,250,0.42)" stroke-width="1.0" class="ch-line-s-3"/>
+        <line x1="345" y1="215" x2="360" y2="395" stroke="rgba(96,165,250,0.42)" stroke-width="1.0" class="ch-line-s-4"/>
+        <!-- System nodes (smaller — clearly tools, not people) -->
+        <circle cx="438" cy="102" r="6" fill="url(#chNodeGrad)" filter="url(#chGlow)" class="ch-node-pulse-5"/>
+        <circle cx="462" cy="215" r="6" fill="url(#chNodeGrad)" filter="url(#chGlow)" class="ch-node-pulse"/>
+        <circle cx="438" cy="328" r="6" fill="url(#chNodeGrad)" filter="url(#chGlow)" class="ch-node-pulse-2"/>
+        <circle cx="360" cy="395" r="6" fill="url(#chNodeGrad)" filter="url(#chGlow)" class="ch-node-pulse-3"/>
+        <!-- System labels (slightly more faint than people labels) -->
+        <text x="438" y="120" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.52)">Newsletters</text>
+        <text x="462" y="233" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.52)">Research</text>
+        <text x="438" y="346" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.52)">Scheduling</text>
+        <text x="360" y="413" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.52)">Comms</text>
+
+        <!-- ── AI NODE (smaller, tool, subordinate) ── -->
+        <circle cx="345" cy="215" r="17" fill="rgba(29,78,216,0.12)" filter="url(#chGlowAI)" class="ch-ai-glow"/>
+        <circle cx="345" cy="215" r="13" fill="url(#chAIGrad)" filter="url(#chGlowAI)" class="ch-ai-glow"/>
+        <text x="345" y="219" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" font-weight="700" fill="#fff">AI</text>
+      </svg>
+    </div>
   </div>
 </div>
 
