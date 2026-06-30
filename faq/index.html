@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Answers to the most common questions about WiseIntegrate, AI implementation for businesses and churches, costs, data privacy, and how the process works.">
+<meta name="theme-color" content="#08080f">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="WiseIntegrate">
+<meta property="og:title" content="FAQ — WiseIntegrate">
+<meta property="og:description" content="Clear answers to the most common questions about AI implementation for businesses, churches, and non-profit organisations.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wiseintegrate.com/faq">
+<title>FAQ — WiseIntegrate</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/images/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:      #08080f;
+  --bg2:     #0a0a16;
+  --bg3:     rgba(29,78,216,0.06);
+  --accent:  #1d4ed8;
+  --accent2: #60a5fa;
+  --border:  rgba(37,99,235,0.15);
+  --border2: rgba(37,99,235,0.28);
+  --text:    #eff6ff;
+  --text2:   rgba(239,246,255,0.6);
+  --text3:   rgba(239,246,255,0.35);
+  --radius:  12px;
+  --radius-sm: 8px;
+  --font-head: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --glow-sm: 0 0 16px rgba(37,99,235,0.30);
+  --glow-md: 0 0 28px rgba(37,99,235,0.45);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  background-image: radial-gradient(ellipse 100% 50% at 50% 0%, rgba(29,78,216,0.25) 0%, transparent 60%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* CURSOR */
+body { cursor: none !important; }
+a, [role="button"] { cursor: pointer !important; }
+.mouse-ambient {
+  position: fixed; top: 0; left: 0;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(29,78,216,0.22) 0%, rgba(29,78,216,0.09) 40%, transparent 70%);
+  pointer-events: none; z-index: 0;
+  transform: translate(-50%, -50%);
+  will-change: left, top; transition: left 0.08s linear, top 0.08s linear;
+}
+.cursor-glow {
+  position: fixed; top: 0; left: 0;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.72) 0%, rgba(180,210,255,0.42) 40%, rgba(96,165,250,0.18) 70%, transparent 100%);
+  box-shadow: 0 0 12px 6px rgba(96,165,250,0.52), 0 0 26px 10px rgba(29,78,216,0.26);
+  filter: blur(1.5px);
+  pointer-events: none; z-index: 99999;
+  transform: translate(-50%, -50%);
+  will-change: left, top; transition: width 0.12s ease, height 0.12s ease;
+}
+.cursor-glow.hovering { width: 22px; height: 22px; box-shadow: 0 0 16px 8px rgba(96,165,250,0.48), 0 0 32px 12px rgba(29,78,216,0.24); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(8,8,15,0.92); backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--border);
+  padding: 0 24px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+.nav-logo img { height: 42px; width: auto; }
+.nav-links { display: flex; align-items: center; gap: 22px; list-style: none; flex-shrink: 0; }
+.nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--text); }
+.nav-cta { background: linear-gradient(135deg, #1d4ed8, #1e3a8a); color: #fff !important; padding: 9px 20px; border-radius: 50px; font-size: 14px; font-weight: 600; text-decoration: none; transition: box-shadow .2s; }
+.nav-cta:hover { box-shadow: var(--glow-sm); }
+.nav-menu-btn { display: none; background: none; border: none; color: var(--text); cursor: pointer; font-size: 22px; }
+.mobile-nav { display: none; position: fixed; top: 60px; left: 0; right: 0; background: rgba(8,8,15,0.98); border-bottom: 0.5px solid var(--border); padding: 20px 24px; z-index: 99; flex-direction: column; gap: 16px; }
+.mobile-nav.open { display: flex; }
+.mobile-nav a { color: var(--text2); text-decoration: none; font-size: 15px; font-weight: 500; padding: 8px 0; border-bottom: 0.5px solid var(--border); }
+
+/* HERO */
+.hero {
+  min-height: 50vh; display: flex; align-items: center;
+  padding: 60px 24px; margin-top: 60px; position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 75% 65% at 65% 40%, rgba(29,78,216,0.24) 0%, rgba(29,78,216,0.07) 55%, transparent 75%);
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+  max-width: 1080px; margin: 0 auto; width: 100%; position: relative; z-index: 1;
+}
+.hero-text .sec-label { justify-content: flex-start; }
+.hero-text .sec-label::before { display: none; }
+.hero-text h1 { text-align: left; }
+.hero-text .hero-sub { text-align: left; margin: 0; max-width: 460px; }
+.hero-visual { display: flex; align-items: center; justify-content: center; }
+.hero-visual svg { width: 100%; max-width: 400px; height: auto; }
+
+/* SECTION BASE */
+section { padding: 72px 24px; }
+.container { max-width: 1080px; margin: 0 auto; }
+.sec-label {
+  font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent2); display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px;
+}
+.sec-label::before { content: ''; width: 20px; height: 1px; background: var(--accent2); display: inline-block; }
+h1 {
+  font-family: var(--font-head);
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 800; line-height: 1.1; letter-spacing: -.02em;
+  margin-bottom: 18px; color: #fff;
+}
+h1 em { font-style: italic; color: var(--accent2); }
+.hero-sub { font-size: 17px; color: var(--text2); line-height: 1.65; max-width: 560px; margin: 0 auto; }
+h2 { font-family: var(--font-head); font-size: clamp(26px, 4vw, 40px); font-weight: 800; line-height: 1.15; letter-spacing: -.02em; margin-bottom: 16px; color: #fff; text-align: center; }
+h2 em { font-style: italic; color: var(--accent2); }
+
+/* FAQ SECTION */
+#faq-section { background: var(--bg2); }
+
+/* ACCORDION */
+.faq-list { max-width: 760px; margin: 0 auto; }
+.faq-item { border-bottom: 0.5px solid var(--border); }
+.faq-item:first-child { border-top: 0.5px solid var(--border); }
+.faq-q {
+  width: 100%; background: none; border: none;
+  display: flex; align-items: center; gap: 16px;
+  padding: 22px 0; cursor: pointer; text-align: left;
+  color: var(--text); font-family: var(--font-head); font-size: 16px; font-weight: 600; line-height: 1.4;
+  transition: color .2s;
+}
+.faq-q:hover { color: var(--accent2); }
+.faq-q span.faq-label { flex: 1; }
+.faq-num { font-size: 11px; font-weight: 700; color: var(--accent2); letter-spacing: .06em; flex-shrink: 0; opacity: 0.65; min-width: 22px; }
+.faq-chevron {
+  flex-shrink: 0; width: 18px; height: 18px; color: var(--text3);
+  transition: transform .28s ease, color .2s;
+}
+.faq-q[aria-expanded="true"] .faq-chevron { transform: rotate(180deg); color: var(--accent2); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+.faq-item.open .faq-a { max-height: 640px; }
+.faq-a-inner { padding: 4px 0 28px 38px; }
+.faq-a p { font-size: 15px; color: var(--text2); line-height: 1.85; margin-bottom: 12px; }
+.faq-a p:last-child { margin-bottom: 0; }
+.faq-a strong { color: var(--text); font-weight: 600; }
+
+/* CTA */
+#cta { background: var(--bg); }
+.cta-box {
+  background: linear-gradient(135deg, rgba(29,78,216,0.18) 0%, rgba(30,58,138,0.10) 100%);
+  border: 0.5px solid var(--border2); border-radius: 20px;
+  padding: 64px 40px; text-align: center; position: relative; overflow: hidden;
+}
+.cta-box::before {
+  content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+  width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(29,78,216,0.35) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-box h2 { margin-bottom: 16px; position: relative; z-index: 1; }
+.cta-box p { font-size: 16px; color: var(--text2); max-width: 540px; margin: 0 auto 32px; line-height: 1.7; position: relative; z-index: 1; }
+.btn-primary {
+  display: inline-block;
+  background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+  color: #fff; font-family: var(--font-head); font-weight: 700;
+  padding: 14px 36px; border-radius: 50px; font-size: 15px; text-decoration: none;
+  transition: box-shadow .25s, transform .2s; position: relative; z-index: 1;
+}
+.btn-primary:hover { box-shadow: var(--glow-md); transform: translateY(-1px); }
+.cta-note { font-size: 12px; color: var(--text3); margin-top: 16px; letter-spacing: .04em; position: relative; z-index: 1; }
+
+/* FOOTER */
+footer { background: rgba(5,5,12,0.95); padding: 52px 24px 24px; border-top: 0.5px solid var(--border); }
+.footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; max-width: 1080px; margin: 0 auto 40px; }
+.footer-brand p { font-size: 14px; color: var(--text3); line-height: 1.6; margin-top: 12px; max-width: 220px; }
+.footer-col h4 { font-family: var(--font-head); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); margin-bottom: 14px; }
+.footer-col a { display: block; font-size: 14px; color: var(--text2); text-decoration: none; margin-bottom: 8px; transition: color .2s; }
+.footer-col a:hover { color: var(--accent2); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; max-width: 1080px; margin: 0 auto; padding-top: 20px; border-top: 0.5px solid var(--border); }
+.footer-bottom p { font-size: 13px; color: var(--text3); }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { font-size: 13px; color: var(--text3); text-decoration: none; transition: color .2s; }
+.footer-bottom-links a:hover { color: var(--text2); }
+
+/* SVG ANIMATIONS */
+@keyframes faqCorePulse { 0%,100% { opacity: .82; } 50% { opacity: 1; } }
+@keyframes faqNodePop   { 0%,100% { opacity: .5;  } 50% { opacity: 1; } }
+@keyframes faqOrbitSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes faqDashFlow  { 0% { stroke-dashoffset: 10; } 100% { stroke-dashoffset: 0; } }
+.faq-core    { animation: faqCorePulse 3.5s ease-in-out infinite; }
+.faq-node-1  { animation: faqNodePop 3.5s 0s    ease-in-out infinite; }
+.faq-node-2  { animation: faqNodePop 3.5s .45s  ease-in-out infinite; }
+.faq-node-3  { animation: faqNodePop 3.5s .9s   ease-in-out infinite; }
+.faq-node-4  { animation: faqNodePop 3.5s 1.35s ease-in-out infinite; }
+.faq-node-5  { animation: faqNodePop 3.5s 1.8s  ease-in-out infinite; }
+.faq-node-6  { animation: faqNodePop 3.5s 2.25s ease-in-out infinite; }
+.faq-orbit   { animation: faqOrbitSpin 28s linear infinite; transform-origin: 200px 170px; }
+.faq-dash    { stroke-dasharray: 6 5; animation: faqDashFlow 1.6s linear infinite; }
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+  .hero-text h1 { text-align: center; }
+  .hero-text .sec-label { justify-content: center; }
+  .hero-text .sec-label::before { display: inline-block; }
+  .hero-text .hero-sub { text-align: center; margin: 0 auto; }
+  .hero-visual { display: none; }
+  .faq-a-inner { padding-left: 0; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .nav-menu-btn { display: block; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+  h1 { font-size: 30px; }
+  h2 { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<div class="mouse-ambient" id="mouse-ambient"></div>
+<div class="cursor-glow" id="cursor-glow"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png" alt="WiseIntegrate" onerror="this.style.display='none';this.nextSibling.style.display='block'" />
+    <span style="display:none;font-family:'Manrope',sans-serif;font-weight:800;font-size:18px;color:#fff">Wise<span style="color:#60a5fa">Integrate</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#process">Process</a></li>
+    <li><a href="/church">Church</a></li>
+    <li><a href="/business">Business</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/faq" class="active">FAQ</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/assessment-intro" class="nav-cta">Start Assessment</a></li>
+  </ul>
+  <button class="nav-menu-btn">&#9776;</button>
+</nav>
+<div class="mobile-nav">
+  <a href="/">Home</a>
+  <a href="/#services">Services</a>
+  <a href="/#process">Process</a>
+  <a href="/church">Church</a>
+  <a href="/business">Business</a>
+  <a href="/about">About</a>
+  <a href="/faq">FAQ</a>
+  <a href="/contact">Contact</a>
+  <a href="/assessment-intro" style="color:var(--accent2);font-weight:700">Start Your Free Assessment</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="sec-label">FAQ</div>
+      <h1>Questions,<br><em>answered.</em></h1>
+      <p class="hero-sub">Find clear answers to what we hear most often. If something is not covered here, the free assessment is a good place to start, or reach out directly.</p>
+    </div>
+    <div class="hero-visual">
+      <svg viewBox="0 0 400 340" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="faqBgGlow" cx="50%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#08080f" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="faqCoreGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#60a5fa"/>
+            <stop offset="100%" stop-color="#1d4ed8"/>
+          </radialGradient>
+          <radialGradient id="faqNodeGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#93c5fd"/>
+            <stop offset="100%" stop-color="#1d4ed8"/>
+          </radialGradient>
+          <filter id="faqGlow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="faqGlowStrong">
+            <feGaussianBlur stdDeviation="9" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Background glow -->
+        <ellipse cx="200" cy="170" rx="190" ry="160" fill="url(#faqBgGlow)"/>
+
+        <!-- Slowly spinning dashed orbit ring -->
+        <circle cx="200" cy="170" r="108" stroke="rgba(96,165,250,0.08)" stroke-width="0.8" fill="none" stroke-dasharray="5 7" class="faq-orbit"/>
+
+        <!-- Spoke lines from hub to each node -->
+        <line x1="200" y1="170" x2="200" y2="55"  stroke="rgba(96,165,250,0.20)" stroke-width="0.8" class="faq-dash"/>
+        <line x1="200" y1="170" x2="301" y2="113" stroke="rgba(96,165,250,0.20)" stroke-width="0.8" class="faq-dash"/>
+        <line x1="200" y1="170" x2="301" y2="228" stroke="rgba(96,165,250,0.20)" stroke-width="0.8" class="faq-dash"/>
+        <line x1="200" y1="170" x2="200" y2="286" stroke="rgba(96,165,250,0.20)" stroke-width="0.8" class="faq-dash"/>
+        <line x1="200" y1="170" x2="99"  y2="228" stroke="rgba(96,165,250,0.20)" stroke-width="0.8" class="faq-dash"/>
+        <line x1="200" y1="170" x2="99"  y2="113" stroke="rgba(96,165,250,0.20)" stroke-width="0.8" class="faq-dash"/>
+
+        <!-- Node 1: Readiness (top) -->
+        <circle cx="200" cy="55" r="9" fill="url(#faqNodeGrad)" filter="url(#faqGlow)" class="faq-node-1"/>
+        <text x="200" y="37" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.65)" text-anchor="middle">Readiness</text>
+
+        <!-- Node 2: Process (top-right) -->
+        <circle cx="301" cy="113" r="9" fill="url(#faqNodeGrad)" filter="url(#faqGlow)" class="faq-node-2"/>
+        <text x="317" y="109" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.65)" text-anchor="start">Process</text>
+
+        <!-- Node 3: Pricing (bottom-right) -->
+        <circle cx="301" cy="228" r="9" fill="url(#faqNodeGrad)" filter="url(#faqGlow)" class="faq-node-3"/>
+        <text x="317" y="232" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.65)" text-anchor="start">Pricing</text>
+
+        <!-- Node 4: Privacy (bottom) -->
+        <circle cx="200" cy="286" r="9" fill="url(#faqNodeGrad)" filter="url(#faqGlow)" class="faq-node-4"/>
+        <text x="200" y="305" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.65)" text-anchor="middle">Privacy</text>
+
+        <!-- Node 5: Staff (bottom-left) -->
+        <circle cx="99" cy="228" r="9" fill="url(#faqNodeGrad)" filter="url(#faqGlow)" class="faq-node-5"/>
+        <text x="83" y="232" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.65)" text-anchor="end">Staff</text>
+
+        <!-- Node 6: Results (top-left) -->
+        <circle cx="99" cy="113" r="9" fill="url(#faqNodeGrad)" filter="url(#faqGlow)" class="faq-node-6"/>
+        <text x="83" y="109" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.65)" text-anchor="end">Results</text>
+
+        <!-- Central hub: outer ambient glow -->
+        <circle cx="200" cy="170" r="54" fill="rgba(29,78,216,0.09)" filter="url(#faqGlowStrong)"/>
+        <!-- Central hub: mid ring -->
+        <circle cx="200" cy="170" r="43" stroke="rgba(96,165,250,0.16)" stroke-width="0.8" fill="rgba(29,78,216,0.06)"/>
+        <!-- Central hub: core circle (animated) -->
+        <circle cx="200" cy="170" r="33" fill="url(#faqCoreGrad)" filter="url(#faqGlowStrong)" class="faq-core"/>
+        <!-- Question mark -->
+        <text x="200" y="181" font-family="Manrope,sans-serif" font-size="30" font-weight="800" fill="rgba(255,255,255,0.96)" text-anchor="middle">?</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ SECTION -->
+<section id="faq-section">
+  <div class="container">
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">01</span>
+          <span class="faq-label">Who is WiseIntegrate for?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>WiseIntegrate works with two kinds of organisations: small-to-medium businesses, and churches and non-profit ministries. What they share is the same problem, leaders spending too much time on administration and not enough on the work only they can do. If you recognise that pattern in your organisation, this is for you.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">02</span>
+          <span class="faq-label">What does the free assessment involve?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>It is a 45-question online assessment that takes about 15 to 20 minutes. It covers eight areas: leadership and strategy, data and systems, AI literacy, staff readiness, governance, current AI usage, security and privacy, and budget. When you finish, you receive an immediate on-screen result showing your readiness level. We then review the full results before any conversation about implementation begins.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">03</span>
+          <span class="faq-label">Will AI replace my staff or my team?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>No. In a business context, AI handles routine and repetitive tasks so your people can focus on work that requires human judgment, relationships, and strategic thinking. In a church or ministry context, that same boundary holds, and goes further. AI will never preach, provide pastoral counselling, interpret Scripture, or be presented to the congregation as a spiritual guide. The people work stays with people.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">04</span>
+          <span class="faq-label">What if my organisation is not ready for AI yet?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Then we will tell you. The assessment is designed to surface exactly that. Some organisations need to get their data practices, governance, or team culture in order before AI can deliver real value. If that is where you are, we will say so honestly and give you a clear picture of what needs to happen first. We are not here to sell tools before you need them.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">05</span>
+          <span class="faq-label">How do you protect our data and privacy?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Clear data boundaries are set before any implementation begins. For businesses, that means confidential client data, financial records, and internal strategy stay out of AI systems unless specifically governed. For churches, it goes further, including pastoral conversations, counselling records, and personal member data.</p>
+            <p>The tools we recommend are selected partly for their data governance, including providers whose terms contractually prohibit using your data for model training. WiseIntegrate operates under the New Zealand Privacy Act 2020, and every organisation leaves the engagement with a documented data policy built for their specific context.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">06</span>
+          <span class="faq-label">What can AI actually do for my organisation?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>For businesses, it handles the administrative and operational work that currently crowds out strategic time. That includes workflow automation, scheduling, meeting notes, document drafting, email sequences, content creation, and customer follow-up, freeing your team to focus on work that actually moves the organisation forward.</p>
+            <p>For churches and ministries, it covers the work that takes your pastor and staff hours each week but does not require pastoral presence. Emails, newsletters, bulletins, volunteer coordination, event planning, visitor care workflows, and social media. The pastoral work, the counselling, the preaching, and the relationships stay entirely with your people.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">07</span>
+          <span class="faq-label">Why do most AI projects fail, and how is this different?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Most AI projects fail because organisations skip the foundations. They start with tools instead of strategy, and they never properly assess where they actually are. There is no governance, no team readiness, and no clear measure of what success looks like. The result is tools that get adopted inconsistently and then quietly abandoned.</p>
+            <p>WiseIntegrate starts with the assessment, builds a roadmap before anything is deployed, and measures outcomes rather than counting tools. Quick wins come first, then systematic expansion built on what is actually working.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">08</span>
+          <span class="faq-label">What does the implementation process look like?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>It starts with the free online assessment. We review the results and build a personalised priority report. Then we meet to walk through it, answer your questions, and build a step-by-step plan specific to your organisation. Implementation follows with hands-on guidance throughout. We do not hand you a setup and disappear.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">09</span>
+          <span class="faq-label">How much does it cost?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>The online assessment is free to complete, and when you finish you receive an immediate on-screen result showing your readiness level at no cost.</p>
+            <p>If you want the full written report without engaging a consultant, that is available for NZ$50. It gives you a detailed breakdown across all eight dimensions so you can take the information and act on it independently.</p>
+            <p>If you want to discuss the results and move into implementation planning, that is where the consulting engagement begins. The full report, the prioritised roadmap, and the guidance to build and execute your AI strategy are part of the paid consulting process. Pricing depends on the size and scope of your organisation and is agreed at the start.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">10</span>
+          <span class="faq-label">What makes WiseIntegrate different from a tech agency or software vendor?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>A tech agency will build what you ask for. A software vendor will sell you what they have. WiseIntegrate starts by asking whether AI is the right move at all, and if so, what your specific organisation needs.</p>
+            <p>The founder brings 30 years of experience building and leading organisations across both business and ministry contexts, with academic training in organisational development alongside hands-on AI implementation work. The approach is built around your mission, not around a product. If AI is not the right fit for where you are right now, that is what you will hear.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-box">
+      <div class="sec-label" style="justify-content:center">Start Here</div>
+      <h2>Still have a question?</h2>
+      <p>The free assessment takes 15 minutes and gives you a personalised picture of where your organisation stands. Or reach out directly, we are happy to talk through what this could look like for you.</p>
+      <a href="/assessment-intro" class="btn-primary" style="font-size:16px;padding:16px 40px">Start Your Free Assessment &#8594;</a>
+      <p class="cta-note">Free. No obligation. No sales pitch. Works on mobile and desktop.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="/images/logo.png" alt="WiseIntegrate" onerror="this.style.display='none'">
+      <p>AI should serve your mission. Not replace it.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="/church">Church Integration</a>
+      <a href="/business">Business Integration</a>
+      <a href="/assessment-intro">Readiness Assessment</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about">About</a>
+      <a href="/faq">FAQ</a>
+      <a href="/#process">Our Process</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Use</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&#169; 2026 WiseIntegrate. All rights reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const _glow = document.getElementById('cursor-glow');
+const _ambient = document.getElementById('mouse-ambient');
+if (_glow && !('ontouchstart' in window) && window.matchMedia('(pointer: fine)').matches) {
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  document.addEventListener('mousemove', function(e) {
+    mx = e.clientX; my = e.clientY;
+    _glow.style.left = mx + 'px'; _glow.style.top = my + 'px';
+    if (_ambient) { _ambient.style.left = mx + 'px'; _ambient.style.top = my + 'px'; }
+  });
+  document.querySelectorAll('a, button, [role="button"]').forEach(el => {
+    el.addEventListener('mouseenter', () => _glow.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => _glow.classList.remove('hovering'));
+  });
+  _glow.style.left = mx + 'px'; _glow.style.top = my + 'px';
+  if (_ambient) { _ambient.style.left = mx + 'px'; _ambient.style.top = my + 'px'; }
+} else if (_glow) {
+  _glow.style.display = 'none';
+  if (_ambient) _ambient.style.display = 'none';
+}
+
+// Mobile nav
+document.querySelector('.nav-menu-btn').addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.toggle('open');
+});
+document.querySelectorAll('.mobile-nav a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.mobile-nav').classList.remove('open');
+  });
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(b => b.setAttribute('aria-expanded', 'false'));
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+</script>
+</body>
+</html>
