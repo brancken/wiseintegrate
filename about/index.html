@@ -132,7 +132,7 @@ h2 em { font-style: italic; color: var(--accent2); }
 
 /* STORY SECTION */
 #story { background: var(--bg2); }
-.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: flex-start; }
 .story-text .sec-label { justify-content: flex-start; }
 .story-text .sec-label::before { display: none; }
 .story-text h2 { text-align: left; margin-bottom: 28px; }
@@ -144,6 +144,10 @@ h2 em { font-style: italic; color: var(--accent2); }
 .stat-label { font-size: 12px; color: var(--text3); margin-top: 5px; letter-spacing: .04em; }
 .story-visual { display: flex; align-items: center; justify-content: center; }
 .story-visual svg { width: 100%; max-width: 420px; height: auto; }
+.story-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+.story-block { background: var(--bg3); border: 0.5px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 28px 24px; }
+.story-block-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent2); margin-bottom: 12px; }
+.story-block p { font-size: 15px; color: var(--text2); line-height: 1.8; margin-bottom: 0; }
 
 /* About page SVG animations */
 @keyframes abGlobePulse { 0%,100%{opacity:.65} 50%{opacity:1} }
@@ -242,6 +246,7 @@ footer { background: #030308; border-top: 0.5px solid var(--border); padding: 60
   .story-text .sec-label::before { display: inline-block; }
   .story-stats { justify-content: center; }
   .story-visual { display: none; }
+  .story-blocks { grid-template-columns: 1fr; }
   .cred-grid { grid-template-columns: 1fr; max-width: 520px; }
 }
 @media (max-width: 768px) {
@@ -313,25 +318,6 @@ footer { background: #030308; border-top: 0.5px solid var(--border); padding: 60
         <p>The founder of WiseIntegrate has spent over thirty years building and leading organisations — starting businesses, building teams, and planting churches across multiple continents. That journey included travelling to more than thirty countries and working alongside organisations of every size, from small community efforts to large multi-staff operations in both the ministry and business world.</p>
 
         <p>In every context, the same pattern appeared. In churches, pastors spending twenty or more hours a week on administration, correspondence, and scheduling — <strong>instead of with the people they were called to serve.</strong> In businesses, owners and leaders buried in routine tasks and management overhead — <strong>instead of driving the vision that built their organisation in the first place.</strong> The work that actually required the leader's presence, judgment, and skill was consistently crowded out by work that didn't.</p>
-
-        <p>Alongside that practical experience, the founder holds a PhD and has worked extensively as an academic — not just studying organisations, but developing the people within them. It was through that lens — of understanding how people and organisations grow — that the potential of AI became clear. Not as a replacement for human work, but as something that could remove the friction standing between a leader and what they were actually built to do.</p>
-
-        <p>AI is a field that moves faster than any institution can formally certify. A degree written today would be outdated before graduation. What matters is staying close to the work — learning from practitioners, from the companies building these tools, and from others navigating the same challenges in real organisations. Completed programmes include Anthropic certificates in AI Fluency for Non-Profits, AI Fluency for Small Business, AI Fluency Framework and Foundations, and Teaching AI; alongside a Certificate in AI and Career Empowerment from the University of Maryland. These are not heavyweight credentials — they are deliberate, ongoing engagements with a fast-moving field, and the foundation for guiding others through it wisely.</p>
-
-        <div class="story-stats">
-          <div>
-            <div class="stat-num">30+</div>
-            <div class="stat-label">Years of experience</div>
-          </div>
-          <div>
-            <div class="stat-num">30+</div>
-            <div class="stat-label">Countries served</div>
-          </div>
-          <div>
-            <div class="stat-num">100%</div>
-            <div class="stat-label">Human-first approach</div>
-          </div>
-        </div>
       </div>
 
       <!-- GLOBE + AI ILLUSTRATION -->
@@ -431,6 +417,30 @@ footer { background: #030308; border-top: 0.5px solid var(--border); padding: 60
         </svg>
       </div>
 
+    </div>
+    <div class="story-blocks">
+      <div class="story-block">
+        <div class="story-block-label">Research &amp; People Development</div>
+        <p>Alongside that practical experience, the founder holds a PhD and has worked extensively as an academic — not just studying organisations, but developing the people within them. It was through that lens — of understanding how people and organisations grow — that the potential of AI became clear. Not as a replacement for human work, but as something that could remove the friction standing between a leader and what they were actually built to do.</p>
+      </div>
+      <div class="story-block">
+        <div class="story-block-label">Staying Ahead of the Field</div>
+        <p>AI is a field that moves faster than any institution can formally certify. What matters is staying close to the work — learning from practitioners, from the companies building these tools, and from others navigating the same challenges in real organisations. Completed programmes include Anthropic certificates in AI Fluency for Non-Profits, AI Fluency for Small Business, AI Fluency Framework and Foundations, and Teaching AI; alongside a Certificate in AI and Career Empowerment from the University of Maryland.</p>
+      </div>
+    </div>
+    <div class="story-stats">
+      <div>
+        <div class="stat-num">30+</div>
+        <div class="stat-label">Years of experience</div>
+      </div>
+      <div>
+        <div class="stat-num">30+</div>
+        <div class="stat-label">Countries served</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Human-first approach</div>
+      </div>
     </div>
   </div>
 </section>
