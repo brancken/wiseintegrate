@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="About WiseIntegrate — built by a pastor with 30+ years of international ministry, grounded in formal AI training and backed by trusted technical expertise.">
+<meta name="theme-color" content="#08080f">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="WiseIntegrate">
+<meta property="og:title" content="About — WiseIntegrate">
+<meta property="og:description" content="Built by a pastor with 30+ years of international ministry, grounded in formal AI training, backed by trusted technical expertise.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wiseintegrate.com/about">
+<title>About — WiseIntegrate</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/images/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:      #08080f;
+  --bg2:     #0a0a16;
+  --bg3:     rgba(29,78,216,0.06);
+  --accent:  #1d4ed8;
+  --accent2: #60a5fa;
+  --border:  rgba(37,99,235,0.15);
+  --border2: rgba(37,99,235,0.28);
+  --text:    #eff6ff;
+  --text2:   rgba(239,246,255,0.6);
+  --text3:   rgba(239,246,255,0.35);
+  --radius:  12px;
+  --radius-sm: 8px;
+  --font-head: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --glow-sm: 0 0 16px rgba(37,99,235,0.30);
+  --glow-md: 0 0 28px rgba(37,99,235,0.45);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  background-image: radial-gradient(ellipse 100% 50% at 50% 0%, rgba(29,78,216,0.25) 0%, transparent 60%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* CURSOR */
+body { cursor: none !important; }
+a, [role="button"] { cursor: pointer !important; }
+.mouse-ambient {
+  position: fixed; top: 0; left: 0;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(29,78,216,0.22) 0%, rgba(29,78,216,0.09) 40%, transparent 70%);
+  pointer-events: none; z-index: 0;
+  transform: translate(-50%, -50%);
+  will-change: left, top; transition: left 0.08s linear, top 0.08s linear;
+}
+.cursor-glow {
+  position: fixed; top: 0; left: 0;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.72) 0%, rgba(180,210,255,0.42) 40%, rgba(96,165,250,0.18) 70%, transparent 100%);
+  box-shadow: 0 0 12px 6px rgba(96,165,250,0.52), 0 0 26px 10px rgba(29,78,216,0.26);
+  filter: blur(1.5px);
+  pointer-events: none; z-index: 99999;
+  transform: translate(-50%, -50%);
+  will-change: left, top; transition: width 0.12s ease, height 0.12s ease;
+}
+.cursor-glow.hovering { width: 22px; height: 22px; box-shadow: 0 0 16px 8px rgba(96,165,250,0.48), 0 0 32px 12px rgba(29,78,216,0.24); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(8,8,15,0.92); backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--border);
+  padding: 0 24px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+.nav-logo img { height: 42px; width: auto; }
+.nav-links { display: flex; align-items: center; gap: 22px; list-style: none; flex-shrink: 0; }
+.nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--text); }
+.nav-cta { background: linear-gradient(135deg, #1d4ed8, #1e3a8a); color: #fff !important; padding: 9px 20px; border-radius: 50px; font-size: 14px; font-weight: 600; text-decoration: none; transition: box-shadow .2s; }
+.nav-cta:hover { box-shadow: var(--glow-sm); }
+.nav-menu-btn { display: none; background: none; border: none; color: var(--text); cursor: pointer; font-size: 22px; }
+.mobile-nav { display: none; position: fixed; top: 60px; left: 0; right: 0; background: rgba(8,8,15,0.98); border-bottom: 0.5px solid var(--border); padding: 20px 24px; z-index: 99; flex-direction: column; gap: 16px; }
+.mobile-nav.open { display: flex; }
+.mobile-nav a { color: var(--text2); text-decoration: none; font-size: 15px; font-weight: 500; padding: 8px 0; border-bottom: 0.5px solid var(--border); }
+
+/* HERO */
+.hero {
+  min-height: 44vh; display: flex; align-items: center; justify-content: center;
+  padding: 60px 24px; margin-top: 60px; position: relative; overflow: hidden; text-align: center;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 90% 70% at 50% 30%, rgba(29,78,216,0.45) 0%, rgba(29,78,216,0.15) 45%, transparent 75%);
+  pointer-events: none;
+}
+.hero-content { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+.sec-label {
+  font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent2); display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px;
+}
+.sec-label::before { content: ''; width: 20px; height: 1px; background: var(--accent2); display: inline-block; }
+h1 {
+  font-family: var(--font-head);
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 800; line-height: 1.1; letter-spacing: -.02em;
+  margin-bottom: 18px; color: #fff;
+}
+h1 em { font-style: italic; color: var(--accent2); }
+.hero-sub { font-size: 17px; color: var(--text2); line-height: 1.65; max-width: 560px; margin: 0 auto; }
+
+/* SECTIONS */
+section { padding: 72px 24px; }
+.container { max-width: 1080px; margin: 0 auto; }
+h2 { font-family: var(--font-head); font-size: clamp(26px, 4vw, 40px); font-weight: 800; line-height: 1.15; letter-spacing: -.02em; margin-bottom: 16px; color: #fff; text-align: center; }
+h2 em { font-style: italic; color: var(--accent2); }
+
+/* STORY SECTION */
+#story { background: var(--bg2); }
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+.story-text .sec-label { justify-content: flex-start; }
+.story-text .sec-label::before { display: none; }
+.story-text h2 { text-align: left; margin-bottom: 28px; }
+.story-text p { font-size: 16px; color: var(--text2); line-height: 1.85; margin-bottom: 20px; }
+.story-text p:last-of-type { margin-bottom: 0; }
+.story-text strong { color: var(--text); font-weight: 600; }
+.story-stats { display: flex; gap: 36px; margin-top: 36px; padding-top: 32px; border-top: 0.5px solid var(--border); flex-wrap: wrap; }
+.stat-num { font-family: var(--font-head); font-size: 30px; font-weight: 800; color: var(--accent2); line-height: 1; }
+.stat-label { font-size: 12px; color: var(--text3); margin-top: 5px; letter-spacing: .04em; }
+.story-visual { display: flex; align-items: center; justify-content: center; }
+.story-visual svg { width: 100%; max-width: 420px; height: auto; }
+
+/* About page SVG animations */
+@keyframes abGlobePulse { 0%,100%{opacity:.65} 50%{opacity:1} }
+.ab-globe-glow { animation: abGlobePulse 4s ease-in-out infinite; }
+@keyframes abBridgeFlow { 0%{stroke-dashoffset:12} 100%{stroke-dashoffset:0} }
+.ab-bridge { stroke-dasharray:7 5; animation: abBridgeFlow 1.4s linear infinite; }
+@keyframes abAIPulse { 0%,100%{opacity:.75} 50%{opacity:1} }
+.ab-ai-core { animation: abAIPulse 3.5s ease-in-out infinite; }
+@keyframes abNodePulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+.ab-node-1 { animation: abNodePulse 3s ease-in-out infinite; }
+.ab-node-2 { animation: abNodePulse 3s ease-in-out infinite .7s; }
+.ab-node-3 { animation: abNodePulse 3s ease-in-out infinite 1.4s; }
+@keyframes abDashFlow { 0%{stroke-dashoffset:9} 100%{stroke-dashoffset:0} }
+.ab-dash-1 { stroke-dasharray:5 4; animation: abDashFlow 1.1s linear infinite; }
+.ab-dash-2 { stroke-dasharray:5 4; animation: abDashFlow 1.3s linear infinite .3s; }
+.ab-dash-3 { stroke-dasharray:5 4; animation: abDashFlow 1.5s linear infinite .6s; }
+
+/* CONVICTIONS SECTION */
+#convictions { background: var(--bg); }
+.convictions-intro { font-size: 16px; color: var(--text2); line-height: 1.75; max-width: 640px; margin: 0 auto 36px; text-align: center; }
+.convictions-list { display: flex; flex-direction: column; gap: 10px; max-width: 760px; margin: 0 auto; }
+.conviction-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 17px 22px;
+  background: rgba(29,78,216,0.06);
+  border: 0.5px solid rgba(37,99,235,0.20);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 15px; color: var(--text2); line-height: 1.55; text-align: left;
+  transition: border-color .2s;
+}
+.conviction-item:hover { border-color: var(--border2); }
+.conv-x { color: var(--accent2); font-weight: 800; font-size: 15px; flex-shrink: 0; margin-top: 2px; }
+.church-only { font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent2); opacity: 0.65; margin-left: 6px; }
+
+/* STATEMENT BREAK */
+.statement-break { background: var(--accent); padding: 52px 24px; text-align: center; }
+.statement-break blockquote { font-family: var(--font-head); font-size: clamp(17px, 2.6vw, 23px); font-weight: 700; color: #fff; line-height: 1.6; max-width: 840px; margin: 0 auto 12px; font-style: italic; }
+.statement-break cite { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #93c5fd; }
+
+/* PRIVACY COMMITMENT */
+#privacy-commit { background: var(--bg2); }
+.privacy-intro { font-size: 16px; color: var(--text2); line-height: 1.7; max-width: 640px; margin: 0 auto 32px; text-align: center; }
+.privacy-block {
+  background: var(--bg3); border: 0.5px solid var(--border); border-left: 3px solid var(--accent);
+  border-radius: var(--radius); padding: 36px 40px; max-width: 760px; margin: 0 auto;
+}
+.privacy-block p { font-size: 15px; color: var(--text2); line-height: 1.85; margin-bottom: 16px; }
+.privacy-block p:last-child { margin-bottom: 0; }
+.privacy-block strong { color: var(--text); font-weight: 600; }
+.privacy-block a { color: var(--accent2); text-decoration: none; font-weight: 600; transition: color .2s; }
+.privacy-block a:hover { color: var(--text); }
+
+/* CREDENTIALS SECTION */
+#credentials { background: var(--bg); }
+.cred-intro { font-size: 16px; color: var(--text2); line-height: 1.7; max-width: 640px; margin: 0 auto 40px; text-align: center; }
+.cred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; margin: 0 auto; }
+.cred-card {
+  background: var(--bg3); border: 0.5px solid var(--border); border-left: 3px solid var(--accent);
+  border-radius: var(--radius); padding: 32px; transition: border-color .2s, transform .2s;
+}
+.cred-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.cred-icon { width: 48px; height: 48px; background: rgba(29,78,216,0.12); border: 0.5px solid rgba(37,99,235,0.25); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+.cred-icon svg { width: 24px; height: 24px; stroke: var(--accent2); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.cred-card h3 { font-family: var(--font-head); font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.3; }
+.cred-card p { font-size: 14px; color: var(--text2); line-height: 1.75; }
+
+/* CTA SECTION */
+#cta { background: var(--bg2); }
+.cta-box { max-width: 640px; margin: 0 auto; text-align: center; }
+.cta-box h2 { margin-bottom: 16px; }
+.cta-box p { font-size: 17px; color: var(--text2); line-height: 1.7; margin-bottom: 32px; }
+.btn-primary { background: linear-gradient(135deg, #1d4ed8, #1e3a8a); color: #fff; padding: 14px 32px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; transition: box-shadow .2s, transform .2s; display: inline-block; }
+.btn-primary:hover { box-shadow: var(--glow-md); transform: translateY(-1px); }
+.cta-note { font-size: 13px; color: var(--text3); margin-top: 14px; }
+
+/* FOOTER */
+footer { background: #030308; border-top: 0.5px solid var(--border); padding: 60px 24px 32px; }
+.footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+.footer-brand img { height: 32px; margin-bottom: 16px; }
+.footer-brand p { font-size: 14px; color: var(--text3); line-height: 1.6; }
+.footer-col h4 { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
+.footer-col a { display: block; color: var(--text2); text-decoration: none; font-size: 14px; margin-bottom: 10px; transition: color .2s; }
+.footer-col a:hover { color: var(--text); }
+.footer-bottom { max-width: 1100px; margin: 0 auto; border-top: 0.5px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-bottom p { font-size: 13px; color: var(--text3); }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { font-size: 13px; color: var(--text3); text-decoration: none; transition: color .2s; }
+.footer-bottom-links a:hover { color: var(--text2); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .story-grid { grid-template-columns: 1fr; gap: 48px; }
+  .story-text h2 { text-align: center; }
+  .story-text .sec-label { justify-content: center; }
+  .story-text .sec-label::before { display: inline-block; }
+  .story-stats { justify-content: center; }
+  .story-visual { display: none; }
+  .cred-grid { grid-template-columns: 1fr; max-width: 520px; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-menu-btn { display: block; }
+  .privacy-block { padding: 24px 20px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  h1 { font-size: 30px; }
+  h2 { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<div class="mouse-ambient" id="mouse-ambient"></div>
+<div class="cursor-glow" id="cursor-glow"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png" alt="WiseIntegrate" onerror="this.style.display='none';this.nextSibling.style.display='block'" />
+    <span style="display:none;font-family:'Manrope',sans-serif;font-weight:800;font-size:18px;color:#fff">Wise<span style="color:#60a5fa">Integrate</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#process">Process</a></li>
+    <li><a href="/church">Church</a></li>
+    <li><a href="/business">Business</a></li>
+    <li><a href="/about" class="active">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/assessment" class="nav-cta">Start Assessment</a></li>
+  </ul>
+  <button class="nav-menu-btn">&#9776;</button>
+</nav>
+<div class="mobile-nav">
+  <a href="/">Home</a>
+  <a href="/#services">Services</a>
+  <a href="/#process">Process</a>
+  <a href="/church">Church</a>
+  <a href="/business">Business</a>
+  <a href="/about">About</a>
+  <a href="/contact">Contact</a>
+  <a href="/assessment" style="color:var(--accent2);font-weight:700">Start Your Free Assessment</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="sec-label">Our Story</div>
+    <h1>Built from the field,<br>grounded in <em>faith.</em></h1>
+    <p class="hero-sub">WiseIntegrate was not built in a boardroom. It was built inside decades of ministry — and a discovery that changed how we think about the pastor's time.</p>
+  </div>
+</div>
+
+<!-- STORY -->
+<section id="story">
+  <div class="container">
+    <div class="story-grid">
+
+      <div class="story-text">
+        <div class="sec-label">The Founder</div>
+        <h2>Thirty years of ministry.<br>Thirty countries. <em>One discovery.</em></h2>
+
+        <p>The founder of WiseIntegrate has spent over thirty years in ministry — planting churches, travelling to more than thirty countries in service of the gospel, and serving in both mega and micro congregations across multiple continents. That breadth of experience gave a clear-eyed view of one persistent problem: <strong>too much of a pastor's week is consumed by work that has nothing to do with people.</strong></p>
+
+        <p>Administration. Communications. Research. Scheduling. Correspondence. These tasks don't require pastoral training — but they demand pastoral time. Week after week. The discovery of AI was not that it is impressive. It was that, when deployed wisely and within clear boundaries, <strong>it can give that time back.</strong></p>
+
+        <p>That conviction turned into a calling — and then into a business. But not without proper preparation. To ensure every recommendation to a client is grounded in expertise and not just enthusiasm, the founder completed <strong>formal certificate programmes in AI implementation</strong>, including courses developed in partnership with Anthropic and delivered through the University of Maryland, among other accredited institutions.</p>
+
+        <div class="story-stats">
+          <div>
+            <div class="stat-num">30+</div>
+            <div class="stat-label">Years in ministry</div>
+          </div>
+          <div>
+            <div class="stat-num">30+</div>
+            <div class="stat-label">Countries served</div>
+          </div>
+          <div>
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Human-first approach</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GLOBE + AI ILLUSTRATION -->
+      <div class="story-visual">
+        <svg viewBox="0 0 400 340" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="abBgGlow" cx="35%" cy="50%" r="60%">
+              <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.22"/>
+              <stop offset="100%" stop-color="#08080f" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="abCoreGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#60a5fa"/>
+              <stop offset="100%" stop-color="#1d4ed8"/>
+            </radialGradient>
+            <radialGradient id="abNodeGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#93c5fd"/>
+              <stop offset="100%" stop-color="#1d4ed8"/>
+            </radialGradient>
+            <filter id="abGlow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="abGlowStrong">
+              <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <clipPath id="abGlobeClip">
+              <circle cx="115" cy="165" r="70"/>
+            </clipPath>
+          </defs>
+
+          <!-- Background glow -->
+          <ellipse cx="190" cy="165" rx="190" ry="160" fill="url(#abBgGlow)"/>
+
+          <!-- Globe outer glow -->
+          <circle cx="115" cy="165" r="75" fill="rgba(29,78,216,0.08)" filter="url(#abGlowStrong)" class="ab-globe-glow"/>
+
+          <!-- Globe circle -->
+          <circle cx="115" cy="165" r="70" stroke="rgba(96,165,250,0.28)" stroke-width="0.8" fill="rgba(29,78,216,0.05)"/>
+
+          <!-- Latitude lines (clipped) -->
+          <line x1="44" y1="130" x2="186" y2="130" stroke="rgba(96,165,250,0.14)" stroke-width="0.5" clip-path="url(#abGlobeClip)"/>
+          <line x1="45" y1="165" x2="185" y2="165" stroke="rgba(96,165,250,0.14)" stroke-width="0.5" clip-path="url(#abGlobeClip)"/>
+          <line x1="44" y1="200" x2="186" y2="200" stroke="rgba(96,165,250,0.14)" stroke-width="0.5" clip-path="url(#abGlobeClip)"/>
+
+          <!-- Longitude ellipses (clipped) -->
+          <ellipse cx="115" cy="165" rx="27" ry="69" stroke="rgba(96,165,250,0.14)" stroke-width="0.5" fill="none" clip-path="url(#abGlobeClip)"/>
+          <ellipse cx="115" cy="165" rx="54" ry="69" stroke="rgba(96,165,250,0.09)" stroke-width="0.5" fill="none" clip-path="url(#abGlobeClip)"/>
+
+          <!-- Cross at top of globe (ministry symbol) -->
+          <line x1="115" y1="88" x2="115" y2="103" stroke="rgba(147,197,253,0.65)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="108" y1="94" x2="122" y2="94" stroke="rgba(147,197,253,0.65)" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Country marker dots (30+ countries visited) -->
+          <circle cx="84"  cy="138" r="3.5" fill="url(#abNodeGrad)" filter="url(#abGlow)"/>
+          <circle cx="130" cy="130" r="3"   fill="url(#abNodeGrad)" filter="url(#abGlow)"/>
+          <circle cx="153" cy="152" r="3"   fill="url(#abNodeGrad)" filter="url(#abGlow)"/>
+          <circle cx="144" cy="188" r="3"   fill="url(#abNodeGrad)" filter="url(#abGlow)"/>
+          <circle cx="100" cy="198" r="3"   fill="url(#abNodeGrad)" filter="url(#abGlow)"/>
+          <circle cx="68"  cy="165" r="3"   fill="url(#abNodeGrad)" filter="url(#abGlow)"/>
+
+          <!-- Dashed arcs between country dots (travel routes) -->
+          <path d="M 84 138 Q 107 125 130 130" stroke="rgba(96,165,250,0.32)" stroke-width="0.8" fill="none" stroke-dasharray="3 4"/>
+          <path d="M 130 130 Q 143 140 153 152" stroke="rgba(96,165,250,0.26)" stroke-width="0.8" fill="none" stroke-dasharray="3 4"/>
+          <path d="M 153 152 Q 150 171 144 188" stroke="rgba(96,165,250,0.22)" stroke-width="0.8" fill="none" stroke-dasharray="3 4"/>
+          <path d="M 100 198 Q 82 186 68 165"  stroke="rgba(96,165,250,0.22)" stroke-width="0.8" fill="none" stroke-dasharray="3 4"/>
+          <path d="M 84 138 Q 75 152 68 165"   stroke="rgba(96,165,250,0.18)" stroke-width="0.8" fill="none" stroke-dasharray="3 4"/>
+
+          <!-- "30+ countries" badge below globe -->
+          <rect x="70" y="249" width="90" height="18" rx="9" fill="rgba(29,78,216,0.18)" stroke="rgba(96,165,250,0.28)" stroke-width="0.5"/>
+          <text x="115" y="261" font-family="Inter,sans-serif" font-size="8.5" font-weight="600" fill="rgba(147,197,253,0.78)" text-anchor="middle" letter-spacing="0.04em">30+ countries</text>
+
+          <!-- Bridge: globe → AI (knowledge flows into tools) -->
+          <line x1="185" y1="165" x2="257" y2="165" stroke="rgba(96,165,250,0.14)" stroke-width="1"/>
+          <line x1="185" y1="165" x2="260" y2="165" stroke="rgba(96,165,250,0.58)" stroke-width="1.3" class="ab-bridge"/>
+          <path d="M 258 160 L 266 165 L 258 170 Z" fill="rgba(96,165,250,0.52)"/>
+
+          <!-- AI Hub -->
+          <circle cx="283" cy="165" r="24" fill="rgba(29,78,216,0.10)"/>
+          <circle cx="283" cy="165" r="15" fill="url(#abCoreGrad)" filter="url(#abGlowStrong)" class="ab-ai-core"/>
+          <text x="283" y="170" font-family="Manrope,sans-serif" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">AI</text>
+
+          <!-- Satellite node: Admin -->
+          <line x1="292" y1="151" x2="316" y2="128" stroke="rgba(96,165,250,0.30)" stroke-width="0.8" class="ab-dash-1"/>
+          <circle cx="322" cy="123" r="7" fill="url(#abNodeGrad)" filter="url(#abGlow)" class="ab-node-1"/>
+          <text x="322" y="111" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.65)" text-anchor="middle">Admin</text>
+
+          <!-- Satellite node: Comms -->
+          <line x1="298" y1="165" x2="344" y2="165" stroke="rgba(96,165,250,0.30)" stroke-width="0.8" class="ab-dash-2"/>
+          <circle cx="351" cy="165" r="7" fill="url(#abNodeGrad)" filter="url(#abGlow)" class="ab-node-2"/>
+          <text x="366" y="169" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.65)" text-anchor="start">Comms</text>
+
+          <!-- Satellite node: Research -->
+          <line x1="292" y1="179" x2="316" y2="202" stroke="rgba(96,165,250,0.30)" stroke-width="0.8" class="ab-dash-3"/>
+          <circle cx="322" cy="207" r="7" fill="url(#abNodeGrad)" filter="url(#abGlow)" class="ab-node-3"/>
+          <text x="322" y="224" font-family="Inter,sans-serif" font-size="8.5" fill="rgba(147,197,253,0.65)" text-anchor="middle">Research</text>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONVICTIONS: WHAT AI WILL NEVER DO -->
+<section id="convictions">
+  <div class="container">
+    <div class="sec-label">Non-Negotiable</div>
+    <h2>What AI will <em>never</em> do<br>in any organisation we work with</h2>
+    <p class="convictions-intro">These are not preferences, guidelines, or suggestions. They are convictions — built from experience in both pastoral ministry and AI implementation. Every engagement begins with these in place, before a single tool is deployed.</p>
+    <div class="convictions-list">
+      <div class="conviction-item">
+        <span class="conv-x">&#10005;</span>
+        AI will never replace pastoral presence — no algorithm will counsel, comfort, or shepherd a human soul<span class="church-only">Church</span>
+      </div>
+      <div class="conviction-item">
+        <span class="conv-x">&#10005;</span>
+        AI will never preach, teach Scripture, exercise pastoral authority, or be presented as a spiritual guide<span class="church-only">Church</span>
+      </div>
+      <div class="conviction-item">
+        <span class="conv-x">&#10005;</span>
+        AI will never interpret Scripture or produce theological doctrine of any kind<span class="church-only">Church</span>
+      </div>
+      <div class="conviction-item">
+        <span class="conv-x">&#10005;</span>
+        No member's personal or pastoral information will ever enter an AI system
+      </div>
+      <div class="conviction-item">
+        <span class="conv-x">&#10005;</span>
+        AI will never replace the human relationships at the heart of your organisation — people are the mission, AI is the tool
+      </div>
+      <div class="conviction-item">
+        <span class="conv-x">&#10005;</span>
+        AI will never make strategic or operational decisions — it supports and informs, but humans lead and decide
+      </div>
+      <div class="conviction-item">
+        <span class="conv-x">&#10005;</span>
+        Every AI output is reviewed and approved by a human before it is used or distributed
+      </div>
+      <div class="conviction-item">
+        <span class="conv-x">&#10005;</span>
+        Your data is never sold, shared with third parties, or used to train AI models — ever
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT BREAK -->
+<div class="statement-break">
+  <blockquote>"AI does not replace the pastor. It does not replace your people. It takes the weight of repetitive administration off the shoulders of the people who matter most — so they can focus entirely on the work only they can do."</blockquote>
+  <cite>WiseIntegrate — Founding Principle</cite>
+</div>
+
+<!-- PRIVACY COMMITMENT -->
+<section id="privacy-commit">
+  <div class="container">
+    <div class="sec-label">Our Commitment</div>
+    <h2>Privacy is built into <em>every engagement</em></h2>
+    <p class="privacy-intro">Working with churches and organisations means handling trust — often in its most sensitive form. We take that seriously.</p>
+    <div class="privacy-block">
+      <p>When helping any organisation integrate AI, <strong>clear data boundaries are established before any implementation begins.</strong> There are specific categories of information — pastoral conversations, counselling records, personal member data, confidential business information — that never enter an AI system. These boundaries are not optional add-ons; they are the starting point.</p>
+      <p>WiseIntegrate operates under the <strong>New Zealand Privacy Act 2020</strong> and holds the same standard of care with client data that we ask AI providers to hold. The AI tools we recommend are selected in part because of their data governance — including providers whose commercial terms contractually prohibit using your data for AI model training.</p>
+      <p>Every church or organisation we work with leaves the engagement with <strong>a documented data policy and a clear set of AI usage guidelines</strong> tailored to their context — not a generic template, but a living document built around their people, their mission, and their specific use of AI.</p>
+      <p>For full details on how WiseIntegrate itself handles your information, see our <a href="/privacy">Privacy Policy</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section id="credentials">
+  <div class="container">
+    <div class="sec-label">The Foundation</div>
+    <h2>Experience, credentials,<br>and <em>trusted expertise</em></h2>
+    <p class="cred-intro">WiseIntegrate does not operate on enthusiasm alone. Behind every recommendation is formal training, verified expertise, and a technical team that knows what it is doing.</p>
+    <div class="cred-grid">
+
+      <div class="cred-card">
+        <div class="cred-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <h3>Formally trained, not self-taught</h3>
+        <p>The founder completed formal certificate programmes in AI implementation — including courses developed in partnership with Anthropic and delivered through the University of Maryland, among other accredited institutions. The goal was simple: to ensure that recommendations made to clients are grounded in current research on responsible AI deployment, governance, and risk — not just personal experience with tools.</p>
+      </div>
+
+      <div class="cred-card">
+        <div class="cred-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <h3>Backed by a trusted technical team</h3>
+        <p>WiseIntegrate does not work alone. Security and technical development are handled in partnership with a trusted consulting team of specialists in information security and systems development. Their expertise underpins the technical side of every implementation — ensuring that what is recommended is not only strategically sound, but safe, properly architected, and built to the standards your organisation deserves.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-box">
+      <div class="sec-label" style="justify-content:center">Start Here</div>
+      <h2>Ready to find out where your<br><em>organisation stands?</em></h2>
+      <p>Before any tool is recommended, we need to understand where you are. The free AI Readiness Assessment gives you a clear picture — and gives us everything we need to build a plan that fits your people, your mission, and your values.</p>
+      <a href="/assessment" class="btn-primary" style="font-size:16px;padding:16px 40px">Start Your Free Assessment &#8594;</a>
+      <p class="cta-note">Free. No obligation. No sales pitch. Works on mobile and desktop.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="/images/logo.png" alt="WiseIntegrate" onerror="this.style.display='none'">
+      <p>AI should serve your mission. Not replace it.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="/church">Church Integration</a>
+      <a href="/business">Business Integration</a>
+      <a href="/assessment">Readiness Assessment</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about">About</a>
+      <a href="/#process">Our Process</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Use</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&#169; 2026 WiseIntegrate. All rights reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const _glow = document.getElementById('cursor-glow');
+const _ambient = document.getElementById('mouse-ambient');
+if (_glow && !('ontouchstart' in window) && window.matchMedia('(pointer: fine)').matches) {
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  document.addEventListener('mousemove', function(e) {
+    mx = e.clientX; my = e.clientY;
+    _glow.style.left = mx + 'px'; _glow.style.top = my + 'px';
+    if (_ambient) { _ambient.style.left = mx + 'px'; _ambient.style.top = my + 'px'; }
+  });
+  document.querySelectorAll('a, button, [role="button"]').forEach(el => {
+    el.addEventListener('mouseenter', () => _glow.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => _glow.classList.remove('hovering'));
+  });
+  _glow.style.left = mx + 'px'; _glow.style.top = my + 'px';
+  if (_ambient) { _ambient.style.left = mx + 'px'; _ambient.style.top = my + 'px'; }
+} else if (_glow) {
+  _glow.style.display = 'none';
+  if (_ambient) _ambient.style.display = 'none';
+}
+
+// Mobile nav
+document.querySelector('.nav-menu-btn').addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.toggle('open');
+});
+document.querySelectorAll('.mobile-nav a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.mobile-nav').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
