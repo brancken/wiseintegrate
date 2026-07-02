@@ -466,11 +466,6 @@ function logout() {
   sessionStorage.removeItem('wi_auth');
   location.reload();
 }
-if (sessionStorage.getItem('wi_auth') === '1') {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  loadData();
-}
 
 // ── Load data ─────────────────────────────────────────────────
 async function loadData() {
