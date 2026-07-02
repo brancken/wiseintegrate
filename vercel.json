@@ -65,6 +65,22 @@
       "dest": "/about/index.html"
     },
     {
+      "src": "/contact",
+      "dest": "/contact/index.html"
+    },
+    {
+      "src": "/faq",
+      "dest": "/faq/index.html"
+    },
+    {
+      "src": "/privacy",
+      "dest": "/privacy/index.html"
+    },
+    {
+      "src": "/terms",
+      "dest": "/terms/index.html"
+    },
+    {
       "src": "/report-summary",
       "dest": "/report-summary/index.html"
     },
