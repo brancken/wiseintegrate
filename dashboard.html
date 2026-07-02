@@ -413,8 +413,13 @@
         <button class="save-notes-btn" onclick="openLeadershipSummary()" style="background:var(--accent);">Leadership Summary</button>
         <button class="save-notes-btn" onclick="openConsultantGuide()" style="background:var(--bg3);border:1px solid var(--border2);color:var(--text);">Consultant Guide</button>
       </div>
+      <div id="m-regen-section" style="display:none;margin-bottom:12px;padding:12px 14px;background:var(--bg3);border:1px solid var(--border2);border-radius:7px;font-size:13px;color:var(--text2);">
+        No structured report data for this row. Generate it now to enable Leadership Summary and Consultant Guide.<br>
+        <button id="regen-btn" class="save-notes-btn" onclick="regenerateReport()" style="margin-top:10px;font-size:13px;padding:8px 18px;">Generate Report Data</button>
+        <span id="regen-status" style="margin-left:12px;font-size:12px;color:var(--text2);"></span>
+      </div>
       <div id="m-report-loading" style="color:var(--text2);font-size:13px;display:none;">Generating report…</div>
-      <div id="m-report-empty" style="color:var(--text3);font-size:13px;">No report generated yet.</div>
+      <div id="m-report-empty" style="color:var(--text3);font-size:13px;display:none;">No AI report generated yet.</div>
       <div id="m-report-content" style="display:none;">
         <div style="margin-bottom:10px;">
           <button class="save-notes-btn" onclick="downloadReportTxt()" style="background:var(--bg3);border:1px solid var(--border2);color:var(--text);">&#8659; Download Prose</button>
@@ -439,6 +444,7 @@ const SUPABASE_ANON     = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const TABLE             = 'ai_assessments';
 const REPORT_SUMMARY_URL = 'https://ppgecvmyuyuntwnqwcru.supabase.co/functions/v1/report-summary';
 const REPORT_GUIDE_URL   = 'https://ppgecvmyuyuntwnqwcru.supabase.co/functions/v1/report-guide';
+const EDGE_FN_URL        = 'https://ppgecvmyuyuntwnqwcru.supabase.co/functions/v1/generate-report';
 
 // ── CHANGE THIS PASSWORD ──────────────────────────────────────
 const DASHBOARD_PASSWORD = 'LoveJesus777#';
@@ -645,6 +651,15 @@ function openModal(row) {
 
   // Show AI report
   const reportText = row.ai_report || '';
+  const hasReportData = !!row.report_data;
+
+  // Regenerate notice: visible when report_data is missing
+  document.getElementById('m-regen-section').style.display = hasReportData ? 'none' : 'block';
+  document.getElementById('regen-btn').disabled = false;
+  document.getElementById('regen-btn').textContent = 'Generate Report Data';
+  document.getElementById('regen-status').textContent = '';
+
+  // Prose text: visible when ai_report exists
   if (reportText) {
     document.getElementById('m-report-empty').style.display = 'none';
     document.getElementById('m-report-content').style.display = 'block';
@@ -705,6 +720,80 @@ function exportCSV() {
   const a = document.createElement('a'); a.href = url;
   a.download = `wiseintegrate-assessments-${new Date().toISOString().slice(0,10)}.csv`;
   a.click(); URL.revokeObjectURL(url);
+}
+
+// ── Regenerate report data for existing rows ─────────────────
+async function regenerateReport() {
+  if (!currentRow) return;
+  const btn = document.getElementById('regen-btn');
+  const status = document.getElementById('regen-status');
+  btn.disabled = true;
+  btn.textContent = 'Generating…';
+  status.textContent = 'This may take 30–60 seconds…';
+
+  const payload = {
+    submitted_at:   currentRow.submitted_at,
+    name:           currentRow.name || '',
+    role:           currentRow.role || '',
+    organisation:   currentRow.organisation || '',
+    org_type:       currentRow.org_type || '',
+    org_size:       currentRow.org_size || '',
+    staff_count:    currentRow.staff_count || '',
+    location:       currentRow.location || '',
+    ai_usage:       currentRow.ai_usage || '',
+    prompt_reason:  currentRow.prompt_reason || '',
+    d1_leadership:  currentRow.d1_leadership || 0,
+    d2_data:        currentRow.d2_data || 0,
+    d3_literacy:    currentRow.d3_literacy || 0,
+    d4_governance:  currentRow.d4_governance || 0,
+    d5_usage:       currentRow.d5_usage || 0,
+    d6_departments: currentRow.d6_departments || 0,
+    d7_security:    currentRow.d7_security || 0,
+    d8_budget:      currentRow.d8_budget || 0,
+    total_score:    currentRow.total_score || 0,
+    maturity_stage: currentRow.maturity_stage || 1
+  };
+
+  try {
+    const fnRes = await fetch(EDGE_FN_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}` },
+      body: JSON.stringify(payload)
+    });
+    if (!fnRes.ok) throw new Error(`HTTP ${fnRes.status}`);
+    const fnData = await fnRes.json();
+    const report = fnData.report || null;
+    const reportData = fnData.report_data || null;
+    if (!reportData) throw new Error('No report_data in response');
+
+    const patchBody = { report_data: reportData };
+    if (report) patchBody.ai_report = report;
+    await fetch(`${SUPABASE_URL}/rest/v1/${TABLE}?id=eq.${currentRow.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}`, 'Prefer': 'return=minimal' },
+      body: JSON.stringify(patchBody)
+    });
+
+    // Update in-memory data
+    currentRow.report_data = reportData;
+    if (report) currentRow.ai_report = report;
+    const idx = allData.findIndex(r => r.id === currentRow.id);
+    if (idx > -1) { allData[idx].report_data = reportData; if (report) allData[idx].ai_report = report; }
+
+    // Hide regenerate notice, update prose section if needed
+    document.getElementById('m-regen-section').style.display = 'none';
+    if (report && !document.getElementById('m-report-content').style.display !== 'none') {
+      document.getElementById('m-report-empty').style.display = 'none';
+      document.getElementById('m-report-content').style.display = 'block';
+      document.getElementById('m-report-text').textContent = report;
+    }
+    status.textContent = 'Done — Leadership Summary and Consultant Guide are ready.';
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = 'Generate Report Data';
+    status.textContent = `Error: ${err.message}`;
+    console.error('Regenerate error:', err);
+  }
 }
 
 // ── Report pages (edge functions) ────────────────────────────
