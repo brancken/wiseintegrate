@@ -412,7 +412,9 @@
       <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
         <button class="save-notes-btn" onclick="openLeadershipSummary()" style="background:var(--accent);">Leadership Summary</button>
         <button class="save-notes-btn" onclick="openConsultantGuide()" style="background:var(--bg3);border:1px solid var(--border2);color:var(--text);">Consultant Guide</button>
+        <button class="save-notes-btn" id="snapshot-btn" onclick="sendSnapshot()" style="background:var(--bg3);border:1px solid var(--border2);color:var(--text);">&#9993; Send Result to Client</button>
       </div>
+      <div id="snapshot-status" style="display:none;font-size:13px;margin-bottom:12px;"></div>
       <div id="m-regen-section" style="display:none;margin-bottom:12px;padding:12px 14px;background:var(--bg3);border:1px solid var(--border2);border-radius:7px;font-size:13px;color:var(--text2);">
         No structured report data for this row. Generate it now to enable Leadership Summary and Consultant Guide.<br>
         <button id="regen-btn" class="save-notes-btn" onclick="regenerateReport()" style="margin-top:10px;font-size:13px;padding:8px 18px;">Generate Report Data</button>
@@ -669,6 +671,22 @@ function openModal(row) {
     document.getElementById('m-report-content').style.display = 'none';
   }
 
+  // Snapshot button state
+  const snapBtn = document.getElementById('snapshot-btn');
+  const snapStatus = document.getElementById('snapshot-status');
+  snapBtn.disabled = false;
+  snapStatus.style.display = 'none';
+  if (row.snapshot_sent) {
+    snapBtn.textContent = '✓ Result Sent';
+    snapBtn.style.background = 'var(--good)';
+    snapBtn.style.color = '#fff';
+    snapBtn.disabled = true;
+  } else {
+    snapBtn.textContent = '✉ Send Result to Client';
+    snapBtn.style.background = '';
+    snapBtn.style.color = '';
+  }
+
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -707,6 +725,59 @@ async function saveNotes() {
       setTimeout(() => document.getElementById('notes-saved').style.display = 'none', 3000);
     }
   } catch (err) { console.error('Save error:', err); }
+}
+
+// ── Send snapshot email to client ────────────────────────────
+async function sendSnapshot() {
+  if (!currentRow) return;
+  const btn = document.getElementById('snapshot-btn');
+  const statusEl = document.getElementById('snapshot-status');
+  if (!currentRow.report_data) {
+    statusEl.textContent = '⚠ Generate Report must be run before sending a snapshot.';
+    statusEl.style.color = 'var(--error)';
+    statusEl.style.display = 'block';
+    return;
+  }
+  if (!currentRow.email) {
+    statusEl.textContent = '⚠ No email address on this record.';
+    statusEl.style.color = 'var(--error)';
+    statusEl.style.display = 'block';
+    return;
+  }
+  const confirmed = confirm(`Send AI readiness result to ${currentRow.email}?`);
+  if (!confirmed) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  statusEl.style.display = 'none';
+
+  try {
+    const res = await fetch(
+      'https://ppgecvmyuyuntwnqwcru.supabase.co/functions/v1/send-snapshot',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}` },
+        body: JSON.stringify({ id: currentRow.id })
+      }
+    );
+    const data = await res.json();
+    if (!res.ok || data.error) throw new Error(data.error || 'Send failed');
+    currentRow.snapshot_sent = true;
+    const idx = allData.findIndex(r => r.id === currentRow.id);
+    if (idx > -1) allData[idx].snapshot_sent = true;
+    btn.textContent = '✓ Result Sent';
+    btn.style.background = 'var(--good)';
+    btn.style.color = '#fff';
+    statusEl.textContent = `Email sent to ${currentRow.email}`;
+    statusEl.style.color = 'var(--good)';
+    statusEl.style.display = 'block';
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = '✉ Send Result to Client';
+    statusEl.textContent = '⚠ ' + (err.message || 'Failed to send email.');
+    statusEl.style.color = 'var(--error)';
+    statusEl.style.display = 'block';
+  }
 }
 
 // ── Export CSV ────────────────────────────────────────────────
