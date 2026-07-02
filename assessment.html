@@ -1462,7 +1462,22 @@ async function submitAssessment() {
       });
     }
 
-    // Step 4 — Stop countdown and show teaser
+    // Step 4 — Notify hello@wiseintegrate.com (fire and forget, never blocks the user)
+    try {
+      emailjs.send('service_hg0ttpe', 'template_assessment_notify', {
+        submitter_name:  payload.name        || '—',
+        submitter_email: payload.email       || '—',
+        organisation:    payload.organisation|| '—',
+        role:            payload.role        || '—',
+        org_type:        payload.org_type    || '—',
+        location:        payload.location    || '—',
+        stage_label:     stageInfo.label,
+        total_score:     total + '/180',
+        record_id:       rowId              || '—',
+      });
+    } catch(e) { /* notification is best-effort */ }
+
+    // Step 5 — Stop countdown and show teaser
     stopCountdown();
     showStep('thanks');
     document.getElementById('teaser-stage').textContent = stageInfo.label;
@@ -1479,5 +1494,7 @@ async function submitAssessment() {
   }
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('DL-E8dje2rOO6v-Ad');</script>
 </body>
 </html>
