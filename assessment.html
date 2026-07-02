@@ -1420,6 +1420,7 @@ async function submitAssessment() {
 
     // Step 2 — Generate AI report via Edge Function
     let report = null;
+    let reportData = null;
     try {
       const fnRes = await fetch(EDGE_FN_URL, {
         method: 'POST',
@@ -1433,11 +1434,14 @@ async function submitAssessment() {
       if (fnRes.ok) {
         const fnData = await fnRes.json();
         report = fnData.report || null;
+        reportData = fnData.report_data || null;
       }
     } catch(e) { console.error('Report gen error:', e); }
 
     // Step 3 — Save report back to Supabase
     if (rowId && report) {
+      const patchBody = { ai_report: report };
+      if (reportData) patchBody.report_data = reportData;
       await fetch(`${SUPABASE_URL}/rest/v1/${TABLE_NAME}?id=eq.${rowId}`, {
         method: 'PATCH',
         headers: {
@@ -1446,7 +1450,7 @@ async function submitAssessment() {
           'Authorization': `Bearer ${SUPABASE_ANON}`,
           'Prefer': 'return=minimal'
         },
-        body: JSON.stringify({ ai_report: report })
+        body: JSON.stringify(patchBody)
       });
     }
 

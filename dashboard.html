@@ -409,12 +409,15 @@
 
     <div class="notes-section" id="m-report-section" style="margin-bottom:20px;">
       <h3>AI Generated Report</h3>
+      <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
+        <button class="save-notes-btn" onclick="openLeadershipSummary()" style="background:var(--accent);">Leadership Summary</button>
+        <button class="save-notes-btn" onclick="openConsultantGuide()" style="background:var(--bg3);border:1px solid var(--border2);color:var(--text);">Consultant Guide</button>
+      </div>
       <div id="m-report-loading" style="color:var(--text2);font-size:13px;display:none;">Generating report…</div>
       <div id="m-report-empty" style="color:var(--text3);font-size:13px;">No report generated yet.</div>
       <div id="m-report-content" style="display:none;">
-        <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
-          <button class="save-notes-btn" onclick="downloadReport()" style="background:var(--accent);">⬇ Download as PDF</button>
-          <button class="save-notes-btn" onclick="downloadReportTxt()" style="background:var(--bg3);border:1px solid var(--border2);color:var(--text);">⬇ Download as Text</button>
+        <div style="margin-bottom:10px;">
+          <button class="save-notes-btn" onclick="downloadReportTxt()" style="background:var(--bg3);border:1px solid var(--border2);color:var(--text);">&#8659; Download Prose</button>
         </div>
         <div id="m-report-text" style="background:var(--bg3);border:1px solid var(--border2);border-radius:7px;padding:16px;font-size:13px;color:var(--text2);line-height:1.7;max-height:400px;overflow-y:auto;white-space:pre-wrap;"></div>
       </div>
@@ -431,9 +434,11 @@
 
 <script>
 // ── Config ────────────────────────────────────────────────────
-const SUPABASE_URL  = 'https://ppgecvmyuyuntwnqwcru.supabase.co';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBwZ2Vjdm15dXl1bnR3bnF3Y3J1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4MzY4MzYsImV4cCI6MjA5NzQxMjgzNn0.sVdfTUM6NvqI7ZrjfdO7JbEit9e3izKhXNZ0-zBmHIs';
-const TABLE        = 'ai_assessments';
+const SUPABASE_URL      = 'https://ppgecvmyuyuntwnqwcru.supabase.co';
+const SUPABASE_ANON     = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBwZ2Vjdm15dXl1bnR3bnF3Y3J1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4MzY4MzYsImV4cCI6MjA5NzQxMjgzNn0.sVdfTUM6NvqI7ZrjfdO7JbEit9e3izKhXNZ0-zBmHIs';
+const TABLE             = 'ai_assessments';
+const REPORT_SUMMARY_URL = 'https://ppgecvmyuyuntwnqwcru.supabase.co/functions/v1/report-summary';
+const REPORT_GUIDE_URL   = 'https://ppgecvmyuyuntwnqwcru.supabase.co/functions/v1/report-guide';
 
 // ── CHANGE THIS PASSWORD ──────────────────────────────────────
 const DASHBOARD_PASSWORD = 'LoveJesus777#';
@@ -464,6 +469,7 @@ function logout() {
 if (sessionStorage.getItem('wi_auth') === '1') {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
+  loadData();
 }
 
 // ── Load data ─────────────────────────────────────────────────
@@ -704,6 +710,16 @@ function exportCSV() {
   const a = document.createElement('a'); a.href = url;
   a.download = `wiseintegrate-assessments-${new Date().toISOString().slice(0,10)}.csv`;
   a.click(); URL.revokeObjectURL(url);
+}
+
+// ── Report pages (edge functions) ────────────────────────────
+function openLeadershipSummary() {
+  if (!currentRow) return;
+  window.open(`${REPORT_SUMMARY_URL}?id=${currentRow.id}`, '_blank');
+}
+function openConsultantGuide() {
+  if (!currentRow) return;
+  window.open(`${REPORT_GUIDE_URL}?id=${currentRow.id}`, '_blank');
 }
 
 // ── Download report ──────────────────────────────────────────
