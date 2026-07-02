@@ -35,10 +35,10 @@ export default {
     }
 
     try {
-      const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+      const BREVO_API_KEY  = Deno.env.get("BREVO_API_KEY");
       const SUPABASE_URL   = Deno.env.get("SUPABASE_URL");
       const SERVICE_KEY    = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-      if (!RESEND_API_KEY) throw new Error("RESEND_API_KEY not set");
+      if (!BREVO_API_KEY) throw new Error("BREVO_API_KEY not set");
       if (!SUPABASE_URL || !SERVICE_KEY) throw new Error("Supabase config missing");
 
       const { id } = await req.json();
@@ -96,22 +96,22 @@ export default {
         </div>
       `;
 
-      // Send via Resend
-      const emailRes = await fetch("https://api.resend.com/emails", {
+      // Send via Brevo
+      const emailRes = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${RESEND_API_KEY}`,
+          "api-key": BREVO_API_KEY,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "WiseIntegrate <hello@wiseintegrate.com>",
-          to: [row.email],
+          sender: { name: "WiseIntegrate", email: "hello@wiseintegrate.com" },
+          to: [{ email: row.email, name: row.name || "" }],
           subject: `Your AI Readiness Result — ${stage.name}`,
-          html,
+          htmlContent: html,
         }),
       });
 
-      if (!emailRes.ok) throw new Error(`Resend error: ${await emailRes.text()}`);
+      if (!emailRes.ok) throw new Error(`Brevo error: ${await emailRes.text()}`);
 
       // Mark snapshot_sent = true
       await fetch(
