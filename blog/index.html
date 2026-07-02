@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Practical thinking on AI integration for churches and organisations — honest advice, no hype. Articles and guides from WiseIntegrate.">
+<meta name="theme-color" content="#08080f">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="WiseIntegrate">
+<meta property="og:title" content="Blog — WiseIntegrate">
+<meta property="og:description" content="Practical thinking on AI integration for churches and organisations.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wiseintegrate.com/blog">
+<meta property="og:image" content="https://wiseintegrate.com/images/og-image.png">
+<meta property="og:site_name" content="WiseIntegrate">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wiseintegrate.com/images/og-image.png">
+<link rel="canonical" href="https://wiseintegrate.com/blog">
+<title>Blog — WiseIntegrate</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/images/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #08080f; --bg2: #0a0a16; --bg3: rgba(29,78,216,0.06);
+  --accent: #1d4ed8; --accent2: #60a5fa;
+  --border: rgba(37,99,235,0.15); --border2: rgba(37,99,235,0.28);
+  --text: #eff6ff; --text2: rgba(239,246,255,0.6); --text3: rgba(239,246,255,0.35);
+  --radius: 12px; --font-head: 'Manrope', sans-serif; --font-body: 'Inter', sans-serif;
+  --glow-sm: 0 0 16px rgba(37,99,235,0.30);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  background-image: radial-gradient(ellipse 100% 50% at 50% 0%, rgba(29,78,216,0.25) 0%, transparent 60%);
+  background-attachment: fixed;
+  color: var(--text); font-family: var(--font-body); font-size: 16px;
+  line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+body { cursor: none !important; }
+a, button, [role="button"] { cursor: pointer !important; }
+.mouse-ambient {
+  position: fixed; top: 0; left: 0; width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(29,78,216,0.22) 0%, rgba(29,78,216,0.09) 40%, transparent 70%);
+  pointer-events: none; z-index: 0; transform: translate(-50%,-50%);
+  will-change: left,top; transition: left 0.08s linear, top 0.08s linear;
+}
+.cursor-glow {
+  position: fixed; top: 0; left: 0; width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.72) 0%, rgba(180,210,255,0.42) 40%, rgba(96,165,250,0.18) 70%, transparent 100%);
+  box-shadow: 0 0 12px 6px rgba(96,165,250,0.52), 0 0 26px 10px rgba(29,78,216,0.26);
+  filter: blur(1.5px); pointer-events: none; z-index: 99999; transform: translate(-50%,-50%);
+  will-change: left,top; transition: width 0.12s ease, height 0.12s ease;
+}
+.cursor-glow.hovering { width: 22px; height: 22px; box-shadow: 0 0 16px 8px rgba(96,165,250,0.48), 0 0 32px 12px rgba(29,78,216,0.24); }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(8,8,15,0.92); backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--border); padding: 0 24px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+.nav-logo img { height: 42px; width: auto; }
+.nav-links { display: flex; align-items: center; gap: 24px; list-style: none; flex-shrink: 0; }
+.nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--text); }
+.nav-cta { background: linear-gradient(135deg,#1d4ed8,#1e3a8a); color: #fff !important; padding: 9px 20px; border-radius: 50px; font-size: 14px; font-weight: 600; }
+.nav-menu-btn { display: none; background: none; border: none; color: var(--text); cursor: pointer; font-size: 22px; }
+.mobile-nav {
+  display: none; position: fixed; top: 60px; left: 0; right: 0;
+  background: rgba(8,8,15,0.98); border-bottom: 0.5px solid var(--border);
+  padding: 20px 24px; z-index: 99; flex-direction: column; gap: 16px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a { color: var(--text2); text-decoration: none; font-size: 15px; font-weight: 500; padding: 8px 0; border-bottom: 0.5px solid var(--border); }
+
+.hero {
+  min-height: 38vh; display: flex; align-items: center; justify-content: center;
+  padding: 60px 24px; margin-top: 60px; position: relative; overflow: hidden; text-align: center;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 90% 70% at 50% 30%, rgba(29,78,216,0.45) 0%, rgba(29,78,216,0.15) 45%, transparent 75%);
+  pointer-events: none;
+}
+.hero-content { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+.sec-label {
+  font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent2); display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px;
+}
+.sec-label::before { content: ''; width: 20px; height: 1px; background: var(--accent2); display: inline-block; }
+h1 { font-family: var(--font-head); font-size: clamp(32px,5vw,52px); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; margin-bottom: 18px; color: #fff; }
+h1 em { font-style: italic; color: var(--accent2); }
+.hero-sub { font-size: 17px; color: var(--text2); line-height: 1.65; max-width: 520px; margin: 0 auto; }
+
+.blog-section { padding: 40px 24px 80px; background: var(--bg2); }
+.container { max-width: 1100px; margin: 0 auto; }
+
+.filters { display: flex; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
+.filter-btn {
+  background: none; border: 0.5px solid var(--border); color: var(--text2);
+  padding: 8px 20px; border-radius: 50px; font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all .2s; font-family: var(--font-body);
+}
+.filter-btn.active, .filter-btn:hover { border-color: var(--accent); color: var(--text); background: rgba(29,78,216,0.1); }
+
+.articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+
+.article-card {
+  background: var(--bg3); border: 0.5px solid var(--border); border-radius: var(--radius);
+  padding: 32px; text-decoration: none; display: flex; flex-direction: column;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+.article-card:hover { border-color: rgba(37,99,235,0.5); transform: translateY(-3px); box-shadow: var(--glow-sm); }
+.article-cat {
+  display: inline-flex; align-items: center; gap: 6px; margin-bottom: 14px;
+  font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent2);
+}
+.article-cat::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); display: inline-block; }
+.article-card h2 { font-family: var(--font-head); font-size: 20px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 12px; letter-spacing: -.01em; }
+.article-card p { font-size: 14px; color: var(--text2); line-height: 1.65; margin-bottom: 20px; flex: 1; }
+.article-meta { display: flex; gap: 16px; font-size: 13px; color: var(--text3); margin-bottom: 16px; }
+.article-arrow { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--accent2); transition: gap .2s; }
+.article-card:hover .article-arrow { gap: 10px; }
+
+footer { background: #030308; border-top: 0.5px solid var(--border); padding: 60px 24px 32px; }
+.footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+.footer-brand img { height: 32px; margin-bottom: 16px; }
+.footer-brand p { font-size: 14px; color: var(--text3); line-height: 1.6; }
+.footer-col h4 { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
+.footer-col a { display: block; color: var(--text2); text-decoration: none; font-size: 14px; margin-bottom: 10px; transition: color .2s; }
+.footer-col a:hover { color: var(--text); }
+.footer-bottom { max-width: 1100px; margin: 0 auto; border-top: 0.5px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-bottom p { font-size: 13px; color: var(--text3); }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { font-size: 13px; color: var(--text3); text-decoration: none; transition: color .2s; }
+.footer-bottom-links a:hover { color: var(--text2); }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-menu-btn { display: block; }
+  .articles-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HV1CPFNJB9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HV1CPFNJB9');
+</script>
+</head>
+<body>
+
+<div class="mouse-ambient" id="mouse-ambient"></div>
+<div class="cursor-glow" id="cursor-glow"></div>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png" alt="WiseIntegrate" onerror="this.style.display='none';this.nextSibling.style.display='block'" />
+    <span style="display:none;font-family:'Manrope',sans-serif;font-weight:800;font-size:18px;color:#fff">Wise<span style="color:#60a5fa">Integrate</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#process">Process</a></li>
+    <li><a href="/church">Church</a></li>
+    <li><a href="/business">Business</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/blog" class="active">Blog</a></li>
+    <li><a href="/faq">FAQ</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/assessment" class="nav-cta">Start Assessment</a></li>
+  </ul>
+  <button class="nav-menu-btn" aria-label="Open menu">&#9776;</button>
+</nav>
+<div class="mobile-nav">
+  <a href="/">Home</a>
+  <a href="/#services">Services</a>
+  <a href="/#process">Process</a>
+  <a href="/church">Church</a>
+  <a href="/business">Business</a>
+  <a href="/about">About</a>
+  <a href="/blog">Blog</a>
+  <a href="/faq">FAQ</a>
+  <a href="/contact">Contact</a>
+  <a href="/assessment" style="color:var(--accent2);font-weight:700">Start Your Free Assessment</a>
+</div>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="sec-label">Articles &amp; Guides</div>
+    <h1>The <em>Blog</em></h1>
+    <p class="hero-sub">Practical thinking on AI integration for churches and organisations — honest advice, no hype.</p>
+  </div>
+</div>
+
+<section class="blog-section">
+  <div class="container">
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="church">Church</button>
+      <button class="filter-btn" data-filter="business">Business</button>
+    </div>
+
+    <div class="articles-grid">
+
+      <a href="/blog/how-to-introduce-ai-to-church-leadership" class="article-card" data-category="church">
+        <span class="article-cat">Church</span>
+        <h2>How to Introduce AI to Your Church Leadership Team</h2>
+        <p>The hesitation you see from church leaders isn't resistance — it's responsibility. Here's how to have the conversation that actually moves things forward.</p>
+        <div class="article-meta">
+          <span>6 min read</span>
+          <span>2 July 2026</span>
+        </div>
+        <span class="article-arrow">Read article &rarr;</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="/images/logo.png" alt="WiseIntegrate" onerror="this.style.display='none'">
+      <p>AI should serve your mission. Not replace it.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="/church">Church Integration</a>
+      <a href="/business">Business Integration</a>
+      <a href="/assessment">Readiness Assessment</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about">About</a>
+      <a href="/#process">Our Process</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Use</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&#169; 2026 WiseIntegrate. All rights reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const _glow = document.getElementById('cursor-glow');
+const _ambient = document.getElementById('mouse-ambient');
+if (_glow && !('ontouchstart' in window) && window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', function(e) {
+    _glow.style.left = e.clientX + 'px'; _glow.style.top = e.clientY + 'px';
+    if (_ambient) { _ambient.style.left = e.clientX + 'px'; _ambient.style.top = e.clientY + 'px'; }
+  });
+  document.querySelectorAll('a, button, [role="button"]').forEach(el => {
+    el.addEventListener('mouseenter', () => _glow.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => _glow.classList.remove('hovering'));
+  });
+} else if (_glow) {
+  _glow.style.display = 'none';
+  if (_ambient) _ambient.style.display = 'none';
+}
+document.querySelector('.nav-menu-btn').addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.toggle('open');
+});
+document.querySelectorAll('.mobile-nav a').forEach(link => {
+  link.addEventListener('click', () => document.querySelector('.mobile-nav').classList.remove('open'));
+});
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.article-card').forEach(card => {
+      card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'flex' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -81,6 +81,14 @@
       "dest": "/terms/index.html"
     },
     {
+      "src": "/blog",
+      "dest": "/blog/index.html"
+    },
+    {
+      "src": "/blog/(.*)",
+      "dest": "/blog/$1/index.html"
+    },
+    {
       "src": "/report-summary",
       "dest": "/report-summary/index.html"
     },
