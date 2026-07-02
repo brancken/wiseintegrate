@@ -47,10 +47,12 @@ Each script file is self-contained and loaded at page bottom:
 `sw.js` uses cache-first for static assets (`wiseintegrate-static-v2`) and network-first for HTML navigation. Service worker explicitly bypasses Supabase API requests. `manifest.json` is the PWA manifest.
 
 ### Supabase backend
+Supabase project: `ppgecvmyuyuntwnqwcru` (region: ap-southeast-2)
+
 `form.js` posts assessment submissions to a Supabase `assessments` table. The Supabase URL and anon key are stored as Vercel environment variables (`SUPABASE_URL`, `SUPABASE_ANON_KEY`). RLS is enabled; only the service role can read rows.
 
 ```sql
--- assessments table schema
+-- assessments table schema (public.assessments)
 CREATE TABLE assessments (
   id UUID PRIMARY KEY,
   created_at TIMESTAMPTZ,
@@ -62,10 +64,30 @@ CREATE TABLE assessments (
   send_snapshot BOOLEAN, snapshot_sent BOOLEAN,
   responses JSONB
 );
+
+-- ai_assessments table schema (public.ai_assessments) — 45-question pipeline
+CREATE TABLE ai_assessments (
+  id UUID PRIMARY KEY,
+  submitted_at TIMESTAMPTZ,
+  organisation TEXT, name TEXT, role TEXT, org_type TEXT, org_size TEXT, location TEXT, prompt_reason TEXT,
+  d1_leadership INT, d2_data INT, d3_literacy INT, d4_governance INT,
+  d5_usage INT, d6_departments INT, d7_security INT,  -- max 24 each
+  d8_budget INT,      -- max 12
+  total_score INT, maturity_stage INT,  -- 1-5
+  ai_report TEXT,     -- prose report from generate-report
+  report_data JSONB   -- structured scoring data (scores, findings, recommendations)
+);
 ```
 
+### Supabase Edge Functions
+All functions are in `supabase/functions/` and deployed to the project above.
+
+- `generate-report` — takes a submitted `ai_assessments` row, scores all 8 dimensions, calls Claude for qualitative output, returns `{ report, report_data }`. Called from `assessment.html` after submission.
+- `report-summary` — JSON API: takes `?id=<uuid>`, returns `report_data` for the Leadership Summary page. CORS-enabled.
+- `report-guide` — JSON API: same as above, feeds the Consultant Guide page. CORS-enabled.
+
 ### Vercel config
-`vercel.json` sets security headers (`X-Frame-Options`, `X-Content-Type-Options`, CSP) and 1-year immutable caching on `/css/*`, `/js/*`, `/images/*`. No rewrites or serverless functions currently.
+`vercel.json` sets security headers (`X-Frame-Options`, `X-Content-Type-Options`, CSP) and 1-year immutable caching on `/css/*`, `/js/*`, `/images/*`. Routes include clean URLs for all pages.
 
 ## Design tokens
 
@@ -93,5 +115,10 @@ Fonts: **Manrope** (headings) and **Inter** (body), loaded from Google Fonts.
 | `/church` | `church/index.html` | Done |
 | `/business` | `business/index.html` | Done |
 | `/contact` | `contact/index.html` | Done |
-| `/dashboard` | `dashboard.html` | Skeleton — auth not implemented |
-| `/about` | — | Not yet built |
+| `/dashboard` | `dashboard.html` | Done — password auth, Supabase data, report buttons |
+| `/about` | `about/index.html` | Done |
+| `/faq` | `faq/index.html` | Done |
+| `/privacy` | `privacy/index.html` | Done |
+| `/terms` | `terms/index.html` | Done |
+| `/report-summary` | `report-summary/index.html` | Done — fetches JSON from Supabase, renders radar chart |
+| `/report-guide` | `report-guide/index.html` | Done — consultant-only, fetches JSON from Supabase |
