@@ -20,7 +20,7 @@ const PRECACHE_URLS = [
   '/manifest.json',
   '/images/icon-192.png',
   '/images/icon-512.png',
-  'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Inter:wght@400;500&display=swap'
+  'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap'
 ];
 
 // ── Install ──────────────────────────────────────────────
