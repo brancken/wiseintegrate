@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Church teams spend hours every week on admin that has nothing to do with ministry. AI handles the routine so your people can focus on what only a human can do.">
+<meta name="theme-color" content="#08080f">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="WiseIntegrate">
+<meta property="og:title" content="Free Your Team From Admin. Let AI Handle the Routine. — WiseIntegrate">
+<meta property="og:description" content="Church teams spend hours every week on admin that has nothing to do with ministry. AI handles the routine so your people can focus on what only a human can do.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://wiseintegrate.com/blog/ai-for-admin-free-your-team">
+<meta property="og:image" content="https://wiseintegrate.com/images/og-image.png">
+<meta property="og:site_name" content="WiseIntegrate">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wiseintegrate.com/images/og-image.png">
+<link rel="canonical" href="https://wiseintegrate.com/blog/ai-for-admin-free-your-team">
+<title>Free Your Team From Admin. Let AI Handle the Routine. — WiseIntegrate</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/images/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #08080f; --bg2: #0a0a16; --bg3: rgba(29,78,216,0.06);
+  --accent: #1d4ed8; --accent2: #60a5fa;
+  --border: rgba(37,99,235,0.15); --border2: rgba(37,99,235,0.28);
+  --text: #eff6ff; --text2: rgba(239,246,255,0.6); --text3: rgba(239,246,255,0.35);
+  --radius: 12px; --font-head: 'Manrope', sans-serif; --font-body: 'Inter', sans-serif;
+  --glow-sm: 0 0 16px rgba(37,99,235,0.30);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text); font-family: var(--font-body); font-size: 16px;
+  line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+body { cursor: none !important; }
+a, button, [role="button"] { cursor: pointer !important; }
+.mouse-ambient {
+  position: fixed; top: 0; left: 0; width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(29,78,216,0.22) 0%, rgba(29,78,216,0.09) 40%, transparent 70%);
+  pointer-events: none; z-index: 0; transform: translate(-50%,-50%);
+  will-change: left,top; transition: left 0.08s linear, top 0.08s linear;
+}
+.cursor-glow {
+  position: fixed; top: 0; left: 0; width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.72) 0%, rgba(180,210,255,0.42) 40%, rgba(96,165,250,0.18) 70%, transparent 100%);
+  box-shadow: 0 0 12px 6px rgba(96,165,250,0.52), 0 0 26px 10px rgba(29,78,216,0.26);
+  filter: blur(1.5px); pointer-events: none; z-index: 99999; transform: translate(-50%,-50%);
+  will-change: left,top; transition: width 0.12s ease, height 0.12s ease;
+}
+.cursor-glow.hovering { width: 22px; height: 22px; box-shadow: 0 0 16px 8px rgba(96,165,250,0.48), 0 0 32px 12px rgba(29,78,216,0.24); }
+
+.reading-progress {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 1001; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transition: width 0.1s linear;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(8,8,15,0.92); backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--border); padding: 0 24px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+.nav-logo img { height: 42px; width: auto; }
+.nav-links { display: flex; align-items: center; gap: 24px; list-style: none; flex-shrink: 0; }
+.nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { background: linear-gradient(135deg,#1d4ed8,#1e3a8a); color: #fff !important; padding: 9px 20px; border-radius: 50px; font-size: 14px; font-weight: 600; }
+.nav-menu-btn { display: none; background: none; border: none; color: var(--text); cursor: pointer; font-size: 22px; }
+.mobile-nav {
+  display: none; position: fixed; top: 60px; left: 0; right: 0;
+  background: rgba(8,8,15,0.98); border-bottom: 0.5px solid var(--border);
+  padding: 20px 24px; z-index: 99; flex-direction: column; gap: 16px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a { color: var(--text2); text-decoration: none; font-size: 15px; font-weight: 500; padding: 8px 0; border-bottom: 0.5px solid var(--border); }
+
+/* HERO BANNER */
+.article-hero-banner {
+  margin-top: 60px;
+  position: relative;
+  overflow: hidden;
+  min-height: 440px;
+  display: flex;
+  align-items: flex-end;
+  background: #08080f;
+}
+.hero-banner-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(8,8,15,0.2) 0%, rgba(8,8,15,0.15) 40%, rgba(8,8,15,0.88) 100%);
+}
+.hero-banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 48px 5vw;
+}
+.article-cat-badge {
+  display: inline-flex; align-items: center; gap: 6px; margin-bottom: 16px;
+  font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent2); border: 0.5px solid rgba(96,165,250,0.3); border-radius: 999px; padding: 5px 14px;
+}
+.article-cat-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); display: inline-block; }
+.hero-banner-content h1 {
+  font-family: var(--font-head);
+  font-size: clamp(30px, 5vw, 60px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.025em;
+  color: #fff;
+  max-width: 680px;
+  text-shadow: 0 2px 24px rgba(8,8,15,0.7);
+}
+
+/* SVG ANIMATIONS */
+@keyframes docFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes aiPulse { 0%,100% { opacity: 0.4; r: 88; } 50% { opacity: 0.15; r: 108; } }
+@keyframes dotFlow {
+  0%   { offset-distance: 0%;   opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+@keyframes crossGlow { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
+@keyframes shimmer { 0%,100% { opacity: 0.18; } 50% { opacity: 0.38; } }
+
+.doc-1 { animation: docFloat 6s ease-in-out infinite; }
+.doc-2 { animation: docFloat 6s ease-in-out infinite 1.2s; }
+.doc-3 { animation: docFloat 6s ease-in-out infinite 2.4s; }
+.ai-pulse-ring { animation: aiPulse 3s ease-in-out infinite; }
+.cross-group { animation: crossGlow 4s ease-in-out infinite 1s; }
+.shimmer-1 { animation: shimmer 5s ease-in-out infinite; }
+.shimmer-2 { animation: shimmer 5s ease-in-out infinite 1.5s; }
+
+/* ARTICLE META BAR */
+.article-meta-bar {
+  background: var(--bg2);
+  border-bottom: 0.5px solid var(--border);
+  padding: 16px 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 100%;
+}
+.article-meta-bar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--text3); text-decoration: none; transition: color .2s;
+}
+.back-link:hover { color: var(--accent2); }
+.article-meta-row { display: flex; gap: 20px; font-size: 13px; color: var(--text3); flex-wrap: wrap; }
+
+/* ARTICLE BODY */
+.article-body { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
+.article-body p { font-size: 16.5px; color: var(--text2); line-height: 1.85; margin-bottom: 28px; }
+.article-body a { color: var(--accent2); text-decoration: none; border-bottom: 0.5px solid rgba(96,165,250,0.3); transition: border-color .2s; }
+.article-body a:hover { border-color: var(--accent2); }
+.article-divider { border: none; border-top: 0.5px solid var(--border); margin: 48px 0; }
+
+.article-cta {
+  background: linear-gradient(135deg, rgba(29,78,216,0.15), rgba(29,78,216,0.05));
+  border: 0.5px solid var(--border2); border-radius: var(--radius);
+  padding: 40px; text-align: center;
+}
+.article-cta h3 {
+  font-family: var(--font-head); font-size: 22px; font-weight: 700;
+  color: var(--text); margin-bottom: 12px; letter-spacing: -.01em;
+}
+.article-cta p { font-size: 15px; color: var(--text2); margin-bottom: 24px; line-height: 1.6; }
+.btn-primary {
+  background: linear-gradient(135deg, #1d4ed8, #1e3a8a); color: #fff;
+  padding: 14px 32px; border-radius: 50px; font-size: 15px; font-weight: 600;
+  text-decoration: none; display: inline-block; transition: box-shadow .2s, transform .2s; border: none;
+}
+.btn-primary:hover { box-shadow: 0 0 24px rgba(29,78,216,0.5); transform: translateY(-1px); }
+
+footer { background: #030308; border-top: 0.5px solid var(--border); padding: 60px 24px 32px; }
+.footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+.footer-brand img { height: 32px; margin-bottom: 16px; }
+.footer-brand p { font-size: 14px; color: var(--text3); line-height: 1.6; }
+.footer-col h4 { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
+.footer-col a { display: block; color: var(--text2); text-decoration: none; font-size: 14px; margin-bottom: 10px; transition: color .2s; }
+.footer-col a:hover { color: var(--text); }
+.footer-bottom { max-width: 1100px; margin: 0 auto; border-top: 0.5px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-bottom p { font-size: 13px; color: var(--text3); }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { font-size: 13px; color: var(--text3); text-decoration: none; transition: color .2s; }
+.footer-bottom-links a:hover { color: var(--text2); }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-menu-btn { display: block; }
+  .article-hero-banner { min-height: 320px; }
+  .hero-banner-content h1 { font-size: clamp(26px, 7vw, 40px); }
+  .article-body { padding: 36px 20px 60px; }
+  .article-cta { padding: 28px 20px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HV1CPFNJB9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HV1CPFNJB9');
+</script>
+</head>
+<body>
+
+<div class="reading-progress" id="reading-progress"></div>
+<div class="mouse-ambient" id="mouse-ambient"></div>
+<div class="cursor-glow" id="cursor-glow"></div>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png" alt="WiseIntegrate" onerror="this.style.display='none';this.nextSibling.style.display='block'" />
+    <span style="display:none;font-family:'Manrope',sans-serif;font-weight:800;font-size:18px;color:#fff">Wise<span style="color:#60a5fa">Integrate</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#process">Process</a></li>
+    <li><a href="/church">Church</a></li>
+    <li><a href="/business">Business</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/faq">FAQ</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/assessment" class="nav-cta">Start Assessment</a></li>
+  </ul>
+  <button class="nav-menu-btn" aria-label="Open menu">&#9776;</button>
+</nav>
+<div class="mobile-nav">
+  <a href="/">Home</a>
+  <a href="/#services">Services</a>
+  <a href="/#process">Process</a>
+  <a href="/church">Church</a>
+  <a href="/business">Business</a>
+  <a href="/about">About</a>
+  <a href="/blog">Blog</a>
+  <a href="/faq">FAQ</a>
+  <a href="/contact">Contact</a>
+  <a href="/assessment" style="color:var(--accent2);font-weight:700">Start Your Free Assessment</a>
+</div>
+
+<!-- HERO BANNER WITH TITLE ON IMAGE -->
+<div class="article-hero-banner">
+
+  <svg class="hero-banner-svg" viewBox="0 0 1400 480" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <!-- Base background -->
+    <rect width="1400" height="480" fill="#08080f"/>
+
+    <!-- Radial glow centred on the illustration (right half) -->
+    <radialGradient id="bg-glow" cx="72%" cy="50%" r="52%">
+      <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#1d4ed8" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0"/>
+    </radialGradient>
+    <rect width="1400" height="480" fill="url(#bg-glow)"/>
+
+    <!-- Subtle grid lines (background texture) -->
+    <line class="shimmer-1" x1="0" y1="120" x2="1400" y2="120" stroke="rgba(37,99,235,0.12)" stroke-width="0.5"/>
+    <line class="shimmer-2" x1="0" y1="240" x2="1400" y2="240" stroke="rgba(37,99,235,0.12)" stroke-width="0.5"/>
+    <line class="shimmer-1" x1="0" y1="360" x2="1400" y2="360" stroke="rgba(37,99,235,0.12)" stroke-width="0.5"/>
+    <line class="shimmer-2" x1="700" y1="0" x2="700" y2="480" stroke="rgba(37,99,235,0.08)" stroke-width="0.5"/>
+    <line class="shimmer-1" x1="1050" y1="0" x2="1050" y2="480" stroke="rgba(37,99,235,0.08)" stroke-width="0.5"/>
+
+    <!-- ── DOCUMENT ICONS (left of AI node) ────────────────── -->
+    <!-- Document 1: checklist / bulletin -->
+    <g class="doc-1" transform="translate(720,80)">
+      <rect width="110" height="136" rx="8" fill="rgba(29,78,216,0.14)" stroke="rgba(96,165,250,0.38)" stroke-width="1"/>
+      <!-- small check icon top right -->
+      <rect x="78" y="12" width="18" height="18" rx="4" fill="rgba(96,165,250,0.18)" stroke="rgba(96,165,250,0.45)" stroke-width="1"/>
+      <polyline points="81,21 85,25 95,16" stroke="#60a5fa" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- text lines -->
+      <rect x="14" y="14" width="58" height="4" rx="2" fill="rgba(239,246,255,0.35)"/>
+      <rect x="14" y="34" width="82" height="4" rx="2" fill="rgba(239,246,255,0.18)"/>
+      <rect x="14" y="48" width="68" height="4" rx="2" fill="rgba(239,246,255,0.18)"/>
+      <rect x="14" y="62" width="76" height="4" rx="2" fill="rgba(239,246,255,0.18)"/>
+      <rect x="14" y="76" width="54" height="4" rx="2" fill="rgba(239,246,255,0.12)"/>
+      <rect x="14" y="96" width="82" height="4" rx="2" fill="rgba(239,246,255,0.12)"/>
+      <rect x="14" y="110" width="62" height="4" rx="2" fill="rgba(239,246,255,0.12)"/>
+    </g>
+
+    <!-- Document 2: calendar -->
+    <g class="doc-2" transform="translate(850,148)">
+      <rect width="110" height="130" rx="8" fill="rgba(29,78,216,0.10)" stroke="rgba(96,165,250,0.28)" stroke-width="1"/>
+      <!-- calendar header bar -->
+      <rect x="0" y="0" width="110" height="30" rx="8" fill="rgba(29,78,216,0.28)"/>
+      <rect x="0" y="22" width="110" height="8" fill="rgba(29,78,216,0.28)"/>
+      <!-- calendar grid -->
+      <rect x="12" y="42" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+      <rect x="32" y="42" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+      <rect x="52" y="42" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+      <rect x="72" y="42" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+      <rect x="92" y="42" width="14" height="12" rx="2" fill="rgba(96,165,250,0.40)"/>
+      <rect x="12" y="62" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+      <rect x="32" y="62" width="14" height="12" rx="2" fill="rgba(239,246,255,0.28)"/>
+      <rect x="52" y="62" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+      <rect x="72" y="62" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+      <rect x="92" y="62" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+      <rect x="12" y="82" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+      <rect x="32" y="82" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+      <rect x="52" y="82" width="14" height="12" rx="2" fill="rgba(96,165,250,0.40)"/>
+      <rect x="72" y="82" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+      <rect x="92" y="82" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+      <rect x="12" y="102" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+      <rect x="32" y="102" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+      <rect x="52" y="102" width="14" height="12" rx="2" fill="rgba(96,165,250,0.22)"/>
+    </g>
+
+    <!-- Document 3: email -->
+    <g class="doc-3" transform="translate(760,272)">
+      <rect width="110" height="80" rx="8" fill="rgba(29,78,216,0.10)" stroke="rgba(96,165,250,0.28)" stroke-width="1"/>
+      <!-- envelope flap -->
+      <polyline points="0,0 55,44 110,0" stroke="rgba(96,165,250,0.45)" stroke-width="1" fill="none" stroke-linejoin="round"/>
+      <line x1="0" y1="80" x2="42" y2="40" stroke="rgba(96,165,250,0.28)" stroke-width="1"/>
+      <line x1="110" y1="80" x2="68" y2="40" stroke="rgba(96,165,250,0.28)" stroke-width="1"/>
+    </g>
+
+    <!-- ── CONNECTING LINES (docs to AI) ──────────────────────── -->
+    <defs>
+      <path id="line-1" d="M 830 148 Q 910 148 960 240"/>
+      <path id="line-2" d="M 960 213 L 960 240"/>
+      <path id="line-3" d="M 870 352 Q 910 352 960 300"/>
+    </defs>
+    <!-- visible paths -->
+    <path d="M 830 148 Q 910 148 960 240" stroke="rgba(96,165,250,0.18)" stroke-width="1" fill="none" stroke-dasharray="4 6"/>
+    <path d="M 960 213 L 960 240" stroke="rgba(96,165,250,0.18)" stroke-width="1" fill="none" stroke-dasharray="4 6"/>
+    <path d="M 870 352 Q 910 352 960 300" stroke="rgba(96,165,250,0.18)" stroke-width="1" fill="none" stroke-dasharray="4 6"/>
+
+    <!-- ── AI PROCESSING NODE ──────────────────────────────── -->
+    <!-- outer glow ring (animated) -->
+    <circle class="ai-pulse-ring" cx="980" cy="240" r="88" fill="none" stroke="rgba(96,165,250,0.18)" stroke-width="1"/>
+    <!-- mid ring -->
+    <circle cx="980" cy="240" r="68" fill="rgba(29,78,216,0.18)" stroke="rgba(96,165,250,0.32)" stroke-width="1"/>
+    <!-- inner core -->
+    <circle cx="980" cy="240" r="48" fill="rgba(29,78,216,0.30)" stroke="rgba(96,165,250,0.55)" stroke-width="1.5"/>
+    <!-- core fill -->
+    <circle cx="980" cy="240" r="32" fill="rgba(29,78,216,0.55)"/>
+
+    <!-- circuit lines inside core -->
+    <line x1="968" y1="228" x2="992" y2="228" stroke="rgba(239,246,255,0.6)" stroke-width="1" stroke-linecap="round"/>
+    <line x1="968" y1="240" x2="992" y2="240" stroke="rgba(239,246,255,0.6)" stroke-width="1" stroke-linecap="round"/>
+    <line x1="968" y1="252" x2="992" y2="252" stroke="rgba(239,246,255,0.6)" stroke-width="1" stroke-linecap="round"/>
+    <circle cx="968" cy="228" r="2.5" fill="#60a5fa"/>
+    <circle cx="992" cy="228" r="2.5" fill="#60a5fa"/>
+    <circle cx="968" cy="252" r="2.5" fill="#60a5fa"/>
+    <circle cx="992" cy="252" r="2.5" fill="#60a5fa"/>
+    <!-- vertical connectors -->
+    <line x1="968" y1="228" x2="968" y2="252" stroke="rgba(239,246,255,0.35)" stroke-width="0.8"/>
+    <line x1="992" y1="228" x2="992" y2="252" stroke="rgba(239,246,255,0.35)" stroke-width="0.8"/>
+
+    <!-- orbital dots -->
+    <circle cx="980" cy="172" r="4" fill="#60a5fa" opacity="0.8"/>
+    <circle cx="1048" cy="240" r="4" fill="#60a5fa" opacity="0.8"/>
+    <circle cx="980" cy="308" r="4" fill="#60a5fa" opacity="0.5"/>
+    <circle cx="912" cy="240" r="4" fill="#60a5fa" opacity="0.5"/>
+    <circle cx="1028" cy="192" r="3" fill="#60a5fa" opacity="0.6"/>
+    <circle cx="1028" cy="288" r="3" fill="#60a5fa" opacity="0.4"/>
+
+    <!-- ── OUTPUT LINE: AI to cross ─────────────────────────── -->
+    <path d="M 1048 240 L 1160 240" stroke="rgba(96,165,250,0.28)" stroke-width="1" fill="none" stroke-dasharray="4 6"/>
+    <circle cx="1100" cy="240" r="3" fill="#60a5fa" opacity="0.5"/>
+
+    <!-- ── CROSS (right) ────────────────────────────────────── -->
+    <g class="cross-group">
+      <!-- glow behind cross -->
+      <radialGradient id="cross-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.25"/>
+        <stop offset="100%" stop-color="#60a5fa" stop-opacity="0"/>
+      </radialGradient>
+      <ellipse cx="1215" cy="240" rx="55" ry="70" fill="url(#cross-glow)"/>
+      <!-- vertical bar -->
+      <rect x="1207" y="155" width="16" height="170" rx="5" fill="rgba(96,165,250,0.75)"/>
+      <!-- horizontal bar -->
+      <rect x="1175" y="210" width="80" height="16" rx="5" fill="rgba(96,165,250,0.75)"/>
+      <!-- bright center highlight -->
+      <rect x="1207" y="210" width="16" height="16" rx="3" fill="rgba(239,246,255,0.6)"/>
+    </g>
+
+    <!-- ── PEOPLE / COMMUNITY DOTS (below cross) ───────────── -->
+    <circle cx="1185" cy="360" r="10" fill="rgba(96,165,250,0.35)" stroke="rgba(96,165,250,0.5)" stroke-width="1"/>
+    <circle cx="1215" cy="356" r="13" fill="rgba(96,165,250,0.45)" stroke="rgba(96,165,250,0.6)" stroke-width="1"/>
+    <circle cx="1245" cy="360" r="10" fill="rgba(96,165,250,0.35)" stroke="rgba(96,165,250,0.5)" stroke-width="1"/>
+    <line x1="1195" y1="360" x2="1205" y2="360" stroke="rgba(96,165,250,0.3)" stroke-width="1"/>
+    <line x1="1225" y1="360" x2="1235" y2="360" stroke="rgba(96,165,250,0.3)" stroke-width="1"/>
+  </svg>
+
+  <div class="hero-banner-overlay"></div>
+
+  <div class="hero-banner-content">
+    <span class="article-cat-badge">Church</span>
+    <h1>Free Your Team From Admin.<br>Let AI Handle the Routine.</h1>
+  </div>
+</div>
+
+<!-- META BAR -->
+<div class="article-meta-bar">
+  <div class="article-meta-bar-inner">
+    <a href="/blog" class="back-link">&larr; Back to Blog</a>
+    <div class="article-meta-row">
+      <span>3 min read</span>
+      <span>3 July 2026</span>
+      <span>WiseIntegrate</span>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body" id="article-body">
+
+  <p>Every church team knows the feeling. The week fills up with tasks that are necessary but not calling-defining: formatting the bulletin, organising meeting notes, drafting the same routine emails, maintaining spreadsheets, scheduling follow-ups, and responding to questions that come in every month like clockwork. These things have to be done, and someone has to do them. But they are not why anyone answered a calling. AI handles all of them well. Given clear instructions, it produces accurate first drafts, organises incoming information, writes scheduling messages, and flags what genuinely needs a human decision. What once consumed two or three hours of a staff member's morning can now take twenty minutes of review and approval.</p>
+
+  <p>The impact becomes most obvious when you look at research-heavy preparation. A pastor preparing a sermon series once had to set aside five or six hours before writing a single word: working through commentaries, hunting for relevant passages across multiple books, and assembling illustrations that would land with a congregation. With AI, that same pastor can receive a well-organised summary of theological sources, suggested scripture references, and illustrative examples within minutes. The quality of the sermon does not change. What changes is how many pastoral visits, prayer sessions, or unhurried conversations with struggling congregation members can now fit into the same week. That is what AI integration is actually about for a ministry: not efficiency for its own sake, but time returned to the work that only a human pastor, elder, or administrator can do.</p>
+
+  <hr class="article-divider">
+
+  <div class="article-cta">
+    <h3>See where your church stands</h3>
+    <p>Our free AI Readiness Assessment takes about 15 minutes and gives you a personalised report across eight dimensions, from leadership readiness to data governance. No sales pitch, no obligation.</p>
+    <a href="/assessment" class="btn-primary">Start Your Free Assessment &rarr;</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="/images/logo.png" alt="WiseIntegrate" onerror="this.style.display='none'">
+      <p>AI should serve your mission. Not replace it.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="/church">Church Integration</a>
+      <a href="/business">Business Integration</a>
+      <a href="/assessment">Readiness Assessment</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about">About</a>
+      <a href="/#process">Our Process</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Use</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&#169; 2026 WiseIntegrate. All rights reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const _glow = document.getElementById('cursor-glow');
+const _ambient = document.getElementById('mouse-ambient');
+if (_glow && !('ontouchstart' in window) && window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', function(e) {
+    _glow.style.left = e.clientX + 'px'; _glow.style.top = e.clientY + 'px';
+    if (_ambient) { _ambient.style.left = e.clientX + 'px'; _ambient.style.top = e.clientY + 'px'; }
+  });
+  document.querySelectorAll('a, button, [role="button"]').forEach(el => {
+    el.addEventListener('mouseenter', () => _glow.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => _glow.classList.remove('hovering'));
+  });
+} else if (_glow) {
+  _glow.style.display = 'none';
+  if (_ambient) _ambient.style.display = 'none';
+}
+document.querySelector('.nav-menu-btn').addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.toggle('open');
+});
+document.querySelectorAll('.mobile-nav a').forEach(link => {
+  link.addEventListener('click', () => document.querySelector('.mobile-nav').classList.remove('open'));
+});
+const progress = document.getElementById('reading-progress');
+const articleBody = document.getElementById('article-body');
+window.addEventListener('scroll', () => {
+  const rect = articleBody.getBoundingClientRect();
+  const total = articleBody.offsetHeight - window.innerHeight;
+  const pct = Math.min(Math.max((-rect.top / total) * 100, 0), 100);
+  progress.style.width = pct + '%';
+});
+</script>
+</body>
+</html>
