@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Readiness &mdash; Leadership Discussion Summary</title>
+<style>
+  :root {
+    --navy: #1d4ed8;
+    --accent: #60a5fa;
+    --grey: #555555;
+    --lightgrey: #777777;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px 32px;
+    background: #fff;
+  }
+  .brand { text-align: center; color: var(--navy); font-weight: bold; font-size: 13px; letter-spacing: 0.5px; }
+  h1 { text-align: center; font-size: 22px; margin: 4px 0 2px; }
+  .subtitle { text-align: center; color: var(--lightgrey); font-size: 12px; font-style: italic; margin-bottom: 14px; }
+  .meta-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 10px; }
+  .meta-row b { color: #000; }
+  h2 {
+    color: var(--navy);
+    font-size: 15px;
+    border-bottom: 2px solid var(--navy);
+    padding-bottom: 4px;
+    margin: 20px 0 8px;
+  }
+  h2 { margin-top: 18px; }
+  h2 + h2 { margin-top: 6px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+  th { background: var(--navy); color: #fff; text-align: left; padding: 6px 8px; font-size: 10.5px; }
+  td { border: 1px solid #ccc; padding: 6px 8px; vertical-align: top; }
+  .dim-name { font-weight: bold; white-space: nowrap; }
+  .score-cell { text-align: center; font-weight: bold; font-size: 14px; }
+  .score-flagged { color: #d1242f; }
+  .why-text { color: var(--grey); font-style: italic; font-size: 10.5px; }
+  .flag-yes { color: #d1242f; font-weight: bold; }
+  .flag-no { color: #999; }
+  ul.findings { padding-left: 18px; margin: 0 0 10px; }
+  ul.findings li { margin-bottom: 6px; font-size: 12px; }
+  ul.prompts { padding-left: 18px; margin: 0 0 4px; }
+  ul.prompts li { margin-bottom: 5px; font-size: 12px; }
+  .next-steps td:first-child { width: 70%; }
+  .footer-note {
+    text-align: center;
+    color: var(--lightgrey);
+    font-size: 9.5px;
+    font-style: italic;
+    margin-top: 20px;
+  }
+  .toolbar {
+    text-align: center;
+    margin: 16px 0 24px;
+  }
+  .toolbar button {
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .toolbar button:hover { background: #1640b5; }
+  .chart-wrap { text-align: center; margin: 6px 0 16px; }
+  .chart-wrap svg { max-width: 320px; }
+  .chart-caption { font-size: 10px; color: var(--lightgrey); font-style: italic; }
+
+  /* Loading / error states */
+  #loading {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--lightgrey);
+    font-size: 14px;
+  }
+  #errorState {
+    display: none;
+    text-align: center;
+    padding: 80px 20px;
+  }
+  #errorState h2 {
+    color: #d1242f;
+    border-color: #d1242f;
+  }
+  #errorMsg {
+    font-size: 13px;
+    color: var(--grey);
+    margin-top: 8px;
+  }
+  #pageContent { display: none; }
+
+  @media print {
+    .toolbar { display: none; }
+    body { padding: 0; max-width: none; }
+    @page { size: A4; margin: 14mm 16mm; }
+    #loading, #errorState { display: none !important; }
+    #pageContent { display: block !important; }
+  }
+</style>
+</head>
+<body>
+
+<div id="loading">Loading report&hellip;</div>
+
+<div id="errorState">
+  <div class="brand">WISEINTEGRATE</div>
+  <h2>Report Not Found</h2>
+  <div id="errorMsg"></div>
+</div>
+
+<div id="pageContent">
+  <div class="toolbar">
+    <button onclick="window.print()">Download as PDF</button>
+  </div>
+
+  <div class="brand">WISEINTEGRATE</div>
+  <h1>AI Readiness Assessment &mdash; Leadership Discussion Summary</h1>
+  <div class="subtitle">45 questions&nbsp;&nbsp;|&nbsp;&nbsp;8 dimensions&nbsp;&nbsp;|&nbsp;&nbsp;For discussion with leadership</div>
+
+  <div class="meta-row">
+    <div><b>Organisation:</b> <span id="orgName">&mdash;</span></div>
+    <div><b>Assessment date:</b> <span id="assessDate">&mdash;</span></div>
+  </div>
+
+  <h2>Readiness Scorecard</h2>
+  <div class="chart-wrap">
+    <svg id="radarChart" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div class="chart-caption">Each spoke is one dimension, scored 1 (centre) to 5 (edge). Red points mark the lowest score(s), the priority focus; all tied dimensions are shown.</div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Dimension</th>
+        <th style="text-align:center;">Score (1&ndash;5)</th>
+        <th>What This Tells Us</th>
+        <th style="text-align:center;">Discuss?</th>
+      </tr>
+    </thead>
+    <tbody id="scoreTableBody"></tbody>
+  </table>
+
+  <h2>Key Findings <span style="color:var(--lightgrey); font-weight:normal; font-size:11px;">(auto-generated from the assessment)</span></h2>
+  <ul class="findings" id="findingsList"></ul>
+
+  <h2>Discussion Prompts</h2>
+  <ul class="prompts">
+    <li>Where are your people spending time on things that keep them from people?</li>
+    <li>If you had an extra 10 hours a week in your team, what would you do with them?</li>
+    <li>Which of these 8 dimensions surprises you? Which doesn't?</li>
+    <li>Looking at the lowest-scoring dimension above, what's driving that score?</li>
+    <li>Of the 8 dimensions, which one, if it stayed weak, would stop everything else from working?</li>
+  </ul>
+
+  <h2>Agreed Next Steps</h2>
+  <table class="next-steps">
+    <thead><tr><th>Action</th><th>Owner / By When</th></tr></thead>
+    <tbody>
+      <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer-note">
+    Full detailed AI Readiness Report available in the client dashboard as a PDF for reference after this meeting.
+    This summary is generated automatically from the assessment responses.
+  </div>
+</div>
+
+<script>
+const DIMENSION_LABELS = {
+  leadership_strategy:   { title: "1. Leadership & Strategy",           why: "Does leadership have a clear AI vision and mandate? Is there executive sponsorship, or is this one person's initiative?" },
+  data_systems:          { title: "2. Data & Systems",                  why: "What software and data infrastructure already exists (ChMS, accounting, CRM)? Is data clean and accessible?" },
+  ai_literacy_staff:     { title: "3. AI Literacy & Staff Readiness",   why: "How comfortable and skilled are staff and volunteers with AI tools today? Fear, curiosity, or neither?" },
+  governance_policy:     { title: "4. Governance & Policy",             why: "Are there AI guidelines, data privacy rules, or an oversight structure in place already?" },
+  current_ai_usage:      { title: "5. Current AI Usage",                why: "What AI tools are already being used, formally or informally, across the organisation right now?" },
+  department_readiness:  { title: "6. Department Readiness",            why: "Which departments or ministries are ready to adopt AI first, and which are not ready at all?" },
+  security_privacy:      { title: "7. Security & Privacy",              why: "How well protected is sensitive data, financial, personal, pastoral, or client, from AI-related risk?" },
+  budget_resources:      { title: "8. Budget & Resources",              why: "What budget and resourcing exists to support tools, training, and ongoing implementation?" },
+};
+
+const DATA_URL = 'https://ppgecvmyuyuntwnqwcru.supabase.co/functions/v1/report-summary';
+
+function calculatePriorityDimensions(scores) {
+  const entries = Object.keys(DIMENSION_LABELS).map((key) => ({ key, score: (scores[key] !== undefined ? scores[key] : 5) }));
+  const minScore = Math.min.apply(null, entries.map((e) => e.score));
+  return entries.filter((e) => e.score === minScore).map((e) => e.key);
+}
+
+function calculateDiscussFlags(scores) {
+  const flags = {};
+  Object.keys(DIMENSION_LABELS).forEach((key) => {
+    flags[key] = (scores[key] !== undefined ? scores[key] : 5) <= 2;
+  });
+  return flags;
+}
+
+function drawRadarChart(scores, priorityKeys) {
+  const keys = Object.keys(DIMENSION_LABELS);
+  const n = keys.length;
+  const cx = 160, cy = 155, maxR = 108, levels = 5;
+  const svg = document.getElementById("radarChart");
+  const angleFor = (i) => (Math.PI * 2 * i) / n - Math.PI / 2;
+  const pointAt = (i, value) => {
+    const r = (value / levels) * maxR;
+    const a = angleFor(i);
+    return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  };
+
+  let svgParts = "";
+
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    let ring = [];
+    for (let i = 0; i < n; i++) ring.push(pointAt(i, lvl).join(","));
+    svgParts += '<polygon points="' + ring.join(" ") + '" fill="none" stroke="#e0e0e0" stroke-width="1"/>';
+  }
+  const shortLabels = ["Leadership", "Data/Systems", "AI Literacy", "Governance", "AI Usage", "Dept. Readiness", "Security", "Budget"];
+  for (let i = 0; i < n; i++) {
+    const [x, y] = pointAt(i, levels);
+    svgParts += '<line x1="' + cx + '" y1="' + cy + '" x2="' + x + '" y2="' + y + '" stroke="#ddd" stroke-width="1"/>';
+    const [lx, ly] = pointAt(i, levels + 0.85);
+    svgParts += '<text x="' + lx + '" y="' + ly + '" font-size="8.5" fill="#555" text-anchor="middle" font-family="Arial">' + shortLabels[i] + '</text>';
+  }
+  let dataPts = [];
+  keys.forEach((key, i) => {
+    const val = scores[key] !== undefined ? scores[key] : 0;
+    dataPts.push(pointAt(i, val));
+  });
+  svgParts += '<polygon points="' + dataPts.map((p) => p.join(",")).join(" ") + '" fill="#1d4ed8" fill-opacity="0.18" stroke="#1d4ed8" stroke-width="2"/>';
+  keys.forEach((key, i) => {
+    const [x, y] = dataPts[i];
+    const isPriority = priorityKeys.indexOf(key) !== -1;
+    svgParts += '<circle cx="' + x + '" cy="' + y + '" r="' + (isPriority ? 5 : 3) + '" fill="' + (isPriority ? "#d1242f" : "#1d4ed8") + '" />';
+  });
+
+  svg.innerHTML = svgParts;
+}
+
+function renderReport(data) {
+  document.getElementById("orgName").textContent = data.organisation_name || "—";
+  document.getElementById("assessDate").textContent = data.assessment_date || "—";
+
+  var scores = data.scores || {};
+  var priorityKeys = calculatePriorityDimensions(scores);
+  var flags = calculateDiscussFlags(scores);
+
+  drawRadarChart(scores, priorityKeys);
+
+  const tbody = document.getElementById("scoreTableBody");
+  tbody.innerHTML = "";
+  Object.keys(DIMENSION_LABELS).forEach((key) => {
+    const label = DIMENSION_LABELS[key];
+    const score = (scores[key] !== undefined) ? scores[key] : "—";
+    const flagged = !!flags[key];
+    const row = document.createElement("tr");
+    row.innerHTML =
+      '<td class="dim-name">' + label.title + '</td>' +
+      '<td class="score-cell ' + (flagged ? "score-flagged" : "") + '">' + score + '</td>' +
+      '<td class="why-text">' + label.why + '</td>' +
+      '<td style="text-align:center;" class="' + (flagged ? "flag-yes" : "flag-no") + '">' + (flagged ? "YES" : "—") + '</td>';
+    tbody.appendChild(row);
+  });
+
+  const findingsList = document.getElementById("findingsList");
+  findingsList.innerHTML = "";
+  (data.key_findings || []).forEach((f) => {
+    const li = document.createElement("li");
+    li.textContent = f;
+    findingsList.appendChild(li);
+  });
+}
+
+function showError(msg) {
+  document.getElementById("loading").style.display = "none";
+  document.getElementById("errorMsg").textContent = msg;
+  document.getElementById("errorState").style.display = "block";
+}
+
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get("id");
+
+  if (!id) {
+    showError("No assessment ID provided. This page must be opened from the WiseIntegrate dashboard.");
+    return;
+  }
+
+  fetch(DATA_URL + "?id=" + encodeURIComponent(id))
+    .then(function (r) {
+      if (!r.ok) {
+        return r.json().then(function (d) {
+          throw new Error(d.error || "Failed to load report (HTTP " + r.status + ").");
+        }).catch(function () {
+          throw new Error("Failed to load report (HTTP " + r.status + ").");
+        });
+      }
+      return r.json();
+    })
+    .then(function (data) {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("pageContent").style.display = "block";
+      renderReport(data);
+    })
+    .catch(function (err) {
+      showError(err.message || "Failed to load report data. Please try again.");
+    });
+})();
+</script>
+
+</body>
+</html>

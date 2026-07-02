@@ -65,6 +65,14 @@
       "dest": "/about/index.html"
     },
     {
+      "src": "/report-summary",
+      "dest": "/report-summary/index.html"
+    },
+    {
+      "src": "/report-guide",
+      "dest": "/report-guide/index.html"
+    },
+    {
       "handle": "filesystem"
     },
     {
