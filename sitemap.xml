@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Core pages -->
   <url>
     <loc>https://wiseintegrate.com/</loc>
     <changefreq>weekly</changefreq>
@@ -16,6 +18,11 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://wiseintegrate.com/assessment</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://wiseintegrate.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -23,17 +30,12 @@
   <url>
     <loc>https://wiseintegrate.com/faq</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://wiseintegrate.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://wiseintegrate.com/assessment-intro</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wiseintegrate.com/privacy</loc>
@@ -45,4 +47,42 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
+  <!-- Blog -->
+  <url>
+    <loc>https://wiseintegrate.com/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wiseintegrate.com/blog/how-ai-powers-small-business</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wiseintegrate.com/blog/three-disadvantages-of-ai</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wiseintegrate.com/blog/making-ai-work-for-your-organisation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wiseintegrate.com/blog/what-is-artificial-intelligence</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wiseintegrate.com/blog/ai-for-admin-free-your-team</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wiseintegrate.com/blog/how-to-introduce-ai-to-church-leadership</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
