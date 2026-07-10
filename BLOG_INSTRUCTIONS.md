@@ -412,7 +412,7 @@ The hero banner is a 1400×480 SVG. Rules:
 
 ## Part 5 — Add a card to `blog/index.html`
 
-Open `blog/index.html`. Find the `<div class="articles-grid">` section. Add a new `<a>` block **before the closing `</div>`** of the grid. Match this exact format:
+Open `blog/index.html`. Find the `<div class="articles-grid">` section. Add the new `<a>` block **immediately after the opening `<div class="articles-grid">` tag** — newest post goes first, at the top. Match this exact format:
 
 ```html
       <a href="/blog/{{SLUG}}" class="article-card" data-category="{{church|business}}">
