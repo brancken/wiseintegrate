@@ -1,0 +1,10 @@
+c/
+*.zip
+node_modules/
+.next/
+.env*
+!.env.example
+.vercel
+tsconfig.tsbuildinfo
+next-env.d.ts
+legacy/c/

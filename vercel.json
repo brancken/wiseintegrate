@@ -41,13 +41,13 @@
       "continue": true
     },
     {
-  "src": "/assessment",
-  "dest": "/assessment-intro.html"
-},
-{
-  "src": "/assessment/start",
-  "dest": "/assessment.html"
-},
+      "src": "/assessment",
+      "dest": "/assessment-intro.html"
+    },
+    {
+      "src": "/assessment/start",
+      "dest": "/assessment.html"
+    },
     {
       "src": "/dashboard",
       "dest": "/dashboard.html"
@@ -97,6 +97,22 @@
       "dest": "/report-guide/index.html"
     },
     {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/courses/how-to-make-a-website/?",
+      "dest": "/courses/how-to-make-a-website/index.html"
+    },
+    {
+      "src": "/c/([A-Za-z0-9]{16})/?",
+      "dest": "/c/$1/index.html",
+      "headers": {
+        "X-Robots-Tag": "noindex, nofollow, noarchive",
+        "Cache-Control": "no-store"
+      }
+    },
+    {
       "handle": "filesystem"
     },
     {
@@ -108,11 +124,26 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options",   "value": "nosniff" },
-        { "key": "X-Frame-Options",           "value": "DENY" },
-        { "key": "X-XSS-Protection",          "value": "1; mode=block" },
-        { "key": "Referrer-Policy",           "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy",        "value": "camera=(), microphone=(self), geolocation=()" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(self), geolocation=()"
+        }
       ]
     }
   ]
