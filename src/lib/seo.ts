@@ -24,7 +24,7 @@ export function orgJsonLd() {
         areaServed: "Worldwide",
         founder: { "@id": abs("/about#founder") },
         knowsAbout: ["Artificial intelligence", "AI integration", "AI governance", "AI training", "Church administration", "Website building with Claude"],
-        sameAs: [site.facebook],
+        sameAs: site.socials.map((s) => s.url),
         contactPoint: [{ "@type": "ContactPoint", contactType: "customer support", email: site.supportEmail, availableLanguage: ["en"] }],
       },
       {
@@ -32,6 +32,7 @@ export function orgJsonLd() {
         "@id": abs("/about#founder"),
         name: site.founder.name,
         jobTitle: "Founder",
+        description: "Senior pastor with 33 years in full-time ministry, church planter, and author of the How to Make a Website with Claude course.",
         image: abs(site.founder.photo),
         worksFor: { "@id": abs("/#org") },
       },

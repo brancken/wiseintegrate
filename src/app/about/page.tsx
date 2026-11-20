@@ -4,7 +4,6 @@ import { PageHero, Section, CtaBand } from "@/components/Blocks";
 import { Icon } from "@/components/Icon";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/seo";
-import { preload } from "react-dom";
 
 export const metadata: Metadata = {
   title: "About WiseIntegrate",
@@ -20,7 +19,6 @@ const stats = [
 ];
 
 export default function AboutPage() {
-  preload("/images/abri-brancken-320.webp", { as: "image", imageSrcSet: "/images/abri-brancken-320.webp 320w, /images/abri-brancken-400.webp 400w", imageSizes: "(min-width:768px) 280px, 45vw", fetchPriority: "high" });
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "About", href: "/about" }])} />
@@ -33,16 +31,17 @@ export default function AboutPage() {
 
       <Section id="story" eyebrow="The founder" title={<>Thirty years of leading. Thirty countries. <em>One discovery.</em></>}>
         <div className="grid gap-10 md:grid-cols-[280px_1fr] md:items-start">
-          <figure className="mx-auto w-[70vw] max-w-[280px] md:mx-0 md:w-auto" data-reveal>
+          <figure className="order-last mx-auto w-[70vw] max-w-[280px] md:order-none md:mx-0 md:w-auto" data-reveal>
             <img
               src="/images/abri-brancken-320.webp"
-              srcSet="/images/abri-brancken-320.webp 320w, /images/abri-brancken-400.webp 400w"
-              sizes="(min-width:768px) 280px, 45vw"
+              srcSet="/images/abri-brancken-320.webp 320w, /images/abri-brancken-400.webp 400w, /images/abri-brancken.webp 640w"
+              sizes="(min-width:768px) 280px, 70vw"
               width={640}
               height={800}
               alt="Dr. Abri Brancken"
               className="h-auto w-full rounded-3xl border border-line"
-              fetchPriority="high"
+              loading="lazy"
+              decoding="async"
             />
           </figure>
           <div className="grid gap-5 text-lg text-muted" data-reveal>

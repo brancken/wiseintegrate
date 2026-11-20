@@ -2,7 +2,7 @@
 export const site = {
   name: "WiseIntegrate",
   appName: "WiseIntegrate",
-  url: "https://wiseintegrate.com",
+  url: "https://www.wiseintegrate.com", // the live address (wiseintegrate.com redirects here)
   locale: "en_NZ",
   tagline: "AI should serve your mission. Not replace it.",
   description:
@@ -11,9 +11,16 @@ export const site = {
   supportEmail: "office@wiseintegrate.com", // course buyers and Stripe receipts
   location: "Auckland, New Zealand",
   facebook: "https://www.facebook.com/wiseintegrate",
+  // Add each profile here once it exists; it then appears in the footer and in the data for Google and AI assistants.
+  socials: [
+    { name: "Facebook", url: "https://www.facebook.com/wiseintegrate" },
+    // { name: "LinkedIn", url: "https://www.linkedin.com/company/wiseintegrate" },
+    // { name: "YouTube", url: "https://www.youtube.com/@wiseintegrate" },
+    // { name: "Instagram", url: "https://www.instagram.com/wiseintegrate" },
+  ] as { name: string; url: string }[],
   founder: {
     name: "Dr. Abri Brancken",
-    photo: "/images/abri-brancken.jpg",
+    photo: "/images/abri-brancken.webp",
   },
   keywords: [
     "AI integration",

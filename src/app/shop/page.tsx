@@ -20,7 +20,7 @@ export default function Shop() {
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Shop", href: "/shop" }])} />
       <PageHero eyebrow="Shop" title={<>Digital products that <em>do the heavy lifting.</em></>} intro="Courses and Claude tools for churches, businesses, organisations and individuals. Buy once, download, and use them at your own pace." />
-      <Section eyebrow="Available now" title="Courses">
+      <Section eyebrow="Available now" title="Courses" intro="Our first course takes you step by step through building your own professional website, app and church office, with Claude doing most of the work. Each course can be bought on its own, or all three together in the complete package.">
         <div className="grid gap-6 md:grid-cols-2">
           {available.map((p, i) => <ProductCard key={p.id} p={p} featured priority={i === 0} />)}
         </div>

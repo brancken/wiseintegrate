@@ -2,11 +2,28 @@ import type { MetadataRoute } from "next";
 import { site } from "@/config/site";
 import { getPosts } from "@/lib/blog";
 
-const pages = ["", "/shop", "/shop/how-to-make-a-website", "/churches", "/business", "/services", "/assessment", "/about", "/blog", "/faq", "/contact", "/app", "/privacy", "/terms"];
+// lastModified = the date each page last really changed (Bing and Google use it; they ignore priority and changefreq).
+// When you change a page's content, update its date here.
+const pages: Record<string, string> = {
+  "": "2026-11-20",
+  "/shop": "2026-11-20",
+  "/shop/how-to-make-a-website": "2026-11-20",
+  "/churches": "2026-11-20",
+  "/business": "2026-11-20",
+  "/services": "2026-11-20",
+  "/assessment": "2026-11-20",
+  "/about": "2026-11-20",
+  "/blog": "2026-11-20",
+  "/faq": "2026-11-20",
+  "/contact": "2026-11-20",
+  "/app": "2026-11-20",
+  "/privacy": "2026-11-20",
+  "/terms": "2026-06-30",
+};
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    ...pages.map((p) => ({ url: `${site.url}${p}`, changeFrequency: "monthly" as const, priority: p === "" ? 1 : p.startsWith("/shop") ? 0.9 : 0.7 })),
-    ...getPosts().map((p) => ({ url: `${site.url}/blog/${p.slug}`, lastModified: p.date, changeFrequency: "yearly" as const, priority: 0.6 })),
+    ...Object.entries(pages).map(([p, d]) => ({ url: `${site.url}${p}`, lastModified: d })),
+    ...getPosts().map((p) => ({ url: `${site.url}/blog/${p.slug}`, lastModified: p.date })),
   ];
 }

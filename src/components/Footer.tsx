@@ -30,7 +30,9 @@ export function Footer() {
           <p>
             <a href={`mailto:${site.email}`} className="hover:text-ink">{site.email}</a>
             <span aria-hidden="true"> · </span>
-            <a href={site.facebook} target="_blank" rel="noopener" className="hover:text-ink">Facebook</a>
+            {site.socials.map((s, i) => (
+              <span key={s.url}>{i > 0 && <span aria-hidden="true"> · </span>}<a href={s.url} target="_blank" rel="noopener me" className="hover:text-ink">{s.name}</a></span>
+            ))}
           </p>
         </div>
       </div>

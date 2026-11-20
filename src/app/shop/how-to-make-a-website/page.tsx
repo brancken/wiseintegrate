@@ -5,11 +5,11 @@ import { site } from "@/config/site";
 import { Section, CtaBand, Checks } from "@/components/Blocks";
 import { Icon } from "@/components/Icon";
 import { JsonLd } from "@/components/JsonLd";
-import { abs, breadcrumbJsonLd } from "@/lib/seo";
+import { abs, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "How to Make a Website with Claude",
-  description: "No more expensive web developers. Build your own professional website with Claude, step by step. For churches, and easy to change for businesses and individuals.",
+  title: "Church Website, App and Church Management System Course",
+  description: "Build your own church website, church app and church management system with no monthly fees, step by step with Claude AI. No web developer needed.",
   alternates: { canonical: "/shop/how-to-make-a-website" },
   openGraph: { images: ["/images/courses/package.webp"] },
 };
@@ -17,6 +17,30 @@ export const metadata: Metadata = {
 // Buy buttons: live Stripe links once STRIPE_LIVE is true. Until then they show only on preview copies
 // (Stripe test mode, no real money), and the live site says sales open soon.
 const showBuy = STRIPE_LIVE || process.env.VERCEL_ENV !== "production";
+
+// Google's "Course list" result: each course with a name, a short description and the provider.
+function courseListJsonLd() {
+  const descriptions: Record<string, string> = {
+    "htmaw-course-1": "Build a church management system on Google: forms, people, follow-ups and group emails.",
+    "htmaw-course-2": "Build a fast church website that also works as an app, with Claude.",
+    "htmaw-course-3": "Get found on Google, AI search and maps; add a podcast and notifications.",
+  };
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: courseProducts.filter((c) => descriptions[c.id]).map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Course",
+        url: abs(`/shop/how-to-make-a-website#${c.id}`),
+        name: c.name.replace(/^Course \d: /, ""),
+        description: descriptions[c.id],
+        provider: { "@type": "Organization", name: site.name, sameAs: site.url },
+      },
+    })),
+  };
+}
 
 function courseJsonLd() {
   return {
@@ -33,6 +57,18 @@ function courseJsonLd() {
     hasCourseInstance: { "@type": "CourseInstance", courseMode: "Online" },
   };
 }
+
+// Questions buyers ask (answers use only facts stated elsewhere on this page and in the course Introduction).
+const faqs = [
+  { q: "Do I need to know how to code?", a: "No. Claude does most of the work and checks with you at every step. No degree or web design diploma is needed, and you edit your finished website yourself in your browser, with no code." },
+  { q: "Is there a monthly fee for the church management system?", a: "Course 1 builds your own church management system on Google: forms, people, follow-ups, group emails and a team dashboard. On a free Gmail account it has no monthly fees." },
+  { q: "What does it cost to run the website?", a: "Mainly your web address, usually about 10 to 15 US dollars a year. We recommend one month of a paid Claude plan while you build. At the time we made this course, hosting was free for a church or personal website; a business needs the host's paid plan." },
+  { q: "How long does it take?", a: "All three courses take about three to four days of work, spread over a week or two. Your website can be online within the first day or two." },
+  { q: "Is it only for churches?", a: "The course focuses on churches, and it can easily be changed for businesses, organisations and individuals." },
+  { q: "Will my website also work as an app?", a: "Yes. Your website is also your app: people save it to their phone's home screen. There is no need to list an app on Google Play or the Apple App Store." },
+  { q: "What do I need?", a: "A Windows 10 or later PC, or a Mac with macOS 13 or later (8 GB memory, 16 recommended), steady broadband internet and a smartphone. The course works on Claude's free plan." },
+  { q: "What if I get stuck?", a: "Most questions are answered by Claude: take a screenshot, paste it into Claude and say where you are. If you are still stuck, email office@wiseintegrate.com. Where it is really needed, we arrange a short Zoom call." },
+];
 
 const youGet = {
   website: [
@@ -52,7 +88,7 @@ const youGet = {
 export default function CoursePage() {
   return (
     <>
-      <JsonLd data={[courseJsonLd(), breadcrumbJsonLd([{ name: "Shop", href: "/shop" }, { name: "How to Make a Website", href: "/shop/how-to-make-a-website" }])]} />
+      <JsonLd data={[courseJsonLd(), courseListJsonLd(), breadcrumbJsonLd([{ name: "Shop", href: "/shop" }, { name: "How to Make a Website", href: "/shop/how-to-make-a-website" }])]} />
 
       {/* Opening */}
       <section className="hero-glow border-b border-line">
@@ -125,7 +161,7 @@ export default function CoursePage() {
         )}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {courseProducts.map((c) => (
-            <div key={c.id} className={`card flex flex-col overflow-hidden ${c.best ? "border-line-strong" : ""}`} data-reveal>
+            <div key={c.id} id={c.id} className={`card flex scroll-mt-24 flex-col overflow-hidden ${c.best ? "border-line-strong" : ""}`} data-reveal>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={c.imageSmall} alt="" width={640} height={360} loading="lazy" decoding="async" className="aspect-video w-full object-cover" />
               <div className="flex flex-1 flex-col p-5">
@@ -170,6 +206,22 @@ export default function CoursePage() {
             <h2 className="text-3xl font-extrabold">Dr. Abri Brancken</h2>
             <p className="mt-3 text-lg text-muted">Dr. Abri Brancken is a senior pastor with 33 years in full-time ministry. He has planted several churches, served in churches of up to 17,000 members and ministered in more than 30 countries. He knows where churches struggle, and put this course together as a well-thought-through tool for any church, especially church plants, start-ups and outreaches.</p>
           </div>
+        </div>
+      </Section>
+
+      {/* Questions */}
+      <Section id="faq" alt eyebrow="Questions" title={<>Questions people <em>ask us.</em></>}>
+        <JsonLd data={faqJsonLd(faqs)} />
+        <div className="grid max-w-3xl gap-3">
+          {faqs.map((f) => (
+            <details key={f.q} className="card group p-5 [&_summary::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold">
+                <h3 className="text-lg">{f.q}</h3>
+                <Icon name="chevron" className="h-5 w-5 shrink-0 text-accent transition-transform group-open:rotate-180" />
+              </summary>
+              <p className="mt-3 text-muted">{f.a}</p>
+            </details>
+          ))}
         </div>
       </Section>
 

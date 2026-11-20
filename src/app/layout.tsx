@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#08080f",
+  themeColor: [{ media: "(prefers-color-scheme: light)", color: "#f7f9fd" }, { media: "(prefers-color-scheme: dark)", color: "#0b1220" }],
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -46,7 +46,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-NZ" className={`${body.variable} ${heading.variable} no-js`} suppressHydrationWarning data-theme="dark">
+    <html lang="en-NZ" className={`${body.variable} ${heading.variable} no-js`} suppressHydrationWarning data-theme="light">
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd()).replace(/</g, "\\u003c") }} />

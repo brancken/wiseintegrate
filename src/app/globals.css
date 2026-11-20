@@ -6,27 +6,9 @@
    light mode is offered with the sun/moon button.
    Text pairings checked for WCAG AA.
    ========================================================= */
+/* Light is the default (research: easier to read for most people, and most devices are set to light).
+   Visitors whose device is set to dark get the dark navy; the sun/moon button lets anyone switch. */
 :root,
-[data-theme="dark"] {
-  --bg: #08080f;
-  --bg-alt: #0c0d1c;
-  --panel: #10122a;
-  --panel-strong: #172048;
-  --text: #eff6ff; /* 18:1 on bg */
-  --text-muted: #aab8d2; /* 9.5:1 on bg, 8.4:1 on panel */
-  --accent: #60a5fa; /* 7.6:1 on bg: links */
-  --accent-strong: #93c5fd;
-  --btn: #2563eb; /* white text 5.2:1 */
-  --btn-strong: #1d4ed8;
-  --on-btn: #ffffff;
-  --border: rgb(96 165 250 / 0.2);
-  --border-strong: rgb(96 165 250 / 0.45);
-  --ring: #93c5fd;
-  --glow: radial-gradient(ellipse 80% 60% at 50% 0%, rgb(29 78 216 / 0.28), transparent 70%);
-  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -14px rgb(29 78 216 / 0.45);
-  color-scheme: dark;
-}
-
 [data-theme="light"] {
   --bg: #f7f9fd;
   --bg-alt: #eef3fb;
@@ -45,6 +27,26 @@
   --glow: radial-gradient(ellipse 80% 60% at 50% 0%, rgb(96 165 250 / 0.22), transparent 70%);
   --shadow-soft: 0 1px 2px rgb(11 21 48 / 0.06), 0 12px 30px -14px rgb(29 78 216 / 0.3);
   color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #0b1220;
+  --bg-alt: #0f172a;
+  --panel: #131d33;
+  --panel-strong: #1b2a4d;
+  --text: #e8eef8; /* 16:1 on bg; off-white, softer than pure white (less glare) */
+  --text-muted: #b4c0d6; /* 10:1 on bg, 9:1 on panel */
+  --accent: #60a5fa; /* 7.6:1 on bg: links */
+  --accent-strong: #93c5fd;
+  --btn: #2563eb; /* white text 5.2:1 */
+  --btn-strong: #1d4ed8;
+  --on-btn: #ffffff;
+  --border: rgb(96 165 250 / 0.2);
+  --border-strong: rgb(96 165 250 / 0.45);
+  --ring: #93c5fd;
+  --glow: radial-gradient(ellipse 80% 60% at 50% 0%, rgb(29 78 216 / 0.28), transparent 70%);
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -14px rgb(29 78 216 / 0.45);
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -116,7 +118,7 @@ h1, h2, h3, h4, .font-display {
     background: linear-gradient(90deg, #60a5fa, #bfdbfe 50%, #3b82f6);
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  [data-theme="light"] .grad { background: linear-gradient(90deg, #1d4ed8, #2563eb 50%, #1e3a8a); -webkit-background-clip: text; background-clip: text; }
+  [data-theme="light"] .grad, :root:not([data-theme="dark"]) .grad { background: linear-gradient(90deg, #1d4ed8, #2563eb 50%, #1e3a8a); -webkit-background-clip: text; background-clip: text; }
   .hero-glow { background-image: var(--glow); }
 
   /* Page text (blog posts, legal pages) */
@@ -167,10 +169,6 @@ h1, h2, h3, h4, .font-display {
 }
 
 /* Logo swaps with the theme */
-.logo-dark { display: block; }
-.logo-light { display: none; }
-[data-theme="light"] .logo-dark { display: none; }
-[data-theme="light"] .logo-light { display: block; }
 
 @media print {
   header, footer, nav[aria-label="Primary (mobile)"], .no-print { display: none !important; }
