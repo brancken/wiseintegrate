@@ -14,7 +14,7 @@ After (Netlify):
 Netlify then issues the free HTTPS certificate (a few minutes to an hour).
 
 ## Order on switch day
-1. Supabase: run `supabase/migrations/20261120_secure_functions.sql`, then the private file `WiseIntegrate-Shop\PRIVATE - dashboard password setup.sql`.
+1. DONE 20 Nov 2026: secure functions applied and dashboard password set (tested on Netlify: sign-in works, 7 assessments listed).
 2. Cloudflare: change the two records above.
 3. Check https://www.wiseintegrate.com pages, the assessment (a test submission) and the dashboard sign-in.
 4. Supabase: run `supabase/migrations/20261120_close_anon_access.sql` (the old site no longer needs the open table).
