@@ -11,3 +11,8 @@ legacy/c/
 
 # Local Netlify folder
 .netlify
+
+# Cloudflare build folders
+.open-next
+.wrangler
+.dev.vars
