@@ -34,6 +34,8 @@ const securityHeaders = [
 
 // Old addresses that moved (every old link keeps working).
 const redirects = [
+  // wiseintegrate.com without www goes to www (as on Netlify), so Google sees one address.
+  { source: "/:path*", has: [{ type: "host" as const, value: "wiseintegrate.com" }], destination: "https://www.wiseintegrate.com/:path*", permanent: true },
   { source: "/church", destination: "/churches", permanent: true },
   { source: "/courses/how-to-make-a-website", destination: "/shop/how-to-make-a-website", permanent: true },
   { source: "/courses", destination: "/shop", permanent: true },
