@@ -3,8 +3,11 @@ import Link from "next/link";
 import { site } from "@/config/site";
 import { LegalDraftBar } from "@/components/LegalDraftBar";
 
-// Set to true once Dr. Brancken has approved the wording (removes the draft notice).
-const approved = false;
+import { notFound } from "next/navigation";
+import { legalApproved } from "@/config/legal";
+import { isProduction } from "@/lib/seo";
+
+const approved = legalApproved.termsOfSale;
 
 export const metadata: Metadata = {
   title: "Terms of Sale",
@@ -13,6 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default function TermsOfSale() {
+  if (!approved && isProduction) notFound();
   return (
     <div className="narrow py-14">
       {!approved && <LegalDraftBar />}

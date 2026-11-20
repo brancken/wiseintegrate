@@ -89,8 +89,6 @@ export const footerLinks: { title: string; links: NavItem[] }[] = [
     links: [
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms of Use", href: "/terms" },
-      { label: "Terms of Sale", href: "/terms-of-sale" },
-      { label: "Refund Policy", href: "/refund-policy" },
     ],
   },
 ];

@@ -21,8 +21,6 @@ const pages: Record<string, string> = {
   "/app": "2026-11-20",
   "/privacy": "2026-11-20",
   "/terms": "2026-06-30",
-  "/terms-of-sale": "2026-11-20",
-  "/refund-policy": "2026-11-20",
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
