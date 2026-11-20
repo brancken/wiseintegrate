@@ -28,16 +28,16 @@ export function ProductCard({ p, featured = false, priority = false }: { p: Prod
       <div className={`flex flex-1 flex-col p-6 ${featured ? "md:justify-center md:p-8" : ""}`}>
         <div className="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-[0.12em]">
           {p.badge && <span className="rounded-full bg-[var(--btn)] px-2.5 py-1 text-white">{p.badge}</span>}
-          {soon && <span className="rounded-full border border-line-strong px-2.5 py-1 text-muted">Coming soon</span>}
+          {soon && <span className="rounded-full bg-[#f97316] px-2.5 py-1 text-[#1a0b00]">Coming soon</span>}
           <span className="text-muted">{p.audience}</span>
         </div>
         <h3 className={`mt-3 font-bold ${featured ? "text-2xl sm:text-3xl" : "text-xl"}`}>{p.name}</h3>
         <p className="mt-2 flex-1 text-muted">{p.short}</p>
         <div className="mt-5 flex items-center justify-between gap-3">
           <span className="font-display text-lg font-extrabold">{p.price}</span>
-          {!soon && (
+          {(!soon || !p.href.includes("#")) && (
             <span className="inline-flex items-center gap-1.5 font-semibold text-accent">
-              See the course <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              {soon ? "See what is inside" : "See the course"} <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
           )}
         </div>

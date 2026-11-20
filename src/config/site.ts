@@ -63,6 +63,7 @@ export const footerLinks: { title: string; links: NavItem[] }[] = [
     links: [
       { label: "Shop", href: "/shop" },
       { label: "How to Make a Website", href: "/shop/how-to-make-a-website" },
+      { label: "Free church management system", href: "/church-management-system" },
     ],
   },
   {
@@ -88,6 +89,8 @@ export const footerLinks: { title: string; links: NavItem[] }[] = [
     links: [
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms of Use", href: "/terms" },
+      { label: "Terms of Sale", href: "/terms-of-sale" },
+      { label: "Refund Policy", href: "/refund-policy" },
     ],
   },
 ];

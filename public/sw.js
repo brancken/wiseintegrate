@@ -1,8 +1,8 @@
 /* WiseIntegrate service worker: the app opens fast and works offline for public pages.
    It never saves anything private: no /api, no account, course, dashboard or tool pages. */
-const VERSION = "wi-v1";
+const VERSION = "wi-v2";
 const PRECACHE = ["/", "/shop", "/churches", "/business", "/services", "/contact", "/offline", "/brand/logo.webp", "/icons/icon-192.png"];
-const PRIVATE = /^\/(api|account|learn|login|admin|dashboard|tools|report-summary|report-guide|assessment)(\/|$)/;
+const PRIVATE = /^\/(api|account|learn|login|admin|dashboard|tools|report-summary|report-guide|assessment|purchase)(\/|$)/;
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(PRECACHE)).then(() => self.skipWaiting()));

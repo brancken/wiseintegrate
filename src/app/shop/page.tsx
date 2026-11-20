@@ -15,7 +15,8 @@ export const metadata: Metadata = {
 export default function Shop() {
   preload("/images/courses/package-640.webp", { as: "image", imageSrcSet: "/images/courses/package-640.webp 640w, /images/courses/package-800.webp 800w, /images/courses/package.webp 1280w", imageSizes: "(min-width: 768px) 50vw, 100vw", fetchPriority: "high" });
   const available = products.filter((p) => p.status === "available");
-  const soon = products.filter((p) => p.status === "soon");
+  const resources = products.filter((p) => p.id === "church-policy-pack");
+  const soon = products.filter((p) => p.status === "soon" && p.id !== "church-policy-pack");
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Shop", href: "/shop" }])} />
@@ -25,7 +26,12 @@ export default function Shop() {
           {available.map((p, i) => <ProductCard key={p.id} p={p} featured priority={i === 0} />)}
         </div>
       </Section>
-      <Section id="coming-soon" alt eyebrow="Coming soon" title={<>Claude tools <em>in the making.</em></>} intro="Each one is a ready-made skill you add to Claude, with a one-page guide. They are being tested now and will appear here when they are ready.">
+      <Section id="church-resources" alt eyebrow="Church resources" title={<>Ready-made policies <em>for your church.</em></>} intro="Coming soon: a full pack of church policies you can adapt to your own church, from child safety to AI use.">
+        <div className="grid gap-6 md:grid-cols-2">
+          {resources.map((p) => <ProductCard key={p.id} p={p} featured />)}
+        </div>
+      </Section>
+      <Section id="coming-soon" eyebrow="Coming soon" title={<>Claude tools <em>in the making.</em></>} intro="Each one is a ready-made skill you add to Claude, with a one-page guide. They are being tested now and will appear here when they are ready.">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {soon.map((p) => <ProductCard key={p.id} p={p} />)}
         </div>

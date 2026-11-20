@@ -8,6 +8,8 @@ const pages: Record<string, string> = {
   "": "2026-11-20",
   "/shop": "2026-11-20",
   "/shop/how-to-make-a-website": "2026-11-20",
+  "/church-management-system": "2026-11-20",
+  "/shop/church-policy-pack": "2026-11-20",
   "/churches": "2026-11-20",
   "/business": "2026-11-20",
   "/services": "2026-11-20",
@@ -19,6 +21,8 @@ const pages: Record<string, string> = {
   "/app": "2026-11-20",
   "/privacy": "2026-11-20",
   "/terms": "2026-06-30",
+  "/terms-of-sale": "2026-11-20",
+  "/refund-policy": "2026-11-20",
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {

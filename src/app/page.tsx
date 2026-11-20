@@ -47,7 +47,7 @@ export default function Home() {
       <Section id="products" eyebrow="Our products" title={<>Tools and courses that <em>do the heavy lifting.</em></>} intro="Buy once, download, and use them at your own pace. Each one comes with clear steps, so you are never on your own.">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <ProductCard p={featured} featured />
-          {rest.slice(0, 1).map((p) => <ProductCard key={p.id} p={p} />)}
+          {rest.filter((p) => p.id === "church-policy-pack").map((p) => <ProductCard key={p.id} p={p} />)}
         </div>
         <div className="mt-8" data-reveal>
           <Link href="/shop" className="btn btn-ghost">See all products <Icon name="arrow" className="h-4 w-4" /></Link>

@@ -17,7 +17,26 @@ export type Product = {
   audience: string;
 };
 
-export const STRIPE_LIVE = false; // switch to true when the live Stripe links are in
+import stripeConfig from "./stripe.json";
+
+// Buy links and price IDs come from src/config/stripe.json (written by scripts/stripe-setup.mjs).
+export const STRIPE_LIVE = stripeConfig.mode === "live";
+const stripeFor = (id: keyof typeof stripeConfig.products) => stripeConfig.products[id];
+
+// What each purchase unlocks: files in the private Supabase storage bucket "course-downloads"
+// (uploaded by scripts/upload-downloads.mjs). "download" is the file name the buyer sees.
+export const DOWNLOAD_BUCKET = "course-downloads";
+export const downloads: Record<string, { title: string; start: string; files: { path: string; download: string; label: string }[] }> = {
+  "htmaw-course-1": { title: "Course 1: Your Office on Google", start: "Start Course 1", files: [{ path: "htmaw-course-1.zip", download: "How to Make a Website - Course 1 - Your Office on Google.zip", label: "Course 1: Your Office on Google" }] },
+  "htmaw-course-2": { title: "Course 2: Build Your Website", start: "Start Course 2", files: [{ path: "htmaw-course-2.zip", download: "How to Make a Website - Course 2 - Build Your Website.zip", label: "Course 2: Build Your Website" }] },
+  "htmaw-course-3": { title: "Course 3: Grow and Connect", start: "Start Course 3", files: [{ path: "htmaw-course-3.zip", download: "How to Make a Website - Course 3 - Grow and Connect.zip", label: "Course 3: Grow and Connect" }] },
+  "htmaw-package": { title: "The complete package", start: "Start Course 2", files: [{ path: "htmaw-package.zip", download: "How to Make a Website - The complete package.zip", label: "The complete package: all three courses and the complete book" }] },
+};
+
+/** Which product a Stripe price belongs to. */
+export function productForPrice(priceId: string) {
+  return (Object.keys(stripeConfig.products) as (keyof typeof stripeConfig.products)[]).find((k) => stripeConfig.products[k].price === priceId);
+}
 
 export const courseProducts = [
   {
@@ -27,7 +46,7 @@ export const courseProducts = [
     price: "US$97",
     image: "/images/courses/course-1.webp",
     imageSmall: "/images/courses/course-1-640.webp",
-    buy: "https://buy.stripe.com/test_7sYcN5fpodZt6kD6W677O00",
+    buy: stripeFor("htmaw-course-1").link,
   },
   {
     id: "htmaw-course-2",
@@ -36,7 +55,7 @@ export const courseProducts = [
     price: "US$97",
     image: "/images/courses/course-2.webp",
     imageSmall: "/images/courses/course-2-640.webp",
-    buy: "https://buy.stripe.com/test_eVq14n1yy5sX7oH3JU77O01",
+    buy: stripeFor("htmaw-course-2").link,
   },
   {
     id: "htmaw-course-3",
@@ -45,7 +64,7 @@ export const courseProducts = [
     price: "US$97",
     image: "/images/courses/course-3.webp",
     imageSmall: "/images/courses/course-3-640.webp",
-    buy: "https://buy.stripe.com/test_7sY3cvfpog7B8sLeoy77O02",
+    buy: stripeFor("htmaw-course-3").link,
   },
   {
     id: "htmaw-package",
@@ -55,7 +74,7 @@ export const courseProducts = [
     was: "US$247",
     image: "/images/courses/package.webp",
     imageSmall: "/images/courses/package-640.webp",
-    buy: "https://buy.stripe.com/test_eVqdR95OOg7BeR96W677O03",
+    buy: stripeFor("htmaw-package").link,
     best: true,
   },
 ];
@@ -73,6 +92,19 @@ export const products: Product[] = [
     status: "available",
     badge: "New course",
     audience: "Churches, businesses, organisations and individuals",
+  },
+  {
+    id: "church-policy-pack",
+    name: "Church Policy Pack",
+    short: "Ready-made church policies you can adapt to your church: child safety, children's ministry, AI use, privacy, social media, volunteers, money, health and safety, and more.",
+    price: "Price to come",
+    href: "/shop/church-policy-pack",
+    image: "/images/products/policy-pack.webp",
+    imageSmall: "/images/products/policy-pack-640.webp",
+    imageMid: "/images/products/policy-pack-800.webp",
+    status: "soon",
+    badge: "Church resources",
+    audience: "Pastors, church boards and administrators",
   },
   {
     id: "exegesis",

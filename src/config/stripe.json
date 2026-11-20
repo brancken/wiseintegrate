@@ -1,0 +1,12 @@
+{
+  "_note": "Written by scripts/stripe-setup.mjs (do not edit by hand). Payment links and price IDs are not secret. mode: test or live.",
+  "mode": "test",
+  "account": "acct_1TusLWFAL2zDCup5 (connector sandbox, not visible in the dashboard; replace by running scripts/stripe-setup.mjs with your own test key)",
+  "coupon": "NxwQfjiD",
+  "products": {
+    "htmaw-course-1": { "price": "price_1UdTsmFAL2zDCup5fPVkw286", "link": "https://buy.stripe.com/test_7sYcN5fpodZt6kD6W677O00" },
+    "htmaw-course-2": { "price": "price_1UdTsmFAL2zDCup5oGX6JoPK", "link": "https://buy.stripe.com/test_eVq14n1yy5sX7oH3JU77O01" },
+    "htmaw-course-3": { "price": "price_1UdTsoFAL2zDCup54kj8Pc32", "link": "https://buy.stripe.com/test_7sY3cvfpog7B8sLeoy77O02" },
+    "htmaw-package": { "price": "price_1UdTspFAL2zDCup5GvHWZVtk", "link": "https://buy.stripe.com/test_eVqdR95OOg7BeR96W677O03" }
+  }
+}

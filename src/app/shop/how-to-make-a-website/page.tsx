@@ -184,7 +184,7 @@ export default function CoursePage() {
           <h3 className="text-lg font-bold">Thank-you gift</h3>
           <p className="mt-1 text-muted">Every buyer gets their own code for <strong className="text-ink">20% off their next purchase</strong>. Single use, valid for about 30 days.</p>
         </div>
-        <p className="mt-4 text-center text-sm text-muted">Prices in US dollars. Secure checkout by Stripe. Digital download.</p>
+        <p className="mt-4 text-center text-sm text-muted">Prices in US dollars. Secure checkout by Stripe. Instant digital download. By buying you agree to our <Link href="/terms-of-sale" className="underline">Terms of Sale</Link>; see our <Link href="/refund-policy" className="underline">Refund Policy</Link>.</p>
         {!showBuy && <p className="mt-2 text-center text-sm text-muted">Want to hear the moment sales open? Email <a className="text-accent underline" href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.</p>}
       </Section>
 

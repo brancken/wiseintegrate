@@ -5,7 +5,7 @@ import { allowIndexing } from "@/lib/seo";
 // Search engines and AI assistants are welcome on public pages; private areas stay out.
 export default function robots(): MetadataRoute.Robots {
   if (!allowIndexing) return { rules: [{ userAgent: "*", disallow: "/" }] };
-  const privateAreas = ["/api/", "/dashboard", "/tools/", "/admin", "/account", "/learn"];
+  const privateAreas = ["/api/", "/dashboard", "/tools/", "/admin", "/account", "/learn", "/purchase"];
   // Search engines and AI assistants are named so it is clear they are welcome (they cite and recommend sites they can read).
   const welcome = [
     "Googlebot", "Bingbot", "Applebot", "DuckDuckBot",
