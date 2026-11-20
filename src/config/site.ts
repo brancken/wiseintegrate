@@ -14,7 +14,7 @@ export const site = {
   // Add each profile here once it exists; it then appears in the footer and in the data for Google and AI assistants.
   socials: [
     { name: "Facebook", url: "https://www.facebook.com/wiseintegrate" },
-    // { name: "LinkedIn", url: "https://www.linkedin.com/company/wiseintegrate" },
+    { name: "LinkedIn", url: "https://www.linkedin.com/company/wiseintegrate" },
     // { name: "YouTube", url: "https://www.youtube.com/@wiseintegrate" },
     // { name: "Instagram", url: "https://www.instagram.com/wiseintegrate" },
   ] as { name: string; url: string }[],
