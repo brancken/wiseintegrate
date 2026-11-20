@@ -287,8 +287,8 @@ export function InstallAppButton({ className = "btn btn-primary", label = "Get o
           // Top bar: a little phone, "App" on phones and medium screens, "Get our app" where there is room.
           <>
             <Icon name="smartphone" className="h-[18px] w-[18px]" />
-            <span className="hdr-app-label whitespace-nowrap sm:hidden lg:inline xl:hidden" aria-hidden="true">App</span>
-            <span className="hdr-app-label hidden whitespace-nowrap sm:inline lg:hidden xl:inline" aria-hidden="true">{label}</span>
+            <span className="hdr-app-label whitespace-nowrap min-[400px]:hidden" aria-hidden="true">App</span>
+            <span className="hdr-app-label hidden whitespace-nowrap min-[400px]:inline" aria-hidden="true">{label}</span>
           </>
         ) : (
           <><Icon name="download" className="h-4 w-4" /> <span className={labelClassName}>{label}</span></>

@@ -5,6 +5,7 @@ import { Section, FeatureCard, Steps, CtaBand } from "@/components/Blocks";
 import { Icon } from "@/components/Icon";
 import { LatestPosts } from "@/components/LatestPosts";
 import { processSteps, promises } from "@/config/services";
+import { InstallAppButton } from "@/components/Pwa";
 
 export default function Home() {
   const [featured, ...rest] = products;
@@ -39,6 +40,22 @@ export default function Home() {
               <span className="grid h-11 w-11 place-items-center rounded-xl bg-panel-strong text-accent"><Icon name="briefcase" /></span>
               <span className="mt-3 block font-bold">Businesses and organisations</span>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* App: get WiseIntegrate on your phone or computer */}
+      <section className="border-b border-line bg-bg-alt">
+        <div className="wrap flex flex-col items-start gap-6 py-10 sm:flex-row sm:items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/icons/icon-192.png" alt="The WiseIntegrate app icon" width={72} height={72} loading="lazy" className="h-16 w-16 shrink-0 rounded-2xl shadow-[var(--shadow-soft)]" />
+          <div className="flex-1">
+            <h2 className="text-2xl font-extrabold">Get the WiseIntegrate app</h2>
+            <p className="mt-1 text-muted">Your courses, AI guides and our latest news, one tap away on your phone or computer. Free, no app store needed, and it takes a few seconds.</p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <InstallAppButton label="Get our app" className="btn bg-[#f97316] text-[#1a0b00] hover:bg-[#ea580c] hover:text-white" />
+            <Link href="/app" className="btn btn-ghost">How it works</Link>
           </div>
         </div>
       </section>

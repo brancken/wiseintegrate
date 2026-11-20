@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function AppPage() {
   return (
     <>
-      <PageHero eyebrow="The WiseIntegrate app" title={<>WiseIntegrate on your <em>home screen.</em></>} intro="No app store needed. Add this website to your phone or computer and it opens like an app, full screen, with one tap." />
+      <PageHero eyebrow="The WiseIntegrate app" title={<>WiseIntegrate on your <em>home screen.</em></>} intro="Your courses, AI guides and our latest news, one tap away. No app store needed: add WiseIntegrate to your phone or computer and it opens like an app, full screen." />
       <Section title="Choose your device">
         <AppButtons />
       </Section>

@@ -7,6 +7,7 @@ import { useOpenUntilNavigate } from "@/lib/hooks";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
 import { Icon } from "./Icon";
+import { InstallAppButton } from "./Pwa";
 
 function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
@@ -35,7 +36,8 @@ export function Header() {
         </nav>
         <div className="ml-auto flex items-center gap-1 lg:ml-2">
           <ThemeToggle />
-          <Link href="/assessment" className="btn btn-primary hidden !min-h-10 whitespace-nowrap !px-4 text-sm sm:inline-flex">Free assessment</Link>
+          <InstallAppButton page="top" label="Get our app" className="btn !min-h-10 gap-1.5 !px-3 text-sm whitespace-nowrap bg-[#f97316] text-[#1a0b00] hover:bg-[#ea580c] hover:text-white" />
+          <Link href="/assessment" className="btn btn-primary hidden !min-h-10 whitespace-nowrap !px-4 text-sm xl:inline-flex">Free assessment</Link>
           <button type="button" className="grid h-10 w-10 place-items-center rounded-full text-ink lg:hidden" aria-expanded={open} aria-controls="mobile-menu" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((o) => !o)}>
             <Icon name={open ? "close" : "menu"} />
           </button>
