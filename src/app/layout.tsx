@@ -9,6 +9,7 @@ import { TabBar } from "@/components/TabBar";
 import { PwaSupport } from "@/components/Pwa";
 import { AskWise } from "@/components/AskWise";
 import { CursorGlow } from "@/components/CursorGlow";
+import { LiveBackground } from "@/components/LiveBackground";
 import { themeScript } from "@/components/ThemeToggle";
 import { orgJsonLd, allowIndexing } from "@/lib/seo";
 
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <link rel="alternate" type="text/plain" title="LLM summary" href="/llms.txt" />
       </head>
       <body className="min-h-dvh antialiased">
+        <LiveBackground />
         <CursorGlow />
         <a href="#main" className="skip-link">Skip to content</a>
         <Header />

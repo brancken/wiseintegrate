@@ -14,5 +14,8 @@
     { "pattern": "www.wiseintegrate.com/*", "zone_name": "wiseintegrate.com" },
     { "pattern": "wiseintegrate.com/*", "zone_name": "wiseintegrate.com" }
   ],
+  // Preview versions (npm run cf:upload) get their own address to check before going live; never listed by Google.
+  "workers_dev": true,
+  "preview_urls": true,
   "observability": { "enabled": true }
 }

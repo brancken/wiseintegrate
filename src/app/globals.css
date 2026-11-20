@@ -103,11 +103,51 @@ h1, h2, h3, h4, .font-display {
   .btn-ghost { background: transparent; color: var(--text); border: 1.5px solid var(--border-strong); }
   .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
+  /* Panels: Liquid Glass (21 Nov 2026, Dr. Brancken). Frosted glass over the moving background, a bright rim where the
+     light comes from (top left), a soft inner glow, and a slight glass ripple at the edges (see .card::after). */
   .card {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 1.25rem;
+    position: relative; isolation: isolate; border-radius: 1.25rem;
+    background:
+      linear-gradient(150deg, rgb(255 255 255 / 0.075), rgb(255 255 255 / 0.015) 38%, rgb(96 165 250 / 0.05)),
+      rgb(16 18 42 / 0.62);
+    border: 1px solid rgb(147 197 253 / 0.14);
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    box-shadow:
+      inset 1px 1px 0 rgb(255 255 255 / 0.18),
+      inset -1px -1px 0 rgb(96 165 250 / 0.10),
+      inset 0 0 22px rgb(147 197 253 / 0.05),
+      0 14px 34px -16px rgb(0 0 0 / 0.65);
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   }
-  a.card:hover, .card-hover:hover { transform: translateY(-3px); border-color: var(--border-strong); box-shadow: var(--shadow-soft); }
+  /* directional light on the edge: bright top-left, fading round the rim */
+  .card::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; z-index: 2;
+    background: linear-gradient(135deg, rgb(255 255 255 / 0.55), rgb(191 219 254 / 0.18) 22%, transparent 45%, transparent 70%, rgb(96 165 250 / 0.35));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    opacity: 0.75; transition: opacity 0.25s ease;
+  }
+  /* the glass edge: a thin rim that bends what is behind it (ripple only where supported) */
+  .card::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: -1;
+    padding: 12px; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    -webkit-backdrop-filter: blur(3px) brightness(1.15); backdrop-filter: blur(3px) brightness(1.15);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .card::after { backdrop-filter: url(#glass-distort) blur(2px) brightness(1.15); }
+  }
+  a.card:hover, .card-hover:hover {
+    transform: translateY(-3px); border-color: var(--border-strong);
+    box-shadow: inset 1px 1px 0 rgb(255 255 255 / 0.26), inset 0 0 26px rgb(147 197 253 / 0.09), var(--shadow-soft);
+  }
+  a.card:hover::before, .card-hover:hover::before { opacity: 1; }
+  [data-theme="light"] .card {
+    background: linear-gradient(150deg, rgb(255 255 255 / 0.85), rgb(255 255 255 / 0.55)), rgb(255 255 255 / 0.5);
+    border-color: rgb(29 78 216 / 0.14);
+    box-shadow: inset 1px 1px 0 rgb(255 255 255 / 0.9), 0 12px 30px -16px rgb(29 78 216 / 0.35);
+  }
+  [data-theme="light"] .card::before { background: linear-gradient(135deg, #fff, rgb(255 255 255 / 0.4) 25%, transparent 50%, rgb(29 78 216 / 0.25)); }
 
   .eyebrow {
     font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent);
@@ -160,6 +200,17 @@ h1, h2, h3, h4, .font-display {
   [data-reveal] { animation: none !important; }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }
+
+/* The faint moving light behind the site (LiveBackground.tsx). Transform-only animation, very slow. */
+.live-bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.live-bg span { position: absolute; border-radius: 50%; filter: blur(70px); will-change: transform; }
+.live-bg__a { width: 60vmax; height: 60vmax; left: -15vmax; top: -20vmax; background: rgb(29 78 216 / 0.20); animation: live-a 38s ease-in-out infinite alternate; }
+.live-bg__b { width: 50vmax; height: 50vmax; right: -18vmax; top: 25vh; background: rgb(56 189 248 / 0.10); animation: live-b 46s ease-in-out infinite alternate; }
+.live-bg__c { width: 45vmax; height: 45vmax; left: 20vw; bottom: -25vmax; background: rgb(99 102 241 / 0.12); animation: live-c 52s ease-in-out infinite alternate; }
+@keyframes live-a { to { transform: translate3d(18vw, 12vh, 0) scale(1.15); } }
+@keyframes live-b { to { transform: translate3d(-22vw, -10vh, 0) scale(0.9); } }
+@keyframes live-c { to { transform: translate3d(14vw, -18vh, 0) scale(1.1); } }
+[data-theme="light"] .live-bg span { opacity: 0.45; }
 
 /* Space for the phone app's bottom bar */
 @media (max-width: 1023px) {

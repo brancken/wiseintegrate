@@ -27,9 +27,9 @@ const stripeFor = (id: keyof typeof stripeConfig.products) => stripeConfig.produ
 // (uploaded by scripts/upload-downloads.mjs). "download" is the file name the buyer sees.
 export const DOWNLOAD_BUCKET = "course-downloads";
 export const downloads: Record<string, { title: string; start: string; files: { path: string; download: string; label: string }[] }> = {
-  "htmaw-course-1": { title: "Course 1: Your Office on Google", start: "Start Course 1", files: [{ path: "htmaw-course-1.zip", download: "How to Make a Website - Course 1 - Your Office on Google.zip", label: "Course 1: Your Office on Google" }] },
-  "htmaw-course-2": { title: "Course 2: Build Your Website", start: "Start Course 2", files: [{ path: "htmaw-course-2.zip", download: "How to Make a Website - Course 2 - Build Your Website.zip", label: "Course 2: Build Your Website" }] },
-  "htmaw-course-3": { title: "Course 3: Grow and Connect", start: "Start Course 3", files: [{ path: "htmaw-course-3.zip", download: "How to Make a Website - Course 3 - Grow and Connect.zip", label: "Course 3: Grow and Connect" }] },
+  "htmaw-course-1": { title: "Course 1: Church Management System on Google", start: "Start Course 1", files: [{ path: "htmaw-course-1.zip", download: "How to Make a Website - Course 1 - Your Office on Google.zip", label: "Course 1: Your Office on Google" }] },
+  "htmaw-course-2": { title: "Course 2: Build Your Own Professional Website + App", start: "Start Course 2", files: [{ path: "htmaw-course-2.zip", download: "How to Make a Website - Course 2 - Build Your Website.zip", label: "Course 2: Build Your Website" }] },
+  "htmaw-course-3": { title: "Course 3: Market Yourself Online", start: "Start Course 3", files: [{ path: "htmaw-course-3.zip", download: "How to Make a Website - Course 3 - Grow and Connect.zip", label: "Course 3: Grow and Connect" }] },
   "htmaw-package": { title: "The complete package", start: "Start Course 2", files: [{ path: "htmaw-package.zip", download: "How to Make a Website - The complete package.zip", label: "The complete package: all three courses and the complete book" }] },
 };
 
@@ -41,29 +41,29 @@ export function productForPrice(priceId: string) {
 export const courseProducts = [
   {
     id: "htmaw-course-1",
-    name: "Course 1: Your Office on Google",
-    short: "Forms, follow-ups, group emails and a team dashboard.",
+    name: "Course 1: Church Management System on Google",
+    short: "Your church office, automated: birthday emails, visitor follow-ups, thank-you emails, group emails, a team dashboard and automatic backups.",
     price: "US$97",
-    image: "/images/courses/course-1-blue.webp",
-    imageSmall: "/images/courses/course-1-640-blue.webp",
+    image: "/images/courses/course-1-v3.webp",
+    imageSmall: "/images/courses/course-1-640-v3.webp",
     buy: stripeFor("htmaw-course-1").link,
   },
   {
     id: "htmaw-course-2",
-    name: "Course 2: Build Your Website",
-    short: "Your own address, your design, your app.",
+    name: "Course 2: Build Your Own Professional Website + App",
+    short: "Your own web address, your own design, and a website that installs on phones like an app. Pages, photos, sermons, events and online giving.",
     price: "US$97",
-    image: "/images/courses/course-2-blue.webp",
-    imageSmall: "/images/courses/course-2-640-blue.webp",
+    image: "/images/courses/course-2-v3.webp",
+    imageSmall: "/images/courses/course-2-640-v3.webp",
     buy: stripeFor("htmaw-course-2").link,
   },
   {
     id: "htmaw-course-3",
-    name: "Course 3: Grow and Connect",
-    short: "Google, AI search, maps, podcasts and notifications.",
+    name: "Course 3: Market Yourself Online",
+    short: "Get found and get out there: Google and AI search, Google Maps, Facebook, Instagram and YouTube, podcasts and phone notifications.",
     price: "US$97",
-    image: "/images/courses/course-3-blue.webp",
-    imageSmall: "/images/courses/course-3-640-blue.webp",
+    image: "/images/courses/course-3-v3.webp",
+    imageSmall: "/images/courses/course-3-640-v3.webp",
     buy: stripeFor("htmaw-course-3").link,
   },
   {

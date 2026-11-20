@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: { absolute: "Free Church Management System on Google, No Monthly Fee" },
   description,
   alternates: { canonical: PATH },
-  openGraph: { images: ["/images/courses/course-1-blue.webp"] },
+  openGraph: { images: ["/images/courses/course-1-v3.webp"] },
 };
 
 const course1 = courseProducts.find((c) => c.id === "htmaw-course-1");
@@ -94,7 +94,7 @@ function pageJsonLd() {
     author: { "@type": "Person", "@id": abs("/about#founder"), name: site.founder.name },
     datePublished: UPDATED,
     dateModified: UPDATED,
-    image: abs("/images/courses/course-1-blue.webp"),
+    image: abs("/images/courses/course-1-v3.webp"),
     about: { "@type": "Thing", name: "Church management system" },
   };
 }
@@ -188,7 +188,7 @@ export default function ChurchManagementSystemPage() {
       <Section id="how-to-build" eyebrow="How to build it" title={<>How to build your church management system <em>step by step</em></>} intro="Course 1 has ten sessions. Each one is a printable guide with a checklist and a quiz.">
         <Steps steps={steps} />
         <p className="mt-8 max-w-3xl text-muted" data-reveal>
-          Get <Link href="/shop/how-to-make-a-website#htmaw-course-1" className="font-semibold text-accent underline underline-offset-4">Course 1: Your Office on Google</Link> on its own, or the <Link href="/shop/how-to-make-a-website#htmaw-package" className="font-semibold text-accent underline underline-offset-4">complete package</Link> with Course 2 (your church website) and Course 3 (getting found on Google and AI search). Want to see it working? <a href="https://shilohministries.nz" target="_blank" rel="noopener" className="font-semibold text-accent underline underline-offset-4">Shiloh Ministries in Auckland</a> was built by following exactly these steps.
+          Get <Link href="/shop/how-to-make-a-website#htmaw-course-1" className="font-semibold text-accent underline underline-offset-4">Course 1: Church Management System on Google</Link> on its own, or the <Link href="/shop/how-to-make-a-website#htmaw-package" className="font-semibold text-accent underline underline-offset-4">complete package</Link> with Course 2 (your church website) and Course 3 (getting found on Google and AI search). Want to see it working? <a href="https://shilohministries.nz" target="_blank" rel="noopener" className="font-semibold text-accent underline underline-offset-4">Shiloh Ministries in Auckland</a> was built by following exactly these steps.
         </p>
       </Section>
 
