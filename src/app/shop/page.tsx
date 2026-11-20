@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function Shop() {
-  preload("/images/courses/package-640.webp", { as: "image", imageSrcSet: "/images/courses/package-640.webp 640w, /images/courses/package-800.webp 800w, /images/courses/package.webp 1280w", imageSizes: "(min-width: 768px) 50vw, 100vw", fetchPriority: "high" });
+  preload("/images/courses/package-640-blue.webp", { as: "image", imageSrcSet: "/images/courses/package-640-blue.webp 640w, /images/courses/package-800-blue.webp 800w, /images/courses/package-blue.webp 1280w", imageSizes: "(min-width: 768px) 50vw, 100vw", fetchPriority: "high" });
   const available = products.filter((p) => p.status === "available");
   const resources = products.filter((p) => p.id === "church-policy-pack");
   const soon = products.filter((p) => p.status === "soon" && p.id !== "church-policy-pack");

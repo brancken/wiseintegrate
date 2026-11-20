@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "Church Website, App and Church Management System Course",
   description: "Build your own church website, church app and church management system with no monthly fees, step by step with Claude AI. No web developer needed.",
   alternates: { canonical: "/shop/how-to-make-a-website" },
-  openGraph: { images: ["/images/courses/package.webp"] },
+  openGraph: { images: ["/images/courses/package-blue.webp"] },
 };
 
 // Buy buttons: live Stripe links once STRIPE_LIVE is true. Until then they show only on preview copies
@@ -51,7 +51,7 @@ function courseJsonLd() {
     name: "How to Make a Website with Claude",
     description: metadata.description,
     url: abs("/shop/how-to-make-a-website"),
-    image: abs("/images/courses/package.webp"),
+    image: abs("/images/courses/package-blue.webp"),
     inLanguage: "en",
     provider: { "@type": "Organization", name: site.name, url: site.url },
     author: { "@type": "Person", name: site.founder.name },
@@ -99,7 +99,7 @@ export default function CoursePage() {
             <p className="mt-4 text-sm text-muted">This course focuses on churches, and it can easily be changed for businesses, organisations and individuals.</p>
           </div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/courses/package.webp" srcSet="/images/courses/package-640.webp 640w, /images/courses/package-800.webp 800w, /images/courses/package.webp 1280w" sizes="(min-width: 1024px) 50vw, 100vw" alt="How to Make a Website: the complete package" width={1280} height={720} fetchPriority="high" className="rise w-full rounded-3xl border border-line shadow-[var(--shadow-soft)]" />
+          <img src="/images/courses/package-blue.webp" srcSet="/images/courses/package-640-blue.webp 640w, /images/courses/package-800-blue.webp 800w, /images/courses/package-blue.webp 1280w" sizes="(min-width: 1024px) 50vw, 100vw" alt="How to Make a Website: the complete package" width={1280} height={720} fetchPriority="high" className="rise w-full rounded-3xl border border-line shadow-[var(--shadow-soft)]" />
         </div>
       </section>
 

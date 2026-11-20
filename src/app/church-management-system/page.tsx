@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: { absolute: "Free Church Management System on Google, No Monthly Fee" },
   description,
   alternates: { canonical: PATH },
-  openGraph: { images: ["/images/courses/course-1.webp"] },
+  openGraph: { images: ["/images/courses/course-1-blue.webp"] },
 };
 
 const course1 = courseProducts.find((c) => c.id === "htmaw-course-1");
@@ -94,7 +94,7 @@ function pageJsonLd() {
     author: { "@type": "Person", "@id": abs("/about#founder"), name: site.founder.name },
     datePublished: UPDATED,
     dateModified: UPDATED,
-    image: abs("/images/courses/course-1.webp"),
+    image: abs("/images/courses/course-1-blue.webp"),
     about: { "@type": "Thing", name: "Church management system" },
   };
 }
