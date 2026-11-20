@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import { TabBar } from "@/components/TabBar";
 import { PwaSupport } from "@/components/Pwa";
 import { AskWise } from "@/components/AskWise";
+import { CursorGlow } from "@/components/CursorGlow";
 import { themeScript } from "@/components/ThemeToggle";
 import { orgJsonLd, allowIndexing } from "@/lib/seo";
 
@@ -34,12 +35,12 @@ export const metadata: Metadata = {
     ...(process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : {}),
     ...(process.env.BING_SITE_VERIFICATION ? { other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION } } : {}),
   },
-  appleWebApp: { capable: true, title: site.appName, statusBarStyle: "default" },
+  appleWebApp: { capable: true, title: site.appName, statusBarStyle: "black-translucent" },
   formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = {
-  themeColor: [{ media: "(prefers-color-scheme: light)", color: "#f7f9fd" }, { media: "(prefers-color-scheme: dark)", color: "#0b1220" }],
+  themeColor: "#08080f",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -47,13 +48,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-NZ" className={`${body.variable} ${heading.variable} no-js`} suppressHydrationWarning data-theme="light">
+    <html lang="en-NZ" className={`${body.variable} ${heading.variable} no-js`} suppressHydrationWarning data-theme="dark">
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd()).replace(/</g, "\\u003c") }} />
         <link rel="alternate" type="text/plain" title="LLM summary" href="/llms.txt" />
       </head>
       <body className="min-h-dvh antialiased">
+        <CursorGlow />
         <a href="#main" className="skip-link">Skip to content</a>
         <Header />
         <ViewTransition name="page">
