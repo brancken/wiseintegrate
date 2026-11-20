@@ -43,6 +43,8 @@ const redirects = [
   { source: "/manifest.json", destination: "/manifest.webmanifest", permanent: true },
   { source: "/get-our-app", destination: "/app", permanent: true },
   { source: "/install", destination: "/app", permanent: true },
+  // Private back office: a Google web app only wiseintegrate@gmail.com can open (Google sign-in is the lock).
+  { source: "/admin", destination: "https://script.google.com/macros/s/AKfycbyouSizDUtNXw5neSHv1hUS58IP0XtchdS01J65EB2FZmc8muz5cAdGRxXd3b8_2ldliQ/exec", permanent: false },
 ];
 
 const nextConfig: NextConfig = {
