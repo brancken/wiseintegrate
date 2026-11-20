@@ -9,7 +9,7 @@ import { processSteps } from "@/config/services";
 export const metadata: Metadata = {
   title: "AI for churches and non-profits",
   description:
-    "AI will never replace your pastor. Church and ministry AI integration with firm boundaries, built by a pastor with over 32 years of ministry experience.",
+    "AI will never replace your pastor. Church and ministry AI integration with firm boundaries, built by a pastor with 33 years of ministry experience.",
   alternates: { canonical: "/churches" },
 };
 
@@ -35,7 +35,7 @@ export default function ChurchesPage() {
       <PageHero
         eyebrow="Churches and non-profits"
         title={<>AI will never replace your pastor. <em>It will free him up to be one.</em></>}
-        intro="Built by a pastor, for pastors. With over 32 years of international ministry, missions, and church planting experience behind every recommendation."
+        intro="Built by a pastor, for pastors. With 33 years of international ministry, missions, and church planting experience behind every recommendation."
       >
         <Link href="/assessment" className="btn btn-primary">Start your free assessment <Icon name="arrow" className="h-4 w-4" /></Link>
         <p className="w-full text-sm text-muted">Church and ministry AI integration</p>
