@@ -19,7 +19,7 @@ export default function Home() {
               Courses and tools that <span className="grad">do the heavy lifting.</span>
             </h1>
             <p className="rise mt-6 max-w-xl text-lg text-muted" style={{ "--d": "120ms" } as React.CSSProperties}>
-              Build your own website, app and church office with Claude doing most of the work. Three courses, step by step, at your own pace.
+              Build your own professional web app (website + app), church office management system, and social media marketing setup, with Claude doing most of the work. Three courses, step by step, at your own pace.
             </p>
             <div className="rise mt-8 flex flex-wrap gap-3" style={{ "--d": "180ms" } as React.CSSProperties}>
               <Link href="/shop/how-to-make-a-website" className="btn btn-primary"><Icon name="cap" className="h-4 w-4" /> See the courses</Link>
