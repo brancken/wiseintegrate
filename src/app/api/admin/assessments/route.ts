@@ -1,10 +1,14 @@
-import { isAdmin } from "@/lib/admin-auth";
-import { adminDb } from "@/lib/supabase-admin";
+import { adminToken } from "@/lib/admin-auth";
+import { rpc } from "@/lib/supabase-public";
 
-// All assessments, newest first (signed-in dashboard only).
+// All assessments, newest first (signed-in dashboard only; the database checks the session).
 export async function GET() {
-  if (!(await isAdmin())) return Response.json({ error: "Not signed in" }, { status: 401 });
-  const { data, error } = await adminDb().from("ai_assessments").select("*").order("submitted_at", { ascending: false });
-  if (error) return Response.json({ error: error.message }, { status: 500 });
-  return Response.json(data, { headers: { "Cache-Control": "no-store" } });
+  const token = await adminToken();
+  if (!token) return Response.json({ error: "Not signed in" }, { status: 401 });
+  try {
+    const rows = await rpc("wi_admin_list", { p_token: token });
+    return Response.json(rows, { headers: { "Cache-Control": "no-store" } });
+  } catch {
+    return Response.json({ error: "Not signed in" }, { status: 401 });
+  }
 }

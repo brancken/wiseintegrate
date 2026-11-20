@@ -1,0 +1,9 @@
+# Netlify build settings for wiseintegrate.com (moved from Vercel, 20 Nov 2026; Vercel is kept as a fallback).
+# Netlify detects Next.js and adds its Next.js runtime automatically.
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NEXT_TELEMETRY_DISABLED = "1"

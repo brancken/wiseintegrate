@@ -18,14 +18,15 @@ Next.js 16 (App Router, Turbopack), React 19, Tailwind CSS 4, MDX blog. Fonts se
 - SEO and AI search: `src/lib/seo.ts` (JSON-LD), `sitemap.ts`, `robots.ts`, `llms.txt`. Only wiseintegrate.com is indexed (preview copies get noindex).
 - Security headers and the Content Security Policy: `next.config.ts`. Old addresses redirect there too.
 
-## AI Readiness Assessment and consultant dashboard
-- The assessment, its two report pages and the dashboard are the old plain pages in `public/tools/` (addresses /assessment, /assessment/start, /report-summary, /report-guide, /dashboard).
-- They no longer touch the database directly. The browser talks to our server routes, which use the secret Supabase service key:
-  - `POST /api/assessment` saves a submission and makes the AI report (Supabase Edge Function `generate-report`).
-  - `/api/admin/*` (login, logout, list, notes, regenerate, snapshot) for the dashboard. Login checks `ADMIN_PASSWORD`; a signed cookie lasts 12 hours; 5 wrong tries lock for 15 minutes.
-- Vercel env vars needed: `SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_PASSWORD` (a new one), optional `ADMIN_SESSION_SECRET`; for the thank-you code: `STRIPE_SECRET_KEY`, `STRIPE_THANKYOU_COUPON`.
-- At go-live, after the new site is live: run `supabase/migrations/20261120_close_anon_access.sql` to remove the public read/update access to `ai_assessments`.
-- Supabase project `ppgecvmyuyuntwnqwcru`; edge functions in `supabase/functions/`.
+## Hosting
+Netlify (free plan allows commercial use) builds the site from GitHub (netlify.toml). Vercel is kept untouched as a fallback (it still serves the old site from `main` until the domain is switched). `isProduction` in src/lib/seo.ts recognises both.
+
+## AI Readiness Assessment, consultant dashboard and purchases
+- The assessment, its report pages and the dashboard are the old plain pages in `public/tools/` (/assessment, /assessment/start, /report-summary, /report-guide, /dashboard).
+- They talk only to our server routes, which call Supabase **database functions** with the public anon key (`src/lib/supabase-public.ts`; functions in `supabase/migrations/20261120_secure_functions.sql`): `wi_submit_assessment`, `wi_save_first_report`, `wi_admin_login` (password checked in the database, 12-hour token in an http-only cookie, lockout after 10 wrong tries), `wi_admin_list/get/set_notes/save_report/set_password`.
+- The dashboard password fingerprint is set from a private SQL file on Dr. Brancken's computer (never in this public repo).
+- At go-live: run `20261120_secure_functions.sql`, then the private password file, then (after the switch) `20261120_close_anon_access.sql`.
+- Purchases: Stripe payment link -> `/purchase/complete?session_id=...` checks the payment with Stripe (`STRIPE_SECRET_KEY`), shows 1-hour signed download links from the private Supabase bucket `course-downloads` (`SUPABASE_SERVICE_ROLE_KEY`, only for this) and the 20% thank-you code. Set up with `scripts/stripe-setup.mjs` and `scripts/upload-downloads.mjs` (see TEST-AT-HOME.md).
 
 ## Old site
 The old static site is in `legacy/` for reference only (not served). It can go once Dr. Brancken has approved the new site; git history keeps it.

@@ -5,7 +5,7 @@ import { site } from "@/config/site";
 import { Section, CtaBand, Checks } from "@/components/Blocks";
 import { Icon } from "@/components/Icon";
 import { JsonLd } from "@/components/JsonLd";
-import { abs, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
+import { abs, breadcrumbJsonLd, faqJsonLd, isProduction } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Church Website, App and Church Management System Course",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 // Buy buttons: live Stripe links once STRIPE_LIVE is true. Until then they show only on preview copies
 // (Stripe test mode, no real money), and the live site says sales open soon.
-const showBuy = STRIPE_LIVE || process.env.VERCEL_ENV !== "production";
+const showBuy = STRIPE_LIVE || !isProduction;
 
 // Google's "Course list" result: each course with a name, a short description and the provider.
 function courseListJsonLd() {

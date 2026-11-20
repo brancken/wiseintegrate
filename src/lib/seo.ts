@@ -1,7 +1,9 @@
 import { site } from "@/config/site";
 
 /** True only on the real live site, so Vercel preview copies never appear in Google. */
-export const allowIndexing = process.env.VERCEL_ENV === "production" || process.env.ALLOW_INDEXING === "1";
+// "Production" = the live build on Netlify (CONTEXT) or Vercel (VERCEL_ENV). Previews and this computer are not.
+export const isProduction = process.env.CONTEXT === "production" || process.env.VERCEL_ENV === "production";
+export const allowIndexing = isProduction || process.env.ALLOW_INDEXING === "1";
 
 export const abs = (p: string) => new URL(p, site.url).toString();
 
