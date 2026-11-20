@@ -11,3 +11,31 @@
 # Netlify's Next.js runtime (server pages, API routes, image and cache handling).
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# The assessment, its reports and the dashboard are plain pages in public/tools (same as the rewrites in next.config.ts,
+# which Netlify's Next.js runtime does not apply to plain files).
+[[redirects]]
+  from = "/assessment"
+  to = "/tools/assessment-intro.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/assessment/start"
+  to = "/tools/assessment.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/report-summary"
+  to = "/tools/report-summary.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/report-guide"
+  to = "/tools/report-guide.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/dashboard"
+  to = "/tools/dashboard.html"
+  status = 200
+  force = true
