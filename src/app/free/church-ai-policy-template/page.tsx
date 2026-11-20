@@ -44,7 +44,6 @@ export default function FreeAiPolicyPage() {
         title={<>Want the <em>complete set?</em></>}
         text="The Church Policy Pack (coming soon) has the full AI use policy and nine more: child safety, children's ministry, privacy, social media, volunteers, money handling, health and safety, complaints and governance."
         primary={{ label: "See the Church Policy Pack", href: "/shop/church-policy-pack" }}
-        secondary={{ label: "Take the free AI Readiness Assessment", href: "/assessment" }}
       />
     </>
   );

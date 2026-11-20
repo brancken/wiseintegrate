@@ -56,8 +56,8 @@ export default function ContactPage() {
               <Link href="/churches" className={linkCls}>View Church Integration <Icon name="arrow" className="h-4 w-4" /></Link>
             </InfoCard>
             <InfoCard icon="briefcase" title="Business enquiries">
-              <p>Ready to implement AI that actually delivers results? Start with a free readiness assessment.</p>
-              <Link href="/assessment" className={linkCls}>Start Your Free Assessment <Icon name="arrow" className="h-4 w-4" /></Link>
+              <p>Bringing AI into your business or organisation? See how we work with teams like yours.</p>
+              <Link href="/business" className={linkCls}>View Business Integration <Icon name="arrow" className="h-4 w-4" /></Link>
             </InfoCard>
             <InfoCard icon="cap" title="Course help">
               <p>Bought a course and need help? Email us. Where it is really needed, we can arrange a short Zoom call.</p>

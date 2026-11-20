@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { abs, breadcrumbJsonLd, faqJsonLd, isProduction } from "@/lib/seo";
 import { legalApproved } from "@/config/legal";
 import { courseFaqs as faqs } from "@/config/course-faqs";
+import { coursePages } from "@/config/course-pages";
 
 export const metadata: Metadata = {
   title: "Church Website, App and Church Management System Course",
@@ -35,7 +36,7 @@ function courseListJsonLd() {
       position: i + 1,
       item: {
         "@type": "Course",
-        url: abs(`/shop/how-to-make-a-website#${c.id}`),
+        url: abs(c.href),
         name: c.name.replace(/^Course \d: /, ""),
         description: descriptions[c.id],
         provider: { "@type": "Organization", name: site.name, sameAs: site.url },
@@ -61,20 +62,6 @@ function courseJsonLd() {
 }
 
 
-const youGet = {
-  website: [
-    "Your own web address with the padlock (the little lock that tells visitors your site is safe)",
-    "A calm design in your colours, with day and night mode",
-    "Made for phones, and it works like an app",
-    'Service times, map, and events with "add to my calendar"',
-    "Sermons or videos appear by themselves from YouTube",
-    "Contact and prayer forms that keep spam (junk messages) out",
-    "You edit it yourself in your browser. No code",
-    "100 out of 100 in all four areas of Google's speed test on a phone",
-  ],
-  office: ["Every visitor in one list, by themselves", "A follow-up for the right person", "A thank-you email on its way", "Birthday emails and group emails", "Automatic backups", "A private dashboard for your team"],
-  found: ["On Google, Bing and maps", "Help for AI assistants such as ChatGPT and Claude to understand your church", "YouTube, Facebook and Instagram linked up", "A podcast on Spotify and Apple Podcasts", "Notifications on people's phones, that they choose", "Optional: a daily Thought for the Day and other languages"],
-};
 
 export default function CoursePage() {
   return (
@@ -85,15 +72,16 @@ export default function CoursePage() {
       <section className="hero-glow border-b border-line">
         <div className="wrap grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-2">
           <div>
-            <p className="eyebrow rise">A course with Claude, step by step</p>
+            <p className="eyebrow rise">How to Make a Website with Claude</p>
             <h1 className="rise mt-4 text-[clamp(2.3rem,1.5rem+3.4vw,4rem)] font-extrabold leading-[1.05]" style={{ "--d": "60ms" } as React.CSSProperties}>
-              No more expensive <span className="grad">web developers.</span>
+              The complete package: <span className="grad">all three courses.</span>
             </h1>
             <p className="rise mt-6 text-lg text-muted" style={{ "--d": "120ms" } as React.CSSProperties}>
-              A website company can take weeks and charge thousands of dollars. With this course, and Claude doing most of the work, you can build a professional website yourself in about <strong className="text-ink">three to four days of work</strong>, at a very affordable price.
+              Your church management system on Google, your own professional website and app, and the know-how to market yourself online. Step by step, with Claude doing most of the work, in about <strong className="text-ink">three to four days of work</strong>.
             </p>
-            <div className="rise mt-8 flex flex-wrap gap-3" style={{ "--d": "180ms" } as React.CSSProperties}>
-              <a href="#prices" className="btn btn-primary">Get the course</a>
+            <div className="rise mt-8 flex flex-wrap items-center gap-4" style={{ "--d": "180ms" } as React.CSSProperties}>
+              <span className="font-display text-4xl font-extrabold">US$197 <s className="text-xl font-semibold text-muted">US$247</s></span>
+              <a href="#prices" className="btn btn-primary">See the prices</a>
               <a href="https://howtomakeawebsite.fyi" target="_blank" rel="noopener" className="btn btn-ghost">See the live sample site</a>
             </div>
             <p className="mt-4 text-sm text-muted">This course focuses on churches, and it can easily be changed for businesses, organisations and individuals.</p>
@@ -120,20 +108,33 @@ export default function CoursePage() {
         </div>
       </Section>
 
-      {/* What you can have */}
-      <Section alt eyebrow="What you can have" title={<>A website, an office and <em>people who find you.</em></>}>
+      {/* The three courses in the package */}
+      <Section alt eyebrow="What is in the package" title={<>Three courses. <em>Everything your church needs online.</em></>}>
         <div className="grid gap-6 lg:grid-cols-3">
-          <div className="card p-6" data-reveal><h3 className="mb-4 text-xl font-bold">A website people love to use</h3><Checks items={youGet.website} /></div>
-          <div className="card p-6" data-reveal><h3 className="mb-4 text-xl font-bold">An office that does the work</h3><Checks items={youGet.office} /></div>
-          <div className="card p-6" data-reveal><h3 className="mb-4 text-xl font-bold">People who find you</h3><Checks items={youGet.found} /></div>
+          {coursePages.map((c) => {
+            const p = courseProducts.find((x) => x.id === c.productId)!;
+            return (
+              <Link key={c.slug} href={`/shop/how-to-make-a-website/${c.slug}`} className="card group flex flex-col overflow-hidden" data-reveal>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={p.imageSmall} alt="" width={640} height={360} loading="lazy" decoding="async" className="aspect-video w-full object-cover" />
+                <div className="flex flex-1 flex-col p-6">
+                  <p className="eyebrow">{c.number}</p>
+                  <h3 className="mt-1 text-xl font-bold">{c.title}</h3>
+                  <p className="mt-2 text-muted">{c.tagline}</p>
+                  <div className="mt-4 flex-1"><Checks items={c.youHave.slice(0, 5)} /></div>
+                  <span className="mt-5 inline-flex items-center gap-1 font-semibold text-accent">See all 10 lessons <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
         <p className="mt-8 text-muted" data-reveal>
-          See this website in full action for a church in Auckland, New Zealand: <a href="https://shilohministries.nz" target="_blank" rel="noopener" className="font-semibold text-accent underline underline-offset-4">Shiloh Ministries, shilohministries.nz</a>.
+          See it in full action for a church in Auckland, New Zealand: <a href="https://shilohministries.nz" target="_blank" rel="noopener" className="font-semibold text-accent underline underline-offset-4">Shiloh Ministries, shilohministries.nz</a>.
         </p>
       </Section>
 
       {/* Three ways */}
-      <Section eyebrow="Three ways to do it" title={<>Relax with your coffee. <em>Claude does most of the work.</em></>}>
+      <Section eyebrow="Three ways to do it" title={<>Learn your way. <em>Claude helps at every step.</em></>}>
         <div className="grid gap-6 md:grid-cols-3">
           <div className="card p-6" data-reveal><h3 className="text-xl font-bold">1. The full manual</h3><p className="mt-2 text-muted">Every session as a PDF and the complete book: more than 450 pages with real screenshots.</p></div>
           <div className="card p-6" data-reveal><h3 className="text-xl font-bold">2. Do it with Claude</h3><p className="mt-2 text-muted">A Claude Project with our ready-made files. Say &ldquo;Start Part 1&rdquo; and Claude takes you through every step.</p></div>

@@ -63,7 +63,6 @@ export default function PolicyPackPage() {
             "Plain words your volunteers will actually read.",
             "Blanks for your church's own names, roles and contact details.",
             "A review date on every policy, so they stay current.",
-            "Pairs with our AI services if you want help putting them in place.",
           ]} />
           <p className="mt-6 text-sm text-muted">Templates only, not legal advice. Laws differ between countries and change over time, so please check each policy against the law where your church is, and with your denomination or insurer where they have requirements.</p>
         </div>

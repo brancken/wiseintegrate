@@ -27,9 +27,9 @@ const stripeFor = (id: keyof typeof stripeConfig.products) => stripeConfig.produ
 // (uploaded by scripts/upload-downloads.mjs). "download" is the file name the buyer sees.
 export const DOWNLOAD_BUCKET = "course-downloads";
 export const downloads: Record<string, { title: string; start: string; files: { path: string; download: string; label: string }[] }> = {
-  "htmaw-course-1": { title: "Course 1: Church Management System on Google", start: "Start Course 1", files: [{ path: "htmaw-course-1.zip", download: "How to Make a Website - Course 1 - Your Office on Google.zip", label: "Course 1: Your Office on Google" }] },
-  "htmaw-course-2": { title: "Course 2: Build Your Own Professional Website + App", start: "Start Course 2", files: [{ path: "htmaw-course-2.zip", download: "How to Make a Website - Course 2 - Build Your Website.zip", label: "Course 2: Build Your Website" }] },
-  "htmaw-course-3": { title: "Course 3: Market Yourself Online", start: "Start Course 3", files: [{ path: "htmaw-course-3.zip", download: "How to Make a Website - Course 3 - Grow and Connect.zip", label: "Course 3: Grow and Connect" }] },
+  "htmaw-course-1": { title: "Course 1: Church Management System on Google", start: "Start Course 1", files: [{ path: "htmaw-course-1.zip", download: "How to Make a Website - Course 1 - Your Office on Google.zip", label: "Course 1: Church Management System on Google" }] },
+  "htmaw-course-2": { title: "Course 2: Build Your Own Professional Website + App", start: "Start Course 2", files: [{ path: "htmaw-course-2.zip", download: "How to Make a Website - Course 2 - Build Your Website.zip", label: "Course 2: Build Your Own Professional Website + App" }] },
+  "htmaw-course-3": { title: "Course 3: Market Yourself Online", start: "Start Course 3", files: [{ path: "htmaw-course-3.zip", download: "How to Make a Website - Course 3 - Grow and Connect.zip", label: "Course 3: Market Yourself Online" }] },
   "htmaw-package": { title: "The complete package", start: "Start Course 2", files: [{ path: "htmaw-package.zip", download: "How to Make a Website - The complete package.zip", label: "The complete package: all three courses and the complete book" }] },
 };
 
@@ -41,6 +41,7 @@ export function productForPrice(priceId: string) {
 export const courseProducts = [
   {
     id: "htmaw-course-1",
+    href: "/shop/how-to-make-a-website/church-management-system",
     name: "Course 1: Church Management System on Google",
     short: "Your church office, automated: birthday emails, visitor follow-ups, thank-you emails, group emails, a team dashboard and automatic backups.",
     price: "US$97",
@@ -50,6 +51,7 @@ export const courseProducts = [
   },
   {
     id: "htmaw-course-2",
+    href: "/shop/how-to-make-a-website/website-and-app",
     name: "Course 2: Build Your Own Professional Website + App",
     short: "Your own web address, your own design, and a website that installs on phones like an app. Pages, photos, sermons, events and online giving.",
     price: "US$97",
@@ -59,6 +61,7 @@ export const courseProducts = [
   },
   {
     id: "htmaw-course-3",
+    href: "/shop/how-to-make-a-website/market-yourself-online",
     name: "Course 3: Market Yourself Online",
     short: "Get found and get out there: Google and AI search, Google Maps, Facebook, Instagram and YouTube, podcasts and phone notifications.",
     price: "US$97",
@@ -68,6 +71,7 @@ export const courseProducts = [
   },
   {
     id: "htmaw-package",
+    href: "/shop/how-to-make-a-website",
     name: "The complete package",
     short: "Launch price. All three courses, the complete book and all three Claude guides.",
     price: "US$197",
@@ -108,6 +112,8 @@ export const products: Product[] = [
   },
   {
     id: "exegesis",
+    image: "/images/products/skill-exegesis.webp",
+    imageSmall: "/images/products/skill-exegesis-640.webp",
     name: "Exegesis skill for Claude",
     short: "A careful six-step method for studying a Bible passage, with approved sources and a proper bibliography.",
     price: "US$15",
@@ -117,6 +123,8 @@ export const products: Product[] = [
   },
   {
     id: "church-policy-governance",
+    image: "/images/products/skill-church-policy.webp",
+    imageSmall: "/images/products/skill-church-policy-640.webp",
     name: "Church policy and governance skill",
     short: "Help writing clear church policies and governance documents.",
     price: "US$15",
@@ -126,6 +134,8 @@ export const products: Product[] = [
   },
   {
     id: "write-more-human",
+    image: "/images/products/skill-write-more-human.webp",
+    imageSmall: "/images/products/skill-write-more-human-640.webp",
     name: "Write more human",
     short: "Writing that sounds like a person, not a machine.",
     price: "US$15",
@@ -135,6 +145,8 @@ export const products: Product[] = [
   },
   {
     id: "human-rewrite",
+    image: "/images/products/skill-human-rewrite.webp",
+    imageSmall: "/images/products/skill-human-rewrite-640.webp",
     name: "Human rewrite",
     short: "Rewrite AI-sounding text so it reads naturally.",
     price: "US$15",

@@ -56,7 +56,7 @@ export const coursePages: CoursePage[] = [
       "A private dashboard for your team",
     ],
     goodToKnow: {
-      time: ["About 5 to 7 hours of work", "10 short lessons, each with a video and a printable guide"],
+      time: ["About 5 to 7 hours of work", "10 lessons, each with a printable guide"],
       cost: ["Google's tools: no charge on a free Gmail account", "Google Workspace: optional (Lesson 1 helps you decide)", "A short web address for the dashboard: optional"],
       need: ["A computer with the Chrome browser", "A phone that can receive text messages", "Claude (the Start Here lessons set it up)"],
     },

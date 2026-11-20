@@ -93,10 +93,10 @@ export default function ChurchesPage() {
         </div>
       </Section>
 
-      <Section id="course" alt eyebrow="Our course" title={<>Build your church website <em>with Claude</em></>}>
+      <Section id="course" alt eyebrow="Our course" title={<>Your church office, <em>automated</em></>}>
         <div className="max-w-xl">
-          <FeatureCard icon="monitor" title="How to Make a Website with Claude" href="/shop/how-to-make-a-website" cta="See the course">
-            <p>A course that takes you step by step through building your own church website, app and church office, with Claude doing most of the work.</p>
+          <FeatureCard icon="users" title="Church Management System on Google" href="/shop/how-to-make-a-website/church-management-system" cta="See the course">
+            <p>Build your own church management system on Google, step by step: visitor follow-ups, birthday emails, group emails, backups and a team dashboard, with no monthly fees.</p>
           </FeatureCard>
         </div>
       </Section>

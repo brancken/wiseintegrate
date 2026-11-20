@@ -18,7 +18,7 @@ const description =
   "Build your own church management system on Google: forms, people, follow-ups, group emails, backups and a team dashboard. On free Gmail, no monthly fees.";
 
 export const metadata: Metadata = {
-  title: { absolute: "Free Church Management System on Google, No Monthly Fee" },
+  title: { absolute: "Church Management System on Google, No Monthly Fee" },
   description,
   alternates: { canonical: PATH },
   openGraph: { images: ["/images/courses/course-1-v3.webp"] },
@@ -85,7 +85,7 @@ function pageJsonLd() {
     "@type": "WebPage",
     "@id": abs(`${PATH}#page`),
     url: abs(PATH),
-    name: "Free church management system on Google, with no monthly fee",
+    name: "Church management system on Google, with no monthly fee",
     headline: "A church management system on Google, with no monthly fee",
     description,
     inLanguage: "en-NZ",
@@ -116,7 +116,7 @@ export default function ChurchManagementSystemPage() {
           </>
         }
       >
-        <Link href="/shop/how-to-make-a-website#htmaw-course-1" className="btn btn-primary">See Course 1 <Icon name="arrow" className="h-4 w-4" /></Link>
+        <Link href="/shop/how-to-make-a-website/church-management-system" className="btn btn-primary">See Course 1 <Icon name="arrow" className="h-4 w-4" /></Link>
         <Link href="/shop/how-to-make-a-website" className="btn btn-ghost">The complete package</Link>
         <p className="w-full text-sm text-muted">Last updated 20 November 2026 by {site.founder.name}</p>
       </PageHero>
@@ -188,7 +188,7 @@ export default function ChurchManagementSystemPage() {
       <Section id="how-to-build" eyebrow="How to build it" title={<>How to build your church management system <em>step by step</em></>} intro="Course 1 has ten sessions. Each one is a printable guide with a checklist and a quiz.">
         <Steps steps={steps} />
         <p className="mt-8 max-w-3xl text-muted" data-reveal>
-          Get <Link href="/shop/how-to-make-a-website#htmaw-course-1" className="font-semibold text-accent underline underline-offset-4">Course 1: Church Management System on Google</Link> on its own, or the <Link href="/shop/how-to-make-a-website#htmaw-package" className="font-semibold text-accent underline underline-offset-4">complete package</Link> with Course 2 (your church website) and Course 3 (getting found on Google and AI search). Want to see it working? <a href="https://shilohministries.nz" target="_blank" rel="noopener" className="font-semibold text-accent underline underline-offset-4">Shiloh Ministries in Auckland</a> was built by following exactly these steps.
+          Get <Link href="/shop/how-to-make-a-website/church-management-system" className="font-semibold text-accent underline underline-offset-4">Course 1: Church Management System on Google</Link> on its own, or the <Link href="/shop/how-to-make-a-website#htmaw-package" className="font-semibold text-accent underline underline-offset-4">complete package</Link> with Course 2 (your church website) and Course 3 (getting found on Google and AI search). Want to see it working? <a href="https://shilohministries.nz" target="_blank" rel="noopener" className="font-semibold text-accent underline underline-offset-4">Shiloh Ministries in Auckland</a> was built by following exactly these steps.
         </p>
       </Section>
 
@@ -210,8 +210,7 @@ export default function ChurchManagementSystemPage() {
       <CtaBand
         title={<>Keep the money <em>for your mission.</em></>}
         text="Build your own church management system on Google, step by step, with Claude beside you."
-        primary={{ label: "See Course 1", href: "/shop/how-to-make-a-website#htmaw-course-1" }}
-        secondary={{ label: "Read the guide to a church website", href: "/blog/how-to-build-a-church-website-with-claude" }}
+        primary={{ label: "See Course 1", href: "/shop/how-to-make-a-website/church-management-system" }}
       />
     </>
   );

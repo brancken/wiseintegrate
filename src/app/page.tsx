@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { products, courseProducts } from "@/config/products";
-import { ProductCard } from "@/components/ProductCard";
+import { products } from "@/config/products";
+import { CourseBlocks, SoonBlocks } from "@/components/ShopBlocks";
 import { Section, FeatureCard, Steps, CtaBand } from "@/components/Blocks";
 import { Icon } from "@/components/Icon";
 import { LatestPosts } from "@/components/LatestPosts";
@@ -32,30 +32,14 @@ export default function Home() {
           </Link>
         </div>
         <div className="wrap pb-14">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {courseProducts.map((c) => (
-              <Link key={c.id} href="/shop/how-to-make-a-website" className={`card group flex flex-col overflow-hidden ${c.best ? "ring-2 ring-[var(--accent)]" : ""}`}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={c.imageSmall} alt="" width={640} height={360} loading="lazy" decoding="async" className="aspect-video w-full object-cover" />
-                <div className="flex flex-1 flex-col p-5">
-                  {c.best && <span className="mb-2 w-fit rounded-full bg-[#f97316] px-2.5 py-1 text-xs font-bold uppercase tracking-[0.12em] text-[#1a0b00]">Best value</span>}
-                  <h2 className="text-lg font-bold leading-snug">{c.name}</h2>
-                  <p className="mt-1 flex-1 text-sm text-muted">{c.short}</p>
-                  <div className="mt-4 flex items-center justify-between gap-2">
-                    <span className="font-display text-xl font-extrabold">{c.price}{c.was && <s className="ml-2 text-sm font-semibold text-muted">{c.was}</s>}</span>
-                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-accent">More <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <CourseBlocks priority />
         </div>
       </section>
 
       {/* 2. More products */}
-      <Section id="products" eyebrow="More products" title={<>Ready-made resources, <em>coming soon.</em></>} intro="Buy once, download, and use them at your own pace. Each one comes with clear steps, so you are never on your own.">
+      <Section id="products" eyebrow="More products" title={<>Ready-made resources, <em>coming soon.</em></>} intro="Church resources and Claude tools being written and tested now. They will open in the shop when they are ready.">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {products.filter((p) => p.id !== "how-to-make-a-website").slice(0, 3).map((p) => <ProductCard key={p.id} p={p} />)}
+          <SoonBlocks items={products.filter((p) => p.status === "soon")} />
         </div>
         <div className="mt-8" data-reveal>
           <Link href="/shop" className="btn btn-ghost">See all products <Icon name="arrow" className="h-4 w-4" /></Link>

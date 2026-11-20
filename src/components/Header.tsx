@@ -90,7 +90,6 @@ export function Header() {
       {open && (
         <nav id="mobile-menu" aria-label="Menu" className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-line bg-bg lg:hidden">
           <ul className="wrap grid gap-1 py-3">
-            <li><Link href="/" className="block rounded-xl px-3 py-3 font-semibold hover:bg-panel">Home</Link></li>
             {mainNav.map((item) => (
               <li key={item.label}>
                 {item.children ? (

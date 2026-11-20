@@ -75,29 +75,6 @@ export default function ServicesPage() {
             <Checks items={promises} />
           </div>
         </div>
-        <blockquote className="mt-10 max-w-3xl border-l-2 border-accent pl-5 text-lg italic text-muted" data-reveal>
-          &ldquo;AI is already doing formation work inside your organisation. The only question is whether you are guiding it.&rdquo;
-          <footer className="mt-2 text-sm not-italic">WiseIntegrate Integration Framework</footer>
-        </blockquote>
-      </Section>
-
-      <Section
-        id="who"
-        alt
-        eyebrow="Who we serve"
-        title={<>We serve businesses and <em>non-profit organisations</em></>}
-        intro="AI should serve your people, protect your values, and advance your purpose, and that is our commitment."
-      >
-        <div className="grid gap-6 lg:grid-cols-2">
-          <FeatureCard icon="church" title="Churches and non-profits" href="/churches" cta="Church integration pathway">
-            <p className="font-semibold text-ink">For churches and non-profits ready to engage AI wisely</p>
-            <p className="mt-2">From pastoral buy-in to full implementation, with a theological framework, clear boundaries, and training your staff can trust.</p>
-          </FeatureCard>
-          <FeatureCard icon="briefcase" title="Businesses, organisations and individuals" href="/business" cta="Business integration pathway">
-            <p className="font-semibold text-ink">For leaders who want AI that actually works</p>
-            <p className="mt-2">We map your workflows, select the right tools, build your policy framework, and train your team, so AI actually delivers results in your organisation.</p>
-          </FeatureCard>
-        </div>
       </Section>
 
       <Section id="process" eyebrow="The process" title={<>From first conversation to <em>full integration</em></>}>

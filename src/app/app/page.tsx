@@ -110,7 +110,7 @@ export default function AppPage() {
           <div className="card p-6" data-reveal>
             <h3 className="text-xl font-bold">What you will find in the app</h3>
             <div className="mt-4"><Checks items={[
-              <><Link href="/shop" className="text-accent underline">Our courses and Claude tools</Link>, and your purchase page with your downloads</>,
+              <><Link href="/shop" className="text-accent underline">Our courses and Claude tools</Link></>,
               <><Link href="/blog" className="text-accent underline">AI guides and articles</Link> for churches and businesses</>,
               <><Link href="/assessment" className="text-accent underline">The free AI Readiness Assessment</Link></>,
               <>Ask WiseIntegrate: questions answered from our website</>,

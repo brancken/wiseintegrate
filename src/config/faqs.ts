@@ -73,7 +73,7 @@ export const faqs: Faq[] = [
   {
     q: "What digital products do you sell?",
     a: [
-      "Practical courses and Claude tools. Our first course, How to Make a Website with Claude, takes you step by step through building your own professional website, app and church office, with Claude doing most of the work. More Claude tools for pastors and writers are coming soon.",
+      "Three courses, each on its own or together in the complete package: Course 1, Church Management System on Google; Course 2, Build Your Own Professional Website + App; and Course 3, Market Yourself Online. Claude does most of the work with you, step by step. A Church Policy Pack and Claude tools for pastors and writers are coming soon.",
     ],
     link: { href: "/shop", label: "Visit the shop" },
   },

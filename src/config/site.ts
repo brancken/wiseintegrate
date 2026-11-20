@@ -46,8 +46,10 @@ export const mainNav: NavItem[] = [
     href: "/shop",
     children: [
       { label: "All products", href: "/shop" },
-      { label: "How to Make a Website with Claude", href: "/shop/how-to-make-a-website" },
-      { label: "Free church management system", href: "/church-management-system" },
+      { label: "Course 1: Church Management System on Google", href: "/shop/how-to-make-a-website/church-management-system" },
+      { label: "Course 2: Professional Website + App", href: "/shop/how-to-make-a-website/website-and-app" },
+      { label: "Course 3: Market Yourself Online", href: "/shop/how-to-make-a-website/market-yourself-online" },
+      { label: "The complete package (all three courses)", href: "/shop/how-to-make-a-website" },
       { label: "Church Policy Pack (coming soon)", href: "/shop/church-policy-pack" },
       { label: "Claude tools (coming soon)", href: "/shop#coming-soon" },
     ],
@@ -74,7 +76,6 @@ export const mainNav: NavItem[] = [
       { label: "Free church AI policy template", href: "/free/church-ai-policy-template" },
       { label: "How to install our app", href: "/app" },
       { label: "Frequently asked questions", href: "/faq" },
-      { label: "Free AI Readiness Assessment", href: "/assessment" },
     ],
   },
   {
@@ -103,8 +104,10 @@ export const footerLinks: { title: string; links: NavItem[] }[] = [
     title: "Products",
     links: [
       { label: "Shop", href: "/shop" },
-      { label: "How to Make a Website", href: "/shop/how-to-make-a-website" },
-      { label: "Free church management system", href: "/church-management-system" },
+      { label: "Course 1: Church Management System", href: "/shop/how-to-make-a-website/church-management-system" },
+      { label: "Course 2: Website + App", href: "/shop/how-to-make-a-website/website-and-app" },
+      { label: "Course 3: Market Yourself Online", href: "/shop/how-to-make-a-website/market-yourself-online" },
+      { label: "The complete package", href: "/shop/how-to-make-a-website" },
     ],
   },
   {

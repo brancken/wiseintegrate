@@ -1,42 +1,29 @@
 import type { Metadata } from "next";
 import { products } from "@/config/products";
-import { ProductCard } from "@/components/ProductCard";
-import { PageHero, Section, CtaBand } from "@/components/Blocks";
+import { PageHero, Section } from "@/components/Blocks";
+import { CourseBlocks, SoonBlocks } from "@/components/ShopBlocks";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/seo";
-import { preload } from "react-dom";
 
 export const metadata: Metadata = {
-  title: "Shop: courses and Claude tools",
-  description: "Practical digital products from WiseIntegrate: build your own website with Claude, plus Claude tools for pastors, churches and writers. Buy once, use at your own pace.",
+  title: "Shop: courses, church resources and Claude tools",
+  description: "All WiseIntegrate products: three courses (church management system on Google, professional website and app, market yourself online) and the complete package, plus church resources and Claude tools coming soon.",
   alternates: { canonical: "/shop" },
 };
 
+// All products, in blocks: the courses first, then what is coming soon. (21 Nov 2026, Dr. Brancken)
 export default function Shop() {
-  preload("/images/courses/package-640-blue.webp", { as: "image", imageSrcSet: "/images/courses/package-640-blue.webp 640w, /images/courses/package-800-blue.webp 800w, /images/courses/package-blue.webp 1280w", imageSizes: "(min-width: 768px) 50vw, 100vw", fetchPriority: "high" });
-  const available = products.filter((p) => p.status === "available");
-  const resources = products.filter((p) => p.id === "church-policy-pack");
-  const soon = products.filter((p) => p.status === "soon" && p.id !== "church-policy-pack");
+  const soon = products.filter((p) => p.status === "soon");
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Shop", href: "/shop" }])} />
-      <PageHero eyebrow="Shop" title={<>Digital products that <em>do the heavy lifting.</em></>} intro="Courses and Claude tools for churches, businesses, organisations and individuals. Buy once, download, and use them at your own pace." />
-      <Section eyebrow="Available now" title="Courses" intro="Our first course takes you step by step through building your own professional website, app and church office, with Claude doing most of the work. Each course can be bought on its own, or all three together in the complete package.">
-        <div className="grid gap-6 md:grid-cols-2">
-          {available.map((p, i) => <ProductCard key={p.id} p={p} featured priority={i === 0} />)}
-        </div>
+      <PageHero eyebrow="Shop" title={<>All our <em>products.</em></>} intro="Courses, church resources and Claude tools. Buy once, download, and use them at your own pace." />
+      <Section eyebrow="Courses" title={<>How to Make a Website <em>with Claude.</em></>} intro="Three courses, each on its own or all together in the complete package. Open a course to see exactly what is inside.">
+        <CourseBlocks priority />
       </Section>
-      <Section id="church-resources" alt eyebrow="Church resources" title={<>Ready-made policies <em>for your church.</em></>} intro="Coming soon: a full pack of church policies you can adapt to your own church, from child safety to AI use.">
-        <div className="grid gap-6 md:grid-cols-2">
-          {resources.map((p) => <ProductCard key={p.id} p={p} featured />)}
-        </div>
+      <Section id="coming-soon" alt eyebrow="Coming soon" title={<>In <em>development.</em></>} intro="These are being written and tested now. They will open here when they are ready.">
+        <SoonBlocks items={soon} />
       </Section>
-      <Section id="coming-soon" eyebrow="Coming soon" title={<>Claude tools <em>in the making.</em></>} intro="Each one is a ready-made skill you add to Claude, with a one-page guide. They are being tested now and will appear here when they are ready.">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {soon.map((p) => <ProductCard key={p.id} p={p} />)}
-        </div>
-      </Section>
-      <CtaBand title={<>Not sure where to start?</>} text="Tell us what you are trying to do, and we will point you to the right product or service." primary={{ label: "Contact us", href: "/contact" }} secondary={{ label: "Our AI services", href: "/services" }} />
     </>
   );
 }

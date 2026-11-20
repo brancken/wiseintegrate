@@ -6,8 +6,11 @@ import { getPosts } from "@/lib/blog";
 // When you change a page's content, update its date here.
 const pages: Record<string, string> = {
   "": "2026-11-20",
-  "/shop": "2026-11-20",
-  "/shop/how-to-make-a-website": "2026-11-20",
+  "/shop": "2026-11-21",
+  "/shop/how-to-make-a-website": "2026-11-21",
+  "/shop/how-to-make-a-website/church-management-system": "2026-11-21",
+  "/shop/how-to-make-a-website/website-and-app": "2026-11-21",
+  "/shop/how-to-make-a-website/market-yourself-online": "2026-11-21",
   "/church-management-system": "2026-11-20",
   "/shop/church-policy-pack": "2026-11-20",
   "/churches": "2026-11-20",

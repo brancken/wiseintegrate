@@ -67,7 +67,7 @@ export default function PrivacyPage() {
               <li><strong>Anthropic:</strong> AI provider (United States) whose Claude model processes your assessment responses solely to generate your personalised AI readiness report.</li>
               <li><strong>Stripe:</strong> payment processor (United States and Ireland) used when you buy a product. Stripe handles your card details under its own privacy policy at <a href="https://stripe.com/privacy" {...ext}>stripe.com/privacy</a>.</li>
               <li><strong>EmailJS:</strong> used to deliver contact form messages to our team. Contact form submissions are not stored by EmailJS beyond delivery.</li>
-              <li><strong>Vercel:</strong> website hosting and infrastructure provider (United States). Vercel may log standard server access data including IP addresses.</li>
+              <li><strong>Cloudflare:</strong> website hosting and infrastructure provider (United States). Cloudflare may log standard server access data including IP addresses.</li>
               <li><strong>jsDelivr:</strong> open-source CDN (European Union) used to deliver an icon set on our AI Readiness Assessment pages. jsDelivr may log your IP address as a standard server request log when these files are loaded.</li>
               <li><strong>Google Fonts:</strong> typography resources loaded from Google&apos;s servers on our AI Readiness Assessment pages. The rest of our website serves its fonts from our own servers. No advertising or tracking cookies are set by this service.</li>
             </ul>
@@ -84,7 +84,7 @@ export default function PrivacyPage() {
             <p>If you would like your data deleted earlier, please contact us and we will action your request promptly.</p>
 
             <h2>International data transfers</h2>
-            <p>Our service providers, Supabase, Vercel, Anthropic, EmailJS, Stripe, and Google (Fonts, on our assessment pages), are based in the United States. jsDelivr, a CDN used to deliver an icon set on our assessment pages, is based in the European Union. When you use our website or submit an assessment, your personal information may be transferred to and processed overseas.</p>
+            <p>Our service providers, Supabase, Cloudflare, Anthropic, EmailJS, Stripe, and Google (Fonts, on our assessment pages), are based in the United States. jsDelivr, a CDN used to deliver an icon set on our assessment pages, is based in the European Union. When you use our website or submit an assessment, your personal information may be transferred to and processed overseas.</p>
             <p>New Zealand holds an adequacy decision from the European Union, meaning our data protection standards are recognised as equivalent internationally. We take reasonable steps to ensure that our overseas service providers protect your information in accordance with at least equivalent standards to those required under the New Zealand Privacy Act 2020.</p>
 
             <h2>Privacy breach notifications</h2>
