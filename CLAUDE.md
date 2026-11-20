@@ -19,7 +19,7 @@ Next.js 16 (App Router, Turbopack), React 19, Tailwind CSS 4, MDX blog. Fonts se
 - Security headers and the Content Security Policy: `next.config.ts`. Old addresses redirect there too.
 
 ## Hosting
-Netlify (free plan allows commercial use) builds the site from GitHub (netlify.toml). Vercel is kept untouched as a fallback (it still serves the old site from `main` until the domain is switched). `isProduction` in src/lib/seo.ts recognises both.
+Netlify (free plan allows commercial use) builds the live site from GitHub branch `main` (netlify.toml); wiseintegrate.com points to Netlify (Cloudflare DNS, see HOSTING-SWITCH.md). Vercel is kept as an unused fallback. `isProduction` in src/lib/seo.ts recognises both.
 
 ## AI Readiness Assessment, consultant dashboard and purchases
 - The assessment, its report pages and the dashboard are the old plain pages in `public/tools/` (/assessment, /assessment/start, /report-summary, /report-guide, /dashboard).

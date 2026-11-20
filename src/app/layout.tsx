@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     ...(process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : {}),
     ...(process.env.BING_SITE_VERIFICATION ? { other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION } } : {}),
   },
-  appleWebApp: { capable: true, title: site.appName, statusBarStyle: "black-translucent" },
+  appleWebApp: { capable: true, title: site.appName, statusBarStyle: "default" },
   formatDetection: { telephone: false },
 };
 
