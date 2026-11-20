@@ -1,0 +1,6 @@
+# Cloudflare: the assessment, its reports and the dashboard are plain pages in public/tools (same as netlify.toml).
+/assessment          /tools/assessment-intro.html   200
+/assessment/start    /tools/assessment.html         200
+/report-summary      /tools/report-summary.html     200
+/report-guide        /tools/report-guide.html       200
+/dashboard           /tools/dashboard.html          200

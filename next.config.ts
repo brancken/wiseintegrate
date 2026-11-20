@@ -21,6 +21,7 @@ const csp = [
 ].join("; ");
 
 const securityHeaders = [
+  { key: "Strict-Transport-Security", value: "max-age=31536000" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()" },
@@ -33,6 +34,8 @@ const securityHeaders = [
 
 // Old addresses that moved (every old link keeps working).
 const redirects = [
+  // wiseintegrate.com without www goes to www (as on Netlify), so Google sees one address.
+  { source: "/:path*", has: [{ type: "host" as const, value: "wiseintegrate.com" }], destination: "https://www.wiseintegrate.com/:path*", permanent: true },
   { source: "/church", destination: "/churches", permanent: true },
   { source: "/courses/how-to-make-a-website", destination: "/shop/how-to-make-a-website", permanent: true },
   { source: "/courses", destination: "/shop", permanent: true },
@@ -48,8 +51,8 @@ const redirects = [
 ];
 
 const nextConfig: NextConfig = {
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Cache Components / partial prefetching are off: Cloudflare cannot run them yet (tested 21 Nov 2026, every page hung).
+  // Without them all main pages are still prebuilt. Turn back on only after testing a Cloudflare build.
   poweredByHeader: false,
   devIndicators: false,
   turbopack: {

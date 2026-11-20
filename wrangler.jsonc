@@ -1,0 +1,18 @@
+// wiseintegrate.com on Cloudflare Workers (from 21 Nov 2026). Publish: npm run cf:deploy (see scripts/cloudflare.mjs).
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "wiseintegrate",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": { "directory": ".open-next/assets", "binding": "ASSETS", "html_handling": "none" },
+  // Keeps sales off and Google listing on while the site runs (the build sets it too).
+  "vars": { "SITE_ENV": "production" },
+  // wiseintegrate.com and www run on this site once the two DNS records (CNAME to wiseintegrate.netlify.app) are Proxied.
+  // Back to Netlify: set those two records to DNS only.
+  "routes": [
+    { "pattern": "www.wiseintegrate.com/*", "zone_name": "wiseintegrate.com" },
+    { "pattern": "wiseintegrate.com/*", "zone_name": "wiseintegrate.com" }
+  ],
+  "observability": { "enabled": true }
+}

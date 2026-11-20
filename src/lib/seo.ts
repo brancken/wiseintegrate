@@ -1,8 +1,10 @@
 import { site } from "@/config/site";
 
 /** True only on the real live site, so Vercel preview copies never appear in Google. */
-// "Production" = the live build on Netlify (CONTEXT) or Vercel (VERCEL_ENV). Previews and this computer are not.
-export const isProduction = process.env.CONTEXT === "production" || process.env.VERCEL_ENV === "production";
+// "Production" = the live build on Cloudflare (SITE_ENV, set by scripts/cloudflare.mjs), Netlify (CONTEXT) or Vercel (VERCEL_ENV).
+// Previews and this computer are not. It keeps sales off and Google listing on, so the live build must always set it.
+export const isProduction =
+  process.env.SITE_ENV === "production" || process.env.CONTEXT === "production" || process.env.VERCEL_ENV === "production";
 export const allowIndexing = isProduction || process.env.ALLOW_INDEXING === "1";
 
 export const abs = (p: string) => new URL(p, site.url).toString();
