@@ -40,6 +40,7 @@ export type NavItem = { label: string; href: string; icon?: string; children?: N
 
 // The top menu. Items with children open as a drop-down (computers) or a fold-out list (phone menu).
 export const mainNav: NavItem[] = [
+  { label: "Home", href: "/" },
   {
     label: "Shop",
     href: "/shop",

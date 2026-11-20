@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { products } from "@/config/products";
+import { products, courseProducts } from "@/config/products";
 import { ProductCard } from "@/components/ProductCard";
 import { Section, FeatureCard, Steps, CtaBand } from "@/components/Blocks";
 import { Icon } from "@/components/Icon";
@@ -8,41 +8,59 @@ import { processSteps, promises } from "@/config/services";
 import { InstallAppButton } from "@/components/Pwa";
 
 export default function Home() {
-  const [featured, ...rest] = products;
   return (
     <>
-      {/* 1. Opening */}
+      {/* 1. Opening: the products first (20 Nov 2026, Dr. Brancken) */}
       <section className="hero-glow relative overflow-hidden border-b border-line">
-        <div className="wrap grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-[1.15fr_1fr]">
+        <div className="wrap grid items-center gap-10 pt-14 pb-10 sm:pt-20 lg:grid-cols-[1fr_1.15fr]">
           <div>
-            <p className="eyebrow rise">Digital products and AI solutions</p>
+            <p className="eyebrow rise">New course: How to Make a Website with Claude</p>
             <h1 className="rise mt-4 text-[clamp(2.3rem,1.5rem+3.6vw,4.2rem)] font-extrabold leading-[1.04]" style={{ "--d": "60ms" } as React.CSSProperties}>
-              AI should serve your mission. <span className="grad">Not replace it.</span>
+              Courses and tools that <span className="grad">do the heavy lifting.</span>
             </h1>
             <p className="rise mt-6 max-w-xl text-lg text-muted" style={{ "--d": "120ms" } as React.CSSProperties}>
-              We make practical digital products, like our course on building your own website with Claude, and we help individuals, small businesses, organisations and churches use AI simply, safely and well.
+              Build your own website, app and church office with Claude doing most of the work. Three courses, step by step, at your own pace.
             </p>
             <div className="rise mt-8 flex flex-wrap gap-3" style={{ "--d": "180ms" } as React.CSSProperties}>
-              <Link href="/shop" className="btn btn-primary"><Icon name="bag" className="h-4 w-4" /> Browse our products</Link>
-              <Link href="/services" className="btn btn-ghost">Our AI services</Link>
+              <Link href="/shop/how-to-make-a-website" className="btn btn-primary"><Icon name="cap" className="h-4 w-4" /> See the courses</Link>
+              <Link href="/shop" className="btn btn-ghost"><Icon name="bag" className="h-4 w-4" /> All products</Link>
             </div>
           </div>
-          <div className="rise grid grid-cols-2 gap-4" style={{ "--d": "200ms" } as React.CSSProperties}>
-            <Link href="/shop" className="card col-span-2 flex items-center gap-4 p-5">
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-panel-strong text-accent"><Icon name="bag" /></span>
-              <span><span className="block font-bold">Digital products</span><span className="text-sm text-muted">Courses and Claude tools you can use today</span></span>
-            </Link>
-            <Link href="/churches" className="card p-5">
-              <span className="grid h-11 w-11 place-items-center rounded-xl bg-panel-strong text-accent"><Icon name="church" /></span>
-              <span className="mt-3 block font-bold">Churches and non-profits</span>
-            </Link>
-            <Link href="/business" className="card p-5">
-              <span className="grid h-11 w-11 place-items-center rounded-xl bg-panel-strong text-accent"><Icon name="briefcase" /></span>
-              <span className="mt-3 block font-bold">Businesses and organisations</span>
-            </Link>
+          <Link href="/shop/how-to-make-a-website" className="rise mx-auto block w-full max-w-[560px] overflow-hidden rounded-3xl border border-line shadow-[var(--shadow-soft)] lg:mr-0" style={{ "--d": "200ms" } as React.CSSProperties}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/courses/ad-blue-720.webp" srcSet="/images/courses/ad-blue-720.webp 720w, /images/courses/ad-blue-1080.webp 1080w" sizes="(min-width: 1024px) 560px, 100vw" alt="New course: how to make your own professional website with Claude. Website and app, church management system." width={1080} height={1080} fetchPriority="high" decoding="async" className="aspect-square w-full object-cover" />
+          </Link>
+        </div>
+        <div className="wrap pb-14">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {courseProducts.map((c) => (
+              <Link key={c.id} href="/shop/how-to-make-a-website" className={`card group flex flex-col overflow-hidden ${c.best ? "ring-2 ring-[var(--accent)]" : ""}`}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={c.imageSmall} alt="" width={640} height={360} loading="lazy" decoding="async" className="aspect-video w-full object-cover" />
+                <div className="flex flex-1 flex-col p-5">
+                  {c.best && <span className="mb-2 w-fit rounded-full bg-[#f97316] px-2.5 py-1 text-xs font-bold uppercase tracking-[0.12em] text-[#1a0b00]">Best value</span>}
+                  <h2 className="text-lg font-bold leading-snug">{c.name}</h2>
+                  <p className="mt-1 flex-1 text-sm text-muted">{c.short}</p>
+                  <div className="mt-4 flex items-center justify-between gap-2">
+                    <span className="font-display text-xl font-extrabold">{c.price}{c.was && <s className="ml-2 text-sm font-semibold text-muted">{c.was}</s>}</span>
+                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-accent">More <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* 2. More products */}
+      <Section id="products" eyebrow="More products" title={<>Ready-made resources, <em>coming soon.</em></>} intro="Buy once, download, and use them at your own pace. Each one comes with clear steps, so you are never on your own.">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {products.filter((p) => p.id !== "how-to-make-a-website").slice(0, 3).map((p) => <ProductCard key={p.id} p={p} />)}
+        </div>
+        <div className="mt-8" data-reveal>
+          <Link href="/shop" className="btn btn-ghost">See all products <Icon name="arrow" className="h-4 w-4" /></Link>
+        </div>
+      </Section>
 
       {/* App: get WiseIntegrate on your phone or computer */}
       <section className="border-b border-line bg-bg-alt">
@@ -60,25 +78,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. Products */}
-      <Section id="products" eyebrow="Our products" title={<>Tools and courses that <em>do the heavy lifting.</em></>} intro="Buy once, download, and use them at your own pace. Each one comes with clear steps, so you are never on your own.">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <ProductCard p={featured} featured />
-          {rest.filter((p) => p.id === "church-policy-pack").map((p) => <ProductCard key={p.id} p={p} />)}
-        </div>
-        <div className="mt-8" data-reveal>
-          <Link href="/shop" className="btn btn-ghost">See all products <Icon name="arrow" className="h-4 w-4" /></Link>
-        </div>
-      </Section>
-
       {/* 3. Services: churches one side, businesses the other */}
-      <Section id="services" alt eyebrow="Our services" title={<>From your first AI question to <em>full implementation.</em></>} intro="We assist businesses, churches and non-profits at every stage of their AI journey, from understanding AI to developing strategies, policies and team training for safe and effective use.">
+      <Section id="services" alt eyebrow="Our services" title={<>AI should serve your mission. <em>Not replace it.</em></>} intro="We assist businesses, churches and non-profits at every stage of their AI journey, from understanding AI to developing strategies, policies and team training for safe and effective use.">
         <div className="grid gap-6 lg:grid-cols-2">
-          <FeatureCard icon="church" title="Churches and non-profits" href="/churches" cta="Church and ministry integration">
-            <p>For churches and non-profits ready to engage AI wisely. From pastoral buy-in to full implementation, with a theological framework, clear boundaries, and training your staff can trust.</p>
-          </FeatureCard>
           <FeatureCard icon="briefcase" title="Businesses, organisations and individuals" href="/business" cta="Business integration">
             <p>For leaders who want AI that actually works. We map your workflows, select the right tools, build your policy framework and train your team, so AI actually delivers results in your organisation.</p>
+          </FeatureCard>
+          <FeatureCard icon="church" title="Churches and non-profits" href="/churches" cta="Church and ministry integration">
+            <p>For churches and non-profits ready to engage AI wisely. From pastoral buy-in to full implementation, with a theological framework, clear boundaries, and training your staff can trust.</p>
           </FeatureCard>
         </div>
         <div className="mt-6 grid gap-6 md:grid-cols-3">
