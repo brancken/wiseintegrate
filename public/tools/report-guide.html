@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Implementation Guide &mdash; Consultant Notes</title>
+<style>
+  :root {
+    --navy: #1d4ed8;
+    --grey: #555555;
+    --lightgrey: #777777;
+    --red: #d1242f;
+    --amber: #92400e;
+    --amberbg: #fef3c7;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px 32px;
+    background: #fff;
+    position: relative;
+  }
+  .watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-35deg);
+    font-size: 38px;
+    font-weight: bold;
+    color: rgba(209, 36, 47, 0.08);
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+    letter-spacing: 2px;
+  }
+  .confidential-banner {
+    background: var(--amberbg);
+    border: 1px solid #f59e0b;
+    border-radius: 5px;
+    padding: 8px 14px;
+    font-size: 11px;
+    font-weight: bold;
+    color: var(--amber);
+    text-align: center;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+  }
+  .brand { text-align: center; color: var(--navy); font-weight: bold; font-size: 13px; letter-spacing: 0.5px; }
+  h1 { text-align: center; font-size: 22px; margin: 4px 0 2px; }
+  .subtitle { text-align: center; color: var(--lightgrey); font-size: 12px; font-style: italic; margin-bottom: 14px; }
+  .meta-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 10px; }
+  .meta-row b { color: #000; }
+  h2 {
+    color: var(--navy);
+    font-size: 15px;
+    border-bottom: 2px solid var(--navy);
+    padding-bottom: 4px;
+    margin: 22px 0 8px;
+  }
+  .stage-badge {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 22px;
+    border-radius: 6px;
+    margin: 4px 0 14px;
+  }
+  .info-block {
+    background: #f8faff;
+    border-left: 3px solid var(--navy);
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 12.5px;
+  }
+  .info-block .label {
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--lightgrey);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .priority-block {
+    background: #fff5f5;
+    border-left: 3px solid var(--red);
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 12.5px;
+  }
+  .priority-block .label {
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  ol.sequence {
+    padding-left: 20px;
+    margin: 0 0 10px;
+  }
+  ol.sequence li {
+    margin-bottom: 7px;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+  .timeframe-row {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+  .timeframe-row b { color: var(--navy); }
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .score-item {
+    background: #f4f7ff;
+    border: 1px solid #dde5f5;
+    border-radius: 4px;
+    padding: 6px 8px;
+    text-align: center;
+  }
+  .score-item .s-label { font-size: 9px; color: var(--lightgrey); line-height: 1.3; }
+  .score-item .s-val { font-size: 18px; font-weight: bold; color: var(--navy); }
+  .score-item.priority { border-color: var(--red); background: #fff5f5; }
+  .score-item.priority .s-val { color: var(--red); }
+  .footer-note {
+    text-align: center;
+    color: var(--lightgrey);
+    font-size: 9.5px;
+    font-style: italic;
+    margin-top: 24px;
+  }
+  .toolbar {
+    text-align: center;
+    margin: 16px 0 24px;
+  }
+  .toolbar button {
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .toolbar button:hover { background: #1640b5; }
+
+  /* Loading / error states */
+  #loading {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--lightgrey);
+    font-size: 14px;
+  }
+  #errorState {
+    display: none;
+    text-align: center;
+    padding: 80px 20px;
+  }
+  #errorState h2 { color: #d1242f; border-color: #d1242f; }
+  #errorMsg { font-size: 13px; color: var(--grey); margin-top: 8px; }
+  #pageContent { display: none; }
+
+  @media print {
+    .toolbar { display: none; }
+    body { padding: 0; max-width: none; }
+    @page { size: A4; margin: 14mm 16mm; }
+    #loading, #errorState { display: none !important; }
+    #pageContent { display: block !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="watermark">CONSULTANT COPY &mdash; NOT FOR DISTRIBUTION</div>
+
+<div id="loading">Loading guide&hellip;</div>
+
+<div id="errorState">
+  <div class="brand">WISEINTEGRATE</div>
+  <h2>Report Not Found</h2>
+  <div id="errorMsg"></div>
+</div>
+
+<div id="pageContent">
+  <div class="confidential-banner">CONSULTANT COPY &mdash; NOT FOR DISTRIBUTION</div>
+
+  <div class="toolbar">
+    <button onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+  <div class="brand">WISEINTEGRATE</div>
+  <h1>AI Implementation Guide</h1>
+  <div class="subtitle">Consultant reference &mdash; do not share with client</div>
+
+  <div class="meta-row">
+    <div><b>Organisation:</b> <span id="orgName">&mdash;</span></div>
+    <div><b>Assessment date:</b> <span id="assessDate">&mdash;</span></div>
+  </div>
+
+  <h2>Current Readiness Stage</h2>
+  <div>
+    <div class="stage-badge" id="stageBadge">&mdash;</div>
+  </div>
+  <div class="info-block">
+    <div class="label">Roadmap Position</div>
+    <div id="roadmapStep">&mdash;</div>
+  </div>
+
+  <h2>Dimension Scores</h2>
+  <div class="score-grid" id="scoreGrid"></div>
+
+  <h2>Priority Focus</h2>
+  <div class="priority-block">
+    <div class="label">Priority Dimension(s)</div>
+    <div id="priorityDims" style="font-weight:bold; margin-bottom:8px;">&mdash;</div>
+    <div class="label" style="margin-top:8px;">Rationale</div>
+    <div id="priorityRationale">&mdash;</div>
+  </div>
+
+  <h2>Recommended First Pilot</h2>
+  <div class="info-block">
+    <div class="label">Pilot</div>
+    <div id="firstPilot" style="font-weight:bold; margin-bottom:8px;">&mdash;</div>
+    <div class="label" style="margin-top:8px;">Why this pilot</div>
+    <div id="pilotRationale">&mdash;</div>
+  </div>
+
+  <h2>Recommended Sequence</h2>
+  <ol class="sequence" id="sequenceList"></ol>
+
+  <div class="timeframe-row">
+    <b>Timeframe:</b> <span id="timeframe">&mdash;</span>
+  </div>
+
+  <div class="footer-note">
+    WiseIntegrate AI Implementation Guide &mdash; generated from assessment data. For consultant use only.
+  </div>
+</div>
+
+<script>
+const DATA_URL = 'https://ppgecvmyuyuntwnqwcru.supabase.co/functions/v1/report-guide';
+
+const DIMENSION_SHORT = {
+  leadership_strategy:  "Leadership & Strategy",
+  data_systems:         "Data & Systems",
+  ai_literacy_staff:    "AI Literacy & Staff",
+  governance_policy:    "Governance & Policy",
+  current_ai_usage:     "Current AI Usage",
+  department_readiness: "Dept. Readiness",
+  security_privacy:     "Security & Privacy",
+  budget_resources:     "Budget & Resources",
+};
+
+function renderGuide(data) {
+  document.getElementById("orgName").textContent = data.organisation_name || "—";
+  document.getElementById("assessDate").textContent = data.assessment_date || "—";
+  document.getElementById("stageBadge").textContent = data.readiness_stage || "—";
+
+  var rec = data.recommendations || {};
+  document.getElementById("roadmapStep").textContent = rec.current_roadmap_step || "—";
+  document.getElementById("priorityRationale").textContent = rec.priority_rationale || "—";
+  document.getElementById("firstPilot").textContent = rec.recommended_first_pilot || "—";
+  document.getElementById("pilotRationale").textContent = rec.pilot_rationale || "—";
+  document.getElementById("timeframe").textContent = rec.timeframe || "—";
+
+  var priorityDims = data.priority_dimensions || [];
+  var priorityLabels = priorityDims.map(function(k) { return DIMENSION_SHORT[k] || k; });
+  document.getElementById("priorityDims").textContent = priorityLabels.join(", ") || "—";
+
+  var scores = data.scores || {};
+  var scoreGrid = document.getElementById("scoreGrid");
+  scoreGrid.innerHTML = "";
+  Object.keys(DIMENSION_SHORT).forEach(function(key) {
+    var isPriority = priorityDims.indexOf(key) !== -1;
+    var val = scores[key] !== undefined ? scores[key] : "—";
+    var item = document.createElement("div");
+    item.className = "score-item" + (isPriority ? " priority" : "");
+    item.innerHTML =
+      '<div class="s-val">' + val + '</div>' +
+      '<div class="s-label">' + DIMENSION_SHORT[key] + '</div>';
+    scoreGrid.appendChild(item);
+  });
+
+  var seqList = document.getElementById("sequenceList");
+  seqList.innerHTML = "";
+  (rec.sequence || []).forEach(function(step) {
+    var li = document.createElement("li");
+    li.textContent = step;
+    seqList.appendChild(li);
+  });
+}
+
+function showError(msg) {
+  document.getElementById("loading").style.display = "none";
+  document.getElementById("errorMsg").textContent = msg;
+  document.getElementById("errorState").style.display = "block";
+}
+
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get("id");
+
+  if (!id) {
+    showError("No assessment ID provided. This page must be opened from the WiseIntegrate dashboard.");
+    return;
+  }
+
+  fetch(DATA_URL + "?id=" + encodeURIComponent(id))
+    .then(function (r) {
+      if (!r.ok) {
+        return r.json().then(function (d) {
+          throw new Error(d.error || "Failed to load guide (HTTP " + r.status + ").");
+        }).catch(function () {
+          throw new Error("Failed to load guide (HTTP " + r.status + ").");
+        });
+      }
+      return r.json();
+    })
+    .then(function (data) {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("pageContent").style.display = "block";
+      renderGuide(data);
+    })
+    .catch(function (err) {
+      showError(err.message || "Failed to load guide data. Please try again.");
+    });
+})();
+</script>
+
+</body>
+</html>

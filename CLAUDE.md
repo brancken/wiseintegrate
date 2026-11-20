@@ -1,124 +1,31 @@
-# CLAUDE.md
+# CLAUDE.md (wiseintegrate.com)
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+WiseIntegrate: digital products (courses, Claude tools) and AI services for churches, businesses, organisations and individuals. Rebuilt on 20 Nov 2026 to the same standard as shilohministries.nz.
 
-## Project
+## Rules (Dr. Brancken)
+- Never publish, push to main, deploy, post or send anything without Dr. Brancken's explicit yes. Pushing to `main` on GitHub publishes the live site (Vercel builds it).
+- The GitHub repo is PUBLIC: never commit keys, passwords, course ZIPs or private course page codes. Keys go in Vercel environment variables, pasted by Dr. Brancken.
+- British/NZ English, no em or en dashes, never invent facts. Under-promise ("can", not "will").
+- Don't delete; move unwanted files to `C:\Wise\websites\_to_delete`.
 
-**WiseIntegrate** — a static PWA for an AI integration consultancy serving churches and businesses. No build toolchain; all source files are deployed directly.
+## Stack
+Next.js 16 (App Router, Turbopack), React 19, Tailwind CSS 4, MDX blog. Fonts served from the site (next/font). No analytics or tracking scripts.
+- `npm run dev` (port 3077), `npm run build`, `npm start`. Run `npm run build` and `npx eslint src` before saying a change is done.
+- Facts: `src/config/site.ts`. Products and prices: `src/config/products.ts` (`STRIPE_LIVE` switches the live buy buttons on). Shared service wording: `src/config/services.ts`.
+- Page parts: `src/components/Blocks.tsx` (PageHero, Section, FeatureCard, Steps, CtaBand, Checks), `ProductCard`, `PostCard`, `Header`, `Footer`, `TabBar` (phone app bar), `Pwa` (install app), `ThemeToggle` (dark blue default, light option).
+- Blog: one file per post in `content/blog/<slug>.mdx`. See `BLOG_INSTRUCTIONS.md`.
+- Web app: `src/app/manifest.ts`, `public/sw.js` (never caches /api, /account, /learn, /admin, /dashboard, /tools or the assessment).
+- SEO and AI search: `src/lib/seo.ts` (JSON-LD), `sitemap.ts`, `robots.ts`, `llms.txt`. Only wiseintegrate.com is indexed (preview copies get noindex).
+- Security headers and the Content Security Policy: `next.config.ts`. Old addresses redirect there too.
 
-## Development
+## AI Readiness Assessment and consultant dashboard
+- The assessment, its two report pages and the dashboard are the old plain pages in `public/tools/` (addresses /assessment, /assessment/start, /report-summary, /report-guide, /dashboard).
+- They no longer touch the database directly. The browser talks to our server routes, which use the secret Supabase service key:
+  - `POST /api/assessment` saves a submission and makes the AI report (Supabase Edge Function `generate-report`).
+  - `/api/admin/*` (login, logout, list, notes, regenerate, snapshot) for the dashboard. Login checks `ADMIN_PASSWORD`; a signed cookie lasts 12 hours; 5 wrong tries lock for 15 minutes.
+- Vercel env vars needed: `SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_PASSWORD` (a new one), optional `ADMIN_SESSION_SECRET`; for the thank-you code: `STRIPE_SECRET_KEY`, `STRIPE_THANKYOU_COUPON`.
+- At go-live, after the new site is live: run `supabase/migrations/20261120_close_anon_access.sql` to remove the public read/update access to `ai_assessments`.
+- Supabase project `ppgecvmyuyuntwnqwcru`; edge functions in `supabase/functions/`.
 
-There is no build step. Edit HTML/CSS/JS files directly and preview in a browser. Deployment happens automatically via Vercel on push to `main`.
-
-To develop locally, serve with any static file server:
-```bash
-npx serve .
-# or
-python -m http.server 8080
-```
-
-There are no lint, test, or build commands configured.
-
-## Architecture
-
-### Static site, no framework
-All pages are plain `.html` files. Sub-pages live in named folders (`business/index.html`, `church/index.html`, `contact/index.html`) so Vercel serves them at clean URLs (`/business`, `/church`, `/contact`).
-
-### CSS layers (load order matters)
-```html
-reset.css → main.css → components.css → animations.css
-```
-- `main.css` — design tokens (CSS custom properties), base layout, typography
-- `components.css` — reusable UI (buttons, cards, forms)
-- `animations.css` — `@keyframes` and `[data-reveal]` scroll-reveal classes
-
-### JS modules (all vanilla, no bundler)
-Each script file is self-contained and loaded at page bottom:
-- `cursor.js` — custom glowing cursor + ambient orb via `mousemove`
-- `nav.js` — mobile hamburger toggle + scroll-based active link
-- `animations.js` — `IntersectionObserver` scroll reveals with staggered delays
-- `pwa.js` — `beforeinstallprompt` capture + service worker registration
-- `form.js` — assessment form validation + URL redirect to `/assessment` with query params; Supabase submission wired here
-
-### Assessment flow
-`assessment-intro.html` collects name/org/email and sector (church/business), then redirects to `assessment.html` via URL params. `assessment.html` reads those params and submits the full responses to Supabase.
-
-### PWA
-`sw.js` uses cache-first for static assets (`wiseintegrate-static-v2`) and network-first for HTML navigation. Service worker explicitly bypasses Supabase API requests. `manifest.json` is the PWA manifest.
-
-### Supabase backend
-Supabase project: `ppgecvmyuyuntwnqwcru` (region: ap-southeast-2)
-
-`form.js` posts assessment submissions to a Supabase `assessments` table. The Supabase URL and anon key are stored as Vercel environment variables (`SUPABASE_URL`, `SUPABASE_ANON_KEY`). RLS is enabled; only the service role can read rows.
-
-```sql
--- assessments table schema (public.assessments)
-CREATE TABLE assessments (
-  id UUID PRIMARY KEY,
-  created_at TIMESTAMPTZ,
-  name TEXT, org TEXT, email TEXT,
-  mode TEXT,       -- 'form' | 'voice'
-  sector TEXT,     -- 'church' | 'business'
-  status TEXT,     -- 'pending' | 'analysed' | 'contacted'
-  ai_summary TEXT,
-  send_snapshot BOOLEAN, snapshot_sent BOOLEAN,
-  responses JSONB
-);
-
--- ai_assessments table schema (public.ai_assessments) — 45-question pipeline
-CREATE TABLE ai_assessments (
-  id UUID PRIMARY KEY,
-  submitted_at TIMESTAMPTZ,
-  organisation TEXT, name TEXT, role TEXT, org_type TEXT, org_size TEXT, location TEXT, prompt_reason TEXT,
-  d1_leadership INT, d2_data INT, d3_literacy INT, d4_governance INT,
-  d5_usage INT, d6_departments INT, d7_security INT,  -- max 24 each
-  d8_budget INT,      -- max 12
-  total_score INT, maturity_stage INT,  -- 1-5
-  ai_report TEXT,     -- prose report from generate-report
-  report_data JSONB   -- structured scoring data (scores, findings, recommendations)
-);
-```
-
-### Supabase Edge Functions
-All functions are in `supabase/functions/` and deployed to the project above.
-
-- `generate-report` — takes a submitted `ai_assessments` row, scores all 8 dimensions, calls Claude for qualitative output, returns `{ report, report_data }`. Called from `assessment.html` after submission.
-- `report-summary` — JSON API: takes `?id=<uuid>`, returns `report_data` for the Leadership Summary page. CORS-enabled.
-- `report-guide` — JSON API: same as above, feeds the Consultant Guide page. CORS-enabled.
-
-### Vercel config
-`vercel.json` sets security headers (`X-Frame-Options`, `X-Content-Type-Options`, CSP) and 1-year immutable caching on `/css/*`, `/js/*`, `/images/*`. Routes include clean URLs for all pages.
-
-## Design tokens
-
-Key CSS custom properties defined in `main.css`:
-
-| Token | Value |
-|---|---|
-| `--bg` | `#08080f` |
-| `--blue-1` | `#1d4ed8` |
-| `--blue-3` | `#60a5fa` |
-| `--text-primary` | `#eff6ff` |
-| `--text-secondary` | `rgba(239,246,255,0.55)` |
-| `--nav-height` | `68px` |
-| `--section-pad` | `6rem 5vw` |
-
-Fonts: **Manrope** (headings) and **Inter** (body), loaded from Google Fonts.
-
-## Pages status
-
-| Route | File | Status |
-|---|---|---|
-| `/` | `index.html` | Done |
-| `/assessment-intro` | `assessment-intro.html` | Done |
-| `/assessment` | `assessment.html` | Done |
-| `/church` | `church/index.html` | Done |
-| `/business` | `business/index.html` | Done |
-| `/contact` | `contact/index.html` | Done |
-| `/dashboard` | `dashboard.html` | Done — password auth, Supabase data, report buttons |
-| `/about` | `about/index.html` | Done |
-| `/faq` | `faq/index.html` | Done |
-| `/privacy` | `privacy/index.html` | Done |
-| `/terms` | `terms/index.html` | Done |
-| `/report-summary` | `report-summary/index.html` | Done — fetches JSON from Supabase, renders radar chart |
-| `/report-guide` | `report-guide/index.html` | Done — consultant-only, fetches JSON from Supabase |
+## Old site
+The old static site is in `legacy/` for reference only (not served). It can go once Dr. Brancken has approved the new site; git history keeps it.

@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+/* =========================================================
+   WISE INTEGRATE DESIGN TOKENS
+   Brand colours in one place. Dark blue is the brand look (default);
+   light mode is offered with the sun/moon button.
+   Text pairings checked for WCAG AA.
+   ========================================================= */
+:root,
+[data-theme="dark"] {
+  --bg: #08080f;
+  --bg-alt: #0c0d1c;
+  --panel: #10122a;
+  --panel-strong: #172048;
+  --text: #eff6ff; /* 18:1 on bg */
+  --text-muted: #aab8d2; /* 9.5:1 on bg, 8.4:1 on panel */
+  --accent: #60a5fa; /* 7.6:1 on bg: links */
+  --accent-strong: #93c5fd;
+  --btn: #2563eb; /* white text 5.2:1 */
+  --btn-strong: #1d4ed8;
+  --on-btn: #ffffff;
+  --border: rgb(96 165 250 / 0.2);
+  --border-strong: rgb(96 165 250 / 0.45);
+  --ring: #93c5fd;
+  --glow: radial-gradient(ellipse 80% 60% at 50% 0%, rgb(29 78 216 / 0.28), transparent 70%);
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -14px rgb(29 78 216 / 0.45);
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #f7f9fd;
+  --bg-alt: #eef3fb;
+  --panel: #ffffff;
+  --panel-strong: #e3ecfb;
+  --text: #0b1530; /* 17:1 */
+  --text-muted: #44516b; /* 7.9:1 */
+  --accent: #1d4ed8; /* 6.6:1 */
+  --accent-strong: #1e3a8a;
+  --btn: #1d4ed8;
+  --btn-strong: #1e3a8a;
+  --on-btn: #ffffff;
+  --border: #d6e0f0;
+  --border-strong: #93b4ea;
+  --ring: #1d4ed8;
+  --glow: radial-gradient(ellipse 80% 60% at 50% 0%, rgb(96 165 250 / 0.22), transparent 70%);
+  --shadow-soft: 0 1px 2px rgb(11 21 48 / 0.06), 0 12px 30px -14px rgb(29 78 216 / 0.3);
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-alt: var(--bg-alt);
+  --color-panel: var(--panel);
+  --color-panel-strong: var(--panel-strong);
+  --color-ink: var(--text);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --font-sans: var(--font-body), Arial, Helvetica, sans-serif;
+  --font-display: var(--font-heading), Arial, Helvetica, sans-serif;
+  --shadow-soft: var(--shadow-soft);
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; border-radius: 6px; }
+::selection { background: #1d4ed8; color: #fff; }
+
+.skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 100;
+  background: var(--btn); color: var(--on-btn);
+  padding: 0.6rem 1rem; border-radius: 999px; font-weight: 600;
+}
+.skip-link:focus { top: 1rem; }
+
+@layer components {
+  .wrap { width: 100%; max-width: 72rem; margin-inline: auto; padding-inline: 1.25rem; }
+  .narrow { width: 100%; max-width: 46rem; margin-inline: auto; padding-inline: 1.25rem; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    min-height: 2.75rem; padding: 0.6rem 1.35rem; border-radius: 999px;
+    font-weight: 600; line-height: 1.2; text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: translateY(0) scale(0.98); }
+  .btn-primary { background: var(--btn); color: var(--on-btn); box-shadow: var(--shadow-soft); }
+  .btn-primary:hover { background: var(--btn-strong); }
+  .btn-ghost { background: transparent; color: var(--text); border: 1.5px solid var(--border-strong); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 1.25rem;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  a.card:hover, .card-hover:hover { transform: translateY(-3px); border-color: var(--border-strong); box-shadow: var(--shadow-soft); }
+
+  .eyebrow {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent);
+  }
+  .grad {
+    background: linear-gradient(90deg, #60a5fa, #bfdbfe 50%, #3b82f6);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  [data-theme="light"] .grad { background: linear-gradient(90deg, #1d4ed8, #2563eb 50%, #1e3a8a); -webkit-background-clip: text; background-clip: text; }
+  .hero-glow { background-image: var(--glow); }
+
+  /* Page text (blog posts, legal pages) */
+  .prose-wi { max-width: none; }
+  .prose-wi > * + * { margin-top: 1rem; }
+  .prose-wi h2 { font-size: clamp(1.45rem, 1.2rem + 1vw, 1.95rem); line-height: 1.2; margin-top: 2.5rem; font-weight: 700; }
+  .prose-wi h3 { font-size: 1.3rem; line-height: 1.3; margin-top: 2rem; font-weight: 700; }
+  .prose-wi h2:first-child, .prose-wi h3:first-child { margin-top: 0; }
+  .prose-wi p, .prose-wi li { color: var(--text-muted); }
+  .prose-wi strong { color: var(--text); font-weight: 700; }
+  .prose-wi a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .prose-wi a:hover { color: var(--accent-strong); text-decoration-thickness: 2px; }
+  .prose-wi ul { list-style: disc; padding-left: 1.4rem; }
+  .prose-wi ol { list-style: decimal; padding-left: 1.4rem; }
+  .prose-wi li + li { margin-top: 0.35rem; }
+  .prose-wi li::marker { color: var(--accent); }
+  .prose-wi blockquote { border-left: 3px solid var(--accent); padding: 0.25rem 0 0.25rem 1.25rem; font-style: italic; }
+  .prose-wi hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose-wi table { width: 100%; border-collapse: collapse; }
+  .prose-wi th, .prose-wi td { border: 1px solid var(--border); padding: 0.5rem 0.75rem; text-align: left; }
+}
+
+/* ---------- Motion ---------- */
+/* Gentle fade-up as cards scroll into view, done by the browser itself (no JavaScript, so nothing waits to appear).
+   Browsers without scroll-driven animations simply show everything straight away. */
+@keyframes reveal { from { transform: translateY(28px) scale(0.985); } to { transform: none; } } /* movement only: text is always fully readable */
+@supports (animation-timeline: view()) {
+  [data-reveal] { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 35%; }
+}
+@keyframes rise { from { opacity: 0.01; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: var(--d, 0ms); }
+
+::view-transition-old(page) { animation: 0.2s ease both fade-out; }
+::view-transition-new(page) { animation: 0.3s ease both fade-in-up; }
+@keyframes fade-out { to { opacity: 0; } }
+@keyframes fade-in-up { from { opacity: 0; transform: translateY(8px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  [data-reveal] { animation: none !important; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+
+/* Space for the phone app's bottom bar */
+@media (max-width: 1023px) {
+  body { padding-bottom: calc(4.25rem + env(safe-area-inset-bottom)); }
+}
+
+/* Logo swaps with the theme */
+.logo-dark { display: block; }
+.logo-light { display: none; }
+[data-theme="light"] .logo-dark { display: none; }
+[data-theme="light"] .logo-light { display: block; }
+
+@media print {
+  header, footer, nav[aria-label="Primary (mobile)"], .no-print { display: none !important; }
+}
