@@ -41,6 +41,8 @@ const redirects = [
   { source: "/assessment.html", destination: "/assessment/start", permanent: true },
   { source: "/dashboard.html", destination: "/dashboard", permanent: true },
   { source: "/manifest.json", destination: "/manifest.webmanifest", permanent: true },
+  { source: "/get-our-app", destination: "/app", permanent: true },
+  { source: "/install", destination: "/app", permanent: true },
 ];
 
 const nextConfig: NextConfig = {

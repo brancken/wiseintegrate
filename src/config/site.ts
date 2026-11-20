@@ -36,16 +36,55 @@ export const site = {
   ],
 } as const;
 
-export type NavItem = { label: string; href: string; icon?: string };
+export type NavItem = { label: string; href: string; icon?: string; children?: NavItem[] };
 
+// The top menu. Items with children open as a drop-down (computers) or a fold-out list (phone menu).
 export const mainNav: NavItem[] = [
-  { label: "Shop", href: "/shop" },
+  {
+    label: "Shop",
+    href: "/shop",
+    children: [
+      { label: "All products", href: "/shop" },
+      { label: "How to Make a Website with Claude", href: "/shop/how-to-make-a-website" },
+      { label: "Free church management system", href: "/church-management-system" },
+      { label: "Church Policy Pack (coming soon)", href: "/shop/church-policy-pack" },
+      { label: "Claude tools (coming soon)", href: "/shop#coming-soon" },
+    ],
+  },
   { label: "Churches", href: "/churches" },
   { label: "Business", href: "/business" },
-  { label: "Services", href: "/services" },
-  { label: "About", href: "/about" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
+  {
+    label: "Services",
+    href: "/services",
+    children: [
+      { label: "All our services", href: "/services" },
+      { label: "Churches and non-profits", href: "/churches" },
+      { label: "Businesses and organisations", href: "/business" },
+      { label: "Training and coaching", href: "/services#training" },
+      { label: "Policy and governance", href: "/services#governance" },
+      { label: "Free AI Readiness Assessment", href: "/assessment" },
+    ],
+  },
+  {
+    label: "Resources",
+    href: "/blog",
+    children: [
+      { label: "Blog: AI guides and articles", href: "/blog" },
+      { label: "How to install our app", href: "/app" },
+      { label: "Frequently asked questions", href: "/faq" },
+      { label: "Free AI Readiness Assessment", href: "/assessment" },
+    ],
+  },
+  {
+    label: "About",
+    href: "/about",
+    children: [
+      { label: "About WiseIntegrate", href: "/about" },
+      { label: "Contact us", href: "/contact" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Use", href: "/terms" },
+    ],
+  },
 ];
 
 // The bottom bar in the phone app (five places).

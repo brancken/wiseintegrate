@@ -7,7 +7,8 @@ import { InstallAppButton } from "@/components/Pwa";
 export const metadata: Metadata = { title: "Menu", description: "Everything on the WiseIntegrate site in one place: shop, services for churches and businesses, the free assessment, blog, FAQ, contact and legal pages.", alternates: { canonical: "/more" } };
 
 export default function More() {
-  const links = [...mainNav, { label: "Free AI Readiness Assessment", href: "/assessment" }, { label: "FAQ", href: "/faq" }, { label: "Get the app", href: "/app" }, ...footerLinks[3].links];
+  const seen = new Set<string>();
+  const links = [{ label: "How to install our app", href: "/app" }, ...mainNav.flatMap((i) => i.children ?? [i]), ...footerLinks[3].links].filter((l) => (seen.has(l.href) ? false : (seen.add(l.href), true)));
   return (
     <div className="wrap max-w-xl py-10">
       <h1 className="text-3xl font-extrabold">Menu</h1>
