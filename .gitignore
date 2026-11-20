@@ -8,3 +8,6 @@ node_modules/
 tsconfig.tsbuildinfo
 next-env.d.ts
 legacy/c/
+
+# Local Netlify folder
+.netlify
