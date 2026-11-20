@@ -146,7 +146,7 @@ export default function CoursePage() {
       </Section>
 
       {/* Prices */}
-      <Section id="prices" alt eyebrow="Choose your course" title={<>Each course on its own, or <em>the complete package.</em></>} intro="Every session has a short video, a PDF, a checklist and a quiz. Every course includes Start Here (set up Claude) and its Claude guide.">
+      <Section id="prices" alt eyebrow="Choose your course" title={<>Each course on its own, or <em>the complete package.</em></>} intro="Every session has a printable guide (PDF), a checklist and a quiz. Every course includes Start Here (set up Claude) and its Claude guide.">
         {!STRIPE_LIVE && showBuy && (
           <p className="mb-6 rounded-2xl border border-line-strong bg-panel p-4 text-sm text-muted">Preview: these Buy buttons use Stripe&rsquo;s test mode. No real money moves.</p>
         )}

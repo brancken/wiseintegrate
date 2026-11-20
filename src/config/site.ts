@@ -70,6 +70,7 @@ export const mainNav: NavItem[] = [
     href: "/blog",
     children: [
       { label: "Blog: AI guides and articles", href: "/blog" },
+      { label: "Free church AI policy template", href: "/free/church-ai-policy-template" },
       { label: "How to install our app", href: "/app" },
       { label: "Frequently asked questions", href: "/faq" },
       { label: "Free AI Readiness Assessment", href: "/assessment" },

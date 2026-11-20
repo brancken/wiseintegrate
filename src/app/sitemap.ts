@@ -19,6 +19,7 @@ const pages: Record<string, string> = {
   "/faq": "2026-11-20",
   "/contact": "2026-11-20",
   "/app": "2026-11-20",
+  "/free/church-ai-policy-template": "2026-11-20",
   "/privacy": "2026-11-20",
   "/terms": "2026-06-30",
 };

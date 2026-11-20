@@ -185,7 +185,7 @@ export default function ChurchManagementSystemPage() {
         </div>
       </Section>
 
-      <Section id="how-to-build" eyebrow="How to build it" title={<>How to build your church management system <em>step by step</em></>} intro="Course 1 has ten sessions. Each one is a short video and a printable guide with a checklist and a quiz.">
+      <Section id="how-to-build" eyebrow="How to build it" title={<>How to build your church management system <em>step by step</em></>} intro="Course 1 has ten sessions. Each one is a printable guide with a checklist and a quiz.">
         <Steps steps={steps} />
         <p className="mt-8 max-w-3xl text-muted" data-reveal>
           Get <Link href="/shop/how-to-make-a-website#htmaw-course-1" className="font-semibold text-accent underline underline-offset-4">Course 1: Your Office on Google</Link> on its own, or the <Link href="/shop/how-to-make-a-website#htmaw-package" className="font-semibold text-accent underline underline-offset-4">complete package</Link> with Course 2 (your church website) and Course 3 (getting found on Google and AI search). Want to see it working? <a href="https://shilohministries.nz" target="_blank" rel="noopener" className="font-semibold text-accent underline underline-offset-4">Shiloh Ministries in Auckland</a> was built by following exactly these steps.

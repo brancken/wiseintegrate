@@ -31,6 +31,7 @@ export default function PolicyPackPage() {
             <div className="rise mt-8 flex flex-wrap gap-3" style={{ "--d": "180ms" } as React.CSSProperties}>
               <a href={`mailto:${site.supportEmail}?subject=Tell%20me%20when%20the%20Church%20Policy%20Pack%20is%20ready`} className="btn btn-primary">Tell me when it is ready</a>
               <a href="#inside" className="btn btn-ghost">See what is inside</a>
+              <a href="/free/church-ai-policy-template" className="btn btn-ghost">Free AI policy template</a>
             </div>
           </div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
