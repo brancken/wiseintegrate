@@ -7,6 +7,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { TabBar } from "@/components/TabBar";
 import { PwaSupport } from "@/components/Pwa";
+import { AskWise } from "@/components/AskWise";
 import { themeScript } from "@/components/ThemeToggle";
 import { orgJsonLd, allowIndexing } from "@/lib/seo";
 
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <TabBar />
         <PwaSupport />
+        <AskWise />
       </body>
     </html>
   );
