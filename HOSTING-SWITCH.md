@@ -5,13 +5,16 @@ Vercel is NOT changed or cancelled: it still builds `main` (the old site) and ca
 
 ## The switch (Cloudflare DNS, zone wiseintegrate.com)
 Before (Vercel), recorded 20 Nov 2026:
-- `wiseintegrate.com` A records 216.198.79.1 and 64.29.17.1 (Vercel)
-- `www` CNAME `5d67eaabc0653ad9.vercel-dns-017.com` (Vercel)
+- `wiseintegrate.com` (@) CNAME `5d67eaabc0653ad9.vercel-dns-017.com`, DNS only
+- `www` CNAME `5d67eaabc0653ad9.vercel-dns-017.com`, DNS only
 
 After (Netlify):
 - `wiseintegrate.com` CNAME `wiseintegrate.netlify.app` (Cloudflare flattens it), **DNS only (grey cloud)**
 - `www` CNAME `wiseintegrate.netlify.app`, **DNS only (grey cloud)**
 Netlify then issues the free HTTPS certificate (a few minutes to an hour).
+
+## Status
+SWITCHED 20 Nov 2026 (both records now CNAME wiseintegrate.netlify.app, DNS only). Netlify certificate issued for both names (expires 18 Feb 2027, renews itself). Live checks passed. IndexNow sent (25 pages, 202). Step 4 (close anon access) waits for Dr. Brancken's yes.
 
 ## Order on switch day
 1. DONE 20 Nov 2026: secure functions applied and dashboard password set (tested on Netlify: sign-in works, 7 assessments listed).
